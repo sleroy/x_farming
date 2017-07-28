@@ -15,9 +15,9 @@ farming.register_plant("farming_addons:coffee", {
 minetest.register_node("farming_addons:coffee_cup", {
 	description = "Cold Cup of Coffee",
 	drawtype = "plantlike",
-	tiles = {"farming_coffee_cup.png"},
-	inventory_image = "farming_coffee_cup.png",
-	wield_image = "farming_coffee_cup.png",
+	tiles = {"farming_addons_coffee_cup.png"},
+	inventory_image = "farming_addons_coffee_cup.png",
+	wield_image = "farming_addons_coffee_cup.png",
 	paramtype = "light",
 	walkable = false,
 	selection_box = {
@@ -48,9 +48,9 @@ minetest.register_craft({
 minetest.register_node("farming_addons:coffee_cup_hot", {
 	description = "Hot Cup of Coffee",
 	drawtype = "plantlike",
-	tiles = {"farming_coffee_cup_hot.png"},
-	inventory_image = "farming_coffee_cup_hot.png",
-	wield_image = "farming_coffee_cup_hot.png",
+	tiles = {"farming_addons_coffee_cup_hot.png"},
+	inventory_image = "farming_addons_coffee_cup_hot.png",
+	wield_image = "farming_addons_coffee_cup_hot.png",
 	paramtype = "light",
 	walkable = false,
 	selection_box = {
@@ -61,20 +61,3 @@ minetest.register_node("farming_addons:coffee_cup_hot", {
 	on_use = minetest.item_eat(3, "vessels:drinking_glass"),
 	sounds = default.node_sound_glass_defaults(),
 })
-
--- coffee definition
-local crop_def = {
-	drawtype = "plantlike",
-	tiles = {"farming_coffee_1.png"},
-	paramtype = "light",
-	sunlight_propagates = true,
-	walkable = false,
-	buildable_to = true,
-	drop = "",
-	selection_box = farming.select,
-	groups = {
-		snappy = 3, flammable = 2, plant = 1, attached_node = 1,
-		not_in_creative_inventory = 1, growing = 1
-	},
-	sounds = default.node_sound_leaves_defaults()
-}

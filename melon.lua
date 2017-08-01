@@ -92,10 +92,14 @@ local function grow_melon(pos, elapsed)
 	local node = minetest.get_node(pos)
 	local random_pos = false
 	local spawn_positions = {}
-	local right = minetest.get_node({x=pos.x+1, y=pos.y, z=pos.z})
-	local front = minetest.get_node({x=pos.x, y=pos.y, z=pos.z+1})
-	local left = minetest.get_node({x=pos.x-1, y=pos.y, z=pos.z})
-	local back = minetest.get_node({x=pos.x, y=pos.y, z=pos.z-1})
+	local right_pos = {x=pos.x+1, y=pos.y, z=pos.z}
+	local front_pos = {x=pos.x, y=pos.y, z=pos.z+1}
+	local left_pos = {x=pos.x-1, y=pos.y, z=pos.z}
+	local back_pos = {x=pos.x, y=pos.y, z=pos.z-1}
+	local right = minetest.get_node(right_pos)
+	local front = minetest.get_node(front_pos)
+	local left = minetest.get_node(left_pos)
+	local back = minetest.get_node(back_pos)
 
 	if right.name == "farming_addons:melon_fruit"
 	or front.name == "farming_addons:melon_fruit"
@@ -105,17 +109,17 @@ local function grow_melon(pos, elapsed)
 	end
 
 	-- make sure that at least one side of the plant has space to put melon
-	if right.name == "air" then
-		table.insert(spawn_positions, {x=pos.x+1, y=pos.y, z=pos.z})
+	if right.name == "air" and not minetest.is_protected(right_pos, "") then
+		table.insert(spawn_positions, right_pos)
 	end
-	if front.name == "air" then
-		table.insert(spawn_positions, {x=pos.x, y=pos.y, z=pos.z+1})
+	if front.name == "air" and not minetest.is_protected(front_pos, "") then
+		table.insert(spawn_positions, front_pos)
 	end
-	if left.name == "air" then
-		table.insert(spawn_positions, {x=pos.x-1, y=pos.y, z=pos.z})
+	if left.name == "air" and not minetest.is_protected(left_pos, "") then
+		table.insert(spawn_positions, left_pos)
 	end
-	if back.name == "air" then
-		table.insert(spawn_positions, {x=pos.x, y=pos.y, z=pos.z-1})
+	if back.name == "air" and not minetest.is_protected(back_pos, "") then
+		table.insert(spawn_positions, back_pos)
 	end
 
 	if #spawn_positions < 1 then

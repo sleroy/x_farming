@@ -109,16 +109,16 @@ local function grow_melon(pos, elapsed)
 	end
 
 	-- make sure that at least one side of the plant has space to put melon
-	if right.name == "air" and not minetest.is_protected(right_pos, "") then
+	if right.name == "air" then
 		table.insert(spawn_positions, right_pos)
 	end
-	if front.name == "air" and not minetest.is_protected(front_pos, "") then
+	if front.name == "air" then
 		table.insert(spawn_positions, front_pos)
 	end
-	if left.name == "air" and not minetest.is_protected(left_pos, "") then
+	if left.name == "air" then
 		table.insert(spawn_positions, left_pos)
 	end
-	if back.name == "air" and not minetest.is_protected(back_pos, "") then
+	if back.name == "air" then
 		table.insert(spawn_positions, back_pos)
 	end
 

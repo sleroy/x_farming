@@ -4,7 +4,6 @@ local maxlight = default.LIGHT_MAX
 -- MELON
 farming.register_plant("farming_addons:melon", {
 	description = "Melon Seed",
-	paramtype2 = "meshoptions",
 	inventory_image = "farming_addons_melon_seed.png",
 	steps = 8,
 	minlight = minlight,

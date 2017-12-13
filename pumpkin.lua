@@ -36,7 +36,7 @@ minetest.register_node("farming_addons:pumpkin_fruit", {
 	paramtype2 = "facedir",
 	sounds = default.node_sound_wood_defaults(),
 	is_ground_content = false,
-	groups = {snappy=3, flammable=4, fall_damage_add_percent=-30},
+	groups = {snappy=3, flammable=4, fall_damage_add_percent=-30, not_in_creative_inventory=1},
 		drop = {
 		max_items = 4,  -- Maximum number of items to drop.
 		items = { -- Choose max_items randomly from this list.
@@ -115,16 +115,6 @@ minetest.override_item("farming_addons:pumpkin_pie", {
 minetest.register_alias_force("farming_addons:pumpkin", "farming_addons:pumpkin_block")
 
 -- drops pumpkin seeds
--- minetest.override_item("default:dry_shrub", {
--- 	drop = {
--- 		max_items = 1,
--- 		items = {
--- 			{items = {'farming_addons:seed_pumpkin'}, rarity = 5},
--- 			{items = {'default:dry_shrub'}},
--- 		}
--- 	}
--- })
-
 for i = 1, 5 do
 	minetest.override_item("default:dry_grass_"..i, {drop = {
 		max_items = 1,
@@ -134,6 +124,19 @@ for i = 1, 5 do
 		}
 	}})
 end
+
+-- pumpkin as fuel (better than cactus)
+minetest.register_craft({
+	type = "fuel",
+	recipe = "farming_addons:pumpkin_block",
+	burntime = 20,
+})
+
+minetest.register_craft({
+	type = "fuel",
+	recipe = "farming_addons:pumpkin_lantern",
+	burntime = 20,
+})
 
 local function grow_pumpkin(pos, elapsed)
 	local node = minetest.get_node(pos)

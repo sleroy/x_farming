@@ -36,7 +36,7 @@ minetest.register_node("farming_addons:pumpkin_fruit", {
 	paramtype2 = "facedir",
 	sounds = default.node_sound_wood_defaults(),
 	is_ground_content = false,
-	groups = {snappy=3, flammable=4, fall_damage_add_percent=-30, not_in_creative_inventory=1},
+	groups = {snappy=3, flammable=4, fall_damage_add_percent=-30},
 		drop = {
 		max_items = 4,  -- Maximum number of items to drop.
 		items = { -- Choose max_items randomly from this list.
@@ -54,7 +54,7 @@ minetest.register_node("farming_addons:pumpkin_fruit", {
 
 -- PUMPKIN BLOCK - HARVEST from crops
 minetest.register_node("farming_addons:pumpkin_block", {
-	description = "Pumpkin Fruit",
+	description = "Pumpkin Block",
 	tiles = {"farming_addons_pumpkin_fruit_top.png", "farming_addons_pumpkin_fruit_top.png", "farming_addons_pumpkin_fruit_side.png", "farming_addons_pumpkin_fruit_side.png", "farming_addons_pumpkin_fruit_side.png", "farming_addons_pumpkin_fruit_side_off.png"},
 	paramtype2 = "facedir",
 	sounds = default.node_sound_wood_defaults(),

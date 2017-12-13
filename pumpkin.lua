@@ -14,7 +14,7 @@ local function pumpkin_on_construct(pos)
 		minetest.remove_node({x=pos.x,y=pos.y-i,z=pos.z})
 	end
 
-	minetest.add_entity({x=pos.x,y=pos.y-1,z=pos.z}, "farming_addons:snow_golem")
+	minetest.add_entity({x=pos.x,y=pos.y-1,z=pos.z}, "mobs_npc:snow_golem")
 end
 
 -- PUMPKIN

@@ -158,8 +158,8 @@ minetest.register_abm({
 	label = "melon_growing_abm",
 	nodenames = {"farming_addons:melon_8"},
 	neighbors = {"air"},
-	interval = 900,
-	chance = 2,
+	interval = 400,
+	chance = 4,
 	catch_up = true,
 	action = grow_melon
 })

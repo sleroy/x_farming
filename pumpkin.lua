@@ -209,7 +209,7 @@ minetest.register_abm({
 	label = "pumpkin_growing_abm",
 	nodenames = {"farming_addons:pumpkin_8"},
 	neighbors = {"air"},
-	interval = 1200,
+	interval = 900,
 	chance = 2,
 	catch_up = true,
 	action = grow_pumpkin

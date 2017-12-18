@@ -24,7 +24,7 @@ farming.register_plant("farming_addons:pumpkin", {
 	steps = 8,
 	minlight = minlight,
 	maxlight = maxlight,
-	fertility = {"grassland"},
+	fertility = {"grassland", "desert"},
 	groups = {flammable = 4},
 	place_param2 = 3,
 })
@@ -210,7 +210,7 @@ minetest.register_abm({
 	nodenames = {"farming_addons:pumpkin_8"},
 	neighbors = {"air"},
 	interval = 400,
-	chance = 4,
+	chance = 3,
 	catch_up = true,
 	action = grow_pumpkin
 })

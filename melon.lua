@@ -13,7 +13,7 @@ farming.register_plant("farming_addons:melon", {
 	place_param2 = 3,
 })
 
--- MELON BLOCK
+-- MELON FRUIT - HARVEST
 minetest.register_node("farming_addons:melon_fruit", {
 	description = "Melon Fruit",
 	tiles = {"farming_addons_melon_fruit_top.png", "farming_addons_melon_fruit_top.png", "farming_addons_melon_fruit_side.png", "farming_addons_melon_fruit_side.png", "farming_addons_melon_fruit_side.png", "farming_addons_melon_fruit_side.png"},
@@ -55,6 +55,15 @@ minetest.register_node("farming_addons:melon_fruit", {
 	},
 })
 
+-- MELON BLOCK - craftable
+minetest.register_node("farming_addons:melon_block", {
+	description = "Melon Block",
+	tiles = {"farming_addons_melon_fruit_top.png", "farming_addons_melon_fruit_top.png", "farming_addons_melon_fruit_side.png", "farming_addons_melon_fruit_side.png", "farming_addons_melon_fruit_side.png", "farming_addons_melon_fruit_side.png"},
+	sounds = default.node_sound_wood_defaults(),
+	is_ground_content = false,
+	groups = {snappy=3, flammable=4, fall_damage_add_percent=-30}
+})
+
 minetest.register_craftitem("farming_addons:golden_melon", {
 	description = "Golden Melon - Restores Hearts",
 	drawtype = "plantlike",
@@ -75,7 +84,7 @@ minetest.register_craft({
 })
 
 minetest.register_craft({
-	output = "farming_addons:melon_fruit",
+	output = "farming_addons:melon_block",
 	recipe = {
 		{"farming_addons:melon", "farming_addons:melon", "farming_addons:melon"},
 		{"farming_addons:melon", "farming_addons:melon", "farming_addons:melon"},
@@ -159,7 +168,7 @@ minetest.register_abm({
 	nodenames = {"farming_addons:melon_8"},
 	neighbors = {"air"},
 	interval = 400,
-	chance = 4,
+	chance = 3,
 	catch_up = true,
 	action = grow_melon
 })

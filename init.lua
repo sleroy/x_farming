@@ -3,6 +3,7 @@
 
 farming.path = minetest.get_modpath("farming_addons")
 
+dofile(farming.path.."/api.lua")
 dofile(farming.path.."/melon.lua")
 dofile(farming.path.."/pumpkin.lua")
 dofile(farming.path.."/coffee.lua")

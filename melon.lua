@@ -1,13 +1,10 @@
-local minlight = 13
-local maxlight = default.LIGHT_MAX
-
 -- MELON
 farming.register_plant("farming_addons:melon", {
 	description = "Melon Seed",
 	inventory_image = "farming_addons_melon_seed.png",
 	steps = 8,
-	minlight = minlight,
-	maxlight = maxlight,
+	minlight = MINLIGHT,
+	maxlight = MAXLIGHT,
 	fertility = {"grassland"},
 	groups = {flammable = 4},
 	place_param2 = 3,
@@ -53,9 +50,29 @@ minetest.register_node("farming_addons:melon_fruit", {
 			},
 		},
 	},
+	after_dig_node = function(pos, oldnode, oldmetadata, digger)
+		local parent = oldmetadata.fields.parent
+		local parent_pos_from_child = minetest.string_to_pos(parent)
+		local parent_node = nil
+
+		-- make sure we have position
+		if parent_pos_from_child
+			and parent_pos_from_child ~= nil then
+			
+			parent_node = minetest.get_node(parent_pos_from_child)
+		end
+
+		-- tick parent if parent stem still exists
+		if parent_node
+			and parent_node ~= nil
+			and parent_node.name == "farming_addons:melon_8" then
+
+			farming_addons.tick(parent_pos_from_child)
+		end
+	end
 })
 
--- MELON BLOCK - craftable
+-- MELON BLOCK - HARVEST from crops
 minetest.register_node("farming_addons:melon_block", {
 	description = "Melon Block",
 	tiles = {"farming_addons_melon_fruit_top.png", "farming_addons_melon_fruit_top.png", "farming_addons_melon_fruit_side.png", "farming_addons_melon_fruit_side.png", "farming_addons_melon_fruit_side.png", "farming_addons_melon_fruit_side.png"},
@@ -64,6 +81,7 @@ minetest.register_node("farming_addons:melon_block", {
 	groups = {snappy=3, flammable=4, fall_damage_add_percent=-30}
 })
 
+-- recipes
 minetest.register_craftitem("farming_addons:golden_melon", {
 	description = "Golden Melon - Restores Hearts",
 	drawtype = "plantlike",
@@ -92,83 +110,22 @@ minetest.register_craft({
 	},
 })
 
+-- needed for hbhunger
 minetest.override_item("farming_addons:melon", {
 	on_use = minetest.item_eat(2),
 })
 
-local function grow_melon(pos, elapsed)
-	local node = minetest.get_node(pos)
-	local random_pos = false
-	local spawn_positions = {}
-	local right_pos = {x=pos.x+1, y=pos.y, z=pos.z}
-	local front_pos = {x=pos.x, y=pos.y, z=pos.z+1}
-	local left_pos = {x=pos.x-1, y=pos.y, z=pos.z}
-	local back_pos = {x=pos.x, y=pos.y, z=pos.z-1}
-	local right = minetest.get_node(right_pos)
-	local front = minetest.get_node(front_pos)
-	local left = minetest.get_node(left_pos)
-	local back = minetest.get_node(back_pos)
+-- take over the growth from minetest_game farming from here
+minetest.override_item("farming_addons:melon_8", {
+	next_plant = "farming_addons:melon_fruit",
+	on_timer = farming_addons.grow_block
+})
 
-	if right.name == "farming_addons:melon_fruit"
-	or front.name == "farming_addons:melon_fruit"
-	or left.name == "farming_addons:melon_fruit"
-	or back.name == "farming_addons:melon_fruit" then
-		return
-	end
-
-	-- make sure that at least one side of the plant has space to put melon
-	if right.name == "air" then
-		table.insert(spawn_positions, right_pos)
-	end
-	if front.name == "air" then
-		table.insert(spawn_positions, front_pos)
-	end
-	if left.name == "air" then
-		table.insert(spawn_positions, left_pos)
-	end
-	if back.name == "air" then
-		table.insert(spawn_positions, back_pos)
-	end
-
-	if #spawn_positions < 1 then
-		-- plant is closed from all sides
-		return false
-	else
-		-- pick random from the open sides
-		local pick_random
-
-		if #spawn_positions == 1 then
-			pick_random = #spawn_positions
-		else
-			pick_random = math.random(1,#spawn_positions)
-		end
-		
-		for k, v in pairs (spawn_positions) do
-			if k == pick_random then
-				random_pos = v
-			end
-		end
-	end
-
-	-- check light
-	local light = minetest.get_node_light(pos)
-	if not light or light < minlight or light > maxlight then
-		return
-	end
-
-	if random_pos then
-		-- spawn melon
-		minetest.set_node(random_pos, {name="farming_addons:melon_fruit"})
-	end
-
-end
-
-minetest.register_abm({
-	label = "melon_growing_abm",
+-- replacement LBM for pre-nodetimer plants
+minetest.register_lbm({
+	name = "farming_addons:start_nodetimer_melon",
 	nodenames = {"farming_addons:melon_8"},
-	neighbors = {"air"},
-	interval = 400,
-	chance = 3,
-	catch_up = true,
-	action = grow_melon
+	action = function(pos, node)
+		farming_addons.tick_short(pos)
+	end,
 })

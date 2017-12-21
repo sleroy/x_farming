@@ -5,8 +5,8 @@ MAXLIGHT = default.LIGHT_MAX
 
 -- how often node timers for plants will tick, +/- some random value
 function farming_addons.tick(pos)
-  minetest.get_node_timer(pos):start(math.random(498, 858))
-  -- minetest.get_node_timer(pos):start(math.random(332, 572))
+  -- minetest.get_node_timer(pos):start(math.random(498, 858))
+  minetest.get_node_timer(pos):start(math.random(332, 572))
 end
 
 -- how often a growth failure tick is retried (e.g. too dark)

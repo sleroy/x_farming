@@ -10,4 +10,4 @@ dofile(farming.path.."/coffee.lua")
 dofile(farming.path.."/corn.lua")
 dofile(farming.path.."/obsidian_wart.lua")
 
-minetest.log("action", "[Mod] farming_addons loaded")
+print ("[Mod] Farming Addons Loaded.")

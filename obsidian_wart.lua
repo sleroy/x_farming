@@ -136,6 +136,7 @@ minetest.register_craftitem("farming_addons:wart_brick", {
 
 minetest.register_craft({
 	type = "cooking",
+	cooktime = 10,
 	output = "farming_addons:wart_brick",
 	recipe = "farming_addons:obsidian_wart"
 })

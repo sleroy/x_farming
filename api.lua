@@ -96,7 +96,7 @@ function farming_addons.grow_block(pos, elapsed)
     else
       pick_random = math.random(1, #spawn_positions)
     end
-    
+
     for k, v in pairs (spawn_positions) do
       if k == pick_random then
         random_pos = v

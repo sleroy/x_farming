@@ -5,7 +5,7 @@ local function pumpkin_on_construct(pos)
 			return
 		end
 	end
-	
+
 	--if 3 snow block are placed, this will make snow golem
 	for i = 0,2 do
 		minetest.remove_node({x=pos.x,y=pos.y-i,z=pos.z})
@@ -55,7 +55,7 @@ minetest.register_node("farming_addons:pumpkin_fruit", {
 		-- make sure we have position
 		if parent_pos_from_child
 			and parent_pos_from_child ~= nil then
-			
+
 			parent_node = minetest.get_node(parent_pos_from_child)
 		end
 
@@ -130,17 +130,6 @@ minetest.override_item("farming_addons:pumpkin_pie", {
 
 -- drop blocks instead of items
 minetest.register_alias_force("farming_addons:pumpkin", "farming_addons:pumpkin_block")
-
--- drops pumpkin seeds from dry grass
-for i = 1, 5 do
-	minetest.override_item("default:dry_grass_"..i, {drop = {
-		max_items = 1,
-		items = {
-			{items = {"farming_addons:seed_pumpkin"}, rarity = 6},
-			{items = {"default:dry_grass_1"}},
-		}
-	}})
-end
 
 -- pumpkin as fuel (better than cactus)
 minetest.register_craft({

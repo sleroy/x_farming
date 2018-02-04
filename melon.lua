@@ -58,7 +58,7 @@ minetest.register_node("farming_addons:melon_fruit", {
 		-- make sure we have position
 		if parent_pos_from_child
 			and parent_pos_from_child ~= nil then
-			
+
 			parent_node = minetest.get_node(parent_pos_from_child)
 		end
 

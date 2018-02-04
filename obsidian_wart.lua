@@ -173,14 +173,3 @@ minetest.register_craft({
 		{"farming_addons:wart_block", "farming_addons:wart_block", ""}
 	},
 })
-
--- 
--- Seeds
--- 
-minetest.override_item("flowers:mushroom_red", {drop = {
-	max_items = 1,
-	items = {
-		{items = {"farming_addons:seed_obsidian_wart"}, rarity = 5},
-		{items = {"flowers:mushroom_red"}},
-	}
-}})

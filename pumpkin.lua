@@ -94,55 +94,8 @@ minetest.register_node("farming_addons:pumpkin_lantern", {
 	on_construct = pumpkin_on_construct
 })
 
--- pumpkin lantern recipe
-minetest.register_craft({
-	output = "farming_addons:pumpkin_lantern",
-	recipe = {
-		{"", "", ""},
-		{"", "farming_addons:pumpkin_block", ""},
-		{"", "default:torch", ""}
-	},
-})
-
--- crafted item from recipe
-minetest.register_craftitem("farming_addons:pumpkin_pie", {
-	description = "Pumpkin Pie",
-	inventory_image = "farming_addons_pumpkin_pie.png",
-	groups = {fleshy = 3, dig_immediate = 3, flammable = 2},
-	on_use = minetest.item_eat(6),
-	sounds = default.node_sound_leaves_defaults()
-})
-
--- pumpkin pie crafting recipe
-minetest.register_craft({
-	output = "farming_addons:pumpkin_pie",
-	recipe = {
-		{"", "", ""},
-		{"farming_addons:pumpkin_block", "farming:flour", ""},
-		{"", "mobs:egg", ""}
-	}
-})
-
--- needed for hbhunger
-minetest.override_item("farming_addons:pumpkin_pie", {
-	on_use = minetest.item_eat(6),
-})
-
 -- drop blocks instead of items
 minetest.register_alias_force("farming_addons:pumpkin", "farming_addons:pumpkin_block")
-
--- pumpkin as fuel (better than cactus)
-minetest.register_craft({
-	type = "fuel",
-	recipe = "farming_addons:pumpkin_block",
-	burntime = 20,
-})
-
-minetest.register_craft({
-	type = "fuel",
-	recipe = "farming_addons:pumpkin_lantern",
-	burntime = 20,
-})
 
 -- take over the growth from minetest_game farming from here
 minetest.override_item("farming_addons:pumpkin_8", {

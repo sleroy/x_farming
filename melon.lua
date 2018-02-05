@@ -10,6 +10,12 @@ farming.register_plant("farming_addons:melon", {
 	place_param2 = 3,
 })
 
+-- needed
+minetest.override_item("farming_addons:melon", {
+	on_use = minetest.item_eat(2),
+	wield_image = "farming_addons_melon.png^[transformR90",
+})
+
 -- MELON FRUIT - HARVEST
 minetest.register_node("farming_addons:melon_fruit", {
 	description = "Melon Fruit",
@@ -79,40 +85,6 @@ minetest.register_node("farming_addons:melon_block", {
 	sounds = default.node_sound_wood_defaults(),
 	is_ground_content = false,
 	groups = {snappy=3, flammable=4, fall_damage_add_percent=-30}
-})
-
--- recipes
-minetest.register_craftitem("farming_addons:golden_melon", {
-	description = "Golden Melon - Restores Hearts",
-	drawtype = "plantlike",
-	tiles = {"farming_addons_golden_melon.png"},
-	inventory_image = "farming_addons_golden_melon.png",
-	groups = {fleshy = 3, dig_immediate = 3, flammable = 2},
-	on_use = minetest.item_eat(2),
-	sounds = default.node_sound_leaves_defaults(),
-})
-
-minetest.register_craft({
-	output = "farming_addons:golden_melon",
-	recipe = {
-		{"default:gold_lump", "default:gold_lump", "default:gold_lump"},
-		{"default:gold_lump", "farming_addons:melon", "default:gold_lump"},
-		{"default:gold_lump", "default:gold_lump", "default:gold_lump"}
-	},
-})
-
-minetest.register_craft({
-	output = "farming_addons:melon_block",
-	recipe = {
-		{"farming_addons:melon", "farming_addons:melon", "farming_addons:melon"},
-		{"farming_addons:melon", "farming_addons:melon", "farming_addons:melon"},
-		{"farming_addons:melon", "farming_addons:melon", "farming_addons:melon"}
-	},
-})
-
--- needed for hbhunger
-minetest.override_item("farming_addons:melon", {
-	on_use = minetest.item_eat(2),
 })
 
 -- take over the growth from minetest_game farming from here

@@ -29,21 +29,6 @@ minetest.register_node("farming_addons:coffee_cup", {
 	sounds = default.node_sound_glass_defaults(),
 })
 
-minetest.register_craft( {
-	output = "farming_addons:coffee_cup",
-	recipe = {
-		{"vessels:drinking_glass", "farming_addons:coffee","bucket:bucket_water"},
-	},
-	replacements = {{"bucket:bucket_water", "bucket:bucket_empty"}}
-})
-
-minetest.register_craft({
-	type = "cooking",
-	cooktime = 5,
-	output = "farming_addons:coffee_cup_hot",
-	recipe = "farming_addons:coffee_cup"
-})
-
 -- hot cup of coffee
 minetest.register_node("farming_addons:coffee_cup_hot", {
 	description = "Hot Cup of Coffee",

@@ -51,30 +51,6 @@ minetest.override_item("farming_addons:corn_10", {
 	}
 })
 
--- CRAFTING
-minetest.register_craftitem("farming_addons:corn_pop", {
-	description = "Popped corn",
-	inventory_image = "farming_addons_corn_pop.png",
-	on_use = minetest.item_eat(1),
-})
-
-minetest.register_craft( {
-	type = "cooking",
-	cooktime = 10,
-	output = "farming_addons:corn_pop",
-	recipe = "farming_addons:corn"
-})
-
-minetest.register_craft( {
-	output = "farming_addons:corn_popcorn",
-	recipe = {
-		{"farming_addons:corn_pop", "farming_addons:corn_pop","farming_addons:corn_pop"},
-		{"default:paper", "","default:paper"},
-		{"default:paper", "default:paper","default:paper"},
-	},
-	replacements = {{"bucket:bucket_water", "bucket:bucket_empty"}}
-})
-
 -- popcorn
 minetest.register_node("farming_addons:corn_popcorn", {
 	description = "Popcorn",

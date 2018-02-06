@@ -25,6 +25,14 @@ GNU LGPL 2.1 (see included LICENSE file)
 - farming_addons_coffee_3.png
 - farming_addons_coffee_4.png
 - farming_addons_coffee_5.png
+- farming_addons_pumpkin_1.png
+- farming_addons_pumpkin_2.png
+- farming_addons_pumpkin_3.png
+- farming_addons_pumpkin_4.png
+- farming_addons_pumpkin_5.png
+- farming_addons_pumpkin_6.png
+- farming_addons_pumpkin_7.png
+- farming_addons_pumpkin_8.png
 
 **CC BY-SA 4.0, Pixel Perfection by XSSheep**, https://minecraft.curseforge.com/projects/pixel-perfection-freshly-updated
 - farming_addons_beetroot_1.png
@@ -116,18 +124,11 @@ GNU LGPL 2.1 (see included LICENSE file)
 - farming_addons_corn_8.png
 - farming_addons_corn_9.png
 - farming_addons_corn_10.png
-- farming_addons_corn_cob.png
-- farming_addons_corn.png
 - farming_addons_corn_pop.png
 - farming_addons_corn_seed.png
-- farming_addons_pumpkin_1.png
-- farming_addons_pumpkin_2.png
-- farming_addons_pumpkin_3.png
-- farming_addons_pumpkin_4.png
-- farming_addons_pumpkin_5.png
-- farming_addons_pumpkin_6.png
-- farming_addons_pumpkin_7.png
-- farming_addons_pumpkin_8.png
+
+**Created by GeMinecraft and edited by TenPlus1**
+- farming_addons_corn.png
 
 **WTFPL**
 - farming_addons_coffee_cup_hot.png

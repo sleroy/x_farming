@@ -1,5 +1,7 @@
 -- spawn snow golem
 local function pumpkin_on_construct(pos)
+	if not minetest.get_modpath("mobs_npc") then return end
+
 	for i = 1,2 do
 		if minetest.get_node({x=pos.x,y=pos.y-i,z=pos.z}).name ~= "default:snowblock" then
 			return

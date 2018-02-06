@@ -12,22 +12,10 @@ farming.register_plant("farming_addons:carrot", {
 	fertility = {"grassland"},
 	groups = {flammable = 4},
 	place_param2 = 3,
-	on_use = minetest.item_eat(2),
+	on_use = minetest.item_eat(3),
 })
 
---
--- Recipes
---
-
--- needed for hbhunger
+-- needed
 minetest.override_item("farming_addons:carrot", {
-	on_use = minetest.item_eat(2),
+	on_use = minetest.item_eat(3),
 })
-
--- carrot Soup
--- minetest.register_craft({
--- 	type = "cooking",
--- 	cooktime = 10,
--- 	output = "farming_addons:bakedcarrot",
--- 	recipe = "farming_addons:carrot"
--- })

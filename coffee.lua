@@ -25,7 +25,7 @@ minetest.register_node("farming_addons:coffee_cup", {
 		fixed = {-0.25, -0.5, -0.25, 0.25, 0.25, 0.25}
 	},
 	groups = {vessel = 1, dig_immediate = 3, attached_node = 1},
-	on_use = minetest.item_eat(2, "vessels:drinking_glass"),
+	on_use = minetest.item_eat(4, "vessels:drinking_glass"),
 	sounds = default.node_sound_glass_defaults(),
 })
 
@@ -43,6 +43,6 @@ minetest.register_node("farming_addons:coffee_cup_hot", {
 		fixed = {-0.25, -0.5, -0.25, 0.25, 0.25, 0.25}
 	},
 	groups = {vessel = 1, dig_immediate = 3, attached_node = 1},
-	on_use = minetest.item_eat(3, "vessels:drinking_glass"),
+	on_use = minetest.item_eat(6, "vessels:drinking_glass"),
 	sounds = default.node_sound_glass_defaults(),
 })

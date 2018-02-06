@@ -65,6 +65,6 @@ minetest.register_node("farming_addons:corn_popcorn", {
 		fixed = {-0.25, -0.5, -0.25, 0.25, 0.25, 0.25}
 	},
 	groups = {dig_immediate = 3, attached_node = 1},
-	on_use = minetest.item_eat(3),
+	on_use = minetest.item_eat(5),
 	sounds = default.node_sound_leaves_defaults(),
 })

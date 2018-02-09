@@ -1,4 +1,4 @@
-# Farming Addons by SaKeL [farming_addons]
+# Farming Addons [farming_addons]
 Extends Minetest default farming mod with new plants and crops.
 
 ![screenshot](screenshot.png)

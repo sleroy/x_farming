@@ -5,7 +5,33 @@ Extends Minetest default farming mod with new plants and crops.
 
 ## Description
 
-### Recipes
+### Empty Soup Bowl ![bowl](textures/farming_addons_bowl.png)
+Empty soup bowl is used as a vessel for soups and stew. To craft bowl put any kind of block with group wood in the middle of the bottom row in the crafting grid and then diagonal left and right also the same block, this will give you 3 empty soup bowls.
+
+### Carrots ![carrot](textures/farming_addons_carrot.png)
+Carrots can be farmed and harvested on wet soil. Planted carrots take 8 stages to grow and go through 4 visually distinct stages.
+Eating a carrot restores 3 hunger points.
+
+**Golden Carrot** ![carrot_golden](textures/farming_addons_carrot_golden.png)
+Eating golden carrot will restore 10 hunger points and 10 health points - the highest values currently in farming_addons mod.
+To craft golden carrot put regular carrot in the middle of the crafting grid and surround it with golden lumps.
+
+**Hog Stew** ![hog_stew](textures/farming_addons_hog_stew.png)
+Eating hog stew will restore 8 hunger points. To craft hog stew put empty soup bowl in the middle of the bottom row of the crafting grid, then bake potato above it, right from the potato will come mushroom (red or brown), left from the potato will come carrot, then on top of the potato put raw pork (mobs redo, pumba/warthog).
+
+### Potato ![potato](textures/farming_addons_potato.png)
+When farmed, potatoes will take 8 stages to grow. However, there are only 4 distinct textures, so only 4 visible stages.
+Fully grown potato crops have chance of dropping an additional poisonous potato.
+
+**Baked potato** ![potato_baked](textures/farming_addons_potato_baked.png)
+
+**Poisonous potato** ![potato_poisonous](textures/farming_addons_potato_poisonous.png)
+
+### Corn ![screenshot](textures/farming_addons_corn.png)
+
+
+## Seeds
+
 
 ## Dependencies
 - default

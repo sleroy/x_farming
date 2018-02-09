@@ -8,6 +8,14 @@ minetest.register_craftitem("farming_addons:bowl", {
 	inventory_image = "farming_addons_bowl.png",
 })
 
+minetest.register_craft({
+	output = "farming_addons:bowl 3",
+	recipe = {
+		{"group:wood", "", "group:wood"},
+		{"", "group:wood", ""}
+	}
+})
+
 -- Hog Stew
 minetest.register_craftitem("farming_addons:hog_stew", {
 	description = "Hog Stew",

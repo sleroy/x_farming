@@ -1,4 +1,5 @@
 # Farming Addons [farming_addons]
+
 Extends Minetest default farming mod with new plants and crops.
 
 ![screenshot](screenshot.png)
@@ -42,6 +43,7 @@ Fully grown potato crops have chance of dropping an additional poisonous potato.
 
 
 ## Dependencies
+
 - default
 - farming
 - flowers
@@ -50,10 +52,13 @@ Fully grown potato crops have chance of dropping an additional poisonous potato.
 ## License:
 
 ### Code
+
 GNU LGPL 2.1 (see included LICENSE file)
 
 ### Textures
+
 **Industrial Carft 2**, https://forum.industrial-craft.net/
+
 - farming_addons_coffee_1.png
 - farming_addons_coffee_2.png
 - farming_addons_coffee_3.png
@@ -69,6 +74,7 @@ GNU LGPL 2.1 (see included LICENSE file)
 - farming_addons_pumpkin_8.png
 
 **CC BY-SA 4.0, Pixel Perfection by XSSheep**, https://minecraft.curseforge.com/projects/pixel-perfection-freshly-updated
+
 - farming_addons_beetroot_1.png
 - farming_addons_beetroot_2.png
 - farming_addons_beetroot_3.png
@@ -137,6 +143,7 @@ GNU LGPL 2.1 (see included LICENSE file)
 - farming_addons_wart_red_brick_block.png
 
 **GNU LGPL 2.1, by SaKeL**
+
 - farming_addons_carrot_seed.png
 - farming_addons_potato_seed.png
 - farming_addons_coffee.png
@@ -148,6 +155,7 @@ GNU LGPL 2.1 (see included LICENSE file)
 - farming_addons_obsidian_wart_seed.png
 
 **Complex Crops, Textured by emmacc**, https://minecraft.curseforge.com/projects/complex-crops
+
 - farming_addons_corn_1.png
 - farming_addons_corn_2.png
 - farming_addons_corn_3.png
@@ -162,11 +170,14 @@ GNU LGPL 2.1 (see included LICENSE file)
 - farming_addons_corn_seed.png
 
 **Created by GeMinecraft and edited by TenPlus1**
+
 - farming_addons_corn.png
 
 **WTFPL**
+
 - farming_addons_coffee_cup_hot.png
 - farming_addons_coffee_cup.png
 
 ## Installation
+
 see: http://wiki.minetest.com/wiki/Installing_Mods

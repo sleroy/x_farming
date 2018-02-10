@@ -162,21 +162,27 @@ When [mobs npc installed with snow golem mob](https://bitbucket.org/minetest_gam
 ## Seeds
 
 **Obsidian Wart**
+
 - red mushroom
 
 **Beetroot and Pumpkin**
+
 - dry grass
 
 **Carrot**
+
 - grass
 
 **Potato**
+
 - jungle grass
 
 **Coffee**
+
 - bush stem
 
 **Corn and Melon**
+
 - dry shrub
 
 Getting seeds from decorations (grass..) can be changed/adjusted in the future when there is more decorations added to the default minetest game.

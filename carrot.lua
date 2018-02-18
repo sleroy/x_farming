@@ -3,7 +3,7 @@ local maxlight = default.LIGHT_MAX
 
 -- carrot
 farming.register_plant("farming_addons:carrot", {
-	description = "Carrot Seed",
+	description = "Planting Carrot",
 	paramtype2 = "meshoptions",
 	inventory_image = "farming_addons_carrot_seed.png",
 	steps = 8,

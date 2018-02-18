@@ -3,7 +3,7 @@ local maxlight = default.LIGHT_MAX
 
 -- POTATO
 farming.register_plant("farming_addons:potato", {
-	description = "Potato Seed",
+	description = "Planting Potato",
 	paramtype2 = "meshoptions",
 	inventory_image = "farming_addons_potato_seed.png",
 	steps = 8,

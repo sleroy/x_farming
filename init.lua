@@ -12,6 +12,7 @@ dofile(path.."/obsidian_wart.lua")
 dofile(path.."/potato.lua")
 dofile(path.."/beetroot.lua")
 dofile(path.."/carrot.lua")
+dofile(path.."/cocoa.lua")
 dofile(path.."/seeds.lua")
 dofile(path.."/crafting.lua")
 

@@ -67,3 +67,13 @@ minetest.override_item("default:dry_shrub", {drop = {
     {items = {"default:dry_shrub"}},
   }
 }})
+
+-- cocoa bean
+minetest.override_item("default:bush_leaves", {drop = {
+  max_items = 1,
+  items = {
+    {items = {"farming_addons:cocoa_bean"}, rarity = 6},
+    {items = {"default:bush_sapling"}, rarity = 5},
+    {items = {"default:bush_leaves"}}
+  }
+}})

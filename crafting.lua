@@ -2,6 +2,42 @@
 -- Crafting recipes & items
 --
 
+-- Cocoa
+minetest.register_craft( {
+	output = "dye:brown",
+	recipe = {
+		{ "farming_addons:cocoa_bean" },
+	}
+})
+
+minetest.register_craftitem("farming_addons:cookie", {
+	description = "Cookie",
+	inventory_image = "farming_addons_cookie.png",
+	on_use = minetest.item_eat(2),
+})
+
+minetest.register_craft( {
+	output = "farming_addons:cookie 8",
+	recipe = {
+		{"farming:wheat", "farming_addons:cocoa_bean", "farming:wheat" },
+	}
+})
+
+minetest.register_craftitem("farming_addons:chocolate", {
+	description = "Chocolate",
+	inventory_image = "farming_addons_chocolate.png",
+	on_use = minetest.item_eat(3),
+})
+
+minetest.register_craft( {
+	output = "farming_addons:chocolate",
+	recipe = {
+		{"", "", "farming_addons:cocoa_bean"},
+		{"", "farming_addons:cocoa_bean", ""},
+		{"default:paper", "", ""},
+	}
+})
+
 -- Soup Bowl
 minetest.register_craftitem("farming_addons:bowl", {
 	description = "Empty Soup Bowl",

@@ -1,4 +1,4 @@
-local minlight = 0
+local minlight = 13
 local maxlight = default.LIGHT_MAX
 
 -- POTATO

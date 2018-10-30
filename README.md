@@ -159,6 +159,10 @@ Egg is currently dependent on [mobs redo](https://github.com/tenplus1/mobs_redo)
 
 When [mobs npc installed with snow golem mob](https://bitbucket.org/minetest_gamers/mobs_npc/overview), placing 2 snowblocks vertically ending up with pumpkin block or pumpkin lantern a snow golem NPC will spawn. This mob is not tamed. You can tame snow golem with bread, meat or diamond. Snow golem will follow you and help you fight mobs or can stay in place (right click). Giving snow golem a gold lump will drop random item.
 
+### Cocoa
+
+Cocoa is planted on jungletree using cocoa bean and fully grown cocoa will drop cocoa bean. From cocoa bean you can further craft eat items. Cocoa have 3 stages of growth.
+
 ## Seeds
 
 **Obsidian Wart**
@@ -184,6 +188,10 @@ When [mobs npc installed with snow golem mob](https://bitbucket.org/minetest_gam
 **Corn and Melon**
 
 - dry shrub
+
+**Cocoa bean**
+
+- bush leaves
 
 Getting seeds from decorations (grass..) can be changed/adjusted in the future when there is more decorations added to the default minetest game.
 
@@ -286,6 +294,10 @@ GNU Lesser General Public License v2.1 or later (see included LICENSE file)
 - farming_addons_wart_brick.png
 - farming_addons_wartrack.png
 - farming_addons_wart_red_brick_block.png
+- farming_addons_cookie.png
+- farming_addons_cocoa_1.png
+- farming_addons_cocoa_2.png
+- farming_addons_cocoa_3.png
 
 **LGPL-2.1-or-later, by SaKeL**
 
@@ -314,6 +326,10 @@ GNU Lesser General Public License v2.1 or later (see included LICENSE file)
 **Created by GeMinecraft and edited by TenPlus1**
 
 - farming_addons_corn.png
+
+**Created by Itsoo1**
+
+- farming_addons_chocolate.png
 
 **WTFPL**
 

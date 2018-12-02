@@ -1,20 +1,20 @@
 -- spawn snow golem
-local function pumpkin_on_construct(pos)
-	if not minetest.get_modpath("mobs_npc") then return end
+-- local function pumpkin_on_construct(pos)
+-- 	if not minetest.get_modpath("mobs_npc") then return end
 
-	for i = 1,2 do
-		if minetest.get_node({x=pos.x,y=pos.y-i,z=pos.z}).name ~= "default:snowblock" then
-			return
-		end
-	end
+-- 	for i = 1,2 do
+-- 		if minetest.get_node({x=pos.x,y=pos.y-i,z=pos.z}).name ~= "default:snowblock" then
+-- 			return
+-- 		end
+-- 	end
 
-	--if 3 snow block are placed, this will make snow golem
-	for i = 0,2 do
-		minetest.remove_node({x=pos.x,y=pos.y-i,z=pos.z})
-	end
+-- 	--if 3 snow block are placed, this will make snow golem
+-- 	for i = 0,2 do
+-- 		minetest.remove_node({x=pos.x,y=pos.y-i,z=pos.z})
+-- 	end
 
-	minetest.add_entity({x=pos.x,y=pos.y-1,z=pos.z}, "mobs_npc:snow_golem")
-end
+-- 	minetest.add_entity({x=pos.x,y=pos.y-1,z=pos.z}, "mobs_npc:snow_golem")
+-- end
 
 -- PUMPKIN
 farming.register_plant("farming_addons:pumpkin", {
@@ -79,7 +79,7 @@ minetest.register_node("farming_addons:pumpkin_block", {
 	sounds = default.node_sound_wood_defaults(),
 	is_ground_content = false,
 	groups = {snappy=3, flammable=4, fall_damage_add_percent=-30},
-	on_construct = pumpkin_on_construct
+	-- on_construct = pumpkin_on_construct
 })
 
 -- PUMPKIN LANTERN -- from recipe
@@ -93,7 +93,7 @@ minetest.register_node("farming_addons:pumpkin_lantern", {
 	light_source = 12,
 	drop = "farming_addons:pumpkin_lantern",
 	groups = {snappy=3, flammable=4, fall_damage_add_percent=-30},
-	on_construct = pumpkin_on_construct
+	-- on_construct = pumpkin_on_construct
 })
 
 -- drop blocks instead of items

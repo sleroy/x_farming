@@ -1,7 +1,7 @@
 -- Farming Addons
 -- by SaKeL
 
-local path = minetest.get_modpath("farming_addons")
+local path = minetest.get_modpath("x_farming")
 
 dofile(path.."/api.lua")
 dofile(path.."/melon.lua")

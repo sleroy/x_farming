@@ -1,33 +1,33 @@
 -- main class
-farming_addons = {}
+x_farming = {}
 MINLIGHT = 13
 MAXLIGHT = default.LIGHT_MAX
 
 -- how often node timers for plants will tick, +/- some random value
-function farming_addons.tick(pos)
+function x_farming.tick(pos)
   minetest.get_node_timer(pos):start(math.random(498, 1287))
 end
 
 -- how often a growth failure tick is retried (e.g. too dark)
-function farming_addons.tick_short(pos)
+function x_farming.tick_short(pos)
   minetest.get_node_timer(pos):start(math.random(332, 858))
   -- minetest.get_node_timer(pos):start(math.random(166, 286))
 end
 
 -- just shorthand for minetest metadata handling
-function farming_addons.meta_get_str(key, pos)
+function x_farming.meta_get_str(key, pos)
   local meta = minetest.get_meta(pos)
   return meta:get_string(key)
 end
 
 -- just shorthand for minetest metadata handling
-function farming_addons.meta_set_str(key, value, pos)
+function x_farming.meta_set_str(key, value, pos)
   local meta = minetest.get_meta(pos)
   meta:set_string(key, value)
 end
 
 -- grow blocks next to the plant
-function farming_addons.grow_block(pos, elapsed)
+function x_farming.grow_block(pos, elapsed)
   local node = minetest.get_node(pos)
   local random_pos = false
   local spawn_positions = {}
@@ -61,7 +61,7 @@ function farming_addons.grow_block(pos, elapsed)
   for side,child_pos in pairs(children) do
     -- print(side, minetest.pos_to_string(child_pos))
 
-    local parent_pos_from_child = farming_addons.meta_get_str("parent", child_pos)
+    local parent_pos_from_child = x_farming.meta_get_str("parent", child_pos)
 
     -- disable timer for fully grown plant - fruit for this stem already exists
     if minetest.pos_to_string(pos) == parent_pos_from_child then
@@ -85,7 +85,7 @@ function farming_addons.grow_block(pos, elapsed)
 
   -- plant is closed from all sides
   if #spawn_positions < 1 then
-    farming_addons.tick_short(pos)
+    x_farming.tick_short(pos)
     return
   else
     -- pick random from the open sides
@@ -107,14 +107,14 @@ function farming_addons.grow_block(pos, elapsed)
   -- check light
   local light = minetest.get_node_light(pos)
   if not light or light < MINLIGHT or light > MAXLIGHT then
-    farming_addons.tick_short(pos)
+    x_farming.tick_short(pos)
     return
   end
 
   -- spawn block
   if random_pos then
     minetest.set_node(random_pos, {name = def.next_plant})
-    farming_addons.meta_set_str("parent", minetest.pos_to_string(pos), random_pos)
+    x_farming.meta_set_str("parent", minetest.pos_to_string(pos), random_pos)
   end
   return
 end

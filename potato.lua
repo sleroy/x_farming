@@ -2,10 +2,10 @@ local minlight = 13
 local maxlight = default.LIGHT_MAX
 
 -- POTATO
-farming.register_plant("farming_addons:potato", {
+farming.register_plant("x_farming:potato", {
 	description = "Planting Potato",
 	paramtype2 = "meshoptions",
-	inventory_image = "farming_addons_potato_seed.png",
+	inventory_image = "x_farming_potato_seed.png",
 	steps = 8,
 	minlight = minlight,
 	maxlight = maxlight,
@@ -16,23 +16,23 @@ farming.register_plant("farming_addons:potato", {
 })
 
 -- needed
-minetest.override_item("farming_addons:potato", {
+minetest.override_item("x_farming:potato", {
 	on_use = minetest.item_eat(2),
 })
 
 -- add poisonous potato to drops
-minetest.override_item("farming_addons:potato_8", {
+minetest.override_item("x_farming:potato_8", {
 	drop = {
 		items = {
-			{items = {"farming_addons:potato"}, rarity = 1},
-			{items = {"farming_addons:potato"}, rarity = 2},
-			{items = {"farming_addons:poisonouspotato"}, rarity = 5},
-			{items = {"farming_addons:seed_potato"}, rarity = 1},
-			{items = {"farming_addons:seed_potato"}, rarity = 2},
+			{items = {"x_farming:potato"}, rarity = 1},
+			{items = {"x_farming:potato"}, rarity = 2},
+			{items = {"x_farming:poisonouspotato"}, rarity = 5},
+			{items = {"x_farming:seed_potato"}, rarity = 1},
+			{items = {"x_farming:seed_potato"}, rarity = 2},
 		}
 	}
 })
 
 if minetest.get_modpath("hbhunger") ~= nil then
-	hbhunger.register_food("farming_addons:poisonouspotato", 1, "", 5)
+	hbhunger.register_food("x_farming:poisonouspotato", 1, "", 5)
 end

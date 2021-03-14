@@ -8,7 +8,7 @@ local function tick_again(pos)
 	minetest.get_node_timer(pos):start(math.random(80, 160))
 end
 
-function farming_addons.grow_cocoa_plant(pos, elapsed)
+function x_farming.grow_cocoa_plant(pos, elapsed)
 	local node = minetest.get_node(pos)
 	local name = node.name
 	local def = minetest.registered_nodes[name]
@@ -45,7 +45,7 @@ function farming_addons.grow_cocoa_plant(pos, elapsed)
 	return
 end
 
-function farming_addons.place_cocoa_bean(itemstack, placer, pointed_thing)
+function x_farming.place_cocoa_bean(itemstack, placer, pointed_thing)
 	local pt = pointed_thing
 	-- check if pointing at a node
 	if not pt then
@@ -105,7 +105,7 @@ function farming_addons.place_cocoa_bean(itemstack, placer, pointed_thing)
 	local new_param2 = minetest.dir_to_facedir(direction)
 
 	-- add the node and remove 1 item from the itemstack
-	minetest.set_node(pt.above, {name = "farming_addons:cocoa_1", param2 = new_param2})
+	minetest.set_node(pt.above, {name = "x_farming:cocoa_1", param2 = new_param2})
 
 	tick(pt.above)
 	if not (creative and creative.is_enabled_for
@@ -116,25 +116,25 @@ function farming_addons.place_cocoa_bean(itemstack, placer, pointed_thing)
 end
 
 -- COCOA
-minetest.register_craftitem("farming_addons:cocoa_bean", {
+minetest.register_craftitem("x_farming:cocoa_bean", {
 	description = "Cocoa bean",
-	tiles = {"farming_addons_cocoa_bean.png"},
-	inventory_image = "farming_addons_cocoa_bean.png",
-	wield_image = "farming_addons_cocoa_bean.png",
-	on_place = farming_addons.place_cocoa_bean,
+	tiles = {"x_farming_cocoa_bean.png"},
+	inventory_image = "x_farming_cocoa_bean.png",
+	wield_image = "x_farming_cocoa_bean.png",
+	on_place = x_farming.place_cocoa_bean,
 })
 
 -- 1
-minetest.register_node("farming_addons:cocoa_1", {
+minetest.register_node("x_farming:cocoa_1", {
 	description = "Cocoa 1",
 	drawtype = "nodebox",
 	tiles = {
-		"farming_addons_cocoa_top_1.png",
-		"farming_addons_cocoa_bottom_1.png",
-		"farming_addons_cocoa_right_1.png",
-		"farming_addons_cocoa_left_1.png",
-		"farming_addons_cocoa_front_1.png",
-		"farming_addons_cocoa_front_1.png"
+		"x_farming_cocoa_top_1.png",
+		"x_farming_cocoa_bottom_1.png",
+		"x_farming_cocoa_right_1.png",
+		"x_farming_cocoa_left_1.png",
+		"x_farming_cocoa_front_1.png",
+		"x_farming_cocoa_front_1.png"
 	},
 	paramtype = "light",
 	sunlight_propagates = true,
@@ -144,7 +144,7 @@ minetest.register_node("farming_addons:cocoa_1", {
 	is_ground_content = false,
 	drop = {
 		items = {
-			{items = {"farming_addons:cocoa_bean"}, rarity = 3},
+			{items = {"x_farming:cocoa_bean"}, rarity = 3},
 		}
 	},
 	node_box = {
@@ -170,23 +170,23 @@ minetest.register_node("farming_addons:cocoa_1", {
 	},
 	groups = {choppy = 3, flammable = 2, plant = 1, not_in_creative_inventory = 1},
 	sounds = default.node_sound_wood_defaults(),
-	next_plant = "farming_addons:cocoa_2",
-	on_timer = farming_addons.grow_cocoa_plant,
+	next_plant = "x_farming:cocoa_2",
+	on_timer = x_farming.grow_cocoa_plant,
 	minlight = 13,
 	maxlight = 15
 })
 
 -- 2
-minetest.register_node("farming_addons:cocoa_2", {
+minetest.register_node("x_farming:cocoa_2", {
 	description = "Cocoa 2",
 	drawtype = "nodebox",
 	tiles = {
-		"farming_addons_cocoa_top_2.png",
-		"farming_addons_cocoa_bottom_2.png",
-		"farming_addons_cocoa_right_2.png",
-		"farming_addons_cocoa_left_2.png",
-		"farming_addons_cocoa_front_2.png",
-		"farming_addons_cocoa_front_2.png"
+		"x_farming_cocoa_top_2.png",
+		"x_farming_cocoa_bottom_2.png",
+		"x_farming_cocoa_right_2.png",
+		"x_farming_cocoa_left_2.png",
+		"x_farming_cocoa_front_2.png",
+		"x_farming_cocoa_front_2.png"
 	},
 	paramtype = "light",
 	sunlight_propagates = true,
@@ -196,7 +196,7 @@ minetest.register_node("farming_addons:cocoa_2", {
 	is_ground_content = false,
 	drop = {
 		items = {
-			{items = {"farming_addons:cocoa_bean"}, rarity = 2},
+			{items = {"x_farming:cocoa_bean"}, rarity = 2},
 		}
 	},
 	node_box = {
@@ -222,23 +222,23 @@ minetest.register_node("farming_addons:cocoa_2", {
 	},
 	groups = {choppy = 3, flammable = 2, plant = 1, not_in_creative_inventory = 1},
 	sounds = default.node_sound_wood_defaults(),
-	next_plant = "farming_addons:cocoa_3",
-	on_timer = farming_addons.grow_cocoa_plant,
+	next_plant = "x_farming:cocoa_3",
+	on_timer = x_farming.grow_cocoa_plant,
 	minlight = 13,
 	maxlight = 15
 })
 
 -- 3
-minetest.register_node("farming_addons:cocoa_3", {
+minetest.register_node("x_farming:cocoa_3", {
 	description = "Cocoa 3",
 	drawtype = "nodebox",
 	tiles = {
-		"farming_addons_cocoa_top_3.png",
-		"farming_addons_cocoa_bottom_3.png",
-		"farming_addons_cocoa_right_3.png",
-		"farming_addons_cocoa_left_3.png",
-		"farming_addons_cocoa_front_3.png",
-		"farming_addons_cocoa_front_3.png"
+		"x_farming_cocoa_top_3.png",
+		"x_farming_cocoa_bottom_3.png",
+		"x_farming_cocoa_right_3.png",
+		"x_farming_cocoa_left_3.png",
+		"x_farming_cocoa_front_3.png",
+		"x_farming_cocoa_front_3.png"
 	},
 	paramtype = "light",
 	sunlight_propagates = true,
@@ -248,8 +248,8 @@ minetest.register_node("farming_addons:cocoa_3", {
 	is_ground_content = false,
 	drop = {
 		items = {
-			{items = {"farming_addons:cocoa_bean"}, rarity = 1},
-			{items = {"farming_addons:cocoa_bean"}, rarity = 2},
+			{items = {"x_farming:cocoa_bean"}, rarity = 1},
+			{items = {"x_farming:cocoa_bean"}, rarity = 2},
 		}
 	},
 	node_box = {
@@ -275,17 +275,17 @@ minetest.register_node("farming_addons:cocoa_3", {
 	},
 	groups = {choppy = 3, flammable = 2, plant = 1, not_in_creative_inventory = 1},
 	sounds = default.node_sound_wood_defaults(),
-	on_timer = farming_addons.grow_cocoa_plant,
+	on_timer = x_farming.grow_cocoa_plant,
 	minlight = 13,
 	maxlight = 15
 })
 
 -- replacement LBM for pre-nodetimer plants
 minetest.register_lbm({
-	name = "farming_addons:start_nodetimer_cocoa",
+	name = "x_farming:start_nodetimer_cocoa",
 	nodenames = {
-		"farming_addons:cocoa_1",
-		"farming_addons:cocoa_2"
+		"x_farming:cocoa_1",
+		"x_farming:cocoa_2"
 	},
 	action = function(pos, node)
 		tick_again(pos)

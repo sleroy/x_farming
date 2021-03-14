@@ -1,7 +1,7 @@
 -- MELON
-farming.register_plant("farming_addons:melon", {
+farming.register_plant("x_farming:melon", {
 	description = "Melon Seed",
-	inventory_image = "farming_addons_melon_seed.png",
+	inventory_image = "x_farming_melon_seed.png",
 	steps = 8,
 	minlight = MINLIGHT,
 	maxlight = MAXLIGHT,
@@ -11,15 +11,15 @@ farming.register_plant("farming_addons:melon", {
 })
 
 -- needed
-minetest.override_item("farming_addons:melon", {
+minetest.override_item("x_farming:melon", {
 	on_use = minetest.item_eat(2),
-	wield_image = "farming_addons_melon.png^[transformR90",
+	wield_image = "x_farming_melon.png^[transformR90",
 })
 
 -- MELON FRUIT - HARVEST
-minetest.register_node("farming_addons:melon_fruit", {
+minetest.register_node("x_farming:melon_fruit", {
 	description = "Melon Fruit",
-	tiles = {"farming_addons_melon_fruit_top.png", "farming_addons_melon_fruit_top.png", "farming_addons_melon_fruit_side.png", "farming_addons_melon_fruit_side.png", "farming_addons_melon_fruit_side.png", "farming_addons_melon_fruit_side.png"},
+	tiles = {"x_farming_melon_fruit_top.png", "x_farming_melon_fruit_top.png", "x_farming_melon_fruit_side.png", "x_farming_melon_fruit_side.png", "x_farming_melon_fruit_side.png", "x_farming_melon_fruit_side.png"},
 	sounds = default.node_sound_wood_defaults(),
 	is_ground_content = false,
 	groups = {snappy=3, flammable=4, fall_damage_add_percent=-30},
@@ -27,31 +27,31 @@ minetest.register_node("farming_addons:melon_fruit", {
 		max_items = 7,  -- Maximum number of items to drop.
 		items = { -- Choose max_items randomly from this list.
 			{
-				items = {"farming_addons:melon"},  -- Items to drop.
+				items = {"x_farming:melon"},  -- Items to drop.
 				rarity = 1,  -- Probability of dropping is 1 / rarity.
 			},
 			{
-				items = {"farming_addons:melon"},  -- Items to drop.
+				items = {"x_farming:melon"},  -- Items to drop.
 				rarity = 2,  -- Probability of dropping is 1 / rarity.
 			},
 			{
-				items = {"farming_addons:melon"},  -- Items to drop.
+				items = {"x_farming:melon"},  -- Items to drop.
 				rarity = 2,  -- Probability of dropping is 1 / rarity.
 			},
 			{
-				items = {"farming_addons:melon"},  -- Items to drop.
+				items = {"x_farming:melon"},  -- Items to drop.
 				rarity = 2,  -- Probability of dropping is 1 / rarity.
 			},
 			{
-				items = {"farming_addons:melon"},  -- Items to drop.
+				items = {"x_farming:melon"},  -- Items to drop.
 				rarity = 3,  -- Probability of dropping is 1 / rarity.
 			},
 			{
-				items = {"farming_addons:melon"},  -- Items to drop.
+				items = {"x_farming:melon"},  -- Items to drop.
 				rarity = 3,  -- Probability of dropping is 1 / rarity.
 			},
 			{
-				items = {"farming_addons:melon"},  -- Items to drop.
+				items = {"x_farming:melon"},  -- Items to drop.
 				rarity = 3,  -- Probability of dropping is 1 / rarity.
 			},
 		},
@@ -71,33 +71,33 @@ minetest.register_node("farming_addons:melon_fruit", {
 		-- tick parent if parent stem still exists
 		if parent_node
 			and parent_node ~= nil
-			and parent_node.name == "farming_addons:melon_8" then
+			and parent_node.name == "x_farming:melon_8" then
 
-			farming_addons.tick(parent_pos_from_child)
+			x_farming.tick(parent_pos_from_child)
 		end
 	end
 })
 
 -- MELON BLOCK - HARVEST from crops
-minetest.register_node("farming_addons:melon_block", {
+minetest.register_node("x_farming:melon_block", {
 	description = "Melon Block",
-	tiles = {"farming_addons_melon_fruit_top.png", "farming_addons_melon_fruit_top.png", "farming_addons_melon_fruit_side.png", "farming_addons_melon_fruit_side.png", "farming_addons_melon_fruit_side.png", "farming_addons_melon_fruit_side.png"},
+	tiles = {"x_farming_melon_fruit_top.png", "x_farming_melon_fruit_top.png", "x_farming_melon_fruit_side.png", "x_farming_melon_fruit_side.png", "x_farming_melon_fruit_side.png", "x_farming_melon_fruit_side.png"},
 	sounds = default.node_sound_wood_defaults(),
 	is_ground_content = false,
 	groups = {snappy=3, flammable=4, fall_damage_add_percent=-30}
 })
 
 -- take over the growth from minetest_game farming from here
-minetest.override_item("farming_addons:melon_8", {
-	next_plant = "farming_addons:melon_fruit",
-	on_timer = farming_addons.grow_block
+minetest.override_item("x_farming:melon_8", {
+	next_plant = "x_farming:melon_fruit",
+	on_timer = x_farming.grow_block
 })
 
 -- replacement LBM for pre-nodetimer plants
 minetest.register_lbm({
-	name = "farming_addons:start_nodetimer_melon",
-	nodenames = {"farming_addons:melon_8"},
+	name = "x_farming:start_nodetimer_melon",
+	nodenames = {"x_farming:melon_8"},
 	action = function(pos, node)
-		farming_addons.tick_short(pos)
+		x_farming.tick_short(pos)
 	end,
 })

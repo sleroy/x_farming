@@ -1,8 +1,8 @@
 -- COFFEE
-farming.register_plant("farming_addons:coffee", {
+farming.register_plant("x_farming:coffee", {
 	description = "Coffee Seed",
 	paramtype2 = "meshoptions",
-	inventory_image = "farming_addons_coffee_seed.png",
+	inventory_image = "x_farming_coffee_seed.png",
 	steps = 5,
 	minlight = 13,
 	maxlight = default.LIGHT_MAX,
@@ -12,12 +12,12 @@ farming.register_plant("farming_addons:coffee", {
 })
 
 -- cold cup of coffee
-minetest.register_node("farming_addons:coffee_cup", {
+minetest.register_node("x_farming:coffee_cup", {
 	description = "Cold Cup of Coffee",
 	drawtype = "plantlike",
-	tiles = {"farming_addons_coffee_cup.png"},
-	inventory_image = "farming_addons_coffee_cup.png",
-	wield_image = "farming_addons_coffee_cup.png",
+	tiles = {"x_farming_coffee_cup.png"},
+	inventory_image = "x_farming_coffee_cup.png",
+	wield_image = "x_farming_coffee_cup.png",
 	paramtype = "light",
 	walkable = false,
 	selection_box = {
@@ -30,12 +30,12 @@ minetest.register_node("farming_addons:coffee_cup", {
 })
 
 -- hot cup of coffee
-minetest.register_node("farming_addons:coffee_cup_hot", {
+minetest.register_node("x_farming:coffee_cup_hot", {
 	description = "Hot Cup of Coffee",
 	drawtype = "plantlike",
-	tiles = {"farming_addons_coffee_cup_hot.png"},
-	inventory_image = "farming_addons_coffee_cup_hot.png",
-	wield_image = "farming_addons_coffee_cup_hot.png",
+	tiles = {"x_farming_coffee_cup_hot.png"},
+	inventory_image = "x_farming_coffee_cup_hot.png",
+	wield_image = "x_farming_coffee_cup_hot.png",
 	paramtype = "light",
 	walkable = false,
 	selection_box = {

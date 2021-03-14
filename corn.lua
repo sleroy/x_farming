@@ -1,8 +1,8 @@
 -- CORN
-farming.register_plant("farming_addons:corn", {
+farming.register_plant("x_farming:corn", {
 	description = "corn Seed",
 	paramtype2 = "meshoptions",
-	inventory_image = "farming_addons_corn_seed.png",
+	inventory_image = "x_farming_corn_seed.png",
 	steps = 10,
 	minlight = 13,
 	maxlight = default.LIGHT_MAX,
@@ -11,7 +11,7 @@ farming.register_plant("farming_addons:corn", {
 	place_param2 = 3,
 })
 
-minetest.override_item("farming_addons:corn_6", {
+minetest.override_item("x_farming:corn_6", {
 	visual_scale = 2.0,
 	selection_box = {
 		type = "fixed",
@@ -19,7 +19,7 @@ minetest.override_item("farming_addons:corn_6", {
 	}
 })
 
-minetest.override_item("farming_addons:corn_7", {
+minetest.override_item("x_farming:corn_7", {
 	visual_scale = 2.0,
 	selection_box = {
 		type = "fixed",
@@ -27,7 +27,7 @@ minetest.override_item("farming_addons:corn_7", {
 	}
 })
 
-minetest.override_item("farming_addons:corn_8", {
+minetest.override_item("x_farming:corn_8", {
 	visual_scale = 2.0,
 	selection_box = {
 		type = "fixed",
@@ -35,7 +35,7 @@ minetest.override_item("farming_addons:corn_8", {
 	}
 })
 
-minetest.override_item("farming_addons:corn_9", {
+minetest.override_item("x_farming:corn_9", {
 	visual_scale = 2.0,
 	selection_box = {
 		type = "fixed",
@@ -43,7 +43,7 @@ minetest.override_item("farming_addons:corn_9", {
 	}
 })
 
-minetest.override_item("farming_addons:corn_10", {
+minetest.override_item("x_farming:corn_10", {
 	visual_scale = 2.0,
 	selection_box = {
 		type = "fixed",
@@ -52,12 +52,12 @@ minetest.override_item("farming_addons:corn_10", {
 })
 
 -- popcorn
-minetest.register_node("farming_addons:corn_popcorn", {
+minetest.register_node("x_farming:corn_popcorn", {
 	description = "Popcorn",
 	drawtype = "plantlike",
-	tiles = {"farming_addons_corn_popcorn.png"},
-	inventory_image = "farming_addons_corn_popcorn.png",
-	wield_image = "farming_addons_corn_popcorn.png",
+	tiles = {"x_farming_corn_popcorn.png"},
+	inventory_image = "x_farming_corn_popcorn.png",
+	wield_image = "x_farming_corn_popcorn.png",
 	paramtype = "light",
 	walkable = false,
 	selection_box = {

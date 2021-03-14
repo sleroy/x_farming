@@ -17,9 +17,9 @@
 -- end
 
 -- PUMPKIN
-farming.register_plant("farming_addons:pumpkin", {
+farming.register_plant("x_farming:pumpkin", {
 	description = "Pumpkin Seed",
-	inventory_image = "farming_addons_pumpkin_seed.png",
+	inventory_image = "x_farming_pumpkin_seed.png",
 	steps = 8,
 	minlight = MINLIGHT,
 	maxlight = MAXLIGHT,
@@ -29,9 +29,9 @@ farming.register_plant("farming_addons:pumpkin", {
 })
 
 -- PUMPKIN FRUIT - HARVEST
-minetest.register_node("farming_addons:pumpkin_fruit", {
+minetest.register_node("x_farming:pumpkin_fruit", {
 	description = "Pumpkin Fruit",
-	tiles = {"farming_addons_pumpkin_fruit_top.png", "farming_addons_pumpkin_fruit_top.png", "farming_addons_pumpkin_fruit_side.png", "farming_addons_pumpkin_fruit_side.png", "farming_addons_pumpkin_fruit_side.png", "farming_addons_pumpkin_fruit_side_off.png"},
+	tiles = {"x_farming_pumpkin_fruit_top.png", "x_farming_pumpkin_fruit_top.png", "x_farming_pumpkin_fruit_side.png", "x_farming_pumpkin_fruit_side.png", "x_farming_pumpkin_fruit_side.png", "x_farming_pumpkin_fruit_side_off.png"},
 	paramtype2 = "facedir",
 	sounds = default.node_sound_wood_defaults(),
 	is_ground_content = false,
@@ -40,11 +40,11 @@ minetest.register_node("farming_addons:pumpkin_fruit", {
 		max_items = 4,  -- Maximum number of items to drop.
 		items = { -- Choose max_items randomly from this list.
 			{
-				items = {"farming_addons:pumpkin"},  -- Items to drop.
+				items = {"x_farming:pumpkin"},  -- Items to drop.
 				rarity = 1,  -- Probability of dropping is 1 / rarity.
 			},
 			{
-				items = {"farming_addons:pumpkin"},  -- Items to drop.
+				items = {"x_farming:pumpkin"},  -- Items to drop.
 				rarity = 2,  -- Probability of dropping is 1 / rarity.
 			}
 		},
@@ -64,17 +64,17 @@ minetest.register_node("farming_addons:pumpkin_fruit", {
 		-- tick parent if parent stem still exists
 		if parent_node
 			and parent_node ~= nil
-			and parent_node.name == "farming_addons:pumpkin_8" then
+			and parent_node.name == "x_farming:pumpkin_8" then
 
-			farming_addons.tick(parent_pos_from_child)
+			x_farming.tick(parent_pos_from_child)
 		end
 	end
 })
 
 -- PUMPKIN BLOCK - HARVEST from crops
-minetest.register_node("farming_addons:pumpkin_block", {
+minetest.register_node("x_farming:pumpkin_block", {
 	description = "Pumpkin Block",
-	tiles = {"farming_addons_pumpkin_fruit_top.png", "farming_addons_pumpkin_fruit_top.png", "farming_addons_pumpkin_fruit_side.png", "farming_addons_pumpkin_fruit_side.png", "farming_addons_pumpkin_fruit_side.png", "farming_addons_pumpkin_fruit_side_off.png"},
+	tiles = {"x_farming_pumpkin_fruit_top.png", "x_farming_pumpkin_fruit_top.png", "x_farming_pumpkin_fruit_side.png", "x_farming_pumpkin_fruit_side.png", "x_farming_pumpkin_fruit_side.png", "x_farming_pumpkin_fruit_side_off.png"},
 	paramtype2 = "facedir",
 	sounds = default.node_sound_wood_defaults(),
 	is_ground_content = false,
@@ -83,33 +83,33 @@ minetest.register_node("farming_addons:pumpkin_block", {
 })
 
 -- PUMPKIN LANTERN -- from recipe
-minetest.register_node("farming_addons:pumpkin_lantern", {
+minetest.register_node("x_farming:pumpkin_lantern", {
 	description = "Pumpkin Lantern",
-	tiles = {"farming_addons_pumpkin_fruit_top.png", "farming_addons_pumpkin_fruit_top.png", "farming_addons_pumpkin_fruit_side.png", "farming_addons_pumpkin_fruit_side.png", "farming_addons_pumpkin_fruit_side.png", "farming_addons_pumpkin_fruit_side_on.png"},
+	tiles = {"x_farming_pumpkin_fruit_top.png", "x_farming_pumpkin_fruit_top.png", "x_farming_pumpkin_fruit_side.png", "x_farming_pumpkin_fruit_side.png", "x_farming_pumpkin_fruit_side.png", "x_farming_pumpkin_fruit_side_on.png"},
 	paramtype = "light",
 	paramtype2 = "facedir",
 	sounds = default.node_sound_wood_defaults(),
 	is_ground_content = false,
 	light_source = 12,
-	drop = "farming_addons:pumpkin_lantern",
+	drop = "x_farming:pumpkin_lantern",
 	groups = {snappy=3, flammable=4, fall_damage_add_percent=-30},
 	-- on_construct = pumpkin_on_construct
 })
 
 -- drop blocks instead of items
-minetest.register_alias_force("farming_addons:pumpkin", "farming_addons:pumpkin_block")
+minetest.register_alias_force("x_farming:pumpkin", "x_farming:pumpkin_block")
 
 -- take over the growth from minetest_game farming from here
-minetest.override_item("farming_addons:pumpkin_8", {
-	next_plant = "farming_addons:pumpkin_fruit",
-	on_timer = farming_addons.grow_block
+minetest.override_item("x_farming:pumpkin_8", {
+	next_plant = "x_farming:pumpkin_fruit",
+	on_timer = x_farming.grow_block
 })
 
 -- replacement LBM for pre-nodetimer plants
 minetest.register_lbm({
-	name = "farming_addons:start_nodetimer_pumpkin",
-	nodenames = {"farming_addons:pumpkin_8"},
+	name = "x_farming:start_nodetimer_pumpkin",
+	nodenames = {"x_farming:pumpkin_8"},
 	action = function(pos, node)
-		farming_addons.tick_short(pos)
+		x_farming.tick_short(pos)
 	end,
 })

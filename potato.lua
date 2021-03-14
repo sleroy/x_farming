@@ -32,3 +32,7 @@ minetest.override_item("farming_addons:potato_8", {
 		}
 	}
 })
+
+if minetest.get_modpath("hbhunger") ~= nil then
+	hbhunger.register_food("farming_addons:poisonouspotato", 1, "", 5)
+end

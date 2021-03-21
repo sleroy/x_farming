@@ -3,7 +3,7 @@ local maxlight = default.LIGHT_MAX
 
 -- OBSIDIAN WART
 farming.register_plant("x_farming:obsidian_wart", {
-	description = "Obsidian Wart Seed",
+	description = "Obsidian Wart Seed" .. "\n" .. "Plant on Obsidian",
 	paramtype2 = "meshoptions",
 	inventory_image = "x_farming_obsidian_wart_seed.png",
 	steps = 6,

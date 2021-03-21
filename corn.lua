@@ -53,7 +53,7 @@ minetest.override_item("x_farming:corn_10", {
 
 -- popcorn
 minetest.register_node("x_farming:corn_popcorn", {
-	description = "Popcorn",
+	description = "Popcorn" .. "\n" .. minetest.colorize(x_farming.colors.brown, "Hunger: 5"),
 	drawtype = "plantlike",
 	tiles = {"x_farming_corn_popcorn.png"},
 	inventory_image = "x_farming_corn_popcorn.png",

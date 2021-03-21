@@ -17,5 +17,6 @@ farming.register_plant("x_farming:beetroot", {
 
 -- needed
 minetest.override_item("x_farming:beetroot", {
+	description = "Beetroot" .. "\n" .. minetest.colorize(x_farming.colors.brown, "Hunger: 3"),
 	on_use = minetest.item_eat(3),
 })

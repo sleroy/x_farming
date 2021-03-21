@@ -117,7 +117,7 @@ end
 
 -- COCOA
 minetest.register_craftitem("x_farming:cocoa_bean", {
-	description = "Cocoa bean",
+	description = "Cocoa bean (plant on jungle tree)",
 	tiles = {"x_farming_cocoa_bean.png"},
 	inventory_image = "x_farming_cocoa_bean.png",
 	wield_image = "x_farming_cocoa_bean.png",

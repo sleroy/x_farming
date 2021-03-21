@@ -12,6 +12,7 @@ farming.register_plant("x_farming:melon", {
 
 -- needed
 minetest.override_item("x_farming:melon", {
+	description = "Melon" .. "\n" .. minetest.colorize(x_farming.colors.brown, "Hunger: 2"),
 	on_use = minetest.item_eat(2),
 	wield_image = "x_farming_melon.png^[transformR90",
 })
@@ -22,7 +23,7 @@ minetest.register_node("x_farming:melon_fruit", {
 	tiles = {"x_farming_melon_fruit_top.png", "x_farming_melon_fruit_top.png", "x_farming_melon_fruit_side.png", "x_farming_melon_fruit_side.png", "x_farming_melon_fruit_side.png", "x_farming_melon_fruit_side.png"},
 	sounds = default.node_sound_wood_defaults(),
 	is_ground_content = false,
-	groups = {snappy=3, flammable=4, fall_damage_add_percent=-30},
+	groups = {snappy=3, flammable=4, fall_damage_add_percent=-30, not_in_creative_inventory=1},
 	drop = {
 		max_items = 7,  -- Maximum number of items to drop.
 		items = { -- Choose max_items randomly from this list.

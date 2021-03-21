@@ -13,7 +13,7 @@ farming.register_plant("x_farming:coffee", {
 
 -- cold cup of coffee
 minetest.register_node("x_farming:coffee_cup", {
-	description = "Cold Cup of Coffee",
+	description = "Cold Cup of Coffee" .. "\n" .. minetest.colorize(x_farming.colors.brown, "Hunger: 4"),
 	drawtype = "plantlike",
 	tiles = {"x_farming_coffee_cup.png"},
 	inventory_image = "x_farming_coffee_cup.png",
@@ -30,8 +30,14 @@ minetest.register_node("x_farming:coffee_cup", {
 })
 
 -- hot cup of coffee
+local coffee_cup_hot_desc = "Hot Cup of Coffee" .. "\n" .. minetest.colorize(x_farming.colors.brown, "Hunger: 6")
+
+if x_farming.hbhunger ~= nil then
+	coffee_cup_hot_desc = coffee_cup_hot_desc .. "\n" .. minetest.colorize(x_farming.colors.red, "Heal: 4")
+end
+
 minetest.register_node("x_farming:coffee_cup_hot", {
-	description = "Hot Cup of Coffee",
+	description = coffee_cup_hot_desc,
 	drawtype = "plantlike",
 	tiles = {"x_farming_coffee_cup_hot.png"},
 	inventory_image = "x_farming_coffee_cup_hot.png",

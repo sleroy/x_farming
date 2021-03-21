@@ -17,6 +17,7 @@ farming.register_plant("x_farming:potato", {
 
 -- needed
 minetest.override_item("x_farming:potato", {
+	description = "Potato" .. "\n" .. minetest.colorize(x_farming.colors.brown, "Hunger: 2"),
 	on_use = minetest.item_eat(2),
 })
 
@@ -32,7 +33,3 @@ minetest.override_item("x_farming:potato_8", {
 		}
 	}
 })
-
-if minetest.get_modpath("hbhunger") ~= nil then
-	hbhunger.register_food("x_farming:poisonouspotato", 1, "", 5)
-end

@@ -11,7 +11,7 @@ minetest.register_craft( {
 })
 
 minetest.register_craftitem("x_farming:cookie", {
-	description = "Cookie",
+	description = "Cookie" .. "\n" .. minetest.colorize(x_farming.colors.brown, "Hunger: 2"),
 	inventory_image = "x_farming_cookie.png",
 	on_use = minetest.item_eat(2),
 })
@@ -24,7 +24,7 @@ minetest.register_craft( {
 })
 
 minetest.register_craftitem("x_farming:chocolate", {
-	description = "Chocolate",
+	description = "Chocolate" .. "\n" .. minetest.colorize(x_farming.colors.brown, "Hunger: 3"),
 	inventory_image = "x_farming_chocolate.png",
 	on_use = minetest.item_eat(3),
 })
@@ -54,7 +54,7 @@ minetest.register_craft({
 
 -- Hog Stew
 minetest.register_craftitem("x_farming:hog_stew", {
-	description = "Hog Stew",
+	description = "Hog Stew" .. "\n" .. minetest.colorize(x_farming.colors.brown, "Hunger: 8"),
 	inventory_image = "x_farming_hog_stew.png",
 	on_use = minetest.item_eat(8, "x_farming:bowl"),
 })
@@ -79,7 +79,7 @@ minetest.register_craft({
 
 -- Beetroot
 minetest.register_craftitem("x_farming:beetroot_soup", {
-	description = "Beetroot Soup",
+	description = "Beetroot Soup" .. "\n" .. minetest.colorize(x_farming.colors.brown, "Hunger: 6"),
 	inventory_image = "x_farming_beetroot_soup.png",
 	on_use = minetest.item_eat(6, "x_farming:bowl"),
 })
@@ -94,8 +94,14 @@ minetest.register_craft({
 })
 
 -- Carrot
+local golden_carrot_desc = "Golden Carrot" .. "\n" .. minetest.colorize(x_farming.colors.brown, "Hunger: 10")
+
+if x_farming.hbhunger ~= nil then
+	golden_carrot_desc = golden_carrot_desc .. "\n" .. minetest.colorize(x_farming.colors.red, "Heal: 10")
+end
+
 minetest.register_craftitem("x_farming:carrot_golden", {
-	description = "Golden Carrot",
+	description = golden_carrot_desc,
 	inventory_image = "x_farming_carrot_golden.png",
 	wield_image = "x_farming_carrot_golden.png^[transformR270",
 	on_use = minetest.item_eat(10),
@@ -128,7 +134,7 @@ minetest.register_craft({
 
 -- Corn
 minetest.register_craftitem("x_farming:corn_pop", {
-	description = "Popped corn",
+	description = "Popped corn" .. "\n" .. minetest.colorize(x_farming.colors.brown, "Hunger: 1"),
 	inventory_image = "x_farming_corn_pop.png",
 	on_use = minetest.item_eat(1),
 })
@@ -150,8 +156,14 @@ minetest.register_craft( {
 })
 
 -- Melon
+local golden_melon_desc = "Golden Melon" .. "\n" .. minetest.colorize(x_farming.colors.brown, "Hunger: 10")
+
+if x_farming.hbhunger ~= nil then
+	golden_melon_desc = golden_melon_desc .. "\n" .. minetest.colorize(x_farming.colors.red, "Heal: 10")
+end
+
 minetest.register_craftitem("x_farming:golden_melon", {
-	description = "Golden Melon - Restores Hearts",
+	description = golden_melon_desc,
 	inventory_image = "x_farming_golden_melon.png",
 	wield_image = "x_farming_golden_melon.png^[transformR90",
 	on_use = minetest.item_eat(10),
@@ -223,15 +235,21 @@ minetest.register_craft({
 
 -- Potato
 minetest.register_craftitem("x_farming:bakedpotato", {
-	description = "Baked Potato",
+	description = "Baked Potato" .. "\n" .. minetest.colorize(x_farming.colors.brown, "Hunger: 6"),
 	inventory_image = "x_farming_potato_baked.png",
 	on_use = minetest.item_eat(6),
 })
 
+local poisonouspotato_desc = "Poisonous Potato" .. "\n" .. minetest.colorize(x_farming.colors.brown, "Hunger: -6")
+
+if x_farming.hbhunger ~= nil then
+	poisonouspotato_desc = poisonouspotato_desc .. "\n" .. minetest.colorize(x_farming.colors.green, "Poison: 5")
+end
+
 minetest.register_craftitem("x_farming:poisonouspotato", {
-	description = "Poisonous Potato",
+	description = poisonouspotato_desc,
 	inventory_image = "x_farming_potato_poisonous.png",
-	on_use = minetest.item_eat(-5),
+	on_use = minetest.item_eat(-6),
 })
 
 minetest.register_craft({
@@ -254,7 +272,7 @@ minetest.register_craft({
 
 -- crafted item from recipe
 minetest.register_craftitem("x_farming:pumpkin_pie", {
-	description = "Pumpkin Pie",
+	description = "Pumpkin Pie" .. "\n" .. minetest.colorize(x_farming.colors.brown, "Hunger: 6"),
 	inventory_image = "x_farming_pumpkin_pie.png",
 	on_use = minetest.item_eat(6),
 })

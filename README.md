@@ -6,7 +6,7 @@ Extends Minetest default farming mod with new plants and crops using only minete
 
 ## Description
 
-Hunger points in the description assume that you have [hudbars](https://bitbucket.org/minetest_gamers/hudbars) with hunger mod configured with x_farming. If not then you can consider hunger points as health points.
+Hunger points in the description assume that you have [hbhubger](https://forum.minetest.net/viewtopic.php?t=11336) with hunger mod configured with x_farming. If not then you can consider hunger points as health points.
 
 ### Empty Soup Bowl ![screenshot](textures/x_farming_bowl.png)
 
@@ -199,8 +199,13 @@ Getting seeds from decorations (grass..) can be changed/adjusted in the future w
 
 - default
 - farming
+
+## Optional Dependencies
+
+- hbhunger
 - flowers
 - vessels
+- mobs_animal
 
 ## License:
 

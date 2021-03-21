@@ -193,7 +193,7 @@ Cocoa is planted on jungletree using cocoa bean and fully grown cocoa will drop 
 
 - bush leaves
 
-Getting seeds from decorations (grass..) can be changed/adjusted in the future when there is more decorations added to the default minetest game.
+Seeds can be found also in dungeon chests.
 
 ## Dependencies
 

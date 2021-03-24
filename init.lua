@@ -16,6 +16,7 @@ dofile(path.."/carrot.lua")
 dofile(path.."/cocoa.lua")
 dofile(path.."/seeds.lua")
 dofile(path.."/crafting.lua")
+dofile(path.."/kiwi_tree.lua")
 -- hbhunger
 if x_farming.hbhunger ~= nil then
     if hbhunger.register_food ~= nil then

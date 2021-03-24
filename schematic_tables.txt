@@ -1,0 +1,77 @@
+x_farming schematic tables
+==============================
+
+-- Mapgen Kiwi tree
+
+local L = {name = "x_farming:kiwi_leaves", prob = 191}
+local N = {name = "x_farming:kiwi_leaves", prob = 223}
+local M = {name = "x_farming:kiwi_leaves", prob = 255}
+local F = {name = "x_farming:kiwi", prob = 127}
+local Y = {name = "x_farming:kiwi_tree", prob = 255, force_place = true}
+
+mts_save("kiwi_tree", {
+	size = {x = 5, y = 5, z = 5},
+	data = {
+		_, _, _, _, _,
+		_, _, _, _, _,
+		L, M, N, M, L,
+		_, _, _, _, _,
+		_, _, _, _, _,
+
+		_, _, _, _, _,
+		_, _, _, _, _,
+		M, F, M, F, M,
+		_, M, L, M, _,
+		_, _, _, _, _,
+
+		_, _, Y, _, _,
+		_, _, Y, _, _,
+		N, M, Y, M, N,
+		_, L, M, L, _,
+		_, _, L, _, _,
+
+		_, _, _, _, _,
+		_, _, _, _, _,
+		M, F, M, F, M,
+		_, M, L, M, _,
+		_, _, _, _, _,
+
+		_, _, _, _, _,
+		_, _, _, _, _,
+		L, M, N, M, L,
+		_, _, _, _, _,
+		_, _, _, _, _,
+	}
+})
+
+-- Kiwi tree from sapling
+
+mts_save("kiwi_tree_from_sapling", {
+	size = {x = 5, y = 4, z = 5},
+	data = {
+		_, _, _, _, _,
+		L, M, N, M, L,
+		_, _, _, _, _,
+		_, _, _, _, _,
+
+		_, _, _, _, _,
+		M, F, M, F, M,
+		_, M, L, M, _,
+		_, _, _, _, _,
+
+		_, _, Y, _, _,
+		N, M, Y, M, N,
+		_, L, M, L, _,
+		_, _, L, _, _,
+
+		_, _, _, _, _,
+		M, F, M, F, M,
+		_, M, L, M, _,
+		_, _, _, _, _,
+
+		_, _, _, _, _,
+		L, M, N, M, L,
+		_, _, _, _, _,
+		_, _, _, _, _,
+	}
+})

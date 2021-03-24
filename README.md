@@ -163,6 +163,10 @@ When [mobs npc installed with snow golem mob](https://bitbucket.org/minetest_gam
 
 Cocoa is planted on jungletree using cocoa bean and fully grown cocoa will drop cocoa bean. From cocoa bean you can further craft eat items. Cocoa have 3 stages of growth.
 
+### Kiwi Tree
+
+Kiwi tree can be found in savana and drops kiwi fruit and sapling from leaves. This tree adds new tree trunk and wood planks also (including stairs and slabs).
+
 ## Seeds
 
 **Obsidian Wart**
@@ -303,6 +307,9 @@ GNU Lesser General Public License v2.1 or later (see included LICENSE file)
 - x_farming_cocoa_1.png
 - x_farming_cocoa_2.png
 - x_farming_cocoa_3.png
+- x_farming_kiwi_tree.png
+- x_farming_kiwi_tree_top.png
+- x_farming_kiwi_tree_wood.png
 
 **LGPL-2.1-or-later, by SaKeL**
 
@@ -327,6 +334,12 @@ GNU Lesser General Public License v2.1 or later (see included LICENSE file)
 - x_farming_corn_10.png
 - x_farming_corn_pop.png
 - x_farming_corn_seed.png
+- x_farming_kiwi.png
+- x_farming_kiwi_fruit.png
+- x_farming_kiwi_sapling.png
+
+**MIT**
+- x_farming_kiwi_leaves.png
 
 **Created by GeMinecraft and edited by TenPlus1**
 

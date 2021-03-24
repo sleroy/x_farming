@@ -34,3 +34,6 @@ hbhunger.register_food("x_farming:hog_stew", 8, "x_farming:bowl")
 -- cocoa
 hbhunger.register_food("x_farming:cookie", 2)
 hbhunger.register_food("x_farming:chocolate", 3)
+
+-- kiwi
+hbhunger.register_food("x_farming:kiwi_fruit", 2)

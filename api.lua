@@ -124,3 +124,27 @@ function x_farming.grow_block(pos, elapsed)
 	end
 	return
 end
+
+function x_farming.grow_kiwi_tree(pos)
+	local path = minetest.get_modpath("x_farming") ..
+		"/schematics/kiwi_tree_from_sapling.mts"
+	minetest.place_schematic({x = pos.x - 2, y = pos.y, z = pos.z - 2},
+		path, "random", nil, false)
+end
+
+-- Grow sapling
+
+function x_farming.grow_sapling(pos)
+	if not default.can_grow(pos) then
+		-- try again 5 min later
+		minetest.get_node_timer(pos):start(300)
+		return
+	end
+
+	local node = minetest.get_node(pos)
+	if node.name == "x_farming:kiwi_sapling" then
+		minetest.log("action", "A sapling grows into a tree at "..
+		minetest.pos_to_string(pos))
+		x_farming.grow_kiwi_tree(pos)
+	end
+end

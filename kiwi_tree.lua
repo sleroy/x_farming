@@ -20,7 +20,7 @@ minetest.register_decoration({
 	biomes = {"savanna"},
 	y_max = 31000,
 	y_min = 1,
-	schematic = minetest.get_modpath("x_farming") .. "/schematics/kiwi_tree.mts",
+	schematic = minetest.get_modpath("x_farming") .. "/schematics/x_farming_kiwi_tree.mts",
 	flags = "place_center_x, place_center_z",
 	rotation = "random",
 })
@@ -95,8 +95,8 @@ minetest.register_node("x_farming:kiwi_sapling", {
 			"x_farming:kiwi_sapling",
 			-- minp, maxp to be checked, relative to sapling pos
 			-- minp_relative.y = 1 because sapling pos has been checked
-			{x = -3, y = 1, z = -3},
-			{x = 3, y = 6, z = 3},
+			{x = -2, y = 1, z = -2},
+			{x = 2, y = 4, z = 2},
 			-- maximum interval of interior volume check
 			4)
 
@@ -131,10 +131,6 @@ minetest.register_node("x_farming:kiwi", {
 	groups = {fleshy = 3, dig_immediate = 3, flammable = 2,
 		leafdecay = 3, leafdecay_drop = 1, food_apple = 1, not_in_creative_inventory=1},
 	sounds = default.node_sound_leaves_defaults(),
-
-	after_place_node = function(pos, placer, itemstack)
-		minetest.set_node(pos, {name = "x_farming:kiwi", param2 = 1})
-	end,
 
 	after_dig_node = function(pos, oldnode, oldmetadata, digger)
 		if oldnode.param2 == 0 then

@@ -37,3 +37,9 @@ hbhunger.register_food("x_farming:chocolate", 3)
 
 -- kiwi
 hbhunger.register_food("x_farming:kiwi_fruit", 2)
+
+-- Dragon fruit
+hbhunger.register_food("x_farming:cactus_fruit_item", 2)
+
+-- Strawberry
+hbhunger.register_food("x_farming:strawberry", 2)

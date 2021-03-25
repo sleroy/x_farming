@@ -7,8 +7,6 @@ x_farming = {
 		green = "#98E698"
 	}
 }
-MINLIGHT = 13
-MAXLIGHT = default.LIGHT_MAX
 
 -- how often node timers for plants will tick, +/- some random value
 function x_farming.tick(pos)
@@ -112,7 +110,7 @@ function x_farming.grow_block(pos, elapsed)
 
 	-- check light
 	local light = minetest.get_node_light(pos)
-	if not light or light < MINLIGHT or light > MAXLIGHT then
+	if not light or light < 13 or light > default.LIGHT_MAX then
 		x_farming.tick_short(pos)
 		return
 	end
@@ -127,7 +125,7 @@ end
 
 function x_farming.grow_kiwi_tree(pos)
 	local path = minetest.get_modpath("x_farming") ..
-		"/schematics/kiwi_tree_from_sapling.mts"
+		"/schematics/x_farming_kiwi_tree_from_sapling.mts"
 	minetest.place_schematic({x = pos.x - 2, y = pos.y, z = pos.z - 2},
 		path, "random", nil, false)
 end
@@ -147,4 +145,14 @@ function x_farming.grow_sapling(pos)
 		minetest.pos_to_string(pos))
 		x_farming.grow_kiwi_tree(pos)
 	end
+end
+
+-- Grow Large Cactus
+
+function x_farming.grow_large_cactus(pos)
+	print(dump(pos))
+	local path = minetest.get_modpath("x_farming") ..
+		"/schematics/x_farming_large_cactus_from_seedling.mts"
+	minetest.place_schematic({x = pos.x, y = pos.y, z = pos.z},
+		path, "random", nil, false, "place_center_x, place_center_z")
 end

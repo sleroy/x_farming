@@ -9,7 +9,7 @@ local M = {name = "x_farming:kiwi_leaves", prob = 255}
 local F = {name = "x_farming:kiwi", prob = 127}
 local Y = {name = "x_farming:kiwi_tree", prob = 255, force_place = true}
 
-mts_save("kiwi_tree", {
+mts_save("x_farming_kiwi_tree", {
 	size = {x = 5, y = 5, z = 5},
 	data = {
 		_, _, _, _, _,
@@ -46,7 +46,7 @@ mts_save("kiwi_tree", {
 
 -- Kiwi tree from sapling
 
-mts_save("kiwi_tree_from_sapling", {
+mts_save("x_farming_kiwi_tree_from_sapling", {
 	size = {x = 5, y = 4, z = 5},
 	data = {
 		_, _, _, _, _,
@@ -74,4 +74,39 @@ mts_save("kiwi_tree_from_sapling", {
 		_, _, _, _, _,
 		_, _, _, _, _,
 	}
+})
+
+
+-- Mapgen Large cactus with Fruit
+
+local C = {name = "default:cactus", prob = 255, param2 = 20}
+local R = {name = "default:cactus", prob = 255, param2 = 20, force_place = true}
+local E = {name = "default:cactus", prob = 127, param2 = 20}
+local FR = {name = "x_farming:cactus_fruit", prob = 170, param2 = 20}
+
+mts_save("x_farming_large_cactus", {
+	size = {x = 7, y = 7, z = 1},
+	data = {
+		_, _, _, R, _, _, _,
+		_, _, _, C, _, _, _,
+		C, C, C, C, C, C, C,
+		C, FR, FR, C, FR, FR, C,
+		E, _, _, C, _, _, E,
+		_, _, _, C, _, _, _,
+		_, _, _, FR, _, _, _,
+	},
+})
+
+-- Large cactus with Fruit from Seedling
+
+mts_save("x_farming_large_cactus_from_seedling", {
+	size = {x = 7, y = 6, z = 1},
+	data = {
+		_, _, _, R, _, _, _,
+		C, C, C, C, C, C, C,
+		C, FR, FR, C, FR, FR, C,
+		E, _, _, C, _, _, E,
+		_, _, _, C, _, _, _,
+		_, _, _, FR, _, _, _,
+	},
 })

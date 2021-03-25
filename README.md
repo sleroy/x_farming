@@ -165,7 +165,15 @@ Cocoa is planted on jungletree using cocoa bean and fully grown cocoa will drop 
 
 ### Kiwi Tree
 
-Kiwi tree can be found in savana and drops kiwi fruit and sapling from leaves. This tree adds new tree trunk and wood planks also (including stairs and slabs).
+Kiwi tree can be found in savana and drops kiwi fruit and sapling from leaves. This tree adds new tree trunk and wood planks also (including stairs and slabs). Kiwi fruit will grow back on the tree after harvested from the tree enabling farming Kiwis. Can be placed as a decoration.
+
+### Large Cactus with Fruit
+
+Cactus with Fruits can be found in desert. You will need axe to harvest the fruit. Fruit will grow back on cactus after harvested - enabling harvesting Dragon Fruits. Can be placed as a decoration. Seedling can be crafted for more farming and harvesting.
+
+### Strawberry
+
+Strawberries can be found in coniferous forest. They drop seeds and strawberries.
 
 ## Seeds
 
@@ -310,6 +318,10 @@ GNU Lesser General Public License v2.1 or later (see included LICENSE file)
 - x_farming_kiwi_tree.png
 - x_farming_kiwi_tree_top.png
 - x_farming_kiwi_tree_wood.png
+- x_farming_strawberry_1.png (modified by SaKeL)
+- x_farming_strawberry_2.png (modified by SaKeL)
+- x_farming_strawberry_3.png (modified by SaKeL)
+- x_farming_strawberry_4.png (modified by SaKeL)
 
 **LGPL-2.1-or-later, by SaKeL**
 
@@ -337,6 +349,15 @@ GNU Lesser General Public License v2.1 or later (see included LICENSE file)
 - x_farming_kiwi.png
 - x_farming_kiwi_fruit.png
 - x_farming_kiwi_sapling.png
+- x_farming_cactus_fruit_bottom.png
+- x_farming_cactus_fruit_sides.png
+- x_farming_cactus_fruit_top.png
+- x_farming_cactus_fruit_item.png
+- x_farming_large_cactus_with_fruit_seedling.png
+- x_farming_large_cactus_with_fruit_seedling
+- x_farming_strawberry_seed.png
+- x_farming_strawberry.png
+
 
 **MIT**
 - x_farming_kiwi_leaves.png

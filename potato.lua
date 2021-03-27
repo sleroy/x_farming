@@ -33,3 +33,23 @@ minetest.override_item("x_farming:potato_8", {
 		}
 	}
 })
+
+minetest.register_decoration({
+	name = "x_farming:potato_8",
+	deco_type = "simple",
+	place_on = {"default:silver_sand"},
+	sidelen = 16,
+	noise_params = {
+		offset = -0.1,
+		scale = 0.1,
+		spread = {x = 50, y = 50, z = 50},
+		seed = 4242,
+		octaves = 3,
+		persist = 0.7
+	},
+	biomes = {"cold_desert"},
+	y_max = 31000,
+	y_min = 1,
+	decoration = "x_farming:potato_8",
+	param2 = 3,
+})

@@ -150,9 +150,17 @@ end
 -- Grow Large Cactus
 
 function x_farming.grow_large_cactus(pos)
-	print(dump(pos))
 	local path = minetest.get_modpath("x_farming") ..
 		"/schematics/x_farming_large_cactus_from_seedling.mts"
 	minetest.place_schematic({x = pos.x, y = pos.y, z = pos.z},
 		path, "random", nil, false, "place_center_x, place_center_z")
+end
+
+-- Grow Jungle Tree
+
+function x_farming.grow_jungle_tree(pos)
+	local path = minetest.get_modpath("x_farming") ..
+		"/schematics/x_farming_jungle_tree_with_cocoa_from_sapling.mts"
+		minetest.place_schematic({x = pos.x - 2, y = pos.y - 1, z = pos.z - 2},
+		path, nil, nil, false)
 end

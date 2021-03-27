@@ -52,3 +52,23 @@ minetest.register_node("x_farming:coffee_cup_hot", {
 	on_use = minetest.item_eat(6, "vessels:drinking_glass"),
 	sounds = default.node_sound_glass_defaults(),
 })
+
+minetest.register_decoration({
+	name = "x_farming:coffee_5",
+	deco_type = "simple",
+	place_on = {"default:dry_dirt_with_dry_grass"},
+	sidelen = 16,
+	noise_params = {
+		offset = -0.1,
+		scale = 0.1,
+		spread = {x = 50, y = 50, z = 50},
+		seed = 4242,
+		octaves = 3,
+		persist = 0.7
+	},
+	biomes = {"savanna"},
+	y_max = 31000,
+	y_min = 1,
+	decoration = "x_farming:coffee_5",
+	param2 = 3,
+})

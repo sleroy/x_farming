@@ -175,35 +175,44 @@ Cactus with Fruits can be found in desert. You will need axe to harvest the frui
 
 Strawberries can be found in coniferous forest. They drop seeds and strawberries.
 
-## Seeds
+## Biomes
 
-**Obsidian Wart**
+**Grassland**
 
-- red mushroom
+- Melon
+- Carrot
 
-**Beetroot and Pumpkin**
+**Coniferous Forest**
 
-- dry grass
+- Strawberry
 
-**Carrot**
+**Desert**
 
-- grass
+- Large Cactus with Fruit (dragon fruit)
 
-**Potato**
+**Savanna**
 
-- jungle grass
+- Kiwi Tree
+- Coffee
 
-**Coffee**
+**Rainforest**
 
-- bush stem
+- Cocoa
 
-**Corn and Melon**
+**Underground**
 
-- dry shrub
+- Obsidian Wart (below -1000)
 
-**Cocoa bean**
+**Sandstone desert**
 
-- bush leaves
+- Corn
+- Pumpkin
+
+**Cold desert**
+
+- Potato
+- Beetroot
+
 
 Seeds can be found also in dungeon chests.
 
@@ -322,6 +331,9 @@ GNU Lesser General Public License v2.1 or later (see included LICENSE file)
 - x_farming_strawberry_2.png (modified by SaKeL)
 - x_farming_strawberry_3.png (modified by SaKeL)
 - x_farming_strawberry_4.png (modified by SaKeL)
+- x_farming_jungle_tree.png (Chorus edit)
+- x_farming_jungle_tree_top.png (Chorus edit)
+- x_farming_jungle_wood.png (Chorus edit)
 
 **LGPL-2.1-or-later, by SaKeL**
 
@@ -357,10 +369,11 @@ GNU Lesser General Public License v2.1 or later (see included LICENSE file)
 - x_farming_large_cactus_with_fruit_seedling
 - x_farming_strawberry_seed.png
 - x_farming_strawberry.png
-
+- x_farming_jungleleaves.png
 
 **MIT**
-- x_farming_kiwi_leaves.png
+- x_farming_kiwi_leaves.png (MTG - modified by SaKeL)
+- x_farming_junglesapling.png (MTG - modified by SaKeL)
 
 **Created by GeMinecraft and edited by TenPlus1**
 

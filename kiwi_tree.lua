@@ -216,6 +216,12 @@ minetest.register_craft({
 
 minetest.register_craft({
 	type = "fuel",
+	recipe = "x_farming:kiwi_wood",
+	burntime = 8,
+})
+
+minetest.register_craft({
+	type = "fuel",
 	recipe = "x_farming:kiwi_tree",
 	burntime = 22,
 })

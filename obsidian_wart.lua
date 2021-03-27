@@ -125,3 +125,62 @@ stairs.register_stair_and_slab(
 	"Wartrack Slab",
 	default.node_sound_stone_defaults()
 )
+
+
+minetest.register_node("x_farming:obsidian_wart_decor", {
+	description = "Obsidian Wart",
+	drawtype = "plantlike_rooted",
+	waving = 1,
+	paramtype = "light",
+	tiles = {"default_obsidian.png"},
+	special_tiles = {{name = "x_farming_obsidian_wart_6.png", tileable_vertical = true}},
+	inventory_image = "x_farming_obsidian_wart_6.png",
+	groups = {snappy = 3, not_in_creative_inventory = 1},
+	light_source = 3,
+	selection_box = {
+		type = "fixed",
+		fixed = {
+				{-0.5, -0.5, -0.5, 0.5, 0.5, 0.5},
+				{-4/16, 0.5, -4/16, 4/16, 1.5, 4/16},
+		},
+	},
+	node_dig_prediction = "default:obsidian",
+	node_placement_prediction = "",
+	sounds = default.node_sound_stone_defaults({
+		dig = {name = "default_dig_snappy", gain = 0.2},
+		dug = {name = "default_grass_footstep", gain = 0.25},
+	}),
+	drop = {
+		items = {
+			{items = {"x_farming:obsidian_wart"}, rarity = 1},
+			{items = {"x_farming:obsidian_wart"}, rarity = 2},
+			{items = {"x_farming:seed_obsidian_wart"}, rarity = 1},
+			{items = {"x_farming:seed_obsidian_wart"}, rarity = 2}
+		}
+	},
+
+	after_destruct  = function(pos, oldnode)
+		minetest.set_node(pos, {name = "default:obsidian"})
+	end,
+})
+
+minetest.register_decoration({
+	name = "x_farming:obsidian_wart_decor",
+	deco_type = "simple",
+	place_offset_y = -1,
+	place_on = {"default:stone"},
+	sidelen = 16,
+	noise_params = {
+		offset = -0.1,
+		scale = 0.1,
+		spread = {x = 50, y = 50, z = 50},
+		seed = 4242,
+		octaves = 3,
+		persist = 0.7
+	},
+	biomes = {"icesheet_under", "tundra_under", "taiga_under", "snowy_grassland_under", "grassland_under", "coniferous_forest_under", "deciduous_forest_under", "desert_under", "sandstone_desert_under", "cold_desert_under", "savanna_under", "rainforest_under"},
+	y_max = -1000,
+	y_min = -31000,
+	flags = "force_placement, all_floors",
+	decoration = {"x_farming:obsidian_wart_decor"},
+})

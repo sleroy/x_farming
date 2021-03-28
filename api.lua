@@ -164,3 +164,12 @@ function x_farming.grow_jungle_tree(pos)
 		minetest.place_schematic({x = pos.x - 2, y = pos.y - 1, z = pos.z - 2},
 		path, nil, nil, false)
 end
+
+-- Pine Nut Tree
+
+function x_farming.grow_pine_nut_tree(pos)
+	local path = minetest.get_modpath("x_farming") ..
+		"/schematics/x_farming_pine_nut_tree_from_sapling.mts"
+		minetest.place_schematic({x = pos.x - 2, y = pos.y, z = pos.z - 2},
+		path, "0", nil, false)
+end

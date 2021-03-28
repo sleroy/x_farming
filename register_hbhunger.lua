@@ -9,8 +9,7 @@ hbhunger.register_food("x_farming:carrot", 3)
 hbhunger.register_food("x_farming:carrot_golden", 10, nil, nil, 10)
 
 -- coffee
-hbhunger.register_food("x_farming:coffee_cup", 4, "vessels:drinking_glass")
-hbhunger.register_food("x_farming:coffee_cup_hot", 6, "vessels:drinking_glass", nil, 4)
+hbhunger.register_food("x_farming:coffee_cup_hot", 6, nil, nil, 4)
 
 -- corn
 hbhunger.register_food("x_farming:corn_pop", 1)
@@ -43,3 +42,10 @@ hbhunger.register_food("x_farming:cactus_fruit_item", 2)
 
 -- Strawberry
 hbhunger.register_food("x_farming:strawberry", 2)
+
+-- Pine Nut Roasted
+hbhunger.register_food("x_farming:pine_nut_roasted", 2)
+
+-- Donuts
+hbhunger.register_food("x_farming:donut", 3)
+hbhunger.register_food("x_farming:donut_chocolate", 4)

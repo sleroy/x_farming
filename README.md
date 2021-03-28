@@ -8,6 +8,24 @@ Extends Minetest default farming mod with new plants and crops using only minete
 
 Hunger points in the description assume that you have [hbhubger](https://forum.minetest.net/viewtopic.php?t=11336) with hunger mod configured with x_farming. If not then you can consider hunger points as health points.
 
+## Features
+
+- adds food source to almost every biome, allows traveling the world without relying on apples only
+- block farming, instead of food items, blocks can be harvested/crafted and used for building or decoration
+- farming on different block than dirt, e.g. obsidian, jungle tree..
+- farming in dark, no need for light for farming, e.g. obsidian wart
+- vertical farming, e.g. farming cocoa on jungle tree trunk
+- new trees and wood blocks allows for tree farms
+- food items can heal or poison you
+- some food items can be placed and used as decoration
+- some food items can grow back on trees/cactus after harvesting
+- using combination of snow block and pumpik can spawn snowman mob
+- mod is lightweight and optimized for servers
+- plants and trees are spawning as decoration troughout the world (see biomes below)
+- stairs and slabs for all new blocks
+- leafdecay with falling fruit after tree trunk is harvested
+- supports hbhunger mod
+
 ### Empty Soup Bowl ![screenshot](textures/x_farming_bowl.png)
 
 Empty soup bowl is used as a vessel for soups and stew. To craft bowl put any kind of block with group wood in the middle of the bottom row in the crafting grid and then diagonal left and right also the same block, this will give you 3 empty soup bowls.
@@ -40,11 +58,6 @@ To craft golden carrot put regular carrot in the middle of the crafting grid and
 ### Coffee ![screenshot](textures/x_farming_coffee.png)
 
 Planted coffee take 5 stages to grow. Farming coffee plants will drop coffee beans. Coffee beans cannot be eaten but are used to craft cup of coffee.
-
-**Coffee Cup (cold)** ![screenshot](textures/x_farming_coffee_cup.png)
-
-Drinking/eating cold cup of coffee will restore 4 hunger points and will return a empty glass.
-Cold cup of coffee can be crafted by putting empty glass to the graft grid, next to it comes coffee bean and under it will come bucket of water. Empty bucket of water will be returned.
 
 **Coffee Cup (hot)** ![screenshot](textures/x_farming_coffee_cup_hot.png)
 
@@ -175,16 +188,22 @@ Cactus with Fruits can be found in desert. You will need axe to harvest the frui
 
 Strawberries can be found in coniferous forest. They drop seeds and strawberries.
 
+### Pine Nut Tree
+
+Allows to harvest pine nuts. Roasted pine nuts can be eaten.
+
 ## Biomes
 
 **Grassland**
 
 - Melon
 - Carrot
+- Soybean
 
 **Coniferous Forest**
 
 - Strawberry
+- Pine Nut Tree
 
 **Desert**
 
@@ -194,6 +213,7 @@ Strawberries can be found in coniferous forest. They drop seeds and strawberries
 
 - Kiwi Tree
 - Coffee
+- Stevia
 
 **Rainforest**
 
@@ -213,6 +233,10 @@ Strawberries can be found in coniferous forest. They drop seeds and strawberries
 - Potato
 - Beetroot
 
+**Taiga**
+
+- Pine Nut Tree
+
 
 Seeds can be found also in dungeon chests.
 
@@ -220,12 +244,13 @@ Seeds can be found also in dungeon chests.
 
 - default
 - farming
+- vessels
+- bucket
 
 ## Optional Dependencies
 
 - hbhunger
 - flowers
-- vessels
 - mobs_animal
 
 ## License:
@@ -334,6 +359,11 @@ GNU Lesser General Public License v2.1 or later (see included LICENSE file)
 - x_farming_jungle_tree.png (Chorus edit)
 - x_farming_jungle_tree_top.png (Chorus edit)
 - x_farming_jungle_wood.png (Chorus edit)
+- x_farming_pine_nut_leaves.png (modified by SaKeL)
+- x_farming_pine_nut_tree.png
+- x_farming_pine_nut_tree_top.png
+- x_farming_pine_nut_wood.png
+- x_farming_sugar.png
 
 **LGPL-2.1-or-later, by SaKeL**
 
@@ -370,10 +400,40 @@ GNU Lesser General Public License v2.1 or later (see included LICENSE file)
 - x_farming_strawberry_seed.png
 - x_farming_strawberry.png
 - x_farming_jungleleaves.png
+- x_farming_pine_nut.png
+- x_farming_pine_nut_roasted.png
+- x_farming_coffee_cup_hot.png
+- x_farming_bottle_coffee.png
+- x_farming_bottle_water.png
+- x_farming_bottle_soymilk_raw.png
+- x_farming_bottle_soymilk.png
+- x_farming_donut.png
+- x_farming_donut_chocolate.png
+- x_farming_soybean.png
+- x_farming_soybean_1.png
+- x_farming_soybean_2.png
+- x_farming_soybean_3.png
+- x_farming_soybean_4.png
+- x_farming_soybean_5.png
+- x_farming_soybean_6.png
+- x_farming_soybean_7.png
+- x_farming_soybean_seed.png
+- x_farming_stevia.png
+- x_farming_stevia_1.png
+- x_farming_stevia_2.png
+- x_farming_stevia_3.png
+- x_farming_stevia_4.png
+- x_farming_stevia_5.png
+- x_farming_stevia_6.png
+- x_farming_stevia_7.png
+- x_farming_stevia_8.png
+- x_farming_stevia_seed.png
 
 **MIT**
+
 - x_farming_kiwi_leaves.png (MTG - modified by SaKeL)
 - x_farming_junglesapling.png (MTG - modified by SaKeL)
+- x_farming_pine_nut_sapling.png (MTG - modified by SaKeL)
 
 **Created by GeMinecraft and edited by TenPlus1**
 
@@ -383,10 +443,6 @@ GNU Lesser General Public License v2.1 or later (see included LICENSE file)
 
 - x_farming_chocolate.png
 
-**WTFPL**
-
-- x_farming_coffee_cup_hot.png
-- x_farming_coffee_cup.png
 
 ## Installation
 

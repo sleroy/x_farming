@@ -11,24 +11,6 @@ farming.register_plant("x_farming:coffee", {
 	place_param2 = 3,
 })
 
--- cold cup of coffee
-minetest.register_node("x_farming:coffee_cup", {
-	description = "Cold Cup of Coffee" .. "\n" .. minetest.colorize(x_farming.colors.brown, "Hunger: 4"),
-	drawtype = "plantlike",
-	tiles = {"x_farming_coffee_cup.png"},
-	inventory_image = "x_farming_coffee_cup.png",
-	wield_image = "x_farming_coffee_cup.png",
-	paramtype = "light",
-	walkable = false,
-	selection_box = {
-		type = "fixed",
-		fixed = {-0.25, -0.5, -0.25, 0.25, 0.25, 0.25}
-	},
-	groups = {vessel = 1, dig_immediate = 3, attached_node = 1},
-	on_use = minetest.item_eat(4, "vessels:drinking_glass"),
-	sounds = default.node_sound_glass_defaults(),
-})
-
 -- hot cup of coffee
 local coffee_cup_hot_desc = "Hot Cup of Coffee" .. "\n" .. minetest.colorize(x_farming.colors.brown, "Hunger: 6")
 
@@ -49,7 +31,7 @@ minetest.register_node("x_farming:coffee_cup_hot", {
 		fixed = {-0.25, -0.5, -0.25, 0.25, 0.25, 0.25}
 	},
 	groups = {vessel = 1, dig_immediate = 3, attached_node = 1},
-	on_use = minetest.item_eat(6, "vessels:drinking_glass"),
+	on_use = minetest.item_eat(6),
 	sounds = default.node_sound_glass_defaults(),
 })
 

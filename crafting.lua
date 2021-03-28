@@ -17,10 +17,9 @@ minetest.register_craftitem("x_farming:cookie", {
 })
 
 minetest.register_craft( {
+	type = "shapeless",
 	output = "x_farming:cookie 8",
-	recipe = {
-		{"farming:wheat", "x_farming:cocoa_bean", "farming:wheat" },
-	}
+	recipe = {"farming:wheat", "x_farming:cocoa_bean", "farming:flour", "x_farming:bottle_soymilk", "x_farming:sugar" }
 })
 
 minetest.register_craftitem("x_farming:chocolate", {
@@ -117,20 +116,30 @@ minetest.register_craft({
 })
 
 -- Coffee
-minetest.register_craft( {
-	output = "x_farming:coffee_cup",
-	recipe = {
-		{"vessels:drinking_glass", "x_farming:coffee","bucket:bucket_water"},
-	},
-	replacements = {{"bucket:bucket_water", "bucket:bucket_empty"}}
+minetest.register_craftitem("x_farming:bottle_coffee", {
+	description = "Coffee Bottle",
+	tiles = {"x_farming_bottle_coffee.png"},
+	inventory_image = "x_farming_bottle_coffee.png",
+	wield_image = "x_farming_bottle_coffee.png",
+	groups = {vessel = 1},
+})
+
+minetest.register_craft({
+	type = "shapeless",
+	output = "x_farming:bottle_coffee",
+	recipe = {"x_farming:coffee","x_farming:bottle_water"}
 })
 
 minetest.register_craft({
 	type = "cooking",
-	cooktime = 5,
+	cooktime = 7,
 	output = "x_farming:coffee_cup_hot",
-	recipe = "x_farming:coffee_cup"
+	recipe = "x_farming:bottle_coffee",
+	replacements = {{"x_farming:bottle_coffee", "vessels:glass_bottle"}}
 })
+
+-- backwards compatibility
+minetest.register_alias("x_farming:coffee_cup", "x_farming:bottle_coffee")
 
 -- Corn
 minetest.register_craftitem("x_farming:corn_pop", {
@@ -279,12 +288,9 @@ minetest.register_craftitem("x_farming:pumpkin_pie", {
 
 -- pumpkin pie crafting recipe
 minetest.register_craft({
+	type = "shapeless",
 	output = "x_farming:pumpkin_pie",
-	recipe = {
-		{"", "", ""},
-		{"x_farming:pumpkin_block", "farming:flour", ""},
-		{"", "mobs:egg", ""}
-	}
+	recipe = {"x_farming:pumpkin_block", "farming:flour", "x_farming:bottle_soymilk", "x_farming:sugar"}
 })
 
 -- pumpkin as fuel (better than cactus)
@@ -298,4 +304,33 @@ minetest.register_craft({
 	type = "fuel",
 	recipe = "x_farming:pumpkin_lantern",
 	burntime = 20,
+})
+
+-- Bottle Water
+minetest.register_craftitem("x_farming:bottle_water", {
+	description = "Water Bottle",
+	tiles = {"x_farming_bottle_water.png"},
+	inventory_image = "x_farming_bottle_water.png",
+	wield_image = "x_farming_bottle_water.png",
+	groups = {vessel = 1},
+})
+
+minetest.register_craft({
+	type = "shapeless",
+	output = "x_farming:bottle_water 5",
+	recipe = {"vessels:glass_bottle", "vessels:glass_bottle", "vessels:glass_bottle", "vessels:glass_bottle", "vessels:glass_bottle", "bucket:bucket_water"},
+	replacements = {{"bucket:water_bucket", "bucket:bucket_empty"}},
+})
+
+-- Donuts
+minetest.register_craft({
+	type = "shapeless",
+	output = "x_farming:donut",
+	recipe = {"x_farming:bottle_soymilk", "x_farming:sugar", "farming:flour"}
+})
+
+minetest.register_craft({
+	type = "shapeless",
+	output = "x_farming:donut_chocolate",
+	recipe = {"x_farming:bottle_soymilk", "x_farming:sugar", "farming:flour", "x_farming:cocoa_bean"}
 })

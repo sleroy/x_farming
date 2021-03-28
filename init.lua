@@ -15,10 +15,15 @@ dofile(path.."/beetroot.lua")
 dofile(path.."/carrot.lua")
 dofile(path.."/cocoa.lua")
 dofile(path.."/seeds.lua")
-dofile(path.."/crafting.lua")
 dofile(path.."/kiwi_tree.lua")
 dofile(path.."/cactus.lua")
 dofile(path.."/strawberry.lua")
+dofile(path.."/pine_nut.lua")
+dofile(path.."/stevia.lua")
+dofile(path.."/soybean.lua")
+dofile(path.."/nodes.lua")
+dofile(path.."/crafting.lua")
+
 -- hbhunger
 if x_farming.hbhunger ~= nil then
     if hbhunger.register_food ~= nil then
@@ -26,6 +31,7 @@ if x_farming.hbhunger ~= nil then
     end
 end
 
+-- mob
 if minetest.get_modpath("mobs_npc") then
     dofile(path.."/snow_golem.lua")
 end

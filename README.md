@@ -192,6 +192,10 @@ Strawberries can be found in coniferous forest. They drop seeds and strawberries
 
 Allows to harvest pine nuts. Roasted pine nuts can be eaten.
 
+### Salt
+
+Can be farmed as ingredient to craft other food recipes.
+
 ## Biomes
 
 **Grassland**
@@ -236,6 +240,14 @@ Allows to harvest pine nuts. Roasted pine nuts can be eaten.
 **Taiga**
 
 - Pine Nut Tree
+
+**Rainforest Swamp**
+
+- Salt
+
+**Savanna Shore**
+
+- Salt
 
 
 Seeds can be found also in dungeon chests.
@@ -364,6 +376,8 @@ GNU Lesser General Public License v2.1 or later (see included LICENSE file)
 - x_farming_pine_nut_tree_top.png
 - x_farming_pine_nut_wood.png
 - x_farming_sugar.png
+- x_farming_x_bonemeal_particles.png (modified by SaKeL)
+- x_farming_salt.png (modified by SaKeL)
 
 **LGPL-2.1-or-later, by SaKeL**
 
@@ -428,12 +442,23 @@ GNU Lesser General Public License v2.1 or later (see included LICENSE file)
 - x_farming_stevia_7.png
 - x_farming_stevia_8.png
 - x_farming_stevia_seed.png
+- x_farming_x_bonemeal_bonemeal.png
+- x_farming_salt_1_side.png
+- x_farming_salt_1_top.png
+- x_farming_salt_2_side.png
+- x_farming_salt_2_top.png
+- x_farming_salt_3_side.png
+- x_farming_salt_3_top.png
+- x_farming_salt_4_side.png
+- x_farming_salt_4_top.png
+- x_farming_salt_water.png
 
 **MIT**
 
 - x_farming_kiwi_leaves.png (MTG - modified by SaKeL)
 - x_farming_junglesapling.png (MTG - modified by SaKeL)
 - x_farming_pine_nut_sapling.png (MTG - modified by SaKeL)
+- x_farming_salt_1_bottom.png
 
 **Created by GeMinecraft and edited by TenPlus1**
 
@@ -443,6 +468,15 @@ GNU Lesser General Public License v2.1 or later (see included LICENSE file)
 
 - x_farming_chocolate.png
 
+**Unknown**
+
+- x_farming_fries.png
+
+### Sound
+
+**freesound.org**
+
+- x_farming_x_bonemeal_grow.ogg
 
 ## Installation
 

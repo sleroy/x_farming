@@ -159,7 +159,7 @@ minetest.register_craft( {
 	output = "x_farming:corn_popcorn",
 	recipe = {
 		{"x_farming:corn_pop", "x_farming:corn_pop","x_farming:corn_pop"},
-		{"default:paper", "","default:paper"},
+		{"default:paper", "x_farming:salt","default:paper"},
 		{"default:paper", "default:paper","default:paper"},
 	}
 })
@@ -333,4 +333,15 @@ minetest.register_craft({
 	type = "shapeless",
 	output = "x_farming:donut_chocolate",
 	recipe = {"x_farming:bottle_soymilk", "x_farming:sugar", "farming:flour", "x_farming:cocoa_bean"}
+})
+
+-- Fries
+
+minetest.register_craft({
+	output = "x_farming:fries",
+	recipe = {
+		{"", "", "x_farming:salt"},
+		{"", "x_farming:bakedpotato", ""},
+		{"default:paper", "", ""}
+	},
 })

@@ -438,3 +438,14 @@ mts_save("x_farming_pine_nut_tree_from_sapling", {
 		_, _, _, _, _,
 	}
 })
+
+-- Salt
+
+mts_save("x_farming_salt_decor", {
+	size = {x = 1, y = 3, z = 1},
+	data = {
+		{name = "default:dirt", prob = 255, force_place = true},
+		{name = "default:dirt", prob = 255, force_place = true},
+		{name = "x_farming:salt_7", prob = 255},
+	}
+})

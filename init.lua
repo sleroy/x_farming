@@ -21,8 +21,10 @@ dofile(path.."/strawberry.lua")
 dofile(path.."/pine_nut.lua")
 dofile(path.."/stevia.lua")
 dofile(path.."/soybean.lua")
+dofile(path.."/salt.lua")
 dofile(path.."/nodes.lua")
 dofile(path.."/crafting.lua")
+dofile(path.."/bonemeal.lua")
 
 -- hbhunger
 if x_farming.hbhunger ~= nil then

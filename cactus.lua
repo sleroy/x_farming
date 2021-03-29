@@ -58,9 +58,7 @@ minetest.register_node("x_farming:cactus_fruit", {
 	sounds = default.node_sound_wood_defaults(),
 
 	after_dig_node = function(pos, oldnode, oldmetadata, digger)
-		print('oldnode.param2', oldnode.param2)
 		if oldnode.param2 == 20 then
-			print('starting timer ...')
 			minetest.set_node(pos, {name = "x_farming:cactus_fruit_mark"})
 			minetest.get_node_timer(pos):start(math.random(300, 1500))
 		end

@@ -5,7 +5,8 @@ x_farming = {
 		brown = "#DEB887",
 		red = "#FF8080",
 		green = "#98E698"
-	}
+	},
+	x_bonemeal = {}
 }
 
 -- how often node timers for plants will tick, +/- some random value
@@ -63,7 +64,6 @@ function x_farming.grow_block(pos, elapsed)
 
 	-- check if the fruit belongs to this stem
 	for side,child_pos in pairs(children) do
-		-- print(side, minetest.pos_to_string(child_pos))
 
 		local parent_pos_from_child = x_farming.meta_get_str("parent", child_pos)
 
@@ -172,4 +172,419 @@ function x_farming.grow_pine_nut_tree(pos)
 		"/schematics/x_farming_pine_nut_tree_from_sapling.mts"
 		minetest.place_schematic({x = pos.x - 2, y = pos.y, z = pos.z - 2},
 		path, "0", nil, false)
+end
+
+--
+-- Bonemeal
+--
+
+------------
+-- Main API for x_bonemeal Mod
+-- @author Juraj Vajda
+-- @license GNU LGPL 2.1
+----
+
+--- Get creative mode setting from minetest.conf
+-- @local
+local creative_mod_cache = minetest.settings:get_bool("creative_mode")
+
+--- Check if creating mode is enabled or player has creative privs
+-- @function
+-- @param name Player name
+-- @return Boolean
+function x_farming.x_bonemeal.is_creative(name)
+	return creative_mod_cache or minetest.check_player_privs(name, {creative = true})
+end
+
+--- Check if node has a soil below its self
+-- @function
+-- @param under table of position
+-- @return Boolean
+function x_farming.x_bonemeal.is_on_soil(under)
+	local below = minetest.get_node({x = under.x, y = under.y - 1, z = under.z})
+	if minetest.get_item_group(below.name, "soil") == 0 then
+		return false
+	end
+	return true
+end
+
+--- Check if node has a sand below its self
+-- @function
+-- @param under table of position
+-- @return Boolean
+function x_farming.x_bonemeal.is_on_sand(under)
+	local below = minetest.get_node({x = under.x, y = under.y - 1, z = under.z})
+	if minetest.get_item_group(below.name, "sand") == 0 then
+		return false
+	end
+	return true
+end
+
+--- Growth steps for farming plants, there is no way of getting them dynamically, so they are defined in the local table variable
+-- @table farming_steps
+-- @local
+local farming_steps = {
+	["farming:wheat"] = 8,
+	["farming:cotton"] = 8,
+	["x_farming:coffee"] = 5,
+	["x_farming:corn"] = 10,
+	["x_farming:obsidian_wart"] = 6,
+	["x_farming:melon"] = 8,
+	["x_farming:pumpkin"] = 8,
+	["x_farming:carrot"] = 8,
+	["x_farming:potato"] = 8,
+	["x_farming:beetroot"] = 8,
+	["x_farming:strawberry"] = 4,
+	["x_farming:stevia"] = 8,
+	["x_farming:soybean"] = 7,
+	["x_farming:salt"] = 7,
+}
+
+--- Particle and sound effect after the bone meal is successfully used
+-- @function
+-- @param pos table containing position
+function x_farming.x_bonemeal.particle_effect(pos)
+	minetest.sound_play("x_farming_x_bonemeal_grow", {
+		pos = pos,
+		gain = 0.5,
+	})
+
+	minetest.add_particlespawner({
+		amount = 6,
+		time = 3,
+		minpos = {x = pos.x - 0.4, y = pos.y - 0.4, z = pos.z - 0.4},
+		maxpos = {x = pos.x + 0.4, y = pos.y, z = pos.z + 0.4},
+		minvel = {x = 0, y = 0, z = 0},
+		maxvel = {x = 0, y = 0.1, z = 0},
+		minacc = vector.new({x = 0, y = 0, z = 0}),
+		maxacc = vector.new({x = 0, y = 0.1, z = 0}),
+		minexptime = 2,
+		maxexptime = 3,
+		minsize = 1,
+		maxsize = 3,
+		texture = "x_farming_x_bonemeal_particles.png",
+		animation = {
+			type = "vertical_frames",
+			aspect_w = 8,
+			aspect_h = 8,
+			length = 3,
+		},
+	})
+end
+
+function x_farming.x_bonemeal.tableContains(table, value)
+	local found = false
+
+	if not table or type(table) ~= "table" then
+		return found
+	end
+
+	for k, v in ipairs(table) do
+		if v == value then
+			found = true
+			break
+		end
+	end
+
+	return found
+end
+
+function x_farming.x_bonemeal.groupContains(groups, fertility, value)
+	local found = false
+
+	if not groups or type(groups) ~= "table" then
+		return found
+	end
+
+	if groups[fertility] and groups[fertility] == value then
+		found = true
+	end
+
+	return found
+end
+
+--- Handle growth of decorations based on biome
+-- @function
+function x_farming.x_bonemeal.grow_grass_and_flowers(itemstack, user, pointed_thing)
+	local node = minetest.get_node(pointed_thing.under)
+
+	if not node then
+		return itemstack
+	end
+
+	local pos0 = vector.subtract(pointed_thing.under, 3)
+	local pos1 = vector.add(pointed_thing.under, 3)
+	local biome_data = minetest.get_biome_data(pointed_thing.under)
+	local biome_name = minetest.get_biome_name(biome_data.biome)
+	local random_number = math.random(2, 6)
+	local registered_decorations_filtered = {}
+	local returned_itemstack = ItemStack(node.name .." 1")
+	local node_def = minetest.registered_nodes[node.name]
+	local below_water = false
+	local floats_on_water = false
+	local node_in_decor = false
+	local positions_dirty = {}
+	local positions = {}
+	local decor_place_on = {}
+	-- print('biome_name', biome_name)
+
+	-- check 1 node below pointed node (floats on water)
+	local test_node = minetest.get_node({x = pointed_thing.under.x, y = pointed_thing.under.y - 1, z = pointed_thing.under.z})
+	local test_node_def = minetest.registered_nodes[test_node.name]
+
+	if test_node_def and test_node_def.liquidtype == "source" and minetest.get_item_group(test_node_def.name, "water") > 0 then
+		floats_on_water = true
+	end
+
+	-- check 2 nodes above pointed nodes (below water)
+	local water_nodes_above = 0
+	for i = 1, 2 do
+		local test_node = minetest.get_node({x = pointed_thing.under.x, y = pointed_thing.under.y + i, z = pointed_thing.under.z})
+		local test_node_def = minetest.registered_nodes[test_node.name]
+
+		if test_node_def and test_node_def.liquidtype == "source" and minetest.get_item_group(test_node_def.name, "water") > 0 then
+			water_nodes_above = water_nodes_above + 1
+		end
+	end
+
+	if water_nodes_above == 2 then
+		below_water = true
+	end
+
+	if below_water then
+		positions_dirty = minetest.find_nodes_in_area(pos0, pos1, node.name)
+	elseif floats_on_water then
+		positions_dirty = minetest.find_nodes_in_area(pos0, pos1, "air")
+	else
+		positions_dirty = minetest.find_nodes_in_area_under_air(pos0, pos1, node.name)
+	end
+
+	-- find suitable decorations
+	for k, v in pairs(minetest.registered_decorations) do
+		-- only for "simple" decoration types
+		if v.deco_type == "simple" then
+			local found = false
+
+			-- filter based on biome name in `biomes` table and node name in `place_on` table
+			if x_farming.x_bonemeal.tableContains(v.biomes, biome_name) then
+				table.insert(registered_decorations_filtered, v)
+			end
+
+		end
+
+		-- clicked node is in decoration
+		if v.decoration == node.name then
+			node_in_decor = true
+		end
+
+		-- all nodes on which decoration can be placed on
+		-- indexed by name
+		if not decor_place_on[v.place_on] then
+			for k, v in ipairs(v.place_on) do
+				decor_place_on[v] = true
+			end
+		end
+	end
+
+	-- find suitable positions
+	for j, pos_value in ipairs(positions_dirty) do
+		local node_at_pos = minetest.get_node(pos_value)
+
+		if below_water then
+			-- below water
+			local water_nodes_above = 0
+
+			-- check if 2 nodes above are water
+			for i = 1, 2 do
+				local test_node = minetest.get_node({x = pos_value.x, y = pos_value.y + i, z = pos_value.z})
+				local test_node_def = minetest.registered_nodes[test_node.name]
+
+				if test_node_def and test_node_def.liquidtype == "source" and minetest.get_item_group(test_node_def.name, "water") > 0 then
+					water_nodes_above = water_nodes_above + 1
+				end
+			end
+
+			if water_nodes_above == 2 and decor_place_on[test_node.name] then
+				table.insert(positions, pos_value)
+			end
+		else
+			-- above water (not on water)
+			if decor_place_on[node_at_pos.name] then
+				table.insert(positions, pos_value)
+			end
+		end
+	end
+
+	-- find suitable positions (float on water)
+	if floats_on_water then
+		for j, pos_value in ipairs(positions_dirty) do
+			local node_at_pos = minetest.get_node(pos_value)
+			local node_at_pos_below = minetest.get_node({x = pos_value.x, y = pos_value.y - 1, z = pos_value.z})
+			local test_node_def = minetest.registered_nodes[node_at_pos_below.name]
+
+			if test_node_def and test_node_def.liquidtype == "source" and minetest.get_item_group(test_node_def.name, "water") > 0 then
+				table.insert(positions, pos_value)
+			end
+		end
+	end
+
+
+	-- place decorations on random positions
+	if #positions > 0 and #registered_decorations_filtered > 0 then
+		for i = 1, random_number do
+			local idx = math.random(#positions)
+			local random_pos = positions[idx]
+			local random_decor = registered_decorations_filtered[math.random(#registered_decorations_filtered)]
+			local random_decor_item = random_decor.decoration
+
+			if floats_on_water and node_in_decor then
+				random_decor_item = node.name
+			elseif type(random_decor.decoration) == "table" then
+				random_decor_item = random_decor.decoration[math.random(#random_decor.decoration)]
+			end
+
+			local random_decor_item_def = minetest.registered_nodes[random_decor_item]
+
+			if random_pos ~= nil then
+				if random_decor_item_def.on_place ~= nil and node_def and not node_def.on_rightclick then
+					-- on_place
+					local pt = {
+						type = "node",
+						above = {
+							x = random_pos.x,
+							y = random_pos.y + 1,
+							z = random_pos.z
+						},
+						under = {
+							x = random_pos.x,
+							y = random_pos.y,
+							z = random_pos.z
+						}
+					}
+
+					if floats_on_water then
+						pt.above.y = random_pos.y
+						pt.under.y = random_pos.y - 1
+					end
+
+					returned_itemstack = random_decor_item_def.on_place(ItemStack(random_decor_item), user, pt)
+					if returned_itemstack and returned_itemstack:is_empty() then
+						x_farming.x_bonemeal.particle_effect(pt.above)
+					end
+				elseif random_decor_item_def ~= nil then
+					-- everything else
+					local pos_y = 1
+
+					if random_decor.place_offset_y ~= nil then
+						pos_y = random_decor.place_offset_y
+					end
+
+					returned_itemstack = ItemStack("")
+					x_farming.x_bonemeal.particle_effect(random_pos)
+					minetest.set_node({x = random_pos.x, y = random_pos.y + pos_y, z = random_pos.z}, { name = random_decor_item })
+				end
+
+				table.remove(positions, idx)
+			end
+		end
+	end
+
+	-- take item
+	if returned_itemstack and returned_itemstack:is_empty() and not x_farming.x_bonemeal.is_creative(user:get_player_name()) then
+		itemstack:take_item()
+	end
+
+	return itemstack
+end
+
+--- Handle farming and farming addons plants. Needed to copy this function from minetest_game and modify it in order to ommit some checks (e.g. light..)
+-- @function
+function x_farming.x_bonemeal.grow_farming(itemstack, user, pointed_thing)
+	local pos_under = pointed_thing.under
+	local replace_node_name = minetest.get_node(pos_under).name
+	local ndef = minetest.registered_nodes[replace_node_name]
+	local take_item = false
+
+	if not ndef.next_plant or ndef.next_plant == "x_farming:pumpkin_fruit" or ndef.next_plant == "x_farming:melon_fruit" then
+		return itemstack
+	end
+
+	local pos0 = vector.subtract(pointed_thing.under, 3)
+	local pos1 = vector.add(pointed_thing.under, 3)
+	local positions = minetest.find_nodes_in_area(pos0, pos1, {"group:plant", "group:seed"})
+
+	for i, pos in ipairs(positions) do
+		local isFertile = false
+		replace_node_name = minetest.get_node(pos).name
+
+		-- check if on wet soil
+		local below = minetest.get_node({x = pos.x, y = pos.y - 1, z = pos.z})
+		local below_def = minetest.registered_nodes[below.name]
+
+		if minetest.get_item_group(below.name, "soil") == 3 then
+			local plant = replace_node_name:split("_")[1]
+			local current_step = tonumber(string.reverse(string.reverse(replace_node_name):split("_")[1]))
+			local max_step = farming_steps[replace_node_name:gsub("_%d+", "", 1)]
+
+			-- check if seed
+			-- farming:seed_wheat
+			local mod_plant = replace_node_name:split(":")
+			-- seed_wheat
+			local seed_plant = mod_plant[2]:split("_")
+			local seed_name = replace_node_name
+
+			if seed_plant[1] == "seed" then
+				current_step = 0
+				if replace_node_name == "x_farming:seed_obsidian_wart" then
+					replace_node_name = mod_plant[1]..":"..seed_plant[2].."_"..seed_plant[3]
+				else
+					replace_node_name = mod_plant[1]..":"..seed_plant[2]
+				end
+				max_step = farming_steps[replace_node_name]
+				replace_node_name = replace_node_name.."_"..current_step
+			else
+				if string.find(replace_node_name, "obsidian_wart") then
+					seed_name = mod_plant[1]..":seed_"..seed_plant[1].."_"..seed_plant[2]
+				else
+					seed_name = mod_plant[1]..":seed_"..seed_plant[1]
+				end
+			end
+
+			-- search for fertility (again after checking soil)
+			local seed_def = minetest.registered_nodes[seed_name]
+
+			if seed_def and below_def then
+				if below_def.groups then
+					for i,v in ipairs(seed_def.fertility) do
+						if not isFertile then
+							isFertile = x_farming.x_bonemeal.groupContains(below_def.groups, v, 1)
+						end
+					end
+				end
+			end
+
+			if current_step ~= nil and max_step ~= nil and current_step ~= max_step and isFertile then
+				local available_steps = max_step - current_step
+				local new_step = max_step - available_steps + math.random(available_steps)
+				local new_plant = replace_node_name:gsub("_%d+", "_"..new_step, 1)
+				take_item = true
+
+				local placenode_def = minetest.registered_nodes[new_plant]
+
+				local placenode = {name = new_plant}
+				if placenode_def and placenode_def.place_param2 then
+					placenode.param2 = placenode_def.place_param2
+				end
+				x_farming.x_bonemeal.particle_effect(pos)
+				minetest.swap_node(pos, placenode)
+			end
+		end
+	end
+
+	-- take item if not in creative
+	if not x_farming.x_bonemeal.is_creative(user:get_player_name()) and take_item then
+		itemstack:take_item()
+	end
+
+	return itemstack
 end

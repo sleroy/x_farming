@@ -49,3 +49,6 @@ hbhunger.register_food("x_farming:pine_nut_roasted", 2)
 -- Donuts
 hbhunger.register_food("x_farming:donut", 3)
 hbhunger.register_food("x_farming:donut_chocolate", 4)
+
+--  Fries
+hbhunger.register_food("x_farming:fries", 6)

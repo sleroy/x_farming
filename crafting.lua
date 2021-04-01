@@ -345,3 +345,154 @@ minetest.register_craft({
 		{"default:paper", "", ""}
 	},
 })
+
+-- Ice Fishing
+
+minetest.register_craft({
+	output = "x_farming:seed_icefishing",
+	recipe = {
+		{"group:wool", "farming:string", "group:stick"},
+		{"", "farming:string", "group:stick"},
+		{"", "farming:string", "group:stick"}
+	},
+})
+
+minetest.register_craft({
+	output = "dye:black 4",
+	recipe = {
+		{"x_farming:black_seashroom"}
+	}
+})
+
+minetest.register_craft({
+	output = "dye:blue 4",
+	recipe = {
+		{"x_farming:blue_seashroom"}
+	}
+})
+
+minetest.register_craft({
+	output = "dye:brown 4",
+	recipe = {
+		{"x_farming:brown_seashroom"}
+	}
+})
+
+minetest.register_craft({
+	output = "dye:cyan 4",
+	recipe = {
+		{"x_farming:cyan_seashroom"}
+	}
+})
+
+minetest.register_craft({
+	output = "dye:dark_grey 4",
+	recipe = {
+		{"x_farming:gray_seashroom"}
+	}
+})
+
+minetest.register_craft({
+	output = "dye:grey 4",
+	recipe = {
+		{"x_farming:light_gray_seashroom"}
+	}
+})
+
+minetest.register_craft({
+	output = "dye:dark_green 4",
+	recipe = {
+		{"x_farming:green_seashroom"}
+	}
+})
+
+minetest.register_craft({
+	output = "dye:green 4",
+	recipe = {
+		{"x_farming:lime_seashroom"}
+	}
+})
+
+minetest.register_craft({
+	output = "dye:magenta 4",
+	recipe = {
+		{"x_farming:magenta_seashroom"}
+	}
+})
+
+minetest.register_craft({
+	output = "dye:orange 4",
+	recipe = {
+		{"x_farming:orange_seashroom"}
+	}
+})
+
+minetest.register_craft({
+	output = "dye:pink 4",
+	recipe = {
+		{"x_farming:pink_seashroom"}
+	}
+})
+
+minetest.register_craft({
+	output = "dye:violet 4",
+	recipe = {
+		{"x_farming:purple_seashroom"}
+	}
+})
+
+minetest.register_craft({
+	output = "dye:red 4",
+	recipe = {
+		{"x_farming:red_seashroom"}
+	}
+})
+
+minetest.register_craft({
+	output = "dye:white 4",
+	recipe = {
+		{"x_farming:white_seashroom"}
+	}
+})
+
+minetest.register_craft({
+	output = "dye:yellow 4",
+	recipe = {
+		{"x_farming:yellow_seashroom"}
+	}
+})
+
+minetest.register_craft({
+	output = "default:diamond",
+	recipe = {
+		{"x_farming:diamond_angler"}
+	}
+})
+
+minetest.register_craft({
+	output = "default:gold_lump",
+	recipe = {
+		{"x_farming:goldfish"}
+	}
+})
+
+minetest.register_craft({
+	output = "default:gold_ingot",
+	recipe = {
+		{"x_farming:true_goldfish"}
+	}
+})
+
+minetest.register_craft({
+	output = "default:iron_lump",
+	recipe = {
+		{"x_farming:ironfish"}
+	}
+})
+
+minetest.register_craft({
+	output = "x_farming:seed_pumpkin",
+	recipe = {
+		{"x_farming:pumpkinseed"}
+	}
+})

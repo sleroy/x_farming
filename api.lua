@@ -31,6 +31,23 @@ function x_farming.meta_set_str(key, value, pos)
 	meta:set_string(key, value)
 end
 
+-- merge two indexed tables
+function x_farming.mergeTables(t1, t2)
+	local _t1 = {unpack(t1)}
+	local _t2 = {unpack(t2)}
+
+	for k, v in ipairs(_t2) do
+		table.insert(_t1, v)
+	end
+
+	return _t1
+end
+
+-- Change an entire string to Title Case (i.e. capitalise the first letter of each word)
+function x_farming.tchelper(first, rest)
+	return first:upper()..rest:lower()
+end
+
 -- grow blocks next to the plant
 function x_farming.grow_block(pos, elapsed)
 	local node = minetest.get_node(pos)

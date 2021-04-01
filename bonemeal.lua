@@ -306,14 +306,14 @@ minetest.register_craftitem("x_farming:bonemeal", {
 --
 
 minetest.register_craft({
-  output = "x_farming:bonemeal 9",
+  output = "x_farming:bonemeal 4",
   recipe = {
     {"bones:bones"}
   }
 })
 
 minetest.register_craft({
-  output = "x_farming:bonemeal 9",
+  output = "x_farming:bonemeal 4",
   recipe = {
     {"default:coral_skeleton"}
   }

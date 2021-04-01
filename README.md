@@ -1,6 +1,6 @@
 # Farming Addons [x_farming]
 
-Extends Minetest default farming mod with new plants and crops using only minetest_game API (except couple of functions for e.g. block farming).
+Extends Minetest default farming mod with new plants, crops and ice fishing using only minetest_game API (except couple of functions for e.g. block farming, ice fishing).
 
 ![screenshot](screenshot.png)
 
@@ -196,6 +196,10 @@ Allows to harvest pine nuts. Roasted pine nuts can be eaten.
 
 Can be farmed as ingredient to craft other food recipes.
 
+### Ice Fishing
+
+Ice fish for getting various kinds of fish, treasures and junk. What type of fish you get depends on the biome where you'r fishing and how many ice blocks are directly around your fishing equipment (there has to be space above the ice and nothing can obstruct the ice otherwise it will not count). For planting you fishing equipment you need to first drill a hole in ice using Ice Auger. Ice fishing equipment can be crafted, occasionally dropped out from digging your ice fishing equipment and can also spawn in cold biomes.
+
 ## Biomes
 
 **Grassland**
@@ -244,11 +248,142 @@ Can be farmed as ingredient to craft other food recipes.
 **Rainforest Swamp**
 
 - Salt
+- Swamp Darter
+- Swamp Frog
+- Sturgeon
+- Sunfish
+- Swordfish
 
 **Savanna Shore**
 
 - Salt
+- Angelfish
+- Lingcod
+- Lukewarm Ocean Hermit Crab
+- Magma Slimefish
+- Manta Ray
 
+**Icesheet Ocean**
+
+- Angler
+- Frozen Boneminnow
+- Frozen Ocean Hermit Crab
+- Paddlefish
+- Pearl Isopod
+
+**Taiga Ocean**
+
+- Armored Catfish
+- Gar
+- Giant Moray
+- Perch
+- Piglish
+
+**Desert Ocean**
+
+- Arrow Squid
+- Desert Frog
+- Desert Sunfish
+- Piranha
+- Prismfish
+- Pumpkinseed
+
+**Tundra Ocean**
+
+- Barracuda
+- Flier
+- Floral Faefish
+- Flounder
+- Fourhorn Sculpin
+
+**Snowy Grassland Ocean**
+
+- Grass Pickerel
+- Guppy
+- Hagfish
+- Rainbowfish
+- Red Snapper
+
+**Coniferous Forest Ocean**
+
+- Bream
+- Redbreast Sunfish
+- Rockfish
+- Rohu
+- Rosefish
+
+**Grassland Ocean**
+
+- Conger
+- Sablefish
+- Sardine
+- Sawfish
+- Skate
+- Skullfin
+
+**Savanna Ocean**
+
+- Chorus Snail
+- White Bullhead
+- Whitefish
+- Wolffish
+- Woodskip
+
+**Cold Desert Ocean**
+
+- Chub
+- Cold Ocean Hermit Crab
+- Oscar
+- Leerfish
+
+**Sandstone Desert Ocean**
+
+- Clam
+- Skykoi
+- Smallmouth Bass
+- Sterlet
+
+**Deciduous Forest Ocean**
+
+- Crayfish
+- Damselfish
+- Danios
+- Vampire Squid
+- Walleye
+- Warm Ocean Hermit Crab
+
+**Rainforest Ocean**
+
+- Burbot
+- Koi
+- Lamprey
+- Largemouth Bass
+- Lava Eel
+- Leech
+
+**Icesheet**
+
+- Dwarf Caiman
+- Eel
+- Electric Eel
+- Endray
+- Tench
+
+**Tundra Beach**
+
+- Carp
+- Catfish
+- Catla
+- Ocean Hermit Crab
+- Octopus
+
+**Deciduous Forest Shore**
+
+- Congo Tiger Fish
+- Convict Cichlid
+- Minnow
+- Mud Flounder
+- Neon Tetra
 
 Seeds can be found also in dungeon chests.
 
@@ -264,6 +399,10 @@ Seeds can be found also in dungeon chests.
 - hbhunger
 - flowers
 - mobs_animal
+- mobs_npc
+- stairs
+- wool
+- dye
 
 ## License:
 
@@ -379,6 +518,140 @@ GNU Lesser General Public License v2.1 or later (see included LICENSE file)
 - x_farming_x_bonemeal_particles.png (modified by SaKeL)
 - x_farming_salt.png (modified by SaKeL)
 
+**https://www.minecraftforum.net/forums/mapping-and-modding-java-edition/minecraft-mods/3043897-vanilla-1-16-4-revamped-fishing-139-new-fish-new, by Athesiel**
+
+- x_farming_fish_albacore.png
+- x_farming_fish_anchovy.png
+- x_farming_fish_angelfish.png
+- x_farming_fish_angler.png
+- x_farming_fish_armored_catfish.png
+- x_farming_fish_arrow_squid.png
+- x_farming_fish_barracuda.png
+- x_farming_fish_black_seashroom.png
+- x_farming_fish_blobfish.png
+- x_farming_fish_blue_seashroom.png
+- x_farming_fish_bream.png
+- x_farming_fish_brown_seashroom.png
+- x_farming_fish_burbot.png
+- x_farming_fish_carp.png
+- x_farming_fish_catfish.png
+- x_farming_fish_catla.png
+- x_farming_fish_chorus_snail.png
+- x_farming_fish_chub.png
+- x_farming_fish_clam.png
+- x_farming_fish_cold_ocean_hermit_crab.png
+- x_farming_fish_conger.png
+- x_farming_fish_congo_tiger_fish.png
+- x_farming_fish_convict_cichlid.png
+- x_farming_fish_crab.png
+- x_farming_fish_crayfish.png
+- x_farming_fish_cyan_seashroom.png
+- x_farming_fish_damselfish.png
+- x_farming_fish_danios.png
+- x_farming_fish_desert_frog.png
+- x_farming_fish_desert_sunfish.png
+- x_farming_fish_diamond_angler.png
+- x_farming_fish_dwarf_caiman.png
+- x_farming_fish_eel.png
+- x_farming_fish_electric_eel.png
+- x_farming_fish_endray.png
+- x_farming_fish_father_sun.png
+- x_farming_fish_flier.png
+- x_farming_fish_floral_faefish.png
+- x_farming_fish_flounder.png
+- x_farming_fish_fourhorn_sculpin.png
+- x_farming_fish_frozen_boneminnow.png
+- x_farming_fish_frozen_ocean_hermit_crab.png
+- x_farming_fish_gar.png
+- x_farming_fish_giant_moray.png
+- x_farming_fish_goldeye.png
+- x_farming_fish_goldfish.png
+- x_farming_fish_grass_pickerel.png
+- x_farming_fish_gray_seashroom.png
+- x_farming_fish_green_seashroom.png
+- x_farming_fish_guppy.png
+- x_farming_fish_hagfish.png
+- x_farming_fish_halibut.png
+- x_farming_fish_herring.png
+- x_farming_fish_illager_ghostfish.png
+- x_farming_fish_ironfish.png
+- x_farming_fish_jungle_frog.png
+- x_farming_fish_koi.png
+- x_farming_fish_lamprey.png
+- x_farming_fish_largemouth_bass.png
+- x_farming_fish_lava_eel.png
+- x_farming_fish_leech.png
+- x_farming_fish_leerfish.png
+- x_farming_fish_light_gray_seashroom.png
+- x_farming_fish_lime_seashroom.png
+- x_farming_fish_lingcod.png
+- x_farming_fish_lobster.png
+- x_farming_fish_lukewarm_ocean_hermit_crab.png
+- x_farming_fish_magenta_seashroom.png
+- x_farming_fish_magma_slimefish.png
+- x_farming_fish_manta_ray.png
+- x_farming_fish_minnow.png
+- x_farming_fish_mother_moon.png
+- x_farming_fish_mud_flounder.png
+- x_farming_fish_neon_tetra.png
+- x_farming_fish_obster.png
+- x_farming_fish_ocean_hermit_crab.png
+- x_farming_fish_octopus.png
+- x_farming_fish_orange_seashroom.png
+- x_farming_fish_oscar.png
+- x_farming_fish_paddlefish.png
+- x_farming_fish_pearl_isopod.png
+- x_farming_fish_pearlwog.png
+- x_farming_fish_perch.png
+- x_farming_fish_piglish.png
+- x_farming_fish_pike.png
+- x_farming_fish_pink_seashroom.png
+- x_farming_fish_piranha.png
+- x_farming_fish_prismfish.png
+- x_farming_fish_pumpkinseed.png
+- x_farming_fish_purple_seashroom.png
+- x_farming_fish_rainbow_trout.png
+- x_farming_fish_rainbowfish.png
+- x_farming_fish_red_mullet.png
+- x_farming_fish_red_seashroom.png
+- x_farming_fish_red_snapper.png
+- x_farming_fish_redbreast_sunfish.png
+- x_farming_fish_rockfish.png
+- x_farming_fish_rohu.png
+- x_farming_fish_rosefish.png
+- x_farming_fish_rusty_skullfin.png
+- x_farming_fish_sablefish.png
+- x_farming_fish_sardine.png
+- x_farming_fish_sawfish.png
+- x_farming_fish_sea_cucumber.png
+- x_farming_fish_shrimp.png
+- x_farming_fish_skate.png
+- x_farming_fish_skullfin.png
+- x_farming_fish_skykoi.png
+- x_farming_fish_slimefish.png
+- x_farming_fish_smallmouth_bass.png
+- x_farming_fish_sterlet.png
+- x_farming_fish_stingray.png
+- x_farming_fish_sturgeon.png
+- x_farming_fish_sunfish.png
+- x_farming_fish_swamp_darter.png
+- x_farming_fish_swamp_frog.png
+- x_farming_fish_swordfish.png
+- x_farming_fish_tancho_koi.png
+- x_farming_fish_tench.png
+- x_farming_fish_tilapia.png
+- x_farming_fish_totemfish.png
+- x_farming_fish_true_goldfish.png
+- x_farming_fish_vampire_squid.png
+- x_farming_fish_walleye.png
+- x_farming_fish_warm_ocean_hermit_crab.png
+- x_farming_fish_white_bullhead.png
+- x_farming_fish_white_seashroom.png
+- x_farming_fish_whitefish.png
+- x_farming_fish_wolffish.png
+- x_farming_fish_woodskip.png
+- x_farming_fish_yellow_seashroom.png
+
 **LGPL-2.1-or-later, by SaKeL**
 
 - x_farming_carrot_seed.png
@@ -452,6 +725,43 @@ GNU Lesser General Public License v2.1 or later (see included LICENSE file)
 - x_farming_salt_4_side.png
 - x_farming_salt_4_top.png
 - x_farming_salt_water.png
+- x_farming_drilled_ice.png
+- x_farming_ice_auger.png
+- x_farming_icefishing_back_0.png
+- x_farming_icefishing_back_1.png
+- x_farming_icefishing_back_2.png
+- x_farming_icefishing_back_3.png
+- x_farming_icefishing_back_4.png
+- x_farming_icefishing_back_5.png
+- x_farming_icefishing_back_6.png
+- x_farming_icefishing_back_7.png
+- x_farming_icefishing_back_8.png
+- x_farming_icefishing_back_9.png
+- x_farming_icefishing_bottom.png
+- x_farming_icefishing_front_0.png
+- x_farming_icefishing_front_1.png
+- x_farming_icefishing_front_2.png
+- x_farming_icefishing_front_3.png
+- x_farming_icefishing_front_4.png
+- x_farming_icefishing_front_5.png
+- x_farming_icefishing_front_6.png
+- x_farming_icefishing_front_7.png
+- x_farming_icefishing_front_8.png
+- x_farming_icefishing_front_9.png
+- x_farming_icefishing_inv.png
+- x_farming_icefishing_left.png
+- x_farming_icefishing_right.png
+- x_farming_icefishing_top_1.png
+- x_farming_icefishing_top_2.png
+- x_farming_icefishing_top_3.png
+- x_farming_icefishing_top_4.png
+- x_farming_icefishing_top_5.png
+- x_farming_icefishing_top_6.png
+- x_farming_icefishing_top_7.png
+- x_farming_icefishing_top_8.png
+- x_farming_icefishing_top_9.png
+- x_farming_icefishing_top_animated.png
+- x_farming_icefishing_top_animated_9.png
 
 **MIT**
 

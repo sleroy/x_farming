@@ -449,3 +449,26 @@ mts_save("x_farming_salt_decor", {
 		{name = "x_farming:salt_7", prob = 255},
 	}
 })
+
+-- Mapgen Ice Fishing
+
+local L = {name = "default:ice", prob = 255}
+local M = {name = "x_farming:icefishing_9", prob = 255}
+local N = {name = "default:ice", prob = 127}
+
+mts_save("x_farming_icefishing", {
+	size = {x = 3, y = 3, z = 3},
+	data = {
+		N, N, N,
+		_, _, _,
+		_, _, _,
+
+		N, L, N,
+		_, M, _,
+		_, _, _,
+
+		N, N, N,
+		_, _, _,
+		_, _, _,
+	}
+})

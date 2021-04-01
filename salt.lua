@@ -13,7 +13,7 @@ minetest.register_craftitem("x_farming:salt", {
 
 minetest.register_node("x_farming:seed_salt", {
 	description = "Salty Water (plant on wet soil)",
-	tiles = {"x_farming_salt_water.png"},
+	-- tiles = {"x_farming_salt_water.png"},
 	inventory_image = "x_farming_salt_water.png",
 	wield_image = "x_farming_salt_water.png",
 	fertility = {"grassland"},
@@ -44,7 +44,7 @@ minetest.register_node("x_farming:seed_salt", {
 			{-0.5, -0.5, -0.5, 0.5, -0.375, 0.5},
 		},
 	},
-	groups = {snappy = 3, flammable = 2, plant = 1, attached_node = 1},
+	groups = {seed = 1, snappy = 3, flammable = 2, plant = 1, attached_node = 1},
 	sounds = default.node_sound_leaves_defaults(),
 	next_plant = "x_farming:salt_1",
 	on_timer = farming.grow_plant,

@@ -13,7 +13,7 @@ minetest.register_craftitem("x_farming:salt", {
 
 minetest.register_node("x_farming:seed_salt", {
 	description = "Salty Water (plant on wet soil)",
-	-- tiles = {"x_farming_salt_water.png"},
+	tiles = {"x_farming_salt_water.png"},
 	inventory_image = "x_farming_salt_water.png",
 	wield_image = "x_farming_salt_water.png",
 	fertility = {"grassland"},

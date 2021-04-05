@@ -874,7 +874,7 @@ minetest.register_tool("x_farming:ice_auger", {
 
 		-- turn the node into soil and play sound
 		minetest.set_node(pt.under, {name = "x_farming:drilled_ice"})
-		minetest.sound_play("default_ice_dug", {
+		minetest.sound_play("x_farming_ice_dug", {
 			pos = pt.under,
 			gain = 0.5,
 		}, true)

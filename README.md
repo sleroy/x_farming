@@ -12,6 +12,7 @@ Hunger points in the description assume that you have [hbhubger](https://forum.m
 
 - adds food source to almost every biome, allows traveling the world without relying on apples only
 - block farming, instead of food items, blocks can be harvested/crafted and used for building or decoration
+- adds ice fishing - farming fish based on biomes and amount of ice around
 - farming on different block than dirt, e.g. obsidian, jungle tree..
 - farming in dark, no need for light for farming, e.g. obsidian wart
 - vertical farming, e.g. farming cocoa on jungle tree trunk
@@ -19,7 +20,7 @@ Hunger points in the description assume that you have [hbhubger](https://forum.m
 - food items can heal or poison you
 - some food items can be placed and used as decoration
 - some food items can grow back on trees/cactus after harvesting
-- using combination of snow block and pumpik can spawn snowman mob
+- using combination of snow block and pumpkin can spawn snowman mob
 - mod is lightweight and optimized for servers
 - plants and trees are spawning as decoration troughout the world (see biomes below)
 - stairs and slabs for all new blocks
@@ -787,6 +788,10 @@ GNU Lesser General Public License v2.1 or later (see included LICENSE file)
 **freesound.org**
 
 - x_farming_x_bonemeal_grow.ogg
+
+**MIT**
+
+- x_farming_ice_dug.ogg (MTG)
 
 ## Installation
 

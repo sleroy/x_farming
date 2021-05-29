@@ -397,8 +397,12 @@ function x_farming.x_bonemeal.grow_grass_and_flowers(itemstack, user, pointed_th
 		-- all nodes on which decoration can be placed on
 		-- indexed by name
 		if not decor_place_on[v.place_on] then
-			for k, v in ipairs(v.place_on) do
-				decor_place_on[v] = true
+			if type(v.place_on) == "string" then
+				decor_place_on[v.place_on] = true
+			elseif type(v.place_on) == "table" then
+				for k, v in ipairs(v.place_on) do
+					decor_place_on[v] = true
+				end
 			end
 		end
 	end

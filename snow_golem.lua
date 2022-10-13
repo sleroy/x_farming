@@ -1,38 +1,37 @@
 local S = mobs.intllib
 
 mobs.npc_drops = {
-  "default:mese_crystal",
-  "default:pick_steel",
-  "default:pick_bronze",
-  "default:sword_steel",
-  "default:sword_bronze",
-  "default:shovel_steel",
-  "default:shovel_bronze",
-  "default:axe_steel",
-  "default:axe_bronze",
-  "farming:bread",
-  "farming:hoe_steel",
-  "bucket:bucket_water",
-  "screwdriver:screwdriver",
-  "default:diamond",
-  "default:gold_lump",
-  "default:coalblock"
+  'default:mese_crystal',
+  'default:pick_steel',
+  'default:pick_bronze',
+  'default:sword_steel',
+  'default:sword_bronze',
+  'default:shovel_steel',
+  'default:shovel_bronze',
+  'default:axe_steel',
+  'default:axe_bronze',
+  'farming:bread',
+  'farming:hoe_steel',
+  'bucket:bucket_water',
+  'screwdriver:screwdriver',
+  'default:diamond',
+  'default:gold_lump',
+  'default:coalblock'
 }
 
 local snow_golem_def = {
-  type = "npc",
+  type = 'npc',
   passive = false,
   pathfinding = true,
   docile_by_day = true,
-  attack_type = "dogshoot",
+  attack_type = 'dogshoot',
   attacks_monsters = true,
-  damage = 5,
   group_attack = true,
   owner_loyal = true,
   shoot_interval = 0.9,
   dogshoot_switch = 1,
   dogshoot_count_max = 10,
-  arrow = "mobs_npc:snowball_arrow",
+  arrow = 'mobs_npc:snowball_arrow',
   shoot_offset = 1,
   reach = 2,
   damage = 3,
@@ -41,15 +40,15 @@ local snow_golem_def = {
   armor = 100,
   collisionbox = {-0.35, -0.1, -0.35, 0.35, 1.89, 0.35},
   visual_size = {x = 2.9, y = 2.9},
-  visual = "mesh",
-  mesh = "x_farming_snowman.b3d",
-  drawtype = "front",
+  visual = 'mesh',
+  mesh = 'x_farming_snowman.b3d',
+  drawtype = 'front',
   textures = {
-    {"x_farming_snowman.png^x_farming_snowman_pumpkin.png"},
+    {'x_farming_snowman.png^x_farming_snowman_pumpkin.png'},
   },
-  blood_texture = "default_snowball.png",
-  owner = "",
-  order = "follow",
+  blood_texture = 'default_snowball.png',
+  owner = '',
+  order = 'follow',
   makes_footstep_sound = true,
   walk_velocity = 0.6,
   run_velocity = 2,
@@ -57,10 +56,10 @@ local snow_golem_def = {
   jump = true,
   floats = 1,
   drops = {
-    {name = "default:snow", chance = 1, min = 0, max = 15},
-    {name = "mobs_npc:seed_pumpkin", chance = 5, min = 1, max = 3}
+    {name = 'default:snow', chance = 1, min = 0, max = 15},
+    {name = 'mobs_npc:seed_pumpkin', chance = 5, min = 1, max = 3}
   },
-  follow = {"farming:bread", "default:diamond"},
+  follow = {'farming:bread', 'default:diamond'},
   water_damage = 6,
   lava_damage = 10,
   light_damage = 0,
@@ -93,7 +92,7 @@ local snow_golem_def = {
       local name = clicker:get_player_name()
 
       -- right clicking with gold lump drops random item from mobs.npc_drops
-      if item:get_name() == "default:gold_lump" then
+      if item:get_name() == 'default:gold_lump' then
 
         if not mobs.is_creative(name) then
           item:take_item()
@@ -110,7 +109,7 @@ local snow_golem_def = {
         })
 
         if obj and obj:get_luaentity() then
-          obj:setvelocity({
+          obj:set_velocity({
             x = math.random(-10, 10) / 9,
             y = 6,
             z = math.random(-10, 10) / 9,
@@ -119,7 +118,7 @@ local snow_golem_def = {
           obj:remove() -- item does not exist
         end
 
-        minetest.chat_send_player(name, S("Snow Golem dropped you an item for gold!"))
+        minetest.chat_send_player(name, S('Snow Golem dropped you an item for gold!'))
 
         return
       end
@@ -127,25 +126,25 @@ local snow_golem_def = {
       -- by right-clicking owner can switch npc between follow and stand
       if self.owner and self.owner == name then
 
-        if self.order == "follow" then
-          self.order = "stand"
+        if self.order == 'follow' then
+          self.order = 'stand'
 
-          minetest.chat_send_player(name, S("NPC stands still."))
+          minetest.chat_send_player(name, S('NPC stands still.'))
         else
-          self.order = "follow"
+          self.order = 'follow'
 
-          minetest.chat_send_player(name, S("NPC will follow you."))
+          minetest.chat_send_player(name, S('NPC will follow you.'))
         end
       end
 
     end,
 }
 
-mobs:register_mob(":mobs_npc:snow_golem", snow_golem_def)
+mobs:register_mob(':mobs_npc:snow_golem', snow_golem_def)
 
 -- mobs:spawn({
---   name = "mobs_npc:snow_golem",
---   nodes = {"default:desert_sand", "default:desert_stone", "default:sand", "default:sandstone", "default:silver_sand", "mobs_npc:deco_stone_eye", "mobs_npc:deco_stone_men", "mobs_npc:deco_stone_sun"},
+--   name = 'mobs_npc:snow_golem',
+--   nodes = {'default:desert_sand', 'default:desert_stone', 'default:sand', 'default:sandstone', 'default:silver_sand', 'mobs_npc:deco_stone_eye', 'mobs_npc:deco_stone_men', 'mobs_npc:deco_stone_sun'},
 --   min_light = 0,
 --   max_light = 20,
 --   chance = 2000,
@@ -153,16 +152,16 @@ mobs:register_mob(":mobs_npc:snow_golem", snow_golem_def)
 --   day_toggle = false,
 -- })
 
-mobs:register_egg(":mobs_npc:snow_golem", "Snow Golem", "default_snow.png", 1)
+mobs:register_egg(':mobs_npc:snow_golem', 'Snow Golem', 'default_snow.png', 1)
 
 -- shooting
-mobs:register_arrow(":mobs_npc:snowball_arrow", {
-  visual = "sprite",
+mobs:register_arrow(':mobs_npc:snowball_arrow', {
+  visual = 'sprite',
   visual_size = {x = 1, y = 1},
-  textures = {"default_snowball.png"},
+  textures = {'default_snowball.png'},
   velocity = 14,
   tail = 0,
-  tail_texture = "default_snowball.png",
+  tail_texture = 'default_snowball.png',
   glow = 5,
   -- tail_size = 10,
 

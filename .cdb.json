@@ -3,6 +3,7 @@
     "title": "X Farming",
     "name": "x_farming",
     "short_description": "Extends default farming with new plants, crops and ice fishing.",
+    "dev_state": "MAINTENANCE_ONLY",
     "tags": [
         "decorative",
         "food",
@@ -14,5 +15,6 @@
     "media_license": "CC BY-SA 4.0",
     "repo": "https://bitbucket.org/minetest_gamers/x_farming/src/master",
     "issue_tracker": "https://bitbucket.org/minetest_gamers/x_farming/issues",
-    "forums": 26464
+    "forums": 26464,
+    "video_url": "https://youtu.be/1MhusGD1-w8"
 }

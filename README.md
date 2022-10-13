@@ -763,6 +763,16 @@ GNU Lesser General Public License v2.1 or later (see included LICENSE file)
 - x_farming_icefishing_top_9.png
 - x_farming_icefishing_top_animated.png
 - x_farming_icefishing_top_animated_9.png
+- x_farming_hog_stew_mesh.png
+- x_farming_beetroot_soup_mesh.png
+- x_farming_pumpkin_pie_mesh.png
+- x_farming_kiwi_fruit_mesh.png
+- x_farming_corn_popcorn_mesh.png
+- x_farming_fries_mesh.png
+- x_farming_coffee_cup_hot_mesh.png
+- x_farming_donut_mesh.png
+- x_farming_donut_chocolate_mesh.png
+
 
 **MIT**
 
@@ -792,6 +802,19 @@ GNU Lesser General Public License v2.1 or later (see included LICENSE file)
 **MIT**
 
 - x_farming_ice_dug.ogg (MTG)
+
+### Models
+
+****LGPL-2.1-or-later, by SaKeL**
+
+- x_farming_hog_stew.obj
+- x_farming_beetroot_soup.obj
+- x_farming_pumpkin_pie.obj
+- x_farming_kiwi_fruit.obj
+- x_farming_corn_popcorn.obj
+- x_farming_fries.obj
+- x_farming_coffee_cup_hot.obj
+- x_farming_donut.obj
 
 ## Installation
 

@@ -329,7 +329,7 @@ function x_farming.x_bonemeal.grow_grass_and_flowers(itemstack, user, pointed_th
     local positions_dirty
     local positions = {}
     local decor_place_on = {}
-    print('biome_name', biome_name)
+    -- print('biome_name', biome_name)
 
     ---check 1 node below pointed node (floats on water)
     local test_node = minetest.get_node({x = pointed_thing.under.x, y = pointed_thing.under.y - 1, z = pointed_thing.under.z})

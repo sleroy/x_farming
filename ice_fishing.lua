@@ -1,8 +1,7 @@
 creative = creative--[[@as MtgCreative]]
 screwdriver = screwdriver--[[@as MtgScrewdriver]]
-dump = dump--[[@as Dump]]
 
--- ICE FISHING
+---ICE FISHING
 local icefishing = {
     drops = {
         treasure = {
@@ -194,14 +193,14 @@ local icefishing = {
     }
 }
 
--- how often node timers for plants will tick, +/- some random value
+---how often node timers for plants will tick, +/- some random value
 function icefishing.tick(pos)
-    minetest.get_node_timer(pos):start(math.random(166, 286))
+    minetest.get_node_timer(pos):start(math.random(1, 3))
 end
 
--- how often a growth failure tick is retried (e.g. too dark)
+---how often a growth failure tick is retried (e.g. too dark)
 function icefishing.tick_again(pos)
-    minetest.get_node_timer(pos):start(math.random(80, 160))
+    minetest.get_node_timer(pos):start(math.random(1, 3))
 end
 
 icefishing.on_construct = function(pos)
@@ -226,19 +225,19 @@ icefishing.after_destruct = function(pos, oldnode, oldmetadata, digger)
     local max_steps = 9
     local current_step = tonumber(string.reverse(string.reverse(oldnode.name):split("_")[1]))
 
-    -- is a seed
+    ---is a seed
     if not current_step then
         minetest.item_drop(ItemStack("x_farming:seed_icefishing"), nil, pos)
         return
     end
 
-    -- too short for getting a fish or junk (tier_1)
+    ---too short for getting a fish or junk (tier_1)
     if current_step < 6 then
         minetest.item_drop(ItemStack("x_farming:seed_icefishing"), nil, pos)
         return
     end
 
-    -- get ice nodes around
+    ---get ice nodes around
     local under = {x = pos.x, y = pos.y - 1, z = pos.z}
     local biome_data = minetest.get_biome_data(under)
 
@@ -252,14 +251,14 @@ icefishing.after_destruct = function(pos, oldnode, oldmetadata, digger)
         {x = under.x + 1, y = under.y, z = under.z + 1},
         "default:ice"
     )
-    -- subtract 1 - not including the node where the icefishing was
+    ---subtract 1 - not including the node where the icefishing was
     local rarity = 8 - (current_step - 1) * 7 / (max_steps - 1)
     rarity = math.floor(rarity)
     local positions_count = #positions - 1
     local items_to_drop = {}
     local tier = 1
 
-    -- tiers
+    ---tiers
     if current_step == max_steps then
         if positions_count >= 4 and positions_count < 6 then
             tier = 2
@@ -270,11 +269,11 @@ icefishing.after_destruct = function(pos, oldnode, oldmetadata, digger)
         end
     end
 
-    -- initial item to drop
+    ---initial item to drop
     local tier_items = icefishing.drops["tier_"..tier]
     local biome_items = icefishing.biomes[biome_name]
 
-    -- add specific biome items
+    ---add specific biome items
     if biome_items ~= nil and tier == 4 then
         tier_items = x_farming.mergeTables(tier_items, biome_items)
     end
@@ -282,19 +281,19 @@ icefishing.after_destruct = function(pos, oldnode, oldmetadata, digger)
     local tier_item = tier_items[math.random(1, #tier_items)]
     table.insert(items_to_drop, tier_item)
 
-    -- rarity - add extra item from list of items to drop
+    ---rarity - add extra item from list of items to drop
     if math.random(1, rarity) == 1 then
         local random_item = items_to_drop[math.random(1, #items_to_drop)]
 
         table.insert(items_to_drop, random_item)
     end
 
-    -- 50% chance to drop the ice fishing equipment
+    ---50% chance to drop the ice fishing equipment
     if math.random(1, 2) == 1 then
         table.insert(items_to_drop, "x_farming:seed_icefishing")
     end
 
-    -- treasure chance (10%)
+    ---treasure chance (10%)
     if math.random(1, 10) == 1 and tier == 4 then
         local random_items = icefishing.drops.treasure
         local random_item = random_items[math.random(1, #random_items)]
@@ -319,10 +318,10 @@ icefishing.after_destruct = function(pos, oldnode, oldmetadata, digger)
     end
 end
 
--- Seed placement
+---Seed placement
 icefishing.place_seed = function(itemstack, placer, pointed_thing, plantname)
     local pt = pointed_thing
-    -- check if pointing at a node
+    ---check if pointing at a node
     if not pt then
         return itemstack
     end
@@ -344,7 +343,7 @@ icefishing.place_seed = function(itemstack, placer, pointed_thing, plantname)
         return
     end
 
-    -- return if any of the nodes is not registered
+    ---return if any of the nodes is not registered
     if not minetest.registered_nodes[under.name] then
         return itemstack
     end
@@ -352,22 +351,22 @@ icefishing.place_seed = function(itemstack, placer, pointed_thing, plantname)
         return itemstack
     end
 
-    -- check if pointing at the top of the node
+    ---check if pointing at the top of the node
     if pt.above.y ~= pt.under.y+1 then
         return itemstack
     end
 
-    -- check if you can replace the node above the pointed node
+    ---check if you can replace the node above the pointed node
     if not minetest.registered_nodes[above.name].buildable_to then
         return itemstack
     end
 
-    -- check if pointing at soil
+    ---check if pointing at soil
     if under.name ~= "x_farming:drilled_ice" then
         return itemstack
     end
 
-    -- add the node and remove 1 item from the itemstack
+    ---add the node and remove 1 item from the itemstack
     minetest.log("action", player_name .. " places node " .. plantname .. " at " ..
         minetest.pos_to_string(pt.above))
     minetest.add_node(pt.above, {name = plantname, param2 = 1})
@@ -385,18 +384,18 @@ icefishing.grow_plant = function(pos, elapsed)
     local def = minetest.registered_nodes[name]
 
     if not def.next_plant then
-        -- disable timer for fully grown plant
+        ---disable timer for fully grown plant
         return
     end
 
-    -- grow seed
+    ---grow seed
     if minetest.get_item_group(node.name, "seed") and def.fertility then
         local soil_node = minetest.get_node_or_nil({x = pos.x, y = pos.y - 1, z = pos.z})
         if not soil_node then
             icefishing.tick_again(pos)
             return
         end
-        -- omitted is a check for light, we assume seeds can germinate in the dark.
+        ---omitted is a check for light, we assume seeds can germinate in the dark.
         for _, v in pairs(def.fertility) do
             if minetest.get_item_group(soil_node.name, v) ~= 0 then
                 local placenode = {name = def.next_plant}
@@ -414,21 +413,21 @@ icefishing.grow_plant = function(pos, elapsed)
         return
     end
 
-    -- check if on ice
+    ---check if on ice
     local below = minetest.get_node({x = pos.x, y = pos.y - 1, z = pos.z})
     if below.name ~= "x_farming:drilled_ice" then
         icefishing.tick_again(pos)
         return
     end
 
-    -- check light
+    ---check light
     local light = minetest.get_node_light(pos)
     if not light or light < def.minlight or light > def.maxlight then
         icefishing.tick_again(pos)
         return
     end
 
-    -- grow
+    ---grow
     local placenode = {name = def.next_plant}
     if def.place_param2 then
         placenode.param2 = def.place_param2
@@ -449,14 +448,14 @@ icefishing.grow_plant = function(pos, elapsed)
         texture = 'bubble.png'
     })
 
-    -- new timer needed?
+    ---new timer needed?
     if minetest.registered_nodes[def.next_plant].next_plant then
         icefishing.tick(pos)
     end
     return
 end
 
--- Items / Harvest
+---Items / Harvest
 
 local fishes = {
     {name = "crab", item_eat = 1, item_eat_cooked = 6},
@@ -597,7 +596,7 @@ for i, def in ipairs(fishes) do
     local desc = string.gsub(string.gsub(def.name, "(_)", " "), "(%a)([%w_']*)", x_farming.tchelper)
     local img = "x_farming_fish_" .. def.name .. ".png"
 
-    -- raw
+    ---raw
     minetest.register_craftitem(name, {
         description = desc .. "\n" .. minetest.colorize(x_farming.colors.brown, "Hunger: " .. def.item_eat),
         tiles = {img},
@@ -606,7 +605,7 @@ for i, def in ipairs(fishes) do
         on_use = minetest.item_eat(def.item_eat),
     })
 
-    -- hbhunger
+    ---hbhunger
     if x_farming.hbhunger ~= nil then
         if hbhunger.register_food ~= nil then
             hbhunger.register_food(name, def.item_eat)
@@ -614,7 +613,7 @@ for i, def in ipairs(fishes) do
     end
 
     if def.item_eat_cooked ~= nil then
-        -- cooked
+        ---cooked
         minetest.register_craftitem(name .. "_cooked", {
             description = "Cooked "..desc .. "\n" .. minetest.colorize(x_farming.colors.brown, "Hunger: " .. def.item_eat_cooked),
             tiles = {img},
@@ -630,7 +629,7 @@ for i, def in ipairs(fishes) do
             recipe = name
         })
 
-        -- hbhunger
+        ---hbhunger
         if x_farming.hbhunger ~= nil then
             if hbhunger.register_food ~= nil then
                 hbhunger.register_food(name .. "_cooked", def.item_eat_cooked)
@@ -639,18 +638,18 @@ for i, def in ipairs(fishes) do
     end
 end
 
--- Ice fishing equipment
+---Ice fishing equipment
 
 icefishing.register_equipment = function(name, def)
     local mname = name:split(":")[1]
     local pname = name:split(":")[2]
 
-    -- Register seed
+    ---Register seed
     local lbm_nodes = {mname .. ":seed_" .. pname}
 
     minetest.register_node(mname .. ":seed_" .. pname, {
         description = def.description,
-        -- top, bottom, sides
+        ---top, bottom, sides
         tiles = {
             "x_farming_icefishing_bottom.png",
             "x_farming_icefishing_bottom.png",
@@ -717,7 +716,7 @@ icefishing.register_equipment = function(name, def)
         after_destruct = icefishing.after_destruct,
     })
 
-    -- Register growing steps
+    ---Register growing steps
     for i = 1, def.steps do
         local next_plant = nil
         local last_step = i == def.steps
@@ -760,8 +759,8 @@ icefishing.register_equipment = function(name, def)
 
         minetest.register_node(mname .. ":" .. pname .. "_" .. i, {
             drawtype = "nodebox",
-            -- Textures of node; +Y, -Y, +X, -X, +Z, -Z
-            -- Textures of node; top, bottom, right, left, front, back
+            ---Textures of node; +Y, -Y, +X, -X, +Z, -Z
+            ---Textures of node; top, bottom, right, left, front, back
             tiles = tiles,
             paramtype = "light",
             walkable = false,
@@ -800,7 +799,7 @@ icefishing.register_equipment = function(name, def)
         })
     end
 
-    -- replacement LBM for pre-nodetimer plants
+    ---replacement LBM for pre-nodetimer plants
     minetest.register_lbm({
         name = mname .. ":start_nodetimer_" .. pname,
         nodenames = lbm_nodes,
@@ -809,7 +808,7 @@ icefishing.register_equipment = function(name, def)
         end,
     })
 
-    -- Return
+    ---Return
     local r = {
         seed = mname .. ":seed_" .. pname
     }
@@ -821,7 +820,7 @@ icefishing.register_equipment("x_farming:icefishing", {
     steps = 9,
 })
 
--- nodes
+---nodes
 
 minetest.register_node("x_farming:drilled_ice", {
     description = "Drilled Ice",
@@ -839,7 +838,7 @@ minetest.register_node("x_farming:drilled_ice", {
     sounds = default.node_sound_ice_defaults(),
 })
 
--- tools
+---tools
 
 minetest.register_tool("x_farming:ice_auger", {
     description = "Ice Auger drills hole in ice for ice fishing.",
@@ -848,7 +847,7 @@ minetest.register_tool("x_farming:ice_auger", {
     stack_max = 1,
     on_use = function(itemstack, user, pointed_thing)
         local pt = pointed_thing
-        -- check if pointing at a node
+        ---check if pointing at a node
         if not pt then
             return
         end
@@ -861,7 +860,7 @@ minetest.register_tool("x_farming:ice_auger", {
         local p = {x=pt.under.x, y=pt.under.y+1, z=pt.under.z}
         local above = minetest.get_node(p)
 
-        -- return if any of the nodes is not registered
+        ---return if any of the nodes is not registered
         if not minetest.registered_nodes[under.name] then
             return
         end
@@ -869,12 +868,12 @@ minetest.register_tool("x_farming:ice_auger", {
             return
         end
 
-        -- check if the node above the pointed thing is air
+        ---check if the node above the pointed thing is air
         if above.name ~= "air" then
             return
         end
 
-        -- check if pointing at soil
+        ---check if pointing at soil
         if under.name ~= "default:ice" then
             return
         end
@@ -889,7 +888,7 @@ minetest.register_tool("x_farming:ice_auger", {
             return
         end
 
-        -- turn the node into soil and play sound
+        ---turn the node into soil and play sound
         minetest.set_node(pt.under, {name = "x_farming:drilled_ice"})
         minetest.sound_play("x_farming_ice_dug", {
             pos = pt.under,
@@ -913,10 +912,10 @@ minetest.register_tool("x_farming:ice_auger", {
         })
 
         if not (creative and creative.is_enabled_for and creative.is_enabled_for(user:get_player_name())) then
-            -- wear tool
+            ---wear tool
             local wdef = itemstack:get_definition()
             itemstack:add_wear(65535/(uses-1))
-            -- tool break sound
+            ---tool break sound
             if itemstack:get_count() == 0 and wdef.sound and wdef.sound.breaks then
                 minetest.sound_play(wdef.sound.breaks, {pos = pt.above,
                     gain = 0.5}, true)
@@ -936,7 +935,7 @@ minetest.register_craft({
     }
 })
 
--- decorations
+---decorations
 
 minetest.register_decoration({
     name = "x_farming:icefishing_9",

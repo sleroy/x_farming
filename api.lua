@@ -415,10 +415,12 @@ function x_farming.register_crate(name, def)
 
         if not node_above then
             x_farming.tick_again_crates(pos)
+            return
         end
 
         if node_above.name ~= 'air' then
             x_farming.tick_again_crates(pos)
+            return
         end
 
         local rand1 = math.random(1, 2) / 10

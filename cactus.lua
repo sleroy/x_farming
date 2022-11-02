@@ -201,3 +201,12 @@ minetest.register_craft({
     recipe = 'x_farming:cactus_fruit_item',
     burntime = 10,
 })
+
+---crate
+x_farming.register_crate('crate_cactus_fruit_item_3', {
+    description = 'Cactus Fruit Crate',
+    tiles = {'x_farming_crate_cactus_fruit_item_3.png'},
+    _custom = {
+        crate_item = 'x_farming:cactus_fruit_item'
+    }
+})

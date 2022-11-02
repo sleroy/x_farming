@@ -9,7 +9,11 @@ x_farming = {
         red = '#FF8080',
         green = '#98E698'
     },
-    x_bonemeal = {}
+    x_bonemeal = {},
+    allowed_crate_items = {},
+    allowed_bag_items = {},
+    registered_crates = {},
+    lbm_nodenames_crates = {}
 }
 
 local mod_start_time = minetest.get_us_time()
@@ -37,6 +41,18 @@ dofile(path..'/ice_fishing.lua')
 dofile(path..'/nodes.lua')
 dofile(path..'/crafting.lua')
 dofile(path..'/bonemeal.lua')
+dofile(path..'/crates.lua')
+dofile(path..'/bags.lua')
+
+---timer for crates
+minetest.register_lbm({
+    label = 'x_farming timer for crates',
+    name = 'x_farming:start_nodetimer_crates',
+    nodenames = x_farming.lbm_nodenames_crates,
+    action = function(pos, node)
+        x_farming.tick_again_crates(pos)
+    end
+})
 
 -- hbhunger
 if x_farming.hbhunger ~= nil then

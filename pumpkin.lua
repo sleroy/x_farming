@@ -133,3 +133,12 @@ minetest.register_decoration({
     decoration = 'x_farming:pumpkin_8',
     param2 = 3,
 })
+
+---crate
+x_farming.register_crate('crate_pumpkin_block_3', {
+    description = 'Pumpkin Crate',
+    tiles = {'x_farming_crate_pumpkin_block_3.png'},
+    _custom = {
+        crate_item = 'x_farming:pumpkin_block'
+    }
+})

@@ -180,6 +180,473 @@ function x_farming.grow_pine_nut_tree(pos)
         path, '0', nil, false)
 end
 
+
+----
+--- Crates and Bags
+----
+
+function x_farming.tick_crates(pos)
+    minetest.get_node_timer(pos):start(math.random(332, 572))
+end
+
+function x_farming.tick_again_crates(pos)
+    minetest.get_node_timer(pos):start(math.random(80, 160))
+end
+
+function x_farming.get_crate_or_bag_formspec(pos, label_copy)
+    local spos = pos.x .. ',' .. pos.y .. ',' .. pos.z
+    local formspec = {
+        'size[8,9]',
+        'list[nodemeta:', spos, ';main;0,0.3;8,4;]',
+        'list[current_player;main;0,4.85;8,1;]',
+        'list[current_player;main;0,6.08;8,3;8]',
+        'listring[nodemeta:', spos, ';main]',
+        'listring[current_player;main]',
+        'label[2,0;' .. minetest.formspec_escape(label_copy) .. ']',
+        default.get_hotbar_bg(0,4.85)
+    }
+
+    formspec = table.concat(formspec, '')
+
+    return formspec
+end
+
+---Crate
+function x_farming.register_crate(name, def)
+    local _def = table.copy(def) or {}
+
+    _def._custom = _def._custom or {}
+
+    _def.name = 'x_farming:' .. name
+    _def.description = def.description or name
+    _def.short_description = def.short_description or def.description
+    _def.drawtype = 'mesh'
+    _def.paramtype = 'light'
+    _def.paramtype2 = 'facedir'
+    _def.mesh = 'x_farming_crate.obj'
+    _def.tiles = def.tiles
+    _def.sounds = def.sounds or default.node_sound_wood_defaults()
+    _def.is_ground_content = false
+    _def.groups = def.groups or {choppy = 2, oddly_breakable_by_hand = 2, not_in_creative_inventory = 1, flammable = 2}
+    _def.stack_max = def.stack_max or 1
+    _def.mod_origin = 'x_farming'
+
+    if _def._custom.crate_item then
+        x_farming.allowed_crate_items[_def._custom.crate_item] = true
+    end
+
+    _def.on_construct = function(pos)
+        local meta = minetest.get_meta(pos)
+        local inv = meta:get_inventory()
+        meta:set_string('infotext', _def.short_description)
+        meta:set_string('owner', '')
+        inv:set_size('main', 1)
+    end
+
+    _def.after_place_node = function(pos, placer, itemstack, pointed_thing)
+        local meta = minetest.get_meta(pos)
+        local meta_st = itemstack:get_meta()
+        local crate_inv = minetest.deserialize(meta_st:get_string('crate_inv'))
+        local inv = meta:get_inventory()
+
+        if crate_inv then
+            inv:add_item('main', ItemStack(crate_inv))
+        end
+
+        local node = minetest.get_node(pos)
+
+        meta:set_string('owner', placer:get_player_name() or '')
+
+        if not inv:is_empty('main') then
+            local inv_stack = inv:get_stack('main', 1)
+
+            meta:set_string('infotext', _def.short_description .. ' (owned by ' .. meta:get_string('owner') .. ')\n' .. inv_stack:get_description() .. '\nQuantity: ' .. inv_stack:get_count())
+        else
+            local swap_node = minetest.registered_nodes['x_farming:crate_empty']
+            if swap_node and inv:is_empty('main') and node.name ~= swap_node.name then
+                minetest.swap_node(pos, {name = swap_node.name, param2 = node.param2})
+                meta:set_string('infotext', swap_node.short_description .. ' (owned by ' .. meta:get_string('owner') .. ')')
+            end
+        end
+    end
+
+    _def.on_rightclick = function(pos, node, clicker, itemstack, pointed_thing)
+        local p_name = clicker:get_player_name()
+        if minetest.is_protected(pos, p_name) then
+            return itemstack
+        end
+
+        local meta = minetest.get_meta(pos)
+        local inv = meta:get_inventory()
+        local inv_stack = inv:get_stack('main', 1)
+        local label_copy = _def.short_description .. ' (owned by ' .. meta:get_string('owner') .. ')\n' .. inv_stack:get_description()
+        minetest.show_formspec(p_name, _def.name, x_farming.get_crate_or_bag_formspec(pos, label_copy))
+        minetest.sound_play('default_dig_choppy', {gain = 0.3, pos = pos, max_hear_distance = 10}, true)
+    end
+
+    _def.on_blast = function(pos, intensity)
+        if minetest.is_protected(pos, '') then
+            return
+        end
+
+        local drops = {}
+        local inv = minetest.get_meta(pos):get_inventory()
+        local n = #drops
+
+        for i = 1, inv:get_size('main') do
+            local stack = inv:get_stack('main', i)
+            if stack:get_count() > 0 then
+                drops[n+1] = stack:to_table()
+                n = n + 1
+            end
+        end
+
+        drops[#drops+1] = name
+        minetest.remove_node(pos)
+        return drops
+    end
+
+    _def.can_dig = function(pos, player)
+        return not minetest.is_protected(pos, player:get_player_name())
+    end
+
+    _def.preserve_metadata = function(pos, oldnode, oldmeta, drops)
+        local meta = minetest.get_meta(pos)
+        local inv = meta:get_inventory()
+        local stack = drops[1]
+        local meta_drop = stack:get_meta()
+
+        if not inv:is_empty('main') then
+            local inv_stack = inv:get_stack('main', 1)
+
+            meta_drop:set_string('crate_inv', minetest.serialize(inv_stack:to_table()))
+            meta_drop:set_string('description', stack:get_description() .. '\n' .. inv_stack:get_description() .. '\nQuantity: ' .. inv_stack:get_count())
+
+            return
+        end
+    end
+
+    _def.allow_metadata_inventory_put = function(pos, listname, index, stack, player)
+        local st_name = stack:get_name()
+
+        if minetest.is_protected(pos, player:get_player_name()) or (not x_farming.allowed_crate_items[st_name] and minetest.get_item_group(st_name, 'fish') == 0) then
+            return 0
+        end
+
+        return stack:get_count()
+    end
+
+    _def.allow_metadata_inventory_take = function(pos, listname, index, stack, player)
+        local st_name = stack:get_name()
+
+        if minetest.is_protected(pos, player:get_player_name()) or (not x_farming.allowed_crate_items[st_name] and minetest.get_item_group(st_name, 'fish') == 0) then
+            return 0
+        end
+
+        return stack:get_count()
+    end
+
+    _def.on_metadata_inventory_put = function(pos, listname, index, stack, player)
+        local stack_name = stack:get_name()
+
+        if not stack_name or stack_name == '' then
+            return
+        end
+
+        local meta = minetest.get_meta(pos)
+        local inv = meta:get_inventory()
+        local node = minetest.get_node(pos)
+        local inv_stack = inv:get_stack('main', 1)
+        local split_name = stack_name:split(':')
+
+        if minetest.get_item_group(stack_name, 'fish') ~= 0 then
+            split_name = {'x_farming', 'fish'}
+        end
+
+        local swap_node = minetest.registered_nodes['x_farming:crate_' .. split_name[2] .. '_3']
+
+        if not swap_node then
+            return
+        end
+
+        if not inv:is_empty(listname) and node.name ~= swap_node.name then
+            local p_name = player:get_player_name()
+
+            minetest.swap_node(pos, {name = swap_node.name, param2 = node.param2})
+
+            local label_copy = swap_node.short_description .. ' (owned by ' .. meta:get_string('owner') .. ')\n' .. inv_stack:get_description()
+
+            minetest.show_formspec(p_name, _def.name, x_farming.get_crate_or_bag_formspec(pos, label_copy))
+        end
+
+        meta:set_string('infotext', swap_node.short_description .. ' (owned by ' .. meta:get_string('owner') .. ')\n' .. inv_stack:get_description() .. '\nQuantity: ' .. inv_stack:get_count())
+    end
+
+    _def.on_metadata_inventory_take = function(pos, listname, index, stack, player)
+        local meta = minetest.get_meta(pos)
+        local inv = meta:get_inventory()
+        local inv_stack = inv:get_stack('main', 1)
+        local node = minetest.get_node(pos)
+
+        if inv:is_empty(listname) then
+            local p_name = player:get_player_name()
+            local swap_node = minetest.registered_nodes['x_farming:crate_empty']
+
+            if swap_node then
+                minetest.swap_node(pos, {name = swap_node.name, param2 = node.param2})
+                meta:set_string('infotext', swap_node.short_description .. ' (owned by ' .. meta:get_string('owner') .. ')')
+
+                local label_copy = swap_node.short_description .. ' (owned by ' .. meta:get_string('owner') .. ')\n' .. inv_stack:get_description()
+
+                minetest.show_formspec(p_name, _def.name, x_farming.get_crate_or_bag_formspec(pos, label_copy))
+            end
+        else
+            local node_def = minetest.registered_nodes[node.name]
+
+            if node_def then
+                meta:set_string('infotext', node_def.short_description .. ' (owned by ' .. meta:get_string('owner') .. ')\n' .. inv_stack:get_description() .. '\nQuantity: ' .. inv_stack:get_count())
+            end
+        end
+    end
+
+    _def.on_timer = function(pos, elapsed)
+        local pos_above = {x = pos.x, y = pos.y + 1, z = pos.z}
+        local node_above = minetest.get_node(pos_above)
+
+        if not node_above then
+            x_farming.tick_again_crates(pos)
+        end
+
+        if node_above.name ~= 'air' then
+            x_farming.tick_again_crates(pos)
+        end
+
+        local rand1 = math.random(1, 2) / 10
+
+        minetest.add_particlespawner({
+            amount = 60,
+            time = 15,
+            minpos = {x = pos_above.x - 0.1, y = pos_above.y - 0.3, z = pos_above.z - 0.1},
+            maxpos = {x = pos_above.x + 0.1, y = pos_above.y + 0.4, z = pos_above.z + 0.1},
+            minvel = {x = rand1 * -1, y = rand1 * -1, z = rand1 * -1},
+            maxvel = {x = rand1, y = rand1, z = rand1},
+            minacc = {x = rand1 * -1, y = rand1 * -1, z = rand1 * -1},
+            maxacc = {x = rand1, y = rand1, z = rand1},
+            minexptime = 1,
+            maxexptime = 1.5,
+            minsize = 0.1,
+            maxsize = 0.3,
+            texture = 'x_farming_fly.png',
+            collisiondetection = true,
+            object_collision = true
+        })
+
+        x_farming.tick_crates(pos)
+    end
+
+    x_farming.registered_crates[_def.name] = _def
+
+    if _def.name ~= 'x_farming:crate_empty' then
+        table.insert(x_farming.lbm_nodenames_crates, _def.name)
+    end
+
+    minetest.register_node(_def.name, _def)
+end
+
+
+---Bag
+function x_farming.register_bag(name, def)
+    local _def = table.copy(def) or {}
+
+    _def._custom = _def._custom or {}
+
+    _def.name = 'x_farming:' .. name
+    _def.description = def.description or name
+    _def.short_description = def.short_description or def.description
+    _def.drawtype = 'mesh'
+    _def.paramtype = 'light'
+    _def.paramtype2 = 'facedir'
+    _def.mesh = 'x_farming_bag.obj'
+    _def.tiles = def.tiles
+    _def.sounds = def.sounds or default.node_sound_sand_defaults()
+    _def.is_ground_content = false
+    _def.groups = def.groups or {choppy = 2, oddly_breakable_by_hand = 2, not_in_creative_inventory = 1, flammable = 2}
+    _def.stack_max = def.stack_max or 1
+    _def.mod_origin = 'x_farming'
+
+    if _def._custom.bag_item then
+        x_farming.allowed_bag_items[_def._custom.bag_item] = true
+    end
+
+    _def.on_construct = function(pos)
+        local meta = minetest.get_meta(pos)
+        local inv = meta:get_inventory()
+        meta:set_string('infotext', _def.short_description)
+        meta:set_string('owner', '')
+        inv:set_size('main', 1)
+    end
+
+    _def.after_place_node = function(pos, placer, itemstack, pointed_thing)
+        local meta = minetest.get_meta(pos)
+        local meta_st = itemstack:get_meta()
+        local bag_inv = minetest.deserialize(meta_st:get_string('bag_inv'))
+        local inv = meta:get_inventory()
+
+        if bag_inv then
+            inv:add_item('main', ItemStack(bag_inv))
+        end
+
+        local node = minetest.get_node(pos)
+
+        meta:set_string('owner', placer:get_player_name() or '')
+
+        if not inv:is_empty('main') then
+            local inv_stack = inv:get_stack('main', 1)
+
+            meta:set_string('infotext', _def.short_description .. ' (owned by ' .. meta:get_string('owner') .. ')\n' .. inv_stack:get_description() .. '\nQuantity: ' .. inv_stack:get_count())
+        else
+            local swap_node = minetest.registered_nodes['x_farming:bag_empty']
+            if swap_node and inv:is_empty('main') and node.name ~= swap_node.name then
+                minetest.swap_node(pos, {name = swap_node.name, param2 = node.param2})
+                meta:set_string('infotext', swap_node.short_description .. ' (owned by ' .. meta:get_string('owner') .. ')')
+            end
+        end
+    end
+
+    _def.on_rightclick = function(pos, node, clicker, itemstack, pointed_thing)
+        local p_name = clicker:get_player_name()
+
+        if minetest.is_protected(pos, p_name) then
+            return itemstack
+        end
+
+        local meta = minetest.get_meta(pos)
+        local inv = meta:get_inventory()
+        local inv_stack = inv:get_stack('main', 1)
+        local label_copy = _def.short_description .. ' (owned by ' .. meta:get_string('owner') .. ')\n' .. inv_stack:get_description()
+        minetest.show_formspec(p_name, _def.name, x_farming.get_crate_or_bag_formspec(pos, label_copy))
+        minetest.sound_play('default_sand_footstep', {gain = 0.3, pos = pos, max_hear_distance = 10}, true)
+    end
+
+    _def.on_blast = function(pos, intensity)
+        if minetest.is_protected(pos, '') then
+            return
+        end
+
+        local drops = {}
+        local inv = minetest.get_meta(pos):get_inventory()
+        local n = #drops
+
+        for i = 1, inv:get_size('main') do
+            local stack = inv:get_stack('main', i)
+            if stack:get_count() > 0 then
+                drops[n+1] = stack:to_table()
+                n = n + 1
+            end
+        end
+
+        drops[#drops+1] = name
+        minetest.remove_node(pos)
+        return drops
+    end
+
+    _def.can_dig = function(pos,player)
+        return not minetest.is_protected(pos, player:get_player_name())
+    end
+
+    _def.preserve_metadata = function(pos, oldnode, oldmeta, drops)
+        local meta = minetest.get_meta(pos)
+        local inv = meta:get_inventory()
+        local stack = drops[1]
+        local meta_drop = stack:get_meta()
+
+        if not inv:is_empty('main') then
+            local inv_stack = inv:get_stack('main', 1)
+
+            meta_drop:set_string('bag_inv', minetest.serialize(inv_stack:to_table()))
+            meta_drop:set_string('description', stack:get_description() .. '\n' .. inv_stack:get_description() .. '\nQuantity: ' .. inv_stack:get_count())
+
+            return
+        end
+    end
+
+    _def.allow_metadata_inventory_put = function(pos, listname, index, stack, player)
+        if minetest.is_protected(pos, player:get_player_name()) or not x_farming.allowed_bag_items[stack:get_name()] then
+            return 0
+        end
+
+        return stack:get_count()
+    end
+
+    _def.allow_metadata_inventory_take = function(pos, listname, index, stack, player)
+        if minetest.is_protected(pos, player:get_player_name()) or not x_farming.allowed_bag_items[stack:get_name()] then
+            return 0
+        end
+
+        return stack:get_count()
+    end
+
+    _def.on_metadata_inventory_put = function(pos, listname, index, stack, player)
+        local stack_name = stack:get_name()
+
+        if not stack_name or stack_name == '' then
+            return
+        end
+
+        local meta = minetest.get_meta(pos)
+        local inv = meta:get_inventory()
+        local split_name = stack_name:split(':')
+        local node = minetest.get_node(pos)
+        local swap_node = minetest.registered_nodes['x_farming:bag_' .. split_name[2]]
+        local inv_stack = inv:get_stack('main', 1)
+
+        if not swap_node then
+            return
+        end
+
+        if not inv:is_empty(listname) and node.name ~= swap_node.name then
+            local p_name = player:get_player_name()
+
+            minetest.swap_node(pos, {name = swap_node.name, param2 = node.param2})
+
+            local label_copy = swap_node.short_description .. ' (owned by ' .. meta:get_string('owner') .. ')\n' .. inv_stack:get_description()
+
+            minetest.show_formspec(p_name, _def.name, x_farming.get_crate_or_bag_formspec(pos, label_copy))
+        end
+
+        meta:set_string('infotext', swap_node.short_description .. ' (owned by ' .. meta:get_string('owner') .. ')\n' .. inv_stack:get_description() .. '\nQuantity: ' .. inv_stack:get_count())
+    end
+
+    _def.on_metadata_inventory_take = function(pos, listname, index, stack, player)
+        local meta = minetest.get_meta(pos)
+        local inv = meta:get_inventory()
+        local inv_stack = inv:get_stack('main', 1)
+        local node = minetest.get_node(pos)
+
+        if inv:is_empty(listname) then
+            local p_name = player:get_player_name()
+            local swap_node = minetest.registered_nodes['x_farming:bag_empty']
+
+            if swap_node then
+                minetest.swap_node(pos, {name = swap_node.name, param2 = node.param2})
+                meta:set_string('infotext', swap_node.short_description .. ' (owned by ' .. meta:get_string('owner') .. ')')
+
+                local label_copy = swap_node.short_description .. ' (owned by ' .. meta:get_string('owner') .. ')\n' .. inv_stack:get_description()
+
+                minetest.show_formspec(p_name, _def.name, x_farming.get_crate_or_bag_formspec(pos, label_copy))
+            end
+        else
+            local node_def = minetest.registered_nodes[node.name]
+
+            if node_def then
+                meta:set_string('infotext', node_def.short_description .. ' (owned by ' .. meta:get_string('owner') .. ')\n' .. inv_stack:get_description() .. '\nQuantity: ' .. inv_stack:get_count())
+            end
+        end
+    end
+
+    minetest.register_node(_def.name, _def)
+end
+
 --
 ---Bonemeal
 --

@@ -38,3 +38,12 @@ for length = 1, 4 do
         decoration = 'x_farming:strawberry_'..length,
     })
 end
+
+---crate
+x_farming.register_crate('crate_strawberry_3', {
+    description = 'Strawberry Crate',
+    tiles = {'x_farming_crate_strawberry_3.png'},
+    _custom = {
+        crate_item = 'x_farming:strawberry'
+    }
+})

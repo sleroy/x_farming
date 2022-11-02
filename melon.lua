@@ -121,3 +121,12 @@ minetest.register_decoration({
     y_min = 1,
     decoration = 'x_farming:melon_8',
 })
+
+---crate
+x_farming.register_crate('crate_melon_3', {
+    description = 'Melon Crate',
+    tiles = {'x_farming_crate_melon_3.png'},
+    _custom = {
+        crate_item = 'x_farming:melon'
+    }
+})

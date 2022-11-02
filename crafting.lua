@@ -477,3 +477,23 @@ minetest.register_craft({
         {'x_farming:pumpkinseed'}
     }
 })
+
+
+-- crates and bags
+minetest.register_craft({
+    output = 'x_farming:crate_empty',
+    recipe = {
+        {'group:wood', 'group:stick', 'group:wood'},
+        {'group:wood', 'group:stick', 'group:wood'},
+        {'group:wood', 'group:wood', 'group:wood'}
+    }
+})
+
+minetest.register_craft({
+    output = 'x_farming:bag_empty',
+    recipe = {
+        {'farming:straw', '', 'farming:straw'},
+        {'farming:straw', '', 'farming:straw'},
+        {'farming:straw', 'farming:straw', 'farming:straw'}
+    }
+})

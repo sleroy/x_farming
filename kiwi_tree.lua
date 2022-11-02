@@ -240,3 +240,12 @@ if minetest.global_exists('stairs') and minetest.get_modpath('stairs') then
         false
     )
 end
+
+---crate
+x_farming.register_crate('crate_kiwi_fruit_3', {
+    description = 'Kiwi Fruit Crate',
+    tiles = {'x_farming_crate_kiwi_fruit_3.png'},
+    _custom = {
+        crate_item = 'x_farming:kiwi_fruit'
+    }
+})

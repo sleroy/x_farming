@@ -195,12 +195,12 @@ local icefishing = {
 
 ---how often node timers for plants will tick, +/- some random value
 function icefishing.tick(pos)
-    minetest.get_node_timer(pos):start(math.random(1, 3))
+    minetest.get_node_timer(pos):start(math.random(166, 286))
 end
 
 ---how often a growth failure tick is retried (e.g. too dark)
 function icefishing.tick_again(pos)
-    minetest.get_node_timer(pos):start(math.random(1, 3))
+    minetest.get_node_timer(pos):start(math.random(40, 80))
 end
 
 icefishing.on_construct = function(pos)
@@ -602,6 +602,7 @@ for i, def in ipairs(fishes) do
         tiles = {img},
         inventory_image = img,
         wield_image = img .. "^[transformFXR90",
+        groups = {fish = 1},
         on_use = minetest.item_eat(def.item_eat),
     })
 
@@ -956,4 +957,10 @@ minetest.register_decoration({
     schematic = minetest.get_modpath("x_farming") .. "/schematics/x_farming_icefishing.mts",
     flags = "force_placement",
     rotation = "random",
+})
+
+---crate
+x_farming.register_crate('crate_fish_3', {
+    description = 'Fish Crate',
+    tiles = {'x_farming_crate_fish_3.png'},
 })

@@ -433,3 +433,12 @@ minetest.register_decoration({
     flags = 'place_center_x, place_center_z',
     rotation = '0',
 })
+
+---crate
+x_farming.register_crate('crate_cocoa_bean_3', {
+    description = 'Cocoa Bean Crate',
+    tiles = {'x_farming_crate_cocoa_bean_3.png'},
+    _custom = {
+        crate_item = 'x_farming:cocoa_bean'
+    }
+})

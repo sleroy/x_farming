@@ -62,3 +62,12 @@ minetest.register_decoration({
     decoration = 'x_farming:coffee_5',
     param2 = 3,
 })
+
+---crate
+x_farming.register_crate('crate_coffee_3', {
+    description = 'Coffee Crate',
+    tiles = {'x_farming_crate_coffee_3.png'},
+    _custom = {
+        crate_item = 'x_farming:coffee'
+    }
+})

@@ -48,3 +48,12 @@ minetest.register_decoration({
     decoration = 'x_farming:stevia_8',
     param2 = 4,
 })
+
+---crate
+x_farming.register_crate('crate_stevia_3', {
+    description = 'Stevia Crate',
+    tiles = {'x_farming_crate_stevia_3.png'},
+    _custom = {
+        crate_item = 'x_farming:stevia'
+    }
+})

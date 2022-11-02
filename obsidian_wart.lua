@@ -186,3 +186,12 @@ minetest.register_decoration({
     flags = 'force_placement, all_floors',
     decoration = {'x_farming:obsidian_wart_decor'},
 })
+
+---crate
+x_farming.register_crate('crate_obsidian_wart_3', {
+    description = 'Obsidian Wart Crate',
+    tiles = {'x_farming_crate_obsidian_wart_3.png'},
+    _custom = {
+        crate_item = 'x_farming:obsidian_wart'
+    }
+})

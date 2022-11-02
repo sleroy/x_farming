@@ -459,3 +459,12 @@ minetest.register_decoration({
     y_min = 0,
     schematic = minetest.get_modpath('x_farming') .. '/schematics/x_farming_salt_decor.mts',
 })
+
+---bag
+x_farming.register_bag('bag_salt', {
+    description = 'Salt Bag',
+    tiles = {'x_farming_bag_salt.png'},
+    _custom = {
+        bag_item = 'x_farming:salt'
+    }
+})

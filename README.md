@@ -26,6 +26,11 @@ Hunger points in the description assume that you have [hbhubger](https://forum.m
 - stairs and slabs for all new blocks
 - leafdecay with falling fruit after tree trunk is harvested
 - supports hbhunger mod
+- crates and bags for storage (holds 1 stack)
+
+### Crates and Bags
+
+Crafting crate/bag will give you empty crate/bag and can be used as a storage for raw farming items. Storage holds up to 1 stack making it work as "place-able" stacks. Crate/bag can be dug and carried while remembering the contents of the crate/bag. After placing the crate/bag you can access the contents again with right click (or the key by placing the node). List of items what can be placed in crates: melon, pumpkin_block, coffee, corn, obsidian_wart, potato, beetroot, carrot, cocoa_bean, kiwi_fruit, cactus_fruit_item, strawberry, pine_nut, stevia, soybean, fish, wheat, cotton. List of items what can be placed in bags: salt.
 
 ### Empty Soup Bowl ![screenshot](textures/x_farming_bowl.png)
 
@@ -653,6 +658,11 @@ GNU Lesser General Public License v2.1 or later (see included LICENSE file)
 - x_farming_fish_woodskip.png
 - x_farming_fish_yellow_seashroom.png
 
+**MIT, Farmer's Delight by vectorwing, modified by SaKeL**
+
+- x_farming_bag_empty.png
+- x_farming_crate_empty.png
+
 **LGPL-2.1-or-later, by SaKeL**
 
 - x_farming_carrot_seed.png
@@ -772,7 +782,28 @@ GNU Lesser General Public License v2.1 or later (see included LICENSE file)
 - x_farming_coffee_cup_hot_mesh.png
 - x_farming_donut_mesh.png
 - x_farming_donut_chocolate_mesh.png
-
+- x_farming_bag_salt.png
+- x_farming_crate_beetroot_3.png
+- x_farming_crate_cactus_fruit_item_3.png
+- x_farming_crate_carrot_1.png
+- x_farming_crate_carrot_2.png
+- x_farming_crate_carrot_3.png
+- x_farming_crate_cocoa_bean_3.png
+- x_farming_crate_coffee_3.png
+- x_farming_crate_corn_3.png
+- x_farming_crate_cotton_3.png
+- x_farming_crate_fish_3.png
+- x_farming_crate_kiwi_fruit_3.png
+- x_farming_crate_melon_3.png
+- x_farming_crate_obsidian_wart_3.png
+- x_farming_crate_pine_nut_3.png
+- x_farming_crate_potato_3.png
+- x_farming_crate_pumpkin_block_3.png
+- x_farming_crate_soybean_3.png
+- x_farming_crate_stevia_3.png
+- x_farming_crate_strawberry_3.png
+- x_farming_crate_wheat_3.png
+- x_farming_fly.png
 
 **MIT**
 
@@ -815,6 +846,8 @@ GNU Lesser General Public License v2.1 or later (see included LICENSE file)
 - x_farming_fries.obj
 - x_farming_coffee_cup_hot.obj
 - x_farming_donut.obj
+- x_farming_crate.obj
+- x_farming_bag.obj
 
 ## Installation
 

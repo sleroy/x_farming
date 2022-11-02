@@ -66,3 +66,12 @@ minetest.register_decoration({
     decoration = 'x_farming:soybean_7',
     param2 = 3,
 })
+
+---crate
+x_farming.register_crate('crate_soybean_3', {
+    description = 'Soybean Crate',
+    tiles = {'x_farming_crate_soybean_3.png'},
+    _custom = {
+        crate_item = 'x_farming:soybean'
+    }
+})

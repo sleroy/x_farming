@@ -40,3 +40,12 @@ minetest.register_decoration({
     decoration = 'x_farming:beetroot_8',
     param2 = 3,
 })
+
+---crate
+x_farming.register_crate('crate_beetroot_3', {
+    description = 'Beetroot Crate',
+    tiles = {'x_farming_crate_beetroot_3.png'},
+    _custom = {
+        crate_item = 'x_farming:beetroot'
+    }
+})

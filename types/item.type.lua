@@ -1,3 +1,4 @@
+---@diagnostic disable: codestyle-check
 ---https://github.com/sumneko/lua-language-server/wiki
 
 ---Minetest item definition. Used by `minetest.register_node`, `minetest.register_craftitem`, and `minetest.register_tool`.
@@ -27,6 +28,7 @@
 ---@field on_pickup fun(itemstack: ItemStack, picker: ObjectRef|nil, pointed_thing?: PointedThingDef, time_from_last_punch?: number|integer, rest?: any): ItemStack|nil Called when a dropped item is punched by a player. Shall pick-up the item and return the leftover itemstack or nil to not modify the dropped item. `rest` are other parameters from `luaentity:on_punch`. default: `minetest.item_pickup`
 ---@field on_use fun(itemstack: ItemStack, user: ObjectRef|nil, pointed_thing: PointedThingDef): ItemStack|nil default: nil. When user pressed the 'punch/mine' key with the item in hand. Function must return either nil if inventory shall not be modified, or an itemstack to replace the original itemstack. e.g. itemstack:take_item(); return itemstack. Otherwise, the function is free to do what it wants. The user may be any ObjectRef or nil. The default functions handle regular use cases.
 ---@field after_use fun(itemstack: ItemStack, user: ObjectRef|nil, node: NodeDef, digparams: DigParamsDef): ItemStack|nil default: nil. If defined, should return an itemstack and will be called instead of wearing out the item (if tool). If returns nil, does nothing.
+---@field soil table Only for farming
 
 ---Tool capabilities definition
 ---@class ToolCapabilitiesDef

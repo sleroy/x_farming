@@ -851,4 +851,4 @@ GNU Lesser General Public License v2.1 or later (see included LICENSE file)
 
 ## Installation
 
-see: http://wiki.minetest.com/wiki/Installing_Mods
+see: https://wiki.minetest.net/Installing_Mods

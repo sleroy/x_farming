@@ -138,12 +138,12 @@ minetest.register_node('x_farming:obsidian_wart_decor', {
     special_tiles = {{name = 'x_farming_obsidian_wart_6.png', tileable_vertical = true}},
     inventory_image = 'x_farming_obsidian_wart_6.png',
     groups = {snappy = 3, not_in_creative_inventory = 1},
-    light_source = 3,
+    light_source = 4,
     selection_box = {
         type = 'fixed',
         fixed = {
-                {-0.5, -0.5, -0.5, 0.5, 0.5, 0.5},
-                {-4/16, 0.5, -4/16, 4/16, 1.5, 4/16},
+            {-0.5, -0.5, -0.5, 0.5, 0.5, 0.5},
+            {-4/16, 0.5, -4/16, 4/16, 1.5, 4/16},
         },
     },
     node_dig_prediction = 'default:obsidian',

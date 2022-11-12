@@ -1,5 +1,6 @@
-creative = creative--[[@as MtgCreative]]
-screwdriver = screwdriver--[[@as MtgScrewdriver]]
+creative = minetest.global_exists('creative') and x_default --[[@as MtgCreative]]
+screwdriver = minetest.global_exists('screwdriver') and screwdriver --[[@as MtgScrewdriver]]
+hbhunger = minetest.global_exists('hbhunger') and hbhunger --[[@as table]]
 
 ---ICE FISHING
 local icefishing = {
@@ -15,7 +16,7 @@ local icefishing = {
             "x_farming:illager_ghostfish",
             "x_farming:father_sun",
             "x_farming:mother_moon",
-        },
+    },
         tier_1 = {
             "default:stick",
             "default:wood",
@@ -26,7 +27,7 @@ local icefishing = {
             "bones:bones",
             "default:clay",
             "x_farming:sea_cucumber",
-        },
+    },
         tier_2 = {
             "x_farming:shrimp",
             "x_farming:anchovy",
@@ -46,7 +47,7 @@ local icefishing = {
             "x_farming:red_seashroom",
             "x_farming:white_seashroom",
             "x_farming:yellow_seashroom",
-        },
+    },
         tier_3 = {
             "x_farming:goldeye",
             "x_farming:halibut",
@@ -56,7 +57,7 @@ local icefishing = {
             "x_farming:blobfish",
             "x_farming:tancho_koi",
             "x_farming:pike",
-        },
+    },
         tier_4 = {
             "x_farming:red_mullet",
             "x_farming:rainbow_trout",
@@ -66,8 +67,8 @@ local icefishing = {
             "x_farming:tilapia",
             "x_farming:obster",
             "x_farming:totemfish",
-        }
-    },
+    }
+},
     biomes = {
         ["icesheet_ocean"] = {
             "x_farming:angler",
@@ -75,14 +76,14 @@ local icefishing = {
             "x_farming:frozen_ocean_hermit_crab",
             "x_farming:paddlefish",
             "x_farming:pearl_isopod",
-        },
+    },
         ["taiga_ocean"] = {
             "x_farming:armored_catfish",
             "x_farming:gar",
             "x_farming:giant_moray",
             "x_farming:perch",
             "x_farming:piglish",
-        },
+    },
         ["desert_ocean"] = {
             "x_farming:arrow_squid",
             "x_farming:desert_frog",
@@ -90,28 +91,28 @@ local icefishing = {
             "x_farming:piranha",
             "x_farming:prismfish",
             "x_farming:pumpkinseed",
-        },
+    },
         ["tundra_ocean"] = {
             "x_farming:barracuda",
             "x_farming:flier",
             "x_farming:floral_faefish",
             "x_farming:flounder",
             "x_farming:fourhorn_sculpin",
-        },
+    },
         ["snowy_grassland_ocean"] = {
             "x_farming:grass_pickerel",
             "x_farming:guppy",
             "x_farming:hagfish",
             "x_farming:rainbowfish",
             "x_farming:red_snapper",
-        },
+    },
         ["coniferous_forest_ocean"] = {
             "x_farming:bream",
             "x_farming:redbreast_sunfish",
             "x_farming:rockfish",
             "x_farming:rohu",
             "x_farming:rosefish",
-        },
+    },
         ["grassland_ocean"] = {
             "x_farming:conger",
             "x_farming:sablefish",
@@ -119,26 +120,26 @@ local icefishing = {
             "x_farming:sawfish",
             "x_farming:skate",
             "x_farming:skullfin",
-        },
+    },
         ["savanna_ocean"] = {
             "x_farming:chorus_snail",
             "x_farming:white_bullhead",
             "x_farming:whitefish",
             "x_farming:wolffish",
             "x_farming:woodskip",
-        },
+    },
         ["cold_desert_ocean"] = {
             "x_farming:chub",
             "x_farming:cold_ocean_hermit_crab",
             "x_farming:oscar",
             "x_farming:leerfish",
-        },
+    },
         ["sandstone_desert_ocean"] = {
             "x_farming:clam",
             "x_farming:skykoi",
             "x_farming:smallmouth_bass",
             "x_farming:sterlet",
-        },
+    },
         ["deciduous_forest_ocean"] = {
             "x_farming:crayfish",
             "x_farming:damselfish",
@@ -146,7 +147,7 @@ local icefishing = {
             "x_farming:vampire_squid",
             "x_farming:walleye",
             "x_farming:warm_ocean_hermit_crab",
-        },
+    },
         ["rainforest_ocean"] = {
             "x_farming:burbot",
             "x_farming:koi",
@@ -154,43 +155,43 @@ local icefishing = {
             "x_farming:largemouth_bass",
             "x_farming:lava_eel",
             "x_farming:leech",
-        },
+    },
         ["rainforest_swamp"] = {
             "x_farming:swamp_darter",
             "x_farming:swamp_frog",
             "x_farming:sturgeon",
             "x_farming:sunfish",
             "x_farming:swordfish",
-        },
+    },
         ["icesheet"] = {
             "x_farming:dwarf_caiman",
             "x_farming:eel",
             "x_farming:electric_eel",
             "x_farming:endray",
             "x_farming:tench",
-        },
+    },
         ["tundra_beach"] = {
             "x_farming:carp",
             "x_farming:catfish",
             "x_farming:catla",
             "x_farming:ocean_hermit_crab",
             "x_farming:octopus",
-        },
+    },
         ["savanna_shore"] = {
             "x_farming:angelfish",
             "x_farming:lingcod",
             "x_farming:lukewarm_ocean_hermit_crab",
             "x_farming:magma_slimefish",
             "x_farming:manta_ray",
-        },
+    },
         ["deciduous_forest_shore"] = {
             "x_farming:congo_tiger_fish",
             "x_farming:convict_cichlid",
             "x_farming:minnow",
             "x_farming:mud_flounder",
             "x_farming:neon_tetra",
-        },
-    }
+    },
+}
 }
 
 ---how often node timers for plants will tick, +/- some random value
@@ -204,7 +205,7 @@ function icefishing.tick_again(pos)
 end
 
 icefishing.on_construct = function(pos)
-    local under = {x = pos.x, y = pos.y - 1, z = pos.z}
+    local under = { x = pos.x, y = pos.y - 1, z = pos.z }
     local biome_data = minetest.get_biome_data(under)
 
     if not biome_data then
@@ -218,7 +219,8 @@ icefishing.on_construct = function(pos)
     end
 
     local meta = minetest.get_meta(pos)
-    meta:set_string("infotext", "Biome: " .. string.gsub(string.gsub(biome_name, "(_)", " "), "(%a)([%w_']*)", x_farming.tchelper))
+    meta:set_string("infotext", "Biome: "
+        .. string.gsub(string.gsub(biome_name, "(_)", " "), "(%a)([%w_']*)", x_farming.tchelper))
 end
 
 icefishing.after_destruct = function(pos, oldnode, oldmetadata, digger)
@@ -238,7 +240,7 @@ icefishing.after_destruct = function(pos, oldnode, oldmetadata, digger)
     end
 
     ---get ice nodes around
-    local under = {x = pos.x, y = pos.y - 1, z = pos.z}
+    local under = { x = pos.x, y = pos.y - 1, z = pos.z }
     local biome_data = minetest.get_biome_data(under)
 
     if not biome_data then
@@ -247,8 +249,8 @@ icefishing.after_destruct = function(pos, oldnode, oldmetadata, digger)
 
     local biome_name = minetest.get_biome_name(biome_data.biome)
     local positions = minetest.find_nodes_in_area_under_air(
-        {x = under.x - 1, y = under.y, z = under.z - 1},
-        {x = under.x + 1, y = under.y, z = under.z + 1},
+        { x = under.x - 1, y = under.y, z = under.z - 1 },
+        { x = under.x + 1, y = under.y, z = under.z + 1 },
         "default:ice"
     )
     ---subtract 1 - not including the node where the icefishing was
@@ -270,7 +272,7 @@ icefishing.after_destruct = function(pos, oldnode, oldmetadata, digger)
     end
 
     ---initial item to drop
-    local tier_items = icefishing.drops["tier_"..tier]
+    local tier_items = icefishing.drops["tier_" .. tier]
     local biome_items = icefishing.biomes[biome_name]
 
     ---add specific biome items
@@ -301,7 +303,7 @@ icefishing.after_destruct = function(pos, oldnode, oldmetadata, digger)
         table.insert(items_to_drop, random_item)
     end
 
-    for i,v in ipairs(items_to_drop) do
+    for i, v in ipairs(items_to_drop) do
         local obj = minetest.add_item(pos, ItemStack(v))
 
         if obj and minetest.registered_items[v] then
@@ -310,7 +312,7 @@ icefishing.after_destruct = function(pos, oldnode, oldmetadata, digger)
                     x = math.random(-1, 1),
                     y = 2,
                     z = math.random(-1, 1),
-                })
+            })
             end
         else
             minetest.log('warning', '[x_farming] Tried to drop non-existing item "' .. dump(v) .. '" ')
@@ -352,7 +354,7 @@ icefishing.place_seed = function(itemstack, placer, pointed_thing, plantname)
     end
 
     ---check if pointing at the top of the node
-    if pt.above.y ~= pt.under.y+1 then
+    if pt.above.y ~= pt.under.y + 1 then
         return itemstack
     end
 
@@ -369,7 +371,7 @@ icefishing.place_seed = function(itemstack, placer, pointed_thing, plantname)
     ---add the node and remove 1 item from the itemstack
     minetest.log("action", player_name .. " places node " .. plantname .. " at " ..
         minetest.pos_to_string(pt.above))
-    minetest.add_node(pt.above, {name = plantname, param2 = 1})
+    minetest.add_node(pt.above, { name = plantname, param2 = 1 })
     icefishing.tick(pt.above)
     if not (creative and creative.is_enabled_for
             and creative.is_enabled_for(player_name)) then
@@ -390,7 +392,7 @@ icefishing.grow_plant = function(pos, elapsed)
 
     ---grow seed
     if minetest.get_item_group(node.name, "seed") and def.fertility then
-        local soil_node = minetest.get_node_or_nil({x = pos.x, y = pos.y - 1, z = pos.z})
+        local soil_node = minetest.get_node_or_nil({ x = pos.x, y = pos.y - 1, z = pos.z })
         if not soil_node then
             icefishing.tick_again(pos)
             return
@@ -398,7 +400,7 @@ icefishing.grow_plant = function(pos, elapsed)
         ---omitted is a check for light, we assume seeds can germinate in the dark.
         for _, v in pairs(def.fertility) do
             if minetest.get_item_group(soil_node.name, v) ~= 0 then
-                local placenode = {name = def.next_plant}
+                local placenode = { name = def.next_plant }
                 if def.place_param2 then
                     placenode.param2 = def.place_param2
                 end
@@ -414,7 +416,7 @@ icefishing.grow_plant = function(pos, elapsed)
     end
 
     ---check if on ice
-    local below = minetest.get_node({x = pos.x, y = pos.y - 1, z = pos.z})
+    local below = minetest.get_node({ x = pos.x, y = pos.y - 1, z = pos.z })
     if below.name ~= "x_farming:drilled_ice" then
         icefishing.tick_again(pos)
         return
@@ -428,7 +430,7 @@ icefishing.grow_plant = function(pos, elapsed)
     end
 
     ---grow
-    local placenode = {name = def.next_plant}
+    local placenode = { name = def.next_plant }
     if def.place_param2 then
         placenode.param2 = def.place_param2
     end
@@ -437,16 +439,16 @@ icefishing.grow_plant = function(pos, elapsed)
     minetest.add_particlespawner({
         amount = 7,
         time = 3,
-        minpos = {x = pos.x - 0.2, y = pos.y - 0.2, z = pos.z - 0.2},
-        maxpos = {x = pos.x + 0.2, y = pos.y - 0.4, z = pos.z + 0.2},
-        minacc = {x = -0.1, y = 0.1, z = -0.1},
-        maxacc = {x = 0.1, y = 0.1, z = 0.1},
+        minpos = { x = pos.x - 0.2, y = pos.y - 0.2, z = pos.z - 0.2 },
+        maxpos = { x = pos.x + 0.2, y = pos.y - 0.4, z = pos.z + 0.2 },
+        minacc = { x = -0.1, y = 0.1, z = -0.1 },
+        maxacc = { x = 0.1, y = 0.1, z = 0.1 },
         minexptime = 0.4,
         maxexptime = 0.8,
         minsize = 1.5,
         maxsize = 2,
         texture = 'bubble.png'
-    })
+})
 
     ---new timer needed?
     if minetest.registered_nodes[def.next_plant].next_plant then
@@ -458,137 +460,137 @@ end
 ---Items / Harvest
 
 local fishes = {
-    {name = "crab", item_eat = 1, item_eat_cooked = 6},
-    {name = "goldeye", item_eat = 1, item_eat_cooked = 3},
-    {name = "halibut", item_eat = 1, item_eat_cooked = 6},
-    {name = "herring", item_eat = 1, item_eat_cooked = 3},
-    {name = "rainbow_trout", item_eat = 1, item_eat_cooked = 6},
-    {name = "red_mullet", item_eat = 1, item_eat_cooked = 6},
-    {name = "shrimp", item_eat = 1, item_eat_cooked = 2},
-    {name = "swamp_frog", item_eat = 1, item_eat_cooked = 2},
-    {name = "swamp_darter", item_eat = 1, item_eat_cooked = 4},
-    {name = "jungle_frog", item_eat = 1, item_eat_cooked = 2},
-    {name = "albacore", item_eat = 1, item_eat_cooked = 4},
-    {name = "anchovy", item_eat = 1, item_eat_cooked = 4},
-    {name = "angelfish", item_eat = 1, item_eat_cooked = 4},
-    {name = "angler", item_eat = 1, item_eat_cooked = 4},
-    {name = "armored_catfish", item_eat = 1, item_eat_cooked = 4},
-    {name = "arrow_squid", item_eat = 1, item_eat_cooked = 8},
-    {name = "barracuda", item_eat = 1, item_eat_cooked = 4},
-    {name = "black_seashroom", item_eat = 1, item_eat_cooked = 3},
-    {name = "blobfish", item_eat = 1, item_eat_cooked = 4},
-    {name = "blue_seashroom", item_eat = 1, item_eat_cooked = 3},
-    {name = "bream", item_eat = 1, item_eat_cooked = 4},
-    {name = "brown_seashroom", item_eat = 1, item_eat_cooked = 3},
-    {name = "burbot", item_eat = 1, item_eat_cooked = 4},
-    {name = "carp", item_eat = 1, item_eat_cooked = 4},
-    {name = "catfish", item_eat = 1, item_eat_cooked = 4},
-    {name = "catla", item_eat = 1, item_eat_cooked = 4},
-    {name = "chorus_snail", item_eat = 1, item_eat_cooked = 2},
-    {name = "chub", item_eat = 1, item_eat_cooked = 4},
-    {name = "clam", item_eat = 1, item_eat_cooked = 2},
-    {name = "cold_ocean_hermit_crab", item_eat = 1, item_eat_cooked = 2},
-    {name = "conger", item_eat = 1, item_eat_cooked = 4},
-    {name = "congo_tiger_fish", item_eat = 1, item_eat_cooked = 4},
-    {name = "convict_cichlid", item_eat = 1, item_eat_cooked = 4},
-    {name = "crayfish", item_eat = 1, item_eat_cooked = 4},
-    {name = "cyan_seashroom", item_eat = 1, item_eat_cooked = 3},
-    {name = "damselfish", item_eat = 1, item_eat_cooked = 4},
-    {name = "danios", item_eat = 1, item_eat_cooked = 4},
-    {name = "desert_frog", item_eat = 1, item_eat_cooked = 2},
-    {name = "desert_sunfish", item_eat = 1, item_eat_cooked = 4},
-    {name = "diamond_angler", item_eat = 1, item_eat_cooked = 8},
-    {name = "dwarf_caiman", item_eat = 1, item_eat_cooked = 4},
-    {name = "eel", item_eat = 1, item_eat_cooked = 4},
-    {name = "electric_eel", item_eat = 1, item_eat_cooked = 4},
-    {name = "endray", item_eat = 1, item_eat_cooked = 5},
-    {name = "father_sun", item_eat = 1, item_eat_cooked = 10},
-    {name = "flier", item_eat = 1, item_eat_cooked = 4},
-    {name = "floral_faefish", item_eat = 1, item_eat_cooked = 4},
-    {name = "flounder", item_eat = 1, item_eat_cooked = 4},
-    {name = "fourhorn_sculpin", item_eat = 1, item_eat_cooked = 4},
-    {name = "frozen_boneminnow", item_eat = 1, item_eat_cooked = 4},
-    {name = "frozen_ocean_hermit_crab", item_eat = 1, item_eat_cooked = 2},
-    {name = "gar", item_eat = 1, item_eat_cooked = 4},
-    {name = "giant_moray", item_eat = 1, item_eat_cooked = 6},
-    {name = "goldfish", item_eat = 1, item_eat_cooked = 8},
-    {name = "grass_pickerel", item_eat = 1, item_eat_cooked = 4},
-    {name = "gray_seashroom", item_eat = 1, item_eat_cooked = 3},
-    {name = "green_seashroom", item_eat = 1, item_eat_cooked = 3},
-    {name = "guppy", item_eat = 1, item_eat_cooked = 4},
-    {name = "hagfish", item_eat = 1, item_eat_cooked = 4},
-    {name = "illager_ghostfish", item_eat = 1, item_eat_cooked = 10},
-    {name = "ironfish", item_eat = 1, item_eat_cooked = 4},
-    {name = "koi", item_eat = 1, item_eat_cooked = 4},
-    {name = "lamprey", item_eat = 1, item_eat_cooked = 4},
-    {name = "largemouth_bass", item_eat = 1, item_eat_cooked = 4},
-    {name = "lava_eel", item_eat = 1, item_eat_cooked = 6},
-    {name = "leech", item_eat = 1, item_eat_cooked = 4},
-    {name = "leerfish", item_eat = 1, item_eat_cooked = 4},
-    {name = "light_gray_seashroom", item_eat = 1, item_eat_cooked = 3},
-    {name = "lime_seashroom", item_eat = 1, item_eat_cooked = 3},
-    {name = "lingcod", item_eat = 1, item_eat_cooked = 4},
-    {name = "lobster", item_eat = 1, item_eat_cooked = 8},
-    {name = "lukewarm_ocean_hermit_crab", item_eat = 1, item_eat_cooked = 2},
-    {name = "magenta_seashroom", item_eat = 1, item_eat_cooked = 3},
-    {name = "magma_slimefish", item_eat = 1, item_eat_cooked = 4},
-    {name = "manta_ray", item_eat = 1, item_eat_cooked = 4},
-    {name = "minnow", item_eat = 1, item_eat_cooked = 4},
-    {name = "mother_moon", item_eat = 1, item_eat_cooked = 10},
-    {name = "mud_flounder", item_eat = 1, item_eat_cooked = 4},
-    {name = "neon_tetra", item_eat = 1, item_eat_cooked = 4},
-    {name = "obster", item_eat = 1, item_eat_cooked = 4},
-    {name = "ocean_hermit_crab", item_eat = 1, item_eat_cooked = 2},
-    {name = "octopus", item_eat = 1, item_eat_cooked = 8},
-    {name = "orange_seashroom", item_eat = 1, item_eat_cooked = 3},
-    {name = "oscar", item_eat = 1, item_eat_cooked = 4},
-    {name = "paddlefish", item_eat = 1, item_eat_cooked = 4},
-    {name = "pearl_isopod", item_eat = 1, item_eat_cooked = 4},
-    {name = "pearlwog", item_eat = 1, item_eat_cooked = 4},
-    {name = "perch", item_eat = 1, item_eat_cooked = 4},
-    {name = "piglish", item_eat = 1, item_eat_cooked = 4},
-    {name = "pike", item_eat = 1, item_eat_cooked = 4},
-    {name = "pink_seashroom", item_eat = 1, item_eat_cooked = 3},
-    {name = "piranha", item_eat = 1, item_eat_cooked = 6},
-    {name = "prismfish", item_eat = 1, item_eat_cooked = 4},
-    {name = "pumpkinseed", item_eat = 1, item_eat_cooked = 4},
-    {name = "purple_seashroom", item_eat = 1, item_eat_cooked = 3},
-    {name = "rainbowfish", item_eat = 1, item_eat_cooked = 4},
-    {name = "red_seashroom", item_eat = 1, item_eat_cooked = 3},
-    {name = "red_snapper", item_eat = 1, item_eat_cooked = 6},
-    {name = "redbreast_sunfish", item_eat = 1, item_eat_cooked = 4},
-    {name = "rockfish", item_eat = 1, item_eat_cooked = 4},
-    {name = "rohu", item_eat = 1, item_eat_cooked = 4},
-    {name = "rosefish", item_eat = 1, item_eat_cooked = 4},
-    {name = "rusty_skullfin", item_eat = 1, item_eat_cooked = 10},
-    {name = "sablefish", item_eat = 1, item_eat_cooked = 4},
-    {name = "sardine", item_eat = 1, item_eat_cooked = 4},
-    {name = "sawfish", item_eat = 1, item_eat_cooked = 5},
-    {name = "sea_cucumber", item_eat = 1, item_eat_cooked = 2},
-    {name = "skate", item_eat = 1, item_eat_cooked = 4},
-    {name = "skullfin", item_eat = 1, item_eat_cooked = 4},
-    {name = "skykoi", item_eat = 1, item_eat_cooked = 4},
-    {name = "slimefish", item_eat = 1, item_eat_cooked = 8},
-    {name = "smallmouth_bass", item_eat = 1, item_eat_cooked = 4},
-    {name = "sterlet", item_eat = 1, item_eat_cooked = 4},
-    {name = "stingray", item_eat = 1, item_eat_cooked = 6},
-    {name = "sturgeon", item_eat = 1, item_eat_cooked = 4},
-    {name = "sunfish", item_eat = 1, item_eat_cooked = 4},
-    {name = "swordfish", item_eat = 1, item_eat_cooked = 6},
-    {name = "tancho_koi", item_eat = 1, item_eat_cooked = 4},
-    {name = "tench", item_eat = 1, item_eat_cooked = 4},
-    {name = "tilapia", item_eat = 1, item_eat_cooked = 4},
-    {name = "totemfish", item_eat = 1, item_eat_cooked = 4},
-    {name = "true_goldfish", item_eat = 1, item_eat_cooked = 10},
-    {name = "vampire_squid", item_eat = 1, item_eat_cooked = 6},
-    {name = "walleye", item_eat = 1, item_eat_cooked = 4},
-    {name = "warm_ocean_hermit_crab", item_eat = 1, item_eat_cooked = 2},
-    {name = "white_bullhead", item_eat = 1, item_eat_cooked = 4},
-    {name = "white_seashroom", item_eat = 1, item_eat_cooked = 3},
-    {name = "whitefish", item_eat = 1, item_eat_cooked = 4},
-    {name = "wolffish", item_eat = 1, item_eat_cooked = 4},
-    {name = "woodskip", item_eat = 1, item_eat_cooked = 4},
-    {name = "yellow_seashroom", item_eat = 1, item_eat_cooked = 3},
+    { name = "crab", item_eat = 1, item_eat_cooked = 6 },
+    { name = "goldeye", item_eat = 1, item_eat_cooked = 3 },
+    { name = "halibut", item_eat = 1, item_eat_cooked = 6 },
+    { name = "herring", item_eat = 1, item_eat_cooked = 3 },
+    { name = "rainbow_trout", item_eat = 1, item_eat_cooked = 6 },
+    { name = "red_mullet", item_eat = 1, item_eat_cooked = 6 },
+    { name = "shrimp", item_eat = 1, item_eat_cooked = 2 },
+    { name = "swamp_frog", item_eat = 1, item_eat_cooked = 2 },
+    { name = "swamp_darter", item_eat = 1, item_eat_cooked = 4 },
+    { name = "jungle_frog", item_eat = 1, item_eat_cooked = 2 },
+    { name = "albacore", item_eat = 1, item_eat_cooked = 4 },
+    { name = "anchovy", item_eat = 1, item_eat_cooked = 4 },
+    { name = "angelfish", item_eat = 1, item_eat_cooked = 4 },
+    { name = "angler", item_eat = 1, item_eat_cooked = 4 },
+    { name = "armored_catfish", item_eat = 1, item_eat_cooked = 4 },
+    { name = "arrow_squid", item_eat = 1, item_eat_cooked = 8 },
+    { name = "barracuda", item_eat = 1, item_eat_cooked = 4 },
+    { name = "black_seashroom", item_eat = 1, item_eat_cooked = 3 },
+    { name = "blobfish", item_eat = 1, item_eat_cooked = 4 },
+    { name = "blue_seashroom", item_eat = 1, item_eat_cooked = 3 },
+    { name = "bream", item_eat = 1, item_eat_cooked = 4 },
+    { name = "brown_seashroom", item_eat = 1, item_eat_cooked = 3 },
+    { name = "burbot", item_eat = 1, item_eat_cooked = 4 },
+    { name = "carp", item_eat = 1, item_eat_cooked = 4 },
+    { name = "catfish", item_eat = 1, item_eat_cooked = 4 },
+    { name = "catla", item_eat = 1, item_eat_cooked = 4 },
+    { name = "chorus_snail", item_eat = 1, item_eat_cooked = 2 },
+    { name = "chub", item_eat = 1, item_eat_cooked = 4 },
+    { name = "clam", item_eat = 1, item_eat_cooked = 2 },
+    { name = "cold_ocean_hermit_crab", item_eat = 1, item_eat_cooked = 2 },
+    { name = "conger", item_eat = 1, item_eat_cooked = 4 },
+    { name = "congo_tiger_fish", item_eat = 1, item_eat_cooked = 4 },
+    { name = "convict_cichlid", item_eat = 1, item_eat_cooked = 4 },
+    { name = "crayfish", item_eat = 1, item_eat_cooked = 4 },
+    { name = "cyan_seashroom", item_eat = 1, item_eat_cooked = 3 },
+    { name = "damselfish", item_eat = 1, item_eat_cooked = 4 },
+    { name = "danios", item_eat = 1, item_eat_cooked = 4 },
+    { name = "desert_frog", item_eat = 1, item_eat_cooked = 2 },
+    { name = "desert_sunfish", item_eat = 1, item_eat_cooked = 4 },
+    { name = "diamond_angler", item_eat = 1, item_eat_cooked = 8 },
+    { name = "dwarf_caiman", item_eat = 1, item_eat_cooked = 4 },
+    { name = "eel", item_eat = 1, item_eat_cooked = 4 },
+    { name = "electric_eel", item_eat = 1, item_eat_cooked = 4 },
+    { name = "endray", item_eat = 1, item_eat_cooked = 5 },
+    { name = "father_sun", item_eat = 1, item_eat_cooked = 10 },
+    { name = "flier", item_eat = 1, item_eat_cooked = 4 },
+    { name = "floral_faefish", item_eat = 1, item_eat_cooked = 4 },
+    { name = "flounder", item_eat = 1, item_eat_cooked = 4 },
+    { name = "fourhorn_sculpin", item_eat = 1, item_eat_cooked = 4 },
+    { name = "frozen_boneminnow", item_eat = 1, item_eat_cooked = 4 },
+    { name = "frozen_ocean_hermit_crab", item_eat = 1, item_eat_cooked = 2 },
+    { name = "gar", item_eat = 1, item_eat_cooked = 4 },
+    { name = "giant_moray", item_eat = 1, item_eat_cooked = 6 },
+    { name = "goldfish", item_eat = 1, item_eat_cooked = 8 },
+    { name = "grass_pickerel", item_eat = 1, item_eat_cooked = 4 },
+    { name = "gray_seashroom", item_eat = 1, item_eat_cooked = 3 },
+    { name = "green_seashroom", item_eat = 1, item_eat_cooked = 3 },
+    { name = "guppy", item_eat = 1, item_eat_cooked = 4 },
+    { name = "hagfish", item_eat = 1, item_eat_cooked = 4 },
+    { name = "illager_ghostfish", item_eat = 1, item_eat_cooked = 10 },
+    { name = "ironfish", item_eat = 1, item_eat_cooked = 4 },
+    { name = "koi", item_eat = 1, item_eat_cooked = 4 },
+    { name = "lamprey", item_eat = 1, item_eat_cooked = 4 },
+    { name = "largemouth_bass", item_eat = 1, item_eat_cooked = 4 },
+    { name = "lava_eel", item_eat = 1, item_eat_cooked = 6 },
+    { name = "leech", item_eat = 1, item_eat_cooked = 4 },
+    { name = "leerfish", item_eat = 1, item_eat_cooked = 4 },
+    { name = "light_gray_seashroom", item_eat = 1, item_eat_cooked = 3 },
+    { name = "lime_seashroom", item_eat = 1, item_eat_cooked = 3 },
+    { name = "lingcod", item_eat = 1, item_eat_cooked = 4 },
+    { name = "lobster", item_eat = 1, item_eat_cooked = 8 },
+    { name = "lukewarm_ocean_hermit_crab", item_eat = 1, item_eat_cooked = 2 },
+    { name = "magenta_seashroom", item_eat = 1, item_eat_cooked = 3 },
+    { name = "magma_slimefish", item_eat = 1, item_eat_cooked = 4 },
+    { name = "manta_ray", item_eat = 1, item_eat_cooked = 4 },
+    { name = "minnow", item_eat = 1, item_eat_cooked = 4 },
+    { name = "mother_moon", item_eat = 1, item_eat_cooked = 10 },
+    { name = "mud_flounder", item_eat = 1, item_eat_cooked = 4 },
+    { name = "neon_tetra", item_eat = 1, item_eat_cooked = 4 },
+    { name = "obster", item_eat = 1, item_eat_cooked = 4 },
+    { name = "ocean_hermit_crab", item_eat = 1, item_eat_cooked = 2 },
+    { name = "octopus", item_eat = 1, item_eat_cooked = 8 },
+    { name = "orange_seashroom", item_eat = 1, item_eat_cooked = 3 },
+    { name = "oscar", item_eat = 1, item_eat_cooked = 4 },
+    { name = "paddlefish", item_eat = 1, item_eat_cooked = 4 },
+    { name = "pearl_isopod", item_eat = 1, item_eat_cooked = 4 },
+    { name = "pearlwog", item_eat = 1, item_eat_cooked = 4 },
+    { name = "perch", item_eat = 1, item_eat_cooked = 4 },
+    { name = "piglish", item_eat = 1, item_eat_cooked = 4 },
+    { name = "pike", item_eat = 1, item_eat_cooked = 4 },
+    { name = "pink_seashroom", item_eat = 1, item_eat_cooked = 3 },
+    { name = "piranha", item_eat = 1, item_eat_cooked = 6 },
+    { name = "prismfish", item_eat = 1, item_eat_cooked = 4 },
+    { name = "pumpkinseed", item_eat = 1, item_eat_cooked = 4 },
+    { name = "purple_seashroom", item_eat = 1, item_eat_cooked = 3 },
+    { name = "rainbowfish", item_eat = 1, item_eat_cooked = 4 },
+    { name = "red_seashroom", item_eat = 1, item_eat_cooked = 3 },
+    { name = "red_snapper", item_eat = 1, item_eat_cooked = 6 },
+    { name = "redbreast_sunfish", item_eat = 1, item_eat_cooked = 4 },
+    { name = "rockfish", item_eat = 1, item_eat_cooked = 4 },
+    { name = "rohu", item_eat = 1, item_eat_cooked = 4 },
+    { name = "rosefish", item_eat = 1, item_eat_cooked = 4 },
+    { name = "rusty_skullfin", item_eat = 1, item_eat_cooked = 10 },
+    { name = "sablefish", item_eat = 1, item_eat_cooked = 4 },
+    { name = "sardine", item_eat = 1, item_eat_cooked = 4 },
+    { name = "sawfish", item_eat = 1, item_eat_cooked = 5 },
+    { name = "sea_cucumber", item_eat = 1, item_eat_cooked = 2 },
+    { name = "skate", item_eat = 1, item_eat_cooked = 4 },
+    { name = "skullfin", item_eat = 1, item_eat_cooked = 4 },
+    { name = "skykoi", item_eat = 1, item_eat_cooked = 4 },
+    { name = "slimefish", item_eat = 1, item_eat_cooked = 8 },
+    { name = "smallmouth_bass", item_eat = 1, item_eat_cooked = 4 },
+    { name = "sterlet", item_eat = 1, item_eat_cooked = 4 },
+    { name = "stingray", item_eat = 1, item_eat_cooked = 6 },
+    { name = "sturgeon", item_eat = 1, item_eat_cooked = 4 },
+    { name = "sunfish", item_eat = 1, item_eat_cooked = 4 },
+    { name = "swordfish", item_eat = 1, item_eat_cooked = 6 },
+    { name = "tancho_koi", item_eat = 1, item_eat_cooked = 4 },
+    { name = "tench", item_eat = 1, item_eat_cooked = 4 },
+    { name = "tilapia", item_eat = 1, item_eat_cooked = 4 },
+    { name = "totemfish", item_eat = 1, item_eat_cooked = 4 },
+    { name = "true_goldfish", item_eat = 1, item_eat_cooked = 10 },
+    { name = "vampire_squid", item_eat = 1, item_eat_cooked = 6 },
+    { name = "walleye", item_eat = 1, item_eat_cooked = 4 },
+    { name = "warm_ocean_hermit_crab", item_eat = 1, item_eat_cooked = 2 },
+    { name = "white_bullhead", item_eat = 1, item_eat_cooked = 4 },
+    { name = "white_seashroom", item_eat = 1, item_eat_cooked = 3 },
+    { name = "whitefish", item_eat = 1, item_eat_cooked = 4 },
+    { name = "wolffish", item_eat = 1, item_eat_cooked = 4 },
+    { name = "woodskip", item_eat = 1, item_eat_cooked = 4 },
+    { name = "yellow_seashroom", item_eat = 1, item_eat_cooked = 3 },
 }
 
 for i, def in ipairs(fishes) do
@@ -599,12 +601,12 @@ for i, def in ipairs(fishes) do
     ---raw
     minetest.register_craftitem(name, {
         description = desc .. "\n" .. minetest.colorize(x_farming.colors.brown, "Hunger: " .. def.item_eat),
-        tiles = {img},
+        tiles = { img },
         inventory_image = img,
         wield_image = img .. "^[transformFXR90",
-        groups = {fish = 1},
+        groups = { fish = 1 },
         on_use = minetest.item_eat(def.item_eat),
-    })
+})
 
     ---hbhunger
     if x_farming.hbhunger ~= nil then
@@ -616,19 +618,20 @@ for i, def in ipairs(fishes) do
     if def.item_eat_cooked ~= nil then
         ---cooked
         minetest.register_craftitem(name .. "_cooked", {
-            description = "Cooked "..desc .. "\n" .. minetest.colorize(x_farming.colors.brown, "Hunger: " .. def.item_eat_cooked),
-            tiles = {img},
+            description = "Cooked " .. desc .. "\n" .. minetest.colorize(x_farming.colors.brown, "Hunger: "
+                .. def.item_eat_cooked),
+            tiles = { img },
             inventory_image = img .. "^[colorize:#3B2510:204",
             wield_image = img .. "^[transformFXR90^[colorize:#3B2510:204",
             on_use = minetest.item_eat(def.item_eat_cooked),
-        })
+    })
 
-        minetest.register_craft( {
+        minetest.register_craft({
             type = "cooking",
             cooktime = 15,
             output = name .. "_cooked",
             recipe = name
-        })
+    })
 
         ---hbhunger
         if x_farming.hbhunger ~= nil then
@@ -646,7 +649,7 @@ icefishing.register_equipment = function(name, def)
     local pname = name:split(":")[2]
 
     ---Register seed
-    local lbm_nodes = {mname .. ":seed_" .. pname}
+    local lbm_nodes = { mname .. ":seed_" .. pname }
 
     minetest.register_node(mname .. ":seed_" .. pname, {
         description = def.description,
@@ -658,41 +661,41 @@ icefishing.register_equipment = function(name, def)
             "x_farming_icefishing_left.png",
             "x_farming_icefishing_front_0.png",
             "x_farming_icefishing_back_0.png"
-        },
+    },
         inventory_image = "x_farming_icefishing_inv.png",
         wield_image = "x_farming_icefishing_inv.png",
         drawtype = "nodebox",
-        groups = {seed = 1, snappy = 3, plant = 1, attached_node = 1},
+        groups = { seed = 1, snappy = 3, plant = 1, attached_node = 1 },
         paramtype = "light",
         walkable = false,
         sunlight_propagates = true,
         node_box = {
             type = "fixed",
             fixed = {
-                {-0.5, -0.5, -0.5, 0.5, -0.375, 0.5},
-                {-0.5, -0.375, 0, 0.5, 0.5, 0},
-                {0, -0.375, -0.5, 0, -0.25, 0.5},
-            }
-        },
+                { -0.5, -0.5, -0.5, 0.5, -0.375, 0.5 },
+                { -0.5, -0.375, 0, 0.5, 0.5, 0 },
+                { 0, -0.375, -0.5, 0, -0.25, 0.5 },
+        }
+    },
         collision_box = {
             type = "fixed",
             fixed = {
-                {-0.5, -0.5, -0.5, 0.5, -0.375, 0.5},
-            },
+                { -0.5, -0.5, -0.5, 0.5, -0.375, 0.5 },
         },
+    },
         selection_box = {
             type = "fixed",
             fixed = {
-                {-0.5, -0.5, -0.5, 0.5, -0.375, 0.5},
-            },
+                { -0.5, -0.5, -0.5, 0.5, -0.375, 0.5 },
         },
-        fertility = {"ice_fishing"},
+    },
+        fertility = { "ice_fishing" },
         drop = "",
         sounds = default.node_sound_dirt_defaults({
-            dig = {name = "", gain = 0},
-            dug = {name = "default_grass_footstep", gain = 0.2},
-            place = {name = "default_place_node", gain = 0.25},
-        }),
+            dig = { name = "", gain = 0 },
+            dug = { name = "default_grass_footstep", gain = 0.2 },
+            place = { name = "default_place_node", gain = 0.25 },
+    }),
         next_plant = mname .. ":" .. pname .. "_1",
         on_timer = icefishing.grow_plant,
         minlight = 13,
@@ -715,7 +718,7 @@ icefishing.register_equipment = function(name, def)
         on_construct = icefishing.on_construct,
 
         after_destruct = icefishing.after_destruct,
-    })
+})
 
     ---Register growing steps
     for i = 1, def.steps do
@@ -736,14 +739,14 @@ icefishing.register_equipment = function(name, def)
                     aspect_w = 16,
                     aspect_h = 16,
                     length = 2.0,
-                },
             },
-            {name = mname .. "_" .. pname .. "_bottom.png"},
-            {name = mname .. "_" .. pname .. "_right.png"},
-            {name = mname .. "_" .. pname .. "_left.png"},
-            {name = mname .. "_" .. pname .. "_front_" .. i .. ".png"},
-            {name = mname .. "_" .. pname .. "_back_" .. i .. ".png"},
-        }
+        },
+            { name = mname .. "_" .. pname .. "_bottom.png" },
+            { name = mname .. "_" .. pname .. "_right.png" },
+            { name = mname .. "_" .. pname .. "_left.png" },
+            { name = mname .. "_" .. pname .. "_front_" .. i .. ".png" },
+            { name = mname .. "_" .. pname .. "_back_" .. i .. ".png" },
+    }
 
         if last_step then
             tiles[1] = {
@@ -754,8 +757,8 @@ icefishing.register_equipment = function(name, def)
                     aspect_w = 16,
                     aspect_h = 16,
                     length = 2.0,
-                },
-            }
+            },
+        }
         end
 
         minetest.register_node(mname .. ":" .. pname .. "_" .. i, {
@@ -772,24 +775,24 @@ icefishing.register_equipment = function(name, def)
             node_box = {
                 type = "fixed",
                 fixed = {
-                    {-0.5, -0.5, -0.5, 0.5, -0.375, 0.5},
-                    {-0.5, -0.375, 0, 0.5, 0.5, 0},
-                    {0, -0.375, -0.5, 0, -0.25, 0.5},
-                }
-            },
+                    { -0.5, -0.5, -0.5, 0.5, -0.375, 0.5 },
+                    { -0.5, -0.375, 0, 0.5, 0.5, 0 },
+                    { 0, -0.375, -0.5, 0, -0.25, 0.5 },
+            }
+        },
             collision_box = {
                 type = "fixed",
                 fixed = {
-                    {-0.5, -0.5, -0.5, 0.5, -0.375, 0.5},
-                },
+                    { -0.5, -0.5, -0.5, 0.5, -0.375, 0.5 },
             },
+        },
             selection_box = {
                 type = "fixed",
                 fixed = {
-                    {-0.5, -0.5, -0.5, 0.5, -0.375, 0.5},
-                },
+                    { -0.5, -0.5, -0.5, 0.5, -0.375, 0.5 },
             },
-            groups = {snappy = 3, plant = 1, not_in_creative_inventory = 1, attached_node = 1},
+        },
+            groups = { snappy = 3, plant = 1, not_in_creative_inventory = 1, attached_node = 1 },
             sounds = default.node_sound_leaves_defaults(),
             next_plant = next_plant,
             on_timer = icefishing.grow_plant,
@@ -797,7 +800,7 @@ icefishing.register_equipment = function(name, def)
             maxlight = 15,
 
             after_destruct = icefishing.after_destruct,
-        })
+    })
     end
 
     ---replacement LBM for pre-nodetimer plants
@@ -807,12 +810,12 @@ icefishing.register_equipment = function(name, def)
         action = function(pos, node)
             icefishing.tick_again(pos)
         end,
-    })
+})
 
     ---Return
     local r = {
         seed = mname .. ":seed_" .. pname
-    }
+}
     return r
 end
 
@@ -832,10 +835,10 @@ minetest.register_node("x_farming:drilled_ice", {
         "default_ice.png",
         "default_ice.png",
         "default_ice.png",
-    },
+},
     paramtype = "light",
     drop = "default:ice",
-    groups = {cracky = 3, cools_lava = 1, slippery = 3, not_in_creative_inventory = 1, ice_fishing = 1},
+    groups = { cracky = 3, cools_lava = 1, slippery = 3, not_in_creative_inventory = 1, ice_fishing = 1 },
     sounds = default.node_sound_ice_defaults(),
 })
 
@@ -847,6 +850,10 @@ minetest.register_tool("x_farming:ice_auger", {
     wield_image = "x_farming_ice_auger.png^[transformR270",
     stack_max = 1,
     on_use = function(itemstack, user, pointed_thing)
+        if not user then
+            return
+        end
+
         local pt = pointed_thing
         ---check if pointing at a node
         if not pt then
@@ -858,7 +865,7 @@ minetest.register_tool("x_farming:ice_auger", {
 
         local uses = 500
         local under = minetest.get_node(pt.under)
-        local p = {x=pt.under.x, y=pt.under.y+1, z=pt.under.z}
+        local p = { x = pt.under.x, y = pt.under.y + 1, z = pt.under.z }
         local above = minetest.get_node(p)
 
         ---return if any of the nodes is not registered
@@ -890,50 +897,50 @@ minetest.register_tool("x_farming:ice_auger", {
         end
 
         ---turn the node into soil and play sound
-        minetest.set_node(pt.under, {name = "x_farming:drilled_ice"})
+        minetest.set_node(pt.under, { name = "x_farming:drilled_ice" })
         minetest.sound_play("x_farming_ice_dug", {
             pos = pt.under,
             gain = 0.5,
-        }, true)
+    }, true)
 
         minetest.add_particlespawner({
             amount = 10,
             time = 0.5,
-            minpos = {x = pt.above.x - 0.4, y = pt.above.y - 0.4, z = pt.above.z - 0.4},
-            maxpos = {x = pt.above.x + 0.4, y = pt.above.y - 0.5, z = pt.above.z + 0.4},
-            minvel = {x = 0, y = 1, z = 0},
-            maxvel = {x = 0, y = 2, z = 0},
-            minacc = {x = 0, y = -4, z = 0},
-            maxacc = {x = 0, y = -8, z = 0},
+            minpos = { x = pt.above.x - 0.4, y = pt.above.y - 0.4, z = pt.above.z - 0.4 },
+            maxpos = { x = pt.above.x + 0.4, y = pt.above.y - 0.5, z = pt.above.z + 0.4 },
+            minvel = { x = 0, y = 1, z = 0 },
+            maxvel = { x = 0, y = 2, z = 0 },
+            minacc = { x = 0, y = -4, z = 0 },
+            maxacc = { x = 0, y = -8, z = 0 },
             minexptime = 1,
             maxexptime = 1.5,
-            node = {name = "default:snowblock"},
+            node = { name = "default:snowblock" },
             collisiondetection = true,
             object_collision = true,
-        })
+    })
 
         if not (creative and creative.is_enabled_for and creative.is_enabled_for(user:get_player_name())) then
             ---wear tool
             local wdef = itemstack:get_definition()
-            itemstack:add_wear(65535/(uses-1))
+            itemstack:add_wear(65535 / (uses - 1))
             ---tool break sound
             if itemstack:get_count() == 0 and wdef.sound and wdef.sound.breaks then
-                minetest.sound_play(wdef.sound.breaks, {pos = pt.above,
-                    gain = 0.5}, true)
+                minetest.sound_play(wdef.sound.breaks, { pos = pt.above,
+                    gain = 0.5 }, true)
             end
         end
         return itemstack
     end,
-    sound = {breaks = "default_tool_breaks"},
+    sound = { breaks = "default_tool_breaks" },
 })
 
 minetest.register_craft({
     output = "x_farming:ice_auger",
     recipe = {
-        {"group:stick", "default:coalblock", "group:stick"},
-        {"", "default:steel_ingot", ""},
-        {"", "default:steel_ingot", ""},
-    }
+        { "group:stick", "default:coalblock", "group:stick" },
+        { "", "default:steel_ingot", "" },
+        { "", "default:steel_ingot", "" },
+}
 })
 
 ---decorations
@@ -941,17 +948,17 @@ minetest.register_craft({
 minetest.register_decoration({
     name = "x_farming:icefishing_9",
     deco_type = "schematic",
-    place_on = {"default:ice", "default:snowblock", "default:snow", "default:dirt_with_snow"},
+    place_on = { "default:ice", "default:snowblock", "default:snow", "default:dirt_with_snow" },
     sidelen = 16,
     noise_params = {
         offset = 0,
         scale = 0.0025,
-        spread = {x = 100, y = 100, z = 100},
+        spread = { x = 100, y = 100, z = 100 },
         seed = 2,
         octaves = 3,
         persist = 0.7
-    },
-    biomes = {"icesheet", "snowy_grassland", "icesheet_ocean"},
+},
+    biomes = { "icesheet", "snowy_grassland", "icesheet_ocean" },
     y_max = 30,
     y_min = 1,
     schematic = minetest.get_modpath("x_farming") .. "/schematics/x_farming_icefishing.mts",
@@ -962,5 +969,5 @@ minetest.register_decoration({
 ---crate
 x_farming.register_crate('crate_fish_3', {
     description = 'Fish Crate',
-    tiles = {'x_farming_crate_fish_3.png'},
+    tiles = { 'x_farming_crate_fish_3.png' },
 })

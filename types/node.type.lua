@@ -20,6 +20,13 @@
 ---@field walkable boolean If true, objects collide with node.
 ---@field after_dig_node fun(pos: Vector, oldnode: NodeDef, oldmetadata: table, digger: ObjectRef): nil  oldmetadata is in table format. Called after destructing node when node was dug using minetest.node_dig / minetest.dig_node., default: nil
 ---@field paramtype2 string
+---@field can_dig fun(pos: Vector, player?: ObjectRef): boolean | nil Returns true if node can be dug, or false if not.default: nil
+---@field on_rotate fun(pos: Vector, node: table, user: ObjectRef, mode: table, new_param2: string): boolean Only for screwdriver mod.
+---@field on_construct fun(pos: Vector): nil Node constructor; called after adding node. Can set up metadata and stuff like that. Not called for bulk node placement (i.e. schematics and VoxelManip). default: nil
+---@field after_place_node fun(pos: Vector, placer: ObjectRef | nil, itemstack: ItemStack, pointed_thing: PointedThingDef): boolean | nil Called after constructing node when node was placed using minetest.item_place_node / minetest.place_node. If return true no item is taken from itemstack. `placer` may be any valid ObjectRef or nil. default: nil
+---@field on_destruct fun(pos: Vector) Node destructor; called before removing node. Not called for bulk node placement. default: nil
+---@field on_blast fun(pos: Vector, intensity?: number): nil intensity: 1.0 = mid range of regular TNT. If defined, called when an explosion touches the node, instead of removing the node.
+---@field on_timer fun(pos: Vector, elapsed: number): boolean | nil default: nil, called by NodeTimers, see minetest.get_node_timer and NodeTimerRef. elapsed is the total time passed since the timer was started. return true to run the timer for another cycle with the same timeout value.
 
 ---Textures of node; +Y, -Y, +X, -X, +Z, -Z. List can be shortened to needed length.
 ---@class NodeTilesDef

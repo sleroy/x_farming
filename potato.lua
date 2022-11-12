@@ -9,8 +9,8 @@ farming.register_plant('x_farming:potato', {
     steps = 8,
     minlight = minlight,
     maxlight = maxlight,
-    fertility = {'grassland'},
-    groups = {flammable = 4},
+    fertility = { 'grassland' },
+    groups = { flammable = 4 },
     place_param2 = 3,
     on_use = minetest.item_eat(2),
 })
@@ -25,11 +25,11 @@ minetest.override_item('x_farming:potato', {
 minetest.override_item('x_farming:potato_8', {
     drop = {
         items = {
-            {items = {'x_farming:potato'}, rarity = 1},
-            {items = {'x_farming:potato'}, rarity = 2},
-            {items = {'x_farming:poisonouspotato'}, rarity = 5},
-            {items = {'x_farming:seed_potato'}, rarity = 1},
-            {items = {'x_farming:seed_potato'}, rarity = 2},
+            { items = { 'x_farming:potato' }, rarity = 1 },
+            { items = { 'x_farming:potato' }, rarity = 2 },
+            { items = { 'x_farming:poisonouspotato' }, rarity = 5 },
+            { items = { 'x_farming:seed_potato' }, rarity = 1 },
+            { items = { 'x_farming:seed_potato' }, rarity = 2 },
         }
     }
 })
@@ -37,17 +37,17 @@ minetest.override_item('x_farming:potato_8', {
 minetest.register_decoration({
     name = 'x_farming:potato_8',
     deco_type = 'simple',
-    place_on = {'default:silver_sand'},
+    place_on = { 'default:silver_sand' },
     sidelen = 16,
     noise_params = {
         offset = -0.1,
         scale = 0.1,
-        spread = {x = 50, y = 50, z = 50},
+        spread = { x = 50, y = 50, z = 50 },
         seed = 4242,
         octaves = 3,
         persist = 0.7
     },
-    biomes = {'cold_desert'},
+    biomes = { 'cold_desert' },
     y_max = 31000,
     y_min = 1,
     decoration = 'x_farming:potato_8',
@@ -57,7 +57,7 @@ minetest.register_decoration({
 ---crate
 x_farming.register_crate('crate_potato_3', {
     description = 'Potato Crate',
-    tiles = {'x_farming_crate_potato_3.png'},
+    tiles = { 'x_farming_crate_potato_3.png' },
     _custom = {
         crate_item = 'x_farming:potato'
     }

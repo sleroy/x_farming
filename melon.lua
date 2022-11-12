@@ -5,8 +5,8 @@ farming.register_plant('x_farming:melon', {
     steps = 8,
     minlight = 13,
     maxlight = default.LIGHT_MAX,
-    fertility = {'grassland'},
-    groups = {flammable = 4},
+    fertility = { 'grassland' },
+    groups = { flammable = 4 },
     place_param2 = 3,
 })
 
@@ -20,40 +20,47 @@ minetest.override_item('x_farming:melon', {
 -- MELON FRUIT - HARVEST
 minetest.register_node('x_farming:melon_fruit', {
     description = 'Melon Fruit',
-    tiles = {'x_farming_melon_fruit_top.png', 'x_farming_melon_fruit_top.png', 'x_farming_melon_fruit_side.png', 'x_farming_melon_fruit_side.png', 'x_farming_melon_fruit_side.png', 'x_farming_melon_fruit_side.png'},
+    tiles = {
+        'x_farming_melon_fruit_top.png',
+        'x_farming_melon_fruit_top.png',
+        'x_farming_melon_fruit_side.png',
+        'x_farming_melon_fruit_side.png',
+        'x_farming_melon_fruit_side.png',
+        'x_farming_melon_fruit_side.png'
+    },
     sounds = default.node_sound_wood_defaults(),
     is_ground_content = false,
-    groups = {snappy=3, flammable=4, fall_damage_add_percent=-30, not_in_creative_inventory=1},
+    groups = { snappy = 3, flammable = 4, fall_damage_add_percent = -30, not_in_creative_inventory = 1 },
     drop = {
-        max_items = 7,  -- Maximum number of items to drop.
+        max_items = 7, -- Maximum number of items to drop.
         items = { -- Choose max_items randomly from this list.
             {
-                items = {'x_farming:melon'},  -- Items to drop.
-                rarity = 1,  -- Probability of dropping is 1 / rarity.
+                items = { 'x_farming:melon' }, -- Items to drop.
+                rarity = 1, -- Probability of dropping is 1 / rarity.
             },
             {
-                items = {'x_farming:melon'},  -- Items to drop.
-                rarity = 2,  -- Probability of dropping is 1 / rarity.
+                items = { 'x_farming:melon' }, -- Items to drop.
+                rarity = 2, -- Probability of dropping is 1 / rarity.
             },
             {
-                items = {'x_farming:melon'},  -- Items to drop.
-                rarity = 2,  -- Probability of dropping is 1 / rarity.
+                items = { 'x_farming:melon' }, -- Items to drop.
+                rarity = 2, -- Probability of dropping is 1 / rarity.
             },
             {
-                items = {'x_farming:melon'},  -- Items to drop.
-                rarity = 2,  -- Probability of dropping is 1 / rarity.
+                items = { 'x_farming:melon' }, -- Items to drop.
+                rarity = 2, -- Probability of dropping is 1 / rarity.
             },
             {
-                items = {'x_farming:melon'},  -- Items to drop.
-                rarity = 3,  -- Probability of dropping is 1 / rarity.
+                items = { 'x_farming:melon' }, -- Items to drop.
+                rarity = 3, -- Probability of dropping is 1 / rarity.
             },
             {
-                items = {'x_farming:melon'},  -- Items to drop.
-                rarity = 3,  -- Probability of dropping is 1 / rarity.
+                items = { 'x_farming:melon' }, -- Items to drop.
+                rarity = 3, -- Probability of dropping is 1 / rarity.
             },
             {
-                items = {'x_farming:melon'},  -- Items to drop.
-                rarity = 3,  -- Probability of dropping is 1 / rarity.
+                items = { 'x_farming:melon' }, -- Items to drop.
+                rarity = 3, -- Probability of dropping is 1 / rarity.
             },
         },
     },
@@ -82,10 +89,17 @@ minetest.register_node('x_farming:melon_fruit', {
 -- MELON BLOCK - HARVEST from crops
 minetest.register_node('x_farming:melon_block', {
     description = 'Melon Block',
-    tiles = {'x_farming_melon_fruit_top.png', 'x_farming_melon_fruit_top.png', 'x_farming_melon_fruit_side.png', 'x_farming_melon_fruit_side.png', 'x_farming_melon_fruit_side.png', 'x_farming_melon_fruit_side.png'},
+    tiles = {
+        'x_farming_melon_fruit_top.png',
+        'x_farming_melon_fruit_top.png',
+        'x_farming_melon_fruit_side.png',
+        'x_farming_melon_fruit_side.png',
+        'x_farming_melon_fruit_side.png',
+        'x_farming_melon_fruit_side.png'
+    },
     sounds = default.node_sound_wood_defaults(),
     is_ground_content = false,
-    groups = {snappy=3, flammable=4, fall_damage_add_percent=-30}
+    groups = { snappy = 3, flammable = 4, fall_damage_add_percent = -30 }
 })
 
 -- take over the growth from minetest_game farming from here
@@ -97,7 +111,7 @@ minetest.override_item('x_farming:melon_8', {
 -- replacement LBM for pre-nodetimer plants
 minetest.register_lbm({
     name = 'x_farming:start_nodetimer_melon',
-    nodenames = {'x_farming:melon_8'},
+    nodenames = { 'x_farming:melon_8' },
     action = function(pos, node)
         x_farming.tick_short(pos)
     end,
@@ -106,17 +120,17 @@ minetest.register_lbm({
 minetest.register_decoration({
     name = 'x_farming:melon_8',
     deco_type = 'simple',
-    place_on = {'default:dirt_with_grass'},
+    place_on = { 'default:dirt_with_grass' },
     sidelen = 16,
     noise_params = {
         offset = -0.1,
         scale = 0.1,
-        spread = {x = 50, y = 50, z = 50},
+        spread = { x = 50, y = 50, z = 50 },
         seed = 4242,
         octaves = 3,
         persist = 0.7
     },
-    biomes = {'grassland'},
+    biomes = { 'grassland' },
     y_max = 31000,
     y_min = 1,
     decoration = 'x_farming:melon_8',
@@ -125,7 +139,7 @@ minetest.register_decoration({
 ---crate
 x_farming.register_crate('crate_melon_3', {
     description = 'Melon Crate',
-    tiles = {'x_farming_crate_melon_3.png'},
+    tiles = { 'x_farming_crate_melon_3.png' },
     _custom = {
         crate_item = 'x_farming:melon'
     }

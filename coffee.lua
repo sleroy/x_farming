@@ -6,8 +6,8 @@ farming.register_plant('x_farming:coffee', {
     steps = 5,
     minlight = 13,
     maxlight = default.LIGHT_MAX,
-    fertility = {'grassland'},
-    groups = {flammable = 4},
+    fertility = { 'grassland' },
+    groups = { flammable = 4 },
     place_param2 = 3,
 })
 
@@ -22,7 +22,7 @@ minetest.register_node('x_farming:coffee_cup_hot', {
     description = coffee_cup_hot_desc,
     drawtype = 'mesh',
     mesh = 'x_farming_coffee_cup_hot.obj',
-    tiles = {'x_farming_coffee_cup_hot_mesh.png'},
+    tiles = { 'x_farming_coffee_cup_hot_mesh.png' },
     inventory_image = 'x_farming_coffee_cup_hot.png',
     wield_image = 'x_farming_coffee_cup_hot.png',
     paramtype = 'light',
@@ -31,13 +31,13 @@ minetest.register_node('x_farming:coffee_cup_hot', {
     walkable = true,
     selection_box = {
         type = 'fixed',
-        fixed = {-0.25, -0.5, -0.4, 0.25, 0.5, 0.25}
+        fixed = { -0.25, -0.5, -0.4, 0.25, 0.5, 0.25 }
     },
     collision_box = {
         type = 'fixed',
-        fixed = {-0.25, -0.5, -0.4, 0.25, 0, 0.25}
+        fixed = { -0.25, -0.5, -0.4, 0.25, 0, 0.25 }
     },
-    groups = {vessel = 1, dig_immediate = 3, attached_node = 1},
+    groups = { vessel = 1, dig_immediate = 3, attached_node = 1 },
     on_use = minetest.item_eat(6),
     sounds = default.node_sound_glass_defaults(),
     sunlight_propagates = true
@@ -46,17 +46,17 @@ minetest.register_node('x_farming:coffee_cup_hot', {
 minetest.register_decoration({
     name = 'x_farming:coffee_5',
     deco_type = 'simple',
-    place_on = {'default:dry_dirt_with_dry_grass'},
+    place_on = { 'default:dry_dirt_with_dry_grass' },
     sidelen = 16,
     noise_params = {
         offset = -0.1,
         scale = 0.1,
-        spread = {x = 50, y = 50, z = 50},
+        spread = { x = 50, y = 50, z = 50 },
         seed = 4242,
         octaves = 3,
         persist = 0.7
     },
-    biomes = {'savanna'},
+    biomes = { 'savanna' },
     y_max = 31000,
     y_min = 1,
     decoration = 'x_farming:coffee_5',
@@ -66,7 +66,7 @@ minetest.register_decoration({
 ---crate
 x_farming.register_crate('crate_coffee_3', {
     description = 'Coffee Crate',
-    tiles = {'x_farming_crate_coffee_3.png'},
+    tiles = { 'x_farming_crate_coffee_3.png' },
     _custom = {
         crate_item = 'x_farming:coffee'
     }

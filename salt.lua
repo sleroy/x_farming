@@ -1,4 +1,4 @@
-screwdriver = screwdriver--[[@as MtgScrewdriver]]
+screwdriver = screwdriver --[[@as MtgScrewdriver]]
 
 -- how often a growth failure tick is retried (e.g. too dark)
 local function tick_again(pos)
@@ -8,7 +8,7 @@ end
 -- SALT
 minetest.register_craftitem('x_farming:salt', {
     description = 'Salt',
-    tiles = {'x_farming_salt.png'},
+    tiles = { 'x_farming_salt.png' },
     inventory_image = 'x_farming_salt.png',
     wield_image = 'x_farming_salt.png'
 })
@@ -17,7 +17,7 @@ minetest.register_node('x_farming:seed_salt', {
     description = 'Salty Water (plant on wet soil)',
     inventory_image = 'x_farming_salt_water.png',
     wield_image = 'x_farming_salt_water.png',
-    fertility = {'grassland'},
+    fertility = { 'grassland' },
     drawtype = 'nodebox',
     tiles = {
         'x_farming_salt_1_top.png',
@@ -30,22 +30,22 @@ minetest.register_node('x_farming:seed_salt', {
     node_box = {
         type = 'fixed',
         fixed = {
-            {-0.5, -0.5, -0.5, 0.5, -0.375, 0.5},
+            { -0.5, -0.5, -0.5, 0.5, -0.375, 0.5 },
         }
     },
     collision_box = {
         type = 'fixed',
         fixed = {
-            {-0.5, -0.5, -0.5, 0.5, -0.375, 0.5},
+            { -0.5, -0.5, -0.5, 0.5, -0.375, 0.5 },
         },
     },
     selection_box = {
         type = 'fixed',
         fixed = {
-            {-0.5, -0.5, -0.5, 0.5, -0.375, 0.5},
+            { -0.5, -0.5, -0.5, 0.5, -0.375, 0.5 },
         },
     },
-    groups = {seed = 1, snappy = 3, flammable = 2, plant = 1, attached_node = 1},
+    groups = { seed = 1, snappy = 3, flammable = 2, plant = 1, attached_node = 1 },
     sounds = default.node_sound_leaves_defaults(),
     next_plant = 'x_farming:salt_1',
     on_timer = farming.grow_plant,
@@ -85,29 +85,29 @@ minetest.register_node('x_farming:salt_1', {
     buildable_to = true,
     drop = {
         items = {
-            {items = {'x_farming:salt'}, rarity = 8},
-            {items = {'x_farming:seed_salt'}, rarity = 8},
+            { items = { 'x_farming:salt' }, rarity = 8 },
+            { items = { 'x_farming:seed_salt' }, rarity = 8 },
         }
     },
     node_box = {
         type = 'fixed',
         fixed = {
-            {-0.5, -0.5, -0.5, 0.5, -0.375, 0.5},
+            { -0.5, -0.5, -0.5, 0.5, -0.375, 0.5 },
         }
     },
     collision_box = {
         type = 'fixed',
         fixed = {
-            {-0.5, -0.5, -0.5, 0.5, -0.375, 0.5},
+            { -0.5, -0.5, -0.5, 0.5, -0.375, 0.5 },
         },
     },
     selection_box = {
         type = 'fixed',
         fixed = {
-            {-0.5, -0.5, -0.5, 0.5, -0.375, 0.5},
+            { -0.5, -0.5, -0.5, 0.5, -0.375, 0.5 },
         },
     },
-    groups = {snappy = 3, flammable = 2, plant = 1, not_in_creative_inventory = 1, attached_node = 1},
+    groups = { snappy = 3, flammable = 2, plant = 1, not_in_creative_inventory = 1, attached_node = 1 },
     sounds = default.node_sound_leaves_defaults(),
     next_plant = 'x_farming:salt_2',
     on_timer = farming.grow_plant,
@@ -135,29 +135,29 @@ minetest.register_node('x_farming:salt_2', {
     buildable_to = true,
     drop = {
         items = {
-            {items = {'x_farming:salt'}, rarity = 7},
-            {items = {'x_farming:seed_salt'}, rarity = 7},
+            { items = { 'x_farming:salt' }, rarity = 7 },
+            { items = { 'x_farming:seed_salt' }, rarity = 7 },
         }
     },
     node_box = {
         type = 'fixed',
         fixed = {
-            {-0.5, -0.5, -0.5, 0.5, -0.375, 0.5},
+            { -0.5, -0.5, -0.5, 0.5, -0.375, 0.5 },
         }
     },
     collision_box = {
         type = 'fixed',
         fixed = {
-            {-0.5, -0.5, -0.5, 0.5, -0.375, 0.5},
+            { -0.5, -0.5, -0.5, 0.5, -0.375, 0.5 },
         },
     },
     selection_box = {
         type = 'fixed',
         fixed = {
-            {-0.5, -0.5, -0.5, 0.5, -0.375, 0.5},
+            { -0.5, -0.5, -0.5, 0.5, -0.375, 0.5 },
         },
     },
-    groups = {snappy = 3, flammable = 2, plant = 1, not_in_creative_inventory = 1, attached_node = 1},
+    groups = { snappy = 3, flammable = 2, plant = 1, not_in_creative_inventory = 1, attached_node = 1 },
     sounds = default.node_sound_leaves_defaults(),
     next_plant = 'x_farming:salt_3',
     on_timer = farming.grow_plant,
@@ -185,30 +185,30 @@ minetest.register_node('x_farming:salt_3', {
     buildable_to = true,
     drop = {
         items = {
-            {items = {'x_farming:salt'}, rarity = 6},
-            {items = {'x_farming:seed_salt'}, rarity = 6},
+            { items = { 'x_farming:salt' }, rarity = 6 },
+            { items = { 'x_farming:seed_salt' }, rarity = 6 },
         }
     },
     node_box = {
         type = 'fixed',
         fixed = {
-            {-0.5, -0.5, -0.5, 0.5, -0.375, 0.5},
-            {-0.0625, -0.5, -0.0625, 0.0625, -0.25, 0.0625},
+            { -0.5, -0.5, -0.5, 0.5, -0.375, 0.5 },
+            { -0.0625, -0.5, -0.0625, 0.0625, -0.25, 0.0625 },
         }
     },
     collision_box = {
         type = 'fixed',
         fixed = {
-            {-0.5, -0.5, -0.5, 0.5, -0.375, 0.5},
+            { -0.5, -0.5, -0.5, 0.5, -0.375, 0.5 },
         },
     },
     selection_box = {
         type = 'fixed',
         fixed = {
-            {-0.5, -0.5, -0.5, 0.5, -0.375, 0.5},
+            { -0.5, -0.5, -0.5, 0.5, -0.375, 0.5 },
         },
     },
-    groups = {snappy = 3, flammable = 2, plant = 1, not_in_creative_inventory = 1, attached_node = 1},
+    groups = { snappy = 3, flammable = 2, plant = 1, not_in_creative_inventory = 1, attached_node = 1 },
     sounds = default.node_sound_leaves_defaults(),
     next_plant = 'x_farming:salt_4',
     on_timer = farming.grow_plant,
@@ -236,30 +236,30 @@ minetest.register_node('x_farming:salt_4', {
     buildable_to = true,
     drop = {
         items = {
-            {items = {'x_farming:salt'}, rarity = 5},
-            {items = {'x_farming:seed_salt'}, rarity = 5},
+            { items = { 'x_farming:salt' }, rarity = 5 },
+            { items = { 'x_farming:seed_salt' }, rarity = 5 },
         }
     },
     node_box = {
         type = 'fixed',
         fixed = {
-            {-0.5, -0.5, -0.5, 0.5, -0.375, 0.5},
-            {-0.0625, -0.5, -0.0625, 0.0625, -0.25, 0.0625},
+            { -0.5, -0.5, -0.5, 0.5, -0.375, 0.5 },
+            { -0.0625, -0.5, -0.0625, 0.0625, -0.25, 0.0625 },
         }
     },
     collision_box = {
         type = 'fixed',
         fixed = {
-            {-0.5, -0.5, -0.5, 0.5, -0.375, 0.5},
+            { -0.5, -0.5, -0.5, 0.5, -0.375, 0.5 },
         },
     },
     selection_box = {
         type = 'fixed',
         fixed = {
-            {-0.5, -0.5, -0.5, 0.5, -0.375, 0.5},
+            { -0.5, -0.5, -0.5, 0.5, -0.375, 0.5 },
         },
     },
-    groups = {snappy = 3, flammable = 2, plant = 1, not_in_creative_inventory = 1, attached_node = 1},
+    groups = { snappy = 3, flammable = 2, plant = 1, not_in_creative_inventory = 1, attached_node = 1 },
     sounds = default.node_sound_leaves_defaults(),
     next_plant = 'x_farming:salt_5',
     on_timer = farming.grow_plant,
@@ -287,31 +287,31 @@ minetest.register_node('x_farming:salt_5', {
     buildable_to = true,
     drop = {
         items = {
-            {items = {'x_farming:salt'}, rarity = 4},
-            {items = {'x_farming:seed_salt'}, rarity = 4},
+            { items = { 'x_farming:salt' }, rarity = 4 },
+            { items = { 'x_farming:seed_salt' }, rarity = 4 },
         }
     },
     node_box = {
         type = 'fixed',
         fixed = {
-            {-0.5, -0.5, -0.5, 0.5, -0.375, 0.5},
-            {-0.1875, -0.375, -0.1875, 0.1875, -0.25, 0.1875},
-            {-0.0625, -0.25, -0.0625, 0.0625, -0.125, 0.0625},
+            { -0.5, -0.5, -0.5, 0.5, -0.375, 0.5 },
+            { -0.1875, -0.375, -0.1875, 0.1875, -0.25, 0.1875 },
+            { -0.0625, -0.25, -0.0625, 0.0625, -0.125, 0.0625 },
         }
     },
     collision_box = {
         type = 'fixed',
         fixed = {
-            {-0.5, -0.5, -0.5, 0.5, -0.375, 0.5},
+            { -0.5, -0.5, -0.5, 0.5, -0.375, 0.5 },
         },
     },
     selection_box = {
         type = 'fixed',
         fixed = {
-            {-0.5, -0.5, -0.5, 0.5, -0.375, 0.5},
+            { -0.5, -0.5, -0.5, 0.5, -0.375, 0.5 },
         },
     },
-    groups = {snappy = 3, flammable = 2, plant = 1, not_in_creative_inventory = 1, attached_node = 1},
+    groups = { snappy = 3, flammable = 2, plant = 1, not_in_creative_inventory = 1, attached_node = 1 },
     sounds = default.node_sound_leaves_defaults(),
     next_plant = 'x_farming:salt_6',
     on_timer = farming.grow_plant,
@@ -339,31 +339,31 @@ minetest.register_node('x_farming:salt_6', {
     buildable_to = true,
     drop = {
         items = {
-            {items = {'x_farming:salt'}, rarity = 3},
-            {items = {'x_farming:seed_salt'}, rarity = 3},
+            { items = { 'x_farming:salt' }, rarity = 3 },
+            { items = { 'x_farming:seed_salt' }, rarity = 3 },
         }
     },
     node_box = {
         type = 'fixed',
         fixed = {
-            {-0.5, -0.5, -0.5, 0.5, -0.375, 0.5},
-            {-0.1875, -0.375, -0.1875, 0.1875, -0.25, 0.1875},
-            {-0.0625, -0.25, -0.0625, 0.0625, -0.125, 0.0625},
+            { -0.5, -0.5, -0.5, 0.5, -0.375, 0.5 },
+            { -0.1875, -0.375, -0.1875, 0.1875, -0.25, 0.1875 },
+            { -0.0625, -0.25, -0.0625, 0.0625, -0.125, 0.0625 },
         }
     },
     collision_box = {
         type = 'fixed',
         fixed = {
-            {-0.5, -0.5, -0.5, 0.5, -0.375, 0.5},
+            { -0.5, -0.5, -0.5, 0.5, -0.375, 0.5 },
         },
     },
     selection_box = {
         type = 'fixed',
         fixed = {
-            {-0.5, -0.5, -0.5, 0.5, -0.375, 0.5},
+            { -0.5, -0.5, -0.5, 0.5, -0.375, 0.5 },
         },
     },
-    groups = {snappy = 3, flammable = 2, plant = 1, not_in_creative_inventory = 1, attached_node = 1},
+    groups = { snappy = 3, flammable = 2, plant = 1, not_in_creative_inventory = 1, attached_node = 1 },
     sounds = default.node_sound_leaves_defaults(),
     next_plant = 'x_farming:salt_7',
     on_timer = farming.grow_plant,
@@ -391,34 +391,34 @@ minetest.register_node('x_farming:salt_7', {
     buildable_to = true,
     drop = {
         items = {
-            {items = {'x_farming:salt'}, rarity = 1},
-            {items = {'x_farming:salt'}, rarity = 2},
-            {items = {'x_farming:seed_salt'}, rarity = 1},
-            {items = {'x_farming:seed_salt'}, rarity = 2},
+            { items = { 'x_farming:salt' }, rarity = 1 },
+            { items = { 'x_farming:salt' }, rarity = 2 },
+            { items = { 'x_farming:seed_salt' }, rarity = 1 },
+            { items = { 'x_farming:seed_salt' }, rarity = 2 },
         }
     },
     node_box = {
         type = 'fixed',
         fixed = {
-            {-0.5, -0.5, -0.5, 0.5, -0.375, 0.5},
-            {-0.3125, -0.5, -0.3125, 0.3125, -0.25, 0.3125},
-            {-0.1875, -0.5, -0.1875, 0.1875, -0.125, 0.1875},
-            {-0.0625, -0.5, -0.0625, 0.0625, 0, 0.0625},
+            { -0.5, -0.5, -0.5, 0.5, -0.375, 0.5 },
+            { -0.3125, -0.5, -0.3125, 0.3125, -0.25, 0.3125 },
+            { -0.1875, -0.5, -0.1875, 0.1875, -0.125, 0.1875 },
+            { -0.0625, -0.5, -0.0625, 0.0625, 0, 0.0625 },
         }
     },
     collision_box = {
         type = 'fixed',
         fixed = {
-            {-0.5, -0.5, -0.5, 0.5, -0.375, 0.5},
+            { -0.5, -0.5, -0.5, 0.5, -0.375, 0.5 },
         },
     },
     selection_box = {
         type = 'fixed',
         fixed = {
-            {-0.5, -0.5, -0.5, 0.5, -0.375, 0.5},
+            { -0.5, -0.5, -0.5, 0.5, -0.375, 0.5 },
         },
     },
-    groups = {snappy = 3, flammable = 2, plant = 1, not_in_creative_inventory = 1, attached_node = 1},
+    groups = { snappy = 3, flammable = 2, plant = 1, not_in_creative_inventory = 1, attached_node = 1 },
     sounds = default.node_sound_leaves_defaults(),
     minlight = 13,
     maxlight = 15
@@ -444,17 +444,17 @@ minetest.register_lbm({
 minetest.register_decoration({
     name = 'x_farming:salt_7',
     deco_type = 'schematic',
-    place_on = {'default:dirt', 'default:dry_dirt'},
+    place_on = { 'default:dirt', 'default:dry_dirt' },
     sidelen = 16,
     noise_params = {
         offset = -0.3,
         scale = 0.7,
-        spread = {x = 200, y = 200, z = 200},
+        spread = { x = 200, y = 200, z = 200 },
         seed = 354,
         octaves = 3,
         persist = 0.7
     },
-    biomes = {'rainforest_swamp', 'savanna_shore'},
+    biomes = { 'rainforest_swamp', 'savanna_shore' },
     y_max = 0,
     y_min = 0,
     schematic = minetest.get_modpath('x_farming') .. '/schematics/x_farming_salt_decor.mts',
@@ -463,7 +463,7 @@ minetest.register_decoration({
 ---bag
 x_farming.register_bag('bag_salt', {
     description = 'Salt Bag',
-    tiles = {'x_farming_bag_salt.png'},
+    tiles = { 'x_farming_bag_salt.png' },
     _custom = {
         bag_item = 'x_farming:salt'
     }

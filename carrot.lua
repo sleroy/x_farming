@@ -9,8 +9,8 @@ farming.register_plant('x_farming:carrot', {
     steps = 8,
     minlight = minlight,
     maxlight = maxlight,
-    fertility = {'grassland'},
-    groups = {flammable = 4},
+    fertility = { 'grassland' },
+    groups = { flammable = 4 },
     place_param2 = 3,
     on_use = minetest.item_eat(3),
 })
@@ -24,17 +24,17 @@ minetest.override_item('x_farming:carrot', {
 minetest.register_decoration({
     name = 'x_farming:carrot_8',
     deco_type = 'simple',
-    place_on = {'default:dirt_with_grass'},
+    place_on = { 'default:dirt_with_grass' },
     sidelen = 16,
     noise_params = {
         offset = -0.1,
         scale = 0.1,
-        spread = {x = 50, y = 50, z = 50},
+        spread = { x = 50, y = 50, z = 50 },
         seed = 4242,
         octaves = 3,
         persist = 0.7
     },
-    biomes = {'grassland'},
+    biomes = { 'grassland' },
     y_max = 31000,
     y_min = 1,
     decoration = 'x_farming:carrot_8',
@@ -44,7 +44,7 @@ minetest.register_decoration({
 ---crate
 x_farming.register_crate('crate_carrot_3', {
     description = 'Carrot Crate',
-    tiles = {'x_farming_crate_carrot_3.png'},
+    tiles = { 'x_farming_crate_carrot_3.png' },
     _custom = {
         crate_item = 'x_farming:carrot'
     }

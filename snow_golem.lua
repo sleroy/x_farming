@@ -1,3 +1,5 @@
+mobs = minetest.global_exists('mobs') and mobs --[[@as table]]
+
 local S = mobs.intllib
 
 mobs.npc_drops = {
@@ -38,13 +40,13 @@ local snow_golem_def = {
   hp_min = 35,
   hp_max = 70,
   armor = 100,
-  collisionbox = {-0.35, -0.1, -0.35, 0.35, 1.89, 0.35},
-  visual_size = {x = 2.9, y = 2.9},
+  collisionbox = { -0.35, -0.1, -0.35, 0.35, 1.89, 0.35 },
+  visual_size = { x = 2.9, y = 2.9 },
   visual = 'mesh',
   mesh = 'x_farming_snowman.b3d',
   drawtype = 'front',
   textures = {
-    {'x_farming_snowman.png^x_farming_snowman_pumpkin.png'},
+    { 'x_farming_snowman.png^x_farming_snowman_pumpkin.png' },
   },
   blood_texture = 'default_snowball.png',
   owner = '',
@@ -56,10 +58,10 @@ local snow_golem_def = {
   jump = true,
   floats = 1,
   drops = {
-    {name = 'default:snow', chance = 1, min = 0, max = 15},
-    {name = 'mobs_npc:seed_pumpkin', chance = 5, min = 1, max = 3}
+    { name = 'default:snow', chance = 1, min = 0, max = 15 },
+    { name = 'mobs_npc:seed_pumpkin', chance = 5, min = 1, max = 3 }
   },
-  follow = {'farming:bread', 'default:diamond'},
+  follow = { 'farming:bread', 'default:diamond' },
   water_damage = 6,
   lava_damage = 10,
   light_damage = 0,
@@ -79,77 +81,91 @@ local snow_golem_def = {
   },
   on_rightclick = function(self, clicker)
 
-      -- feed to heal npc
-      if mobs:feed_tame(self, clicker, 8, true, true) then return end
-
-      -- capture npc with net or lasso
-      if mobs:capture_mob(self, clicker, 0, 5, 80, false, nil) then return end
-
-      -- protect npc with mobs:protector
-      if mobs:protect(self, clicker) then return end
-
-      local item = clicker:get_wielded_item()
-      local name = clicker:get_player_name()
-
-      -- right clicking with gold lump drops random item from mobs.npc_drops
-      if item:get_name() == 'default:gold_lump' then
-
-        if not mobs.is_creative(name) then
-          item:take_item()
-          clicker:set_wielded_item(item)
+        -- feed to heal npc
+        if mobs:feed_tame(self, clicker, 8, true, true) then
+            return
         end
 
-        local pos = self.object:get_pos()
-
-        pos.y = pos.y + 0.5
-
-        -- add item if it exists
-        local obj = minetest.add_item(pos, {
-          name = mobs.npc_drops[math.random(1, #mobs.npc_drops)]
-        })
-
-        if obj and obj:get_luaentity() then
-          obj:set_velocity({
-            x = math.random(-10, 10) / 9,
-            y = 6,
-            z = math.random(-10, 10) / 9,
-          })
-        elseif obj then
-          obj:remove() -- item does not exist
+        -- capture npc with net or lasso
+        if mobs:capture_mob(self, clicker, 0, 5, 80, false, nil) then
+            return
         end
 
-        minetest.chat_send_player(name, S('Snow Golem dropped you an item for gold!'))
-
-        return
-      end
-
-      -- by right-clicking owner can switch npc between follow and stand
-      if self.owner and self.owner == name then
-
-        if self.order == 'follow' then
-          self.order = 'stand'
-
-          minetest.chat_send_player(name, S('NPC stands still.'))
-        else
-          self.order = 'follow'
-
-          minetest.chat_send_player(name, S('NPC will follow you.'))
+        -- protect npc with mobs:protector
+        if mobs:protect(self, clicker) then
+            return
         end
-      end
 
+        local item = clicker:get_wielded_item()
+        local name = clicker:get_player_name()
+
+        -- right clicking with gold lump drops random item from mobs.npc_drops
+        if item:get_name() == 'default:gold_lump' then
+
+            if not mobs.is_creative(name) then
+                item:take_item()
+                clicker:set_wielded_item(item)
+            end
+
+            local pos = self.object:get_pos()
+
+            pos.y = pos.y + 0.5
+
+            -- add item if it exists
+            local obj = minetest.add_item(pos, {
+                name = mobs.npc_drops[math.random(1, #mobs.npc_drops)]
+            })
+
+            if obj and obj:get_luaentity() then
+                obj:set_velocity({
+                    x = math.random(-10, 10) / 9,
+                    y = 6,
+                    z = math.random(-10, 10) / 9,
+                })
+            elseif obj then
+                obj:remove() -- item does not exist
+            end
+
+            minetest.chat_send_player(name, S('Snow Golem dropped you an item for gold!'))
+
+            return
+        end
+
+        -- by right-clicking owner can switch npc between follow and stand
+        if self.owner and self.owner == name then
+
+            if self.order == 'follow' then
+                self.order = 'stand'
+
+                minetest.chat_send_player(name, S('NPC stands still.'))
+            else
+                self.order = 'follow'
+
+                minetest.chat_send_player(name, S('NPC will follow you.'))
+            end
+        end
     end,
 }
 
 mobs:register_mob(':mobs_npc:snow_golem', snow_golem_def)
 
 -- mobs:spawn({
---   name = 'mobs_npc:snow_golem',
---   nodes = {'default:desert_sand', 'default:desert_stone', 'default:sand', 'default:sandstone', 'default:silver_sand', 'mobs_npc:deco_stone_eye', 'mobs_npc:deco_stone_men', 'mobs_npc:deco_stone_sun'},
---   min_light = 0,
---   max_light = 20,
---   chance = 2000,
---   active_object_count = 2,
---   day_toggle = false,
+--     name = 'mobs_npc:snow_golem',
+--     nodes = {
+--         'default:desert_sand',
+--         'default:desert_stone',
+--         'default:sand',
+--         'default:sandstone',
+--         'default:silver_sand',
+--         'mobs_npc:deco_stone_eye',
+--         'mobs_npc:deco_stone_men',
+--         'mobs_npc:deco_stone_sun'
+--     },
+--     min_light = 0,
+--     max_light = 20,
+--     chance = 2000,
+--     active_object_count = 2,
+--     day_toggle = false,
 -- })
 
 mobs:register_egg(':mobs_npc:snow_golem', 'Snow Golem', 'default_snow.png', 1)
@@ -157,8 +173,8 @@ mobs:register_egg(':mobs_npc:snow_golem', 'Snow Golem', 'default_snow.png', 1)
 -- shooting
 mobs:register_arrow(':mobs_npc:snowball_arrow', {
   visual = 'sprite',
-  visual_size = {x = 1, y = 1},
-  textures = {'default_snowball.png'},
+  visual_size = { x = 1, y = 1 },
+  textures = { 'default_snowball.png' },
   velocity = 14,
   tail = 0,
   tail_texture = 'default_snowball.png',
@@ -167,19 +183,19 @@ mobs:register_arrow(':mobs_npc:snowball_arrow', {
 
   -- direct hit, no fire... just plenty of pain
   hit_player = function(self, player)
-    player:punch(self.object, 1.0, {
-      full_punch_interval = 1.0,
-      damage_groups = {fleshy = 8},
-    }, nil)
+        player:punch(self.object, 1.0, {
+        full_punch_interval = 1.0,
+        damage_groups = { fleshy = 8 },
+        }, nil)
   end,
 
-  hit_mob = function(self, player)
-    player:punch(self.object, 1.0, {
-      full_punch_interval = 1.0,
-      damage_groups = {fleshy = 8},
-    }, nil)
-  end,
+    hit_mob = function(self, player)
+        player:punch(self.object, 1.0, {
+            full_punch_interval = 1.0,
+            damage_groups = { fleshy = 8 },
+        }, nil)
+    end,
 
-  hit_node = function(self, pos, node)
-  end
+    hit_node = function(self, pos, node)
+    end
 })

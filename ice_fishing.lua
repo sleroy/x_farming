@@ -1,4 +1,4 @@
-creative = minetest.global_exists('creative') and x_default --[[@as MtgCreative]]
+creative = minetest.global_exists('creative') and creative --[[@as MtgCreative]]
 screwdriver = minetest.global_exists('screwdriver') and screwdriver --[[@as MtgScrewdriver]]
 hbhunger = minetest.global_exists('hbhunger') and hbhunger --[[@as table]]
 

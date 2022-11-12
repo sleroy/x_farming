@@ -1,3 +1,5 @@
+local S = minetest.get_translator(minetest.get_current_modname())
+
 -- spawn snow golem
 local function pumpkin_on_construct(pos)
     if not minetest.get_modpath('mobs_npc') then return end
@@ -18,7 +20,7 @@ end
 
 -- PUMPKIN
 farming.register_plant('x_farming:pumpkin', {
-    description = 'Pumpkin Seed',
+    description = S('Pumpkin Seed'),
     inventory_image = 'x_farming_pumpkin_seed.png',
     steps = 8,
     minlight = 13,
@@ -30,7 +32,7 @@ farming.register_plant('x_farming:pumpkin', {
 
 -- PUMPKIN FRUIT - HARVEST
 minetest.register_node('x_farming:pumpkin_fruit', {
-    description = 'Pumpkin Fruit',
+    description = S('Pumpkin Fruit'),
     tiles = {
         'x_farming_pumpkin_fruit_top.png',
         'x_farming_pumpkin_fruit_top.png',
@@ -80,7 +82,7 @@ minetest.register_node('x_farming:pumpkin_fruit', {
 
 -- PUMPKIN BLOCK - HARVEST from crops
 minetest.register_node('x_farming:pumpkin_block', {
-    description = 'Pumpkin Block',
+    description = S('Pumpkin Block'),
     tiles = {
         'x_farming_pumpkin_fruit_top.png',
         'x_farming_pumpkin_fruit_top.png',
@@ -98,7 +100,7 @@ minetest.register_node('x_farming:pumpkin_block', {
 
 -- PUMPKIN LANTERN -- from recipe
 minetest.register_node('x_farming:pumpkin_lantern', {
-    description = 'Pumpkin Lantern',
+    description = S('Pumpkin Lantern'),
     tiles = {
         'x_farming_pumpkin_fruit_top.png',
         'x_farming_pumpkin_fruit_top.png',
@@ -157,7 +159,7 @@ minetest.register_decoration({
 
 ---crate
 x_farming.register_crate('crate_pumpkin_block_3', {
-    description = 'Pumpkin Crate',
+    description = S('Pumpkin Crate'),
     tiles = { 'x_farming_crate_pumpkin_block_3.png' },
     _custom = {
         crate_item = 'x_farming:pumpkin_block'

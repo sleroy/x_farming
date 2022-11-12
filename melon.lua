@@ -1,6 +1,8 @@
+local S = minetest.get_translator(minetest.get_current_modname())
+
 -- MELON
 farming.register_plant('x_farming:melon', {
-    description = 'Melon Seed',
+    description = S('Melon Seed'),
     inventory_image = 'x_farming_melon_seed.png',
     steps = 8,
     minlight = 13,
@@ -12,14 +14,14 @@ farming.register_plant('x_farming:melon', {
 
 -- needed
 minetest.override_item('x_farming:melon', {
-    description = 'Melon' .. '\n' .. minetest.colorize(x_farming.colors.brown, 'Hunger: 2'),
+    description = S('Melon') .. '\n' .. minetest.colorize(x_farming.colors.brown, S('Hunger') .. ': 2'),
     on_use = minetest.item_eat(2),
     wield_image = 'x_farming_melon.png^[transformR90',
 })
 
 -- MELON FRUIT - HARVEST
 minetest.register_node('x_farming:melon_fruit', {
-    description = 'Melon Fruit',
+    description = S('Melon Fruit'),
     tiles = {
         'x_farming_melon_fruit_top.png',
         'x_farming_melon_fruit_top.png',
@@ -88,7 +90,7 @@ minetest.register_node('x_farming:melon_fruit', {
 
 -- MELON BLOCK - HARVEST from crops
 minetest.register_node('x_farming:melon_block', {
-    description = 'Melon Block',
+    description = S('Melon Block'),
     tiles = {
         'x_farming_melon_fruit_top.png',
         'x_farming_melon_fruit_top.png',
@@ -138,7 +140,7 @@ minetest.register_decoration({
 
 ---crate
 x_farming.register_crate('crate_melon_3', {
-    description = 'Melon Crate',
+    description = S('Melon Crate'),
     tiles = { 'x_farming_crate_melon_3.png' },
     _custom = {
         crate_item = 'x_farming:melon'

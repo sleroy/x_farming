@@ -1,11 +1,12 @@
 stairs = stairs --[[@as MtgStairs]]
 
+local S = minetest.get_translator(minetest.get_current_modname())
 local minlight = 0
 local maxlight = default.LIGHT_MAX
 
 -- OBSIDIAN WART
 farming.register_plant('x_farming:obsidian_wart', {
-    description = 'Obsidian Wart Seed' .. '\n' .. 'Plant on Obsidian',
+    description = S('Obsidian Wart Seed') .. '\n' .. S('Plant on Obsidian'),
     paramtype2 = 'meshoptions',
     inventory_image = 'x_farming_obsidian_wart_seed.png',
     steps = 6,
@@ -28,7 +29,7 @@ minetest.override_item('default:obsidian', {
 
 -- obsidian - soil
 minetest.register_node('x_farming:obsidian_soil', {
-    description = 'Obsidian Soil',
+    description = S('Obsidian Soil'),
     drop = 'default:obsidian',
     tiles = { 'x_farming_obsidian_soil.png', 'default_obsidian.png' },
     groups = { cracky = 1, level = 2, soil = 2, underground = 1, field = 1, not_in_creative_inventory = 1 },
@@ -42,7 +43,7 @@ minetest.register_node('x_farming:obsidian_soil', {
 
 -- obsidian - soil - wet
 minetest.register_node('x_farming:obsidian_soil_wet', {
-    description = 'Wet Obsidian Soil',
+    description = S('Wet Obsidian Soil'),
     drop = 'default:obsidian',
     tiles = { 'x_farming_obsidian_soil_wet.png', 'x_farming_obsidian_soil_wet_side.png' },
     groups = { cracky = 1, level = 2, soil = 3, wet = 1, underground = 1, field = 1, not_in_creative_inventory = 1 },
@@ -58,28 +59,28 @@ minetest.register_node('x_farming:obsidian_soil_wet', {
 -- Nodes
 --
 minetest.register_node('x_farming:wart_block', {
-    description = 'Wart Block',
+    description = S('Wart Block'),
     tiles = { 'x_farming_wart_block.png' },
     groups = { cracky = 3 },
     sounds = default.node_sound_stone_defaults()
 })
 
 minetest.register_node('x_farming:wartrack', {
-    description = 'Wartrack',
+    description = S('Wartrack'),
     tiles = { 'x_farming_wartrack.png' },
     groups = { cracky = 3 },
     sounds = default.node_sound_stone_defaults()
 })
 
 minetest.register_node('x_farming:wart_brick_block', {
-    description = 'Wart Brick Block',
+    description = S('Wart Brick Block'),
     tiles = { 'x_farming_wart_brick_block.png' },
     groups = { cracky = 2 },
     sounds = default.node_sound_stone_defaults()
 })
 
 minetest.register_node('x_farming:wart_red_brick_block', {
-    description = 'Wart Red Brick Block',
+    description = S('Wart Red Brick Block'),
     tiles = { 'x_farming_wart_red_brick_block.png' },
     groups = { cracky = 2 },
     sounds = default.node_sound_stone_defaults()
@@ -93,8 +94,8 @@ stairs.register_stair_and_slab(
     'x_farming:wart_block',
     { cracky = 3 },
     { 'x_farming_wart_block.png' },
-    'Wart Block Stair',
-    'Wart Block Slab',
+    S('Wart Block Stair'),
+    S('Wart Block Slab'),
     default.node_sound_stone_defaults()
 )
 
@@ -103,8 +104,8 @@ stairs.register_stair_and_slab(
     'x_farming:wart_brick_block',
     { cracky = 2 },
     { 'x_farming_wart_brick_block.png' },
-    'Wart Brick Stair',
-    'Wart Brick Slab',
+    S('Wart Brick Stair'),
+    S('Wart Brick Slab'),
     default.node_sound_stone_defaults()
 )
 
@@ -113,8 +114,8 @@ stairs.register_stair_and_slab(
     'x_farming:wart_red_brick_block',
     { cracky = 2 },
     { 'x_farming_wart_red_brick_block.png' },
-    'Wart Red Brick Stair',
-    'Wart Red Brick Slab',
+    S('Wart Red Brick Stair'),
+    S('Wart Red Brick Slab'),
     default.node_sound_stone_defaults()
 )
 
@@ -123,14 +124,14 @@ stairs.register_stair_and_slab(
     'x_farming:wartrack',
     { cracky = 3 },
     { 'x_farming_wartrack.png' },
-    'Wartrack Stair',
-    'Wartrack Slab',
+    S('Wartrack Stair'),
+    S('Wartrack Slab'),
     default.node_sound_stone_defaults()
 )
 
 
 minetest.register_node('x_farming:obsidian_wart_decor', {
-    description = 'Obsidian Wart',
+    description = S('Obsidian Wart'),
     drawtype = 'plantlike_rooted',
     waving = 1,
     paramtype = 'light',
@@ -202,7 +203,7 @@ minetest.register_decoration({
 
 ---crate
 x_farming.register_crate('crate_obsidian_wart_3', {
-    description = 'Obsidian Wart Crate',
+    description = S('Obsidian Wart Crate'),
     tiles = { 'x_farming_crate_obsidian_wart_3.png' },
     _custom = {
         crate_item = 'x_farming:obsidian_wart'

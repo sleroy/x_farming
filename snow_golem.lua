@@ -1,6 +1,6 @@
 mobs = minetest.global_exists('mobs') and mobs --[[@as table]]
 
-local S = mobs.intllib
+local S = minetest.get_translator(minetest.get_current_modname())
 
 mobs.npc_drops = {
   'default:mese_crystal',
@@ -80,7 +80,6 @@ local snow_golem_def = {
     die_loop = false,
   },
   on_rightclick = function(self, clicker)
-
         -- feed to heal npc
         if mobs:feed_tame(self, clicker, 8, true, true) then
             return

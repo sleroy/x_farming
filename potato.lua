@@ -1,9 +1,10 @@
+local S = minetest.get_translator(minetest.get_current_modname())
 local minlight = 13
 local maxlight = default.LIGHT_MAX
 
 -- POTATO
 farming.register_plant('x_farming:potato', {
-    description = 'Planting Potato',
+    description = S('Planting Potato'),
     paramtype2 = 'meshoptions',
     inventory_image = 'x_farming_potato_seed.png',
     steps = 8,
@@ -17,7 +18,7 @@ farming.register_plant('x_farming:potato', {
 
 -- needed
 minetest.override_item('x_farming:potato', {
-    description = 'Potato' .. '\n' .. minetest.colorize(x_farming.colors.brown, 'Hunger: 2'),
+    description = S('Potato') .. '\n' .. minetest.colorize(x_farming.colors.brown, S('Hunger') .. ': 2'),
     on_use = minetest.item_eat(2),
 })
 
@@ -56,7 +57,7 @@ minetest.register_decoration({
 
 ---crate
 x_farming.register_crate('crate_potato_3', {
-    description = 'Potato Crate',
+    description = S('Potato Crate'),
     tiles = { 'x_farming_crate_potato_3.png' },
     _custom = {
         crate_item = 'x_farming:potato'

@@ -1,6 +1,8 @@
+local S = minetest.get_translator(minetest.get_current_modname())
+
 -- COFFEE
 farming.register_plant('x_farming:coffee', {
-    description = 'Coffee Seed',
+    description = S('Coffee Seed'),
     paramtype2 = 'meshoptions',
     inventory_image = 'x_farming_coffee_seed.png',
     steps = 5,
@@ -12,10 +14,11 @@ farming.register_plant('x_farming:coffee', {
 })
 
 -- hot cup of coffee
-local coffee_cup_hot_desc = 'Hot Cup of Coffee' .. '\n' .. minetest.colorize(x_farming.colors.brown, 'Hunger: 6')
+local coffee_cup_hot_desc = S('Hot Cup of Coffee') .. '\n'
+    .. minetest.colorize(x_farming.colors.brown, S('Hunger') .. ': 6')
 
 if x_farming.hbhunger ~= nil then
-    coffee_cup_hot_desc = coffee_cup_hot_desc .. '\n' .. minetest.colorize(x_farming.colors.red, 'Heal: 4')
+    coffee_cup_hot_desc = coffee_cup_hot_desc .. '\n' .. minetest.colorize(x_farming.colors.red, S('Heal') .. ': 4')
 end
 
 minetest.register_node('x_farming:coffee_cup_hot', {
@@ -65,7 +68,7 @@ minetest.register_decoration({
 
 ---crate
 x_farming.register_crate('crate_coffee_3', {
-    description = 'Coffee Crate',
+    description = S('Coffee Crate'),
     tiles = { 'x_farming_crate_coffee_3.png' },
     _custom = {
         crate_item = 'x_farming:coffee'

@@ -1,5 +1,7 @@
 stairs = stairs --[[@as MtgStairs]]
 
+local S = minetest.get_translator(minetest.get_current_modname())
+
 -- decoration
 minetest.register_decoration({
     name = 'x_farming:pine_nut_tree',
@@ -23,7 +25,7 @@ minetest.register_decoration({
 
 -- trunk
 minetest.register_node('x_farming:pine_nut_tree', {
-    description = 'Pine Nut Tree',
+    description = S('Pine Nut Tree'),
     tiles = { 'x_farming_pine_nut_tree_top.png', 'x_farming_pine_nut_tree_top.png', 'x_farming_pine_nut_tree.png' },
     paramtype2 = 'facedir',
     is_ground_content = false,
@@ -35,7 +37,7 @@ minetest.register_node('x_farming:pine_nut_tree', {
 
 -- leaves
 minetest.register_node('x_farming:pine_nut_leaves', {
-    description = 'Pine Nut Needles',
+    description = S('Pine Nut Needles'),
     drawtype = 'allfaces_optional',
     waving = 1,
     tiles = { 'x_farming_pine_nut_leaves.png' },
@@ -65,7 +67,7 @@ minetest.register_node('x_farming:pine_nut_leaves', {
 
 -- sapling
 minetest.register_node('x_farming:pine_nut_sapling', {
-    description = 'Pine Nut Sapling',
+    description = S('Pine Nut Sapling'),
     drawtype = 'plantlike',
     tiles = { 'x_farming_pine_nut_sapling.png' },
     inventory_image = 'x_farming_pine_nut_sapling.png',
@@ -102,7 +104,7 @@ minetest.register_node('x_farming:pine_nut_sapling', {
 
 -- fruit
 minetest.register_node('x_farming:pine_nut', {
-    description = 'Pine Nut',
+    description = S('Pine Nut'),
     drawtype = 'plantlike',
     tiles = { 'x_farming_pine_nut.png' },
     inventory_image = 'x_farming_pine_nut.png',
@@ -138,14 +140,14 @@ minetest.register_node('x_farming:pine_nut', {
 })
 
 minetest.register_craftitem('x_farming:pine_nut_roasted', {
-    description = 'Pine Nut Roasted' .. '\n' .. minetest.colorize(x_farming.colors.brown, 'Hunger: 2'),
+    description = S('Pine Nut Roasted') .. '\n' .. minetest.colorize(x_farming.colors.brown, S('Hunger') .. ': 2'),
     inventory_image = 'x_farming_pine_nut_roasted.png',
     on_use = minetest.item_eat(2),
     groups = { flammable = 2 },
 })
 
 minetest.register_node('x_farming:pine_nut_mark', {
-    description = 'Pine Nut Marker',
+    description = S('Pine Nut Marker'),
     inventory_image = 'x_farming:pine_nut.png^default_invisible_node_overlay.png',
     wield_image = 'x_farming:pine_nut.png^default_invisible_node_overlay.png',
     drawtype = 'airlike',
@@ -178,7 +180,7 @@ default.register_leafdecay({
 
 -- planks
 minetest.register_node('x_farming:pine_nut_wood', {
-    description = 'Pine Nut Wood Planks',
+    description = S('Pine Nut Wood Planks'),
     paramtype2 = 'facedir',
     place_param2 = 0,
     tiles = { 'x_farming_pine_nut_wood.png' },
@@ -219,8 +221,8 @@ if minetest.global_exists('stairs') and minetest.get_modpath('stairs') then
         'x_farming:pine_nut_wood',
         { choppy = 2, oddly_breakable_by_hand = 2, flammable = 2 },
         { 'x_farming_pine_nut_wood.png' },
-        'Pine Nut Wooden Stair',
-        'Pine Nut Wooden Slab',
+        S('Pine Nut Wooden Stair'),
+        S('Pine Nut Wooden Slab'),
         default.node_sound_wood_defaults(),
         false
     )
@@ -228,7 +230,7 @@ end
 
 ---crate
 x_farming.register_crate('crate_pine_nut_3', {
-    description = 'Pine Nut Crate',
+    description = S('Pine Nut Crate'),
     tiles = { 'x_farming_crate_pine_nut_3.png' },
     _custom = {
         crate_item = 'x_farming:pine_nut'

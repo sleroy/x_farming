@@ -1,11 +1,12 @@
 farming = minetest.global_exists('farming') and farming --[[@as MtgFarming]]
 
+local S = minetest.get_translator(minetest.get_current_modname())
 local minlight = 13
 local maxlight = default.LIGHT_MAX
 
 ---beetroot
 farming.register_plant('x_farming:beetroot', {
-    description = 'Beetroot Seed',
+    description = S('Beetroot Seed'),
     paramtype2 = 'meshoptions',
     inventory_image = 'x_farming_beetroot_seed.png',
     steps = 8,
@@ -19,7 +20,7 @@ farming.register_plant('x_farming:beetroot', {
 
 ---needed
 minetest.override_item('x_farming:beetroot', {
-    description = 'Beetroot' .. '\n' .. minetest.colorize(x_farming.colors.brown, 'Hunger: 3'),
+    description = S('Beetroot') .. '\n' .. minetest.colorize(x_farming.colors.brown, S('Hunger') .. ': 3'),
     on_use = minetest.item_eat(3),
 })
 
@@ -45,7 +46,7 @@ minetest.register_decoration({
 
 ---crate
 x_farming.register_crate('crate_beetroot_3', {
-    description = 'Beetroot Crate',
+    description = S('Beetroot Crate'),
     tiles = { 'x_farming_crate_beetroot_3.png' },
     _custom = {
         crate_item = 'x_farming:beetroot'

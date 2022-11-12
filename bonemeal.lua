@@ -6,9 +6,11 @@
 
 x_default = minetest.global_exists('x_default') and x_default --[[@as table]]
 
+local S = minetest.get_translator(minetest.get_current_modname())
+
 ---Register craftitem definition - added to minetest.registered_items[name]
 minetest.register_craftitem('x_farming:bonemeal', {
-    description = 'Bonemeal - use it as a fertilizer for most plants',
+    description = S('Bonemeal - use it as a fertilizer for most plants'),
     inventory_image = 'x_farming_x_bonemeal_bonemeal.png',
     on_use = function(itemstack, user, pointed_thing)
         if not user then

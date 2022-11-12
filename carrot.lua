@@ -1,9 +1,10 @@
+local S = minetest.get_translator(minetest.get_current_modname())
 local minlight = 13
 local maxlight = default.LIGHT_MAX
 
 -- carrot
 farming.register_plant('x_farming:carrot', {
-    description = 'Planting Carrot',
+    description = S('Planting Carrot'),
     paramtype2 = 'meshoptions',
     inventory_image = 'x_farming_carrot_seed.png',
     steps = 8,
@@ -17,7 +18,7 @@ farming.register_plant('x_farming:carrot', {
 
 -- needed
 minetest.override_item('x_farming:carrot', {
-    description = 'Carrot' .. '\n' .. minetest.colorize(x_farming.colors.brown, 'Hunger: 3'),
+    description = S('Carrot') .. '\n' .. minetest.colorize(x_farming.colors.brown, S('Hunger') .. ': 3'),
     on_use = minetest.item_eat(3),
 })
 
@@ -43,7 +44,7 @@ minetest.register_decoration({
 
 ---crate
 x_farming.register_crate('crate_carrot_3', {
-    description = 'Carrot Crate',
+    description = S('Carrot Crate'),
     tiles = { 'x_farming_crate_carrot_3.png' },
     _custom = {
         crate_item = 'x_farming:carrot'

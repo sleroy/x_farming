@@ -1,3 +1,5 @@
+local S = minetest.get_translator(minetest.get_current_modname())
+
 -- Large cactus
 
 minetest.register_decoration({
@@ -22,7 +24,7 @@ minetest.register_decoration({
 })
 
 minetest.register_node('x_farming:cactus_fruit', {
-    description = 'Dragon Fruit',
+    description = S('Dragon Fruit'),
     inventory_image = 'x_farming_cactus_fruit_sides.png',
     is_ground_content = false,
     tiles = {
@@ -66,7 +68,7 @@ minetest.register_node('x_farming:cactus_fruit', {
 })
 
 minetest.register_node('x_farming:cactus_fruit_mark', {
-    description = 'Cactus Fruit Marker',
+    description = S('Cactus Fruit Marker'),
     inventory_image = 'x_farming_cactus_fruit_sides.png^default_invisible_node_overlay.png',
     wield_image = 'x_farming_cactus_fruit_sides.png^default_invisible_node_overlay.png',
     drawtype = 'airlike',
@@ -92,7 +94,7 @@ minetest.register_node('x_farming:cactus_fruit_mark', {
 })
 
 minetest.register_node('x_farming:cactus_fruit_item', {
-    description = 'Dragon Fruit' .. '\n' .. minetest.colorize(x_farming.colors.brown, 'Hunger: 2'),
+    description = S('Dragon Fruit') .. '\n' .. minetest.colorize(x_farming.colors.brown, S('Hunger') .. ': 2'),
     drawtype = 'plantlike',
     tiles = { 'x_farming_cactus_fruit_item.png' },
     inventory_image = 'x_farming_cactus_fruit_item.png',
@@ -105,7 +107,7 @@ minetest.register_node('x_farming:cactus_fruit_item', {
 })
 
 minetest.register_node('x_farming:large_cactus_with_fruit_seedling', {
-    description = 'Large Cactus with Fruit Seedling',
+    description = S('Large Cactus with Fruit Seedling'),
     drawtype = 'plantlike',
     tiles = { 'x_farming_large_cactus_with_fruit_seedling.png' },
     inventory_image = 'x_farming_large_cactus_with_fruit_seedling.png',
@@ -204,7 +206,7 @@ minetest.register_craft({
 
 ---crate
 x_farming.register_crate('crate_cactus_fruit_item_3', {
-    description = 'Cactus Fruit Crate',
+    description = S('Cactus Fruit Crate'),
     tiles = { 'x_farming_crate_cactus_fruit_item_3.png' },
     _custom = {
         crate_item = 'x_farming:cactus_fruit_item'

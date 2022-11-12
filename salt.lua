@@ -1,5 +1,7 @@
 screwdriver = screwdriver --[[@as MtgScrewdriver]]
 
+local S = minetest.get_translator(minetest.get_current_modname())
+
 -- how often a growth failure tick is retried (e.g. too dark)
 local function tick_again(pos)
     minetest.get_node_timer(pos):start(math.random(80, 160))
@@ -7,14 +9,14 @@ end
 
 -- SALT
 minetest.register_craftitem('x_farming:salt', {
-    description = 'Salt',
+    description = S('Salt'),
     tiles = { 'x_farming_salt.png' },
     inventory_image = 'x_farming_salt.png',
     wield_image = 'x_farming_salt.png'
 })
 
 minetest.register_node('x_farming:seed_salt', {
-    description = 'Salty Water (plant on wet soil)',
+    description = S('Salty Water (plant on wet soil)'),
     inventory_image = 'x_farming_salt_water.png',
     wield_image = 'x_farming_salt_water.png',
     fertility = { 'grassland' },
@@ -67,7 +69,7 @@ minetest.register_node('x_farming:seed_salt', {
 
 -- 1
 minetest.register_node('x_farming:salt_1', {
-    description = 'Salt 1',
+    description = S('Salt') .. ' 1',
     drawtype = 'nodebox',
     tiles = {
         'x_farming_salt_1_top.png',
@@ -117,7 +119,7 @@ minetest.register_node('x_farming:salt_1', {
 
 -- 2
 minetest.register_node('x_farming:salt_2', {
-    description = 'Salt 2',
+    description = S('Salt') .. ' 2',
     drawtype = 'nodebox',
     tiles = {
         'x_farming_salt_2_top.png',
@@ -167,7 +169,7 @@ minetest.register_node('x_farming:salt_2', {
 
 -- 3
 minetest.register_node('x_farming:salt_3', {
-    description = 'Salt 3',
+    description = S('Salt') .. ' 3',
     drawtype = 'nodebox',
     tiles = {
         'x_farming_salt_2_top.png',
@@ -218,7 +220,7 @@ minetest.register_node('x_farming:salt_3', {
 
 -- 4
 minetest.register_node('x_farming:salt_4', {
-    description = 'Salt 4',
+    description = S('Salt') .. ' 4',
     drawtype = 'nodebox',
     tiles = {
         'x_farming_salt_3_top.png',
@@ -269,7 +271,7 @@ minetest.register_node('x_farming:salt_4', {
 
 -- 5
 minetest.register_node('x_farming:salt_5', {
-    description = 'Salt 5',
+    description = S('Salt') .. ' 5',
     drawtype = 'nodebox',
     tiles = {
         'x_farming_salt_3_top.png',
@@ -321,7 +323,7 @@ minetest.register_node('x_farming:salt_5', {
 
 -- 6
 minetest.register_node('x_farming:salt_6', {
-    description = 'Salt 6',
+    description = S('Salt') .. ' 6',
     drawtype = 'nodebox',
     tiles = {
         'x_farming_salt_4_top.png',
@@ -373,7 +375,7 @@ minetest.register_node('x_farming:salt_6', {
 
 -- 7
 minetest.register_node('x_farming:salt_7', {
-    description = 'Salt 7',
+    description = S('Salt') .. ' 7',
     drawtype = 'nodebox',
     tiles = {
         'x_farming_salt_4_top.png',
@@ -462,7 +464,7 @@ minetest.register_decoration({
 
 ---bag
 x_farming.register_bag('bag_salt', {
-    description = 'Salt Bag',
+    description = S('Salt') .. ' Bag',
     tiles = { 'x_farming_bag_salt.png' },
     _custom = {
         bag_item = 'x_farming:salt'

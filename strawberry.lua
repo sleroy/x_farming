@@ -1,6 +1,8 @@
+local S = minetest.get_translator(minetest.get_current_modname())
+
 -- STRAWBERRY
 farming.register_plant('x_farming:strawberry', {
-    description = 'Strawberry Seed',
+    description = S('Strawberry Seed'),
     paramtype2 = 'meshoptions',
     inventory_image = 'x_farming_strawberry_seed.png',
     steps = 4,
@@ -13,7 +15,7 @@ farming.register_plant('x_farming:strawberry', {
 
 -- needed
 minetest.override_item('x_farming:strawberry', {
-    description = 'Strawberry' .. '\n' .. minetest.colorize(x_farming.colors.brown, 'Hunger: 2'),
+    description = S('Strawberry') .. '\n' .. minetest.colorize(x_farming.colors.brown, S('Hunger') .. ': 2'),
     on_use = minetest.item_eat(2),
 })
 
@@ -41,7 +43,7 @@ end
 
 ---crate
 x_farming.register_crate('crate_strawberry_3', {
-    description = 'Strawberry Crate',
+    description = S('Strawberry Crate'),
     tiles = { 'x_farming_crate_strawberry_3.png' },
     _custom = {
         crate_item = 'x_farming:strawberry'

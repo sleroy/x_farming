@@ -1,5 +1,7 @@
 stairs = stairs --[[@as MtgStairs]]
 
+local S = minetest.get_translator(minetest.get_current_modname())
+
 -- Required wrapper to allow customization of default.after_place_leaves
 local function after_place_leaves(...)
     return default.after_place_leaves(...)
@@ -29,7 +31,7 @@ minetest.register_decoration({
 
 -- trunk
 minetest.register_node('x_farming:kiwi_tree', {
-    description = 'Kiwi Tree',
+    description = S('Kiwi Tree'),
     tiles = { 'x_farming_kiwi_tree_top.png', 'x_farming_kiwi_tree_top.png', 'x_farming_kiwi_tree.png' },
     paramtype2 = 'facedir',
     is_ground_content = false,
@@ -41,7 +43,7 @@ minetest.register_node('x_farming:kiwi_tree', {
 
 -- leaves
 minetest.register_node('x_farming:kiwi_leaves', {
-    description = 'Kiwi Tree Leaves',
+    description = S('Kiwi Tree Leaves'),
     drawtype = 'allfaces_optional',
     waving = 1,
     tiles = { 'x_farming_kiwi_leaves.png' },
@@ -71,7 +73,7 @@ minetest.register_node('x_farming:kiwi_leaves', {
 
 -- sapling
 minetest.register_node('x_farming:kiwi_sapling', {
-    description = 'Kiwi Tree Sapling',
+    description = S('Kiwi Tree Sapling'),
     drawtype = 'plantlike',
     tiles = { 'x_farming_kiwi_sapling.png' },
     inventory_image = 'x_farming_kiwi_sapling.png',
@@ -108,7 +110,7 @@ minetest.register_node('x_farming:kiwi_sapling', {
 
 -- fruit
 minetest.register_node('x_farming:kiwi', {
-    description = 'Kiwi',
+    description = S('Kiwi'),
     drawtype = 'plantlike',
     visual_scale = 0.5,
     tiles = { 'x_farming_kiwi.png' },
@@ -143,7 +145,7 @@ minetest.register_node('x_farming:kiwi', {
 })
 
 minetest.register_node('x_farming:kiwi_mark', {
-    description = 'Kiwi Marker',
+    description = S('Kiwi Marker'),
     inventory_image = 'x_farming:kiwi_fruit.png^default_invisible_node_overlay.png',
     wield_image = 'x_farming:kiwi_fruit.png^default_invisible_node_overlay.png',
     drawtype = 'airlike',
@@ -167,7 +169,7 @@ minetest.register_node('x_farming:kiwi_mark', {
 })
 
 minetest.register_node('x_farming:kiwi_fruit', {
-    description = 'Kiwi' .. '\n' .. minetest.colorize(x_farming.colors.brown, 'Hunger: 2'),
+    description = S('Kiwi') .. '\n' .. minetest.colorize(x_farming.colors.brown, S('Hunger') .. ': 2'),
     drawtype = 'mesh',
     mesh = 'x_farming_kiwi_fruit.obj',
     tiles = { 'x_farming_kiwi_fruit_mesh.png' },
@@ -200,7 +202,7 @@ default.register_leafdecay({
 
 -- planks
 minetest.register_node('x_farming:kiwi_wood', {
-    description = 'Kiwi Wood Planks',
+    description = S('Kiwi Wood Planks'),
     paramtype2 = 'facedir',
     place_param2 = 0,
     tiles = { 'x_farming_kiwi_wood.png' },
@@ -234,8 +236,8 @@ if minetest.global_exists('stairs') and minetest.get_modpath('stairs') then
         'x_farming:kiwi_wood',
         { choppy = 2, oddly_breakable_by_hand = 2, flammable = 2 },
         { 'x_farming_kiwi_wood.png' },
-        'Kiwi Wooden Stair',
-        'Kiwi Wooden Slab',
+        S('Kiwi Wooden Stair'),
+        S('Kiwi Wooden Slab'),
         default.node_sound_wood_defaults(),
         false
     )
@@ -243,7 +245,7 @@ end
 
 ---crate
 x_farming.register_crate('crate_kiwi_fruit_3', {
-    description = 'Kiwi Fruit Crate',
+    description = S('Kiwi Fruit Crate'),
     tiles = { 'x_farming_crate_kiwi_fruit_3.png' },
     _custom = {
         crate_item = 'x_farming:kiwi_fruit'

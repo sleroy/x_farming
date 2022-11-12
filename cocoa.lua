@@ -2,6 +2,8 @@ creative = creative --[[@as MtgCreative]]
 screwdriver = screwdriver --[[@as MtgScrewdriver]]
 stairs = stairs --[[@as MtgStairs]]
 
+local S = minetest.get_translator(minetest.get_current_modname())
+
 -- how often node timers for plants will tick, +/- some random value
 local function tick(pos)
     minetest.get_node_timer(pos):start(math.random(332, 572))
@@ -119,7 +121,7 @@ end
 
 -- COCOA
 minetest.register_craftitem('x_farming:cocoa_bean', {
-    description = 'Cocoa bean (plant on jungle tree)',
+    description = S('Cocoa bean') .. '(' .. S('plant on jungle tree') .. ')',
     tiles = { 'x_farming_cocoa_bean.png' },
     inventory_image = 'x_farming_cocoa_bean.png',
     wield_image = 'x_farming_cocoa_bean.png',
@@ -128,7 +130,7 @@ minetest.register_craftitem('x_farming:cocoa_bean', {
 
 -- 1
 minetest.register_node('x_farming:cocoa_1', {
-    description = 'Cocoa 1',
+    description = S('Cocoa') .. ' 1',
     drawtype = 'nodebox',
     tiles = {
         'x_farming_cocoa_top_1.png',
@@ -180,7 +182,7 @@ minetest.register_node('x_farming:cocoa_1', {
 
 -- 2
 minetest.register_node('x_farming:cocoa_2', {
-    description = 'Cocoa 2',
+    description = S('Cocoa') .. ' 2',
     drawtype = 'nodebox',
     tiles = {
         'x_farming_cocoa_top_2.png',
@@ -232,7 +234,7 @@ minetest.register_node('x_farming:cocoa_2', {
 
 -- 3
 minetest.register_node('x_farming:cocoa_3', {
-    description = 'Cocoa 3',
+    description = S('Cocoa') .. ' 3',
     drawtype = 'nodebox',
     tiles = {
         'x_farming_cocoa_top_3.png',
@@ -294,7 +296,7 @@ minetest.register_lbm({
 })
 
 minetest.register_node('x_farming:jungle_with_cocoa_sapling', {
-    description = 'Jungle Tree with Cocoa Sapling',
+    description = S('Jungle Tree with Cocoa Sapling'),
     drawtype = 'plantlike',
     tiles = { 'x_farming_junglesapling.png' },
     inventory_image = 'x_farming_junglesapling.png',
@@ -330,7 +332,7 @@ minetest.register_node('x_farming:jungle_with_cocoa_sapling', {
 
 -- trunk
 minetest.register_node('x_farming:jungle_tree', {
-    description = 'Jungle Tree',
+    description = S('Jungle Tree'),
     tiles = { 'x_farming_jungle_tree_top.png', 'x_farming_jungle_tree_top.png', 'x_farming_jungle_tree.png' },
     paramtype2 = 'facedir',
     is_ground_content = false,
@@ -342,7 +344,7 @@ minetest.register_node('x_farming:jungle_tree', {
 
 -- leaves
 minetest.register_node('x_farming:jungle_leaves', {
-    description = 'Jungle Tree Leaves',
+    description = S('Jungle Tree Leaves'),
     drawtype = 'allfaces_optional',
     waving = 1,
     tiles = { 'x_farming_jungleleaves.png' },
@@ -379,7 +381,7 @@ default.register_leafdecay({
 
 -- planks
 minetest.register_node('x_farming:jungle_wood', {
-    description = 'Jungle Wood Planks',
+    description = S('Jungle Wood Planks'),
     paramtype2 = 'facedir',
     place_param2 = 0,
     tiles = { 'x_farming_jungle_wood.png' },
@@ -436,7 +438,7 @@ minetest.register_decoration({
 
 ---crate
 x_farming.register_crate('crate_cocoa_bean_3', {
-    description = 'Cocoa Bean Crate',
+    description = S('Cocoa Bean Crate'),
     tiles = { 'x_farming_crate_cocoa_bean_3.png' },
     _custom = {
         crate_item = 'x_farming:cocoa_bean'

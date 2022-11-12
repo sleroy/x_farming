@@ -2,6 +2,8 @@ creative = minetest.global_exists('creative') and x_default --[[@as MtgCreative]
 screwdriver = minetest.global_exists('screwdriver') and screwdriver --[[@as MtgScrewdriver]]
 hbhunger = minetest.global_exists('hbhunger') and hbhunger --[[@as table]]
 
+local S = minetest.get_translator(minetest.get_current_modname())
+
 ---ICE FISHING
 local icefishing = {
     drops = {
@@ -16,7 +18,7 @@ local icefishing = {
             "x_farming:illager_ghostfish",
             "x_farming:father_sun",
             "x_farming:mother_moon",
-    },
+        },
         tier_1 = {
             "default:stick",
             "default:wood",
@@ -27,7 +29,7 @@ local icefishing = {
             "bones:bones",
             "default:clay",
             "x_farming:sea_cucumber",
-    },
+        },
         tier_2 = {
             "x_farming:shrimp",
             "x_farming:anchovy",
@@ -47,7 +49,7 @@ local icefishing = {
             "x_farming:red_seashroom",
             "x_farming:white_seashroom",
             "x_farming:yellow_seashroom",
-    },
+        },
         tier_3 = {
             "x_farming:goldeye",
             "x_farming:halibut",
@@ -57,7 +59,7 @@ local icefishing = {
             "x_farming:blobfish",
             "x_farming:tancho_koi",
             "x_farming:pike",
-    },
+        },
         tier_4 = {
             "x_farming:red_mullet",
             "x_farming:rainbow_trout",
@@ -67,8 +69,8 @@ local icefishing = {
             "x_farming:tilapia",
             "x_farming:obster",
             "x_farming:totemfish",
-    }
-},
+        }
+    },
     biomes = {
         ["icesheet_ocean"] = {
             "x_farming:angler",
@@ -76,14 +78,14 @@ local icefishing = {
             "x_farming:frozen_ocean_hermit_crab",
             "x_farming:paddlefish",
             "x_farming:pearl_isopod",
-    },
+        },
         ["taiga_ocean"] = {
             "x_farming:armored_catfish",
             "x_farming:gar",
             "x_farming:giant_moray",
             "x_farming:perch",
             "x_farming:piglish",
-    },
+        },
         ["desert_ocean"] = {
             "x_farming:arrow_squid",
             "x_farming:desert_frog",
@@ -91,28 +93,28 @@ local icefishing = {
             "x_farming:piranha",
             "x_farming:prismfish",
             "x_farming:pumpkinseed",
-    },
+        },
         ["tundra_ocean"] = {
             "x_farming:barracuda",
             "x_farming:flier",
             "x_farming:floral_faefish",
             "x_farming:flounder",
             "x_farming:fourhorn_sculpin",
-    },
+        },
         ["snowy_grassland_ocean"] = {
             "x_farming:grass_pickerel",
             "x_farming:guppy",
             "x_farming:hagfish",
             "x_farming:rainbowfish",
             "x_farming:red_snapper",
-    },
+        },
         ["coniferous_forest_ocean"] = {
             "x_farming:bream",
             "x_farming:redbreast_sunfish",
             "x_farming:rockfish",
             "x_farming:rohu",
             "x_farming:rosefish",
-    },
+        },
         ["grassland_ocean"] = {
             "x_farming:conger",
             "x_farming:sablefish",
@@ -120,26 +122,26 @@ local icefishing = {
             "x_farming:sawfish",
             "x_farming:skate",
             "x_farming:skullfin",
-    },
+        },
         ["savanna_ocean"] = {
             "x_farming:chorus_snail",
             "x_farming:white_bullhead",
             "x_farming:whitefish",
             "x_farming:wolffish",
             "x_farming:woodskip",
-    },
+        },
         ["cold_desert_ocean"] = {
             "x_farming:chub",
             "x_farming:cold_ocean_hermit_crab",
             "x_farming:oscar",
             "x_farming:leerfish",
-    },
+        },
         ["sandstone_desert_ocean"] = {
             "x_farming:clam",
             "x_farming:skykoi",
             "x_farming:smallmouth_bass",
             "x_farming:sterlet",
-    },
+        },
         ["deciduous_forest_ocean"] = {
             "x_farming:crayfish",
             "x_farming:damselfish",
@@ -147,7 +149,7 @@ local icefishing = {
             "x_farming:vampire_squid",
             "x_farming:walleye",
             "x_farming:warm_ocean_hermit_crab",
-    },
+        },
         ["rainforest_ocean"] = {
             "x_farming:burbot",
             "x_farming:koi",
@@ -155,43 +157,43 @@ local icefishing = {
             "x_farming:largemouth_bass",
             "x_farming:lava_eel",
             "x_farming:leech",
-    },
+        },
         ["rainforest_swamp"] = {
             "x_farming:swamp_darter",
             "x_farming:swamp_frog",
             "x_farming:sturgeon",
             "x_farming:sunfish",
             "x_farming:swordfish",
-    },
+        },
         ["icesheet"] = {
             "x_farming:dwarf_caiman",
             "x_farming:eel",
             "x_farming:electric_eel",
             "x_farming:endray",
             "x_farming:tench",
-    },
+        },
         ["tundra_beach"] = {
             "x_farming:carp",
             "x_farming:catfish",
             "x_farming:catla",
             "x_farming:ocean_hermit_crab",
             "x_farming:octopus",
-    },
+        },
         ["savanna_shore"] = {
             "x_farming:angelfish",
             "x_farming:lingcod",
             "x_farming:lukewarm_ocean_hermit_crab",
             "x_farming:magma_slimefish",
             "x_farming:manta_ray",
-    },
+        },
         ["deciduous_forest_shore"] = {
             "x_farming:congo_tiger_fish",
             "x_farming:convict_cichlid",
             "x_farming:minnow",
             "x_farming:mud_flounder",
             "x_farming:neon_tetra",
-    },
-}
+        },
+    }
 }
 
 ---how often node timers for plants will tick, +/- some random value
@@ -219,7 +221,7 @@ icefishing.on_construct = function(pos)
     end
 
     local meta = minetest.get_meta(pos)
-    meta:set_string("infotext", "Biome: "
+    meta:set_string("infotext", S("Biome") .. ": "
         .. string.gsub(string.gsub(biome_name, "(_)", " "), "(%a)([%w_']*)", x_farming.tchelper))
 end
 
@@ -448,7 +450,7 @@ icefishing.grow_plant = function(pos, elapsed)
         minsize = 1.5,
         maxsize = 2,
         texture = 'bubble.png'
-})
+    })
 
     ---new timer needed?
     if minetest.registered_nodes[def.next_plant].next_plant then
@@ -600,13 +602,14 @@ for i, def in ipairs(fishes) do
 
     ---raw
     minetest.register_craftitem(name, {
-        description = desc .. "\n" .. minetest.colorize(x_farming.colors.brown, "Hunger: " .. def.item_eat),
+        description = desc .. "\n"
+            .. minetest.colorize(x_farming.colors.brown, S("Hunger") .. ": " .. def.item_eat),
         tiles = { img },
         inventory_image = img,
         wield_image = img .. "^[transformFXR90",
         groups = { fish = 1 },
         on_use = minetest.item_eat(def.item_eat),
-})
+    })
 
     ---hbhunger
     if x_farming.hbhunger ~= nil then
@@ -618,20 +621,21 @@ for i, def in ipairs(fishes) do
     if def.item_eat_cooked ~= nil then
         ---cooked
         minetest.register_craftitem(name .. "_cooked", {
-            description = "Cooked " .. desc .. "\n" .. minetest.colorize(x_farming.colors.brown, "Hunger: "
+            description = S("Cooked") .. " " .. desc .. "\n"
+                .. minetest.colorize(x_farming.colors.brown, S("Hunger") .. ": "
                 .. def.item_eat_cooked),
             tiles = { img },
             inventory_image = img .. "^[colorize:#3B2510:204",
             wield_image = img .. "^[transformFXR90^[colorize:#3B2510:204",
             on_use = minetest.item_eat(def.item_eat_cooked),
-    })
+        })
 
         minetest.register_craft({
             type = "cooking",
             cooktime = 15,
             output = name .. "_cooked",
             recipe = name
-    })
+        })
 
         ---hbhunger
         if x_farming.hbhunger ~= nil then
@@ -661,7 +665,7 @@ icefishing.register_equipment = function(name, def)
             "x_farming_icefishing_left.png",
             "x_farming_icefishing_front_0.png",
             "x_farming_icefishing_back_0.png"
-    },
+        },
         inventory_image = "x_farming_icefishing_inv.png",
         wield_image = "x_farming_icefishing_inv.png",
         drawtype = "nodebox",
@@ -675,27 +679,27 @@ icefishing.register_equipment = function(name, def)
                 { -0.5, -0.5, -0.5, 0.5, -0.375, 0.5 },
                 { -0.5, -0.375, 0, 0.5, 0.5, 0 },
                 { 0, -0.375, -0.5, 0, -0.25, 0.5 },
-        }
-    },
+            }
+        },
         collision_box = {
             type = "fixed",
             fixed = {
                 { -0.5, -0.5, -0.5, 0.5, -0.375, 0.5 },
+            },
         },
-    },
         selection_box = {
             type = "fixed",
             fixed = {
                 { -0.5, -0.5, -0.5, 0.5, -0.375, 0.5 },
+            },
         },
-    },
         fertility = { "ice_fishing" },
         drop = "",
         sounds = default.node_sound_dirt_defaults({
             dig = { name = "", gain = 0 },
             dug = { name = "default_grass_footstep", gain = 0.2 },
             place = { name = "default_place_node", gain = 0.25 },
-    }),
+        }),
         next_plant = mname .. ":" .. pname .. "_1",
         on_timer = icefishing.grow_plant,
         minlight = 13,
@@ -718,7 +722,7 @@ icefishing.register_equipment = function(name, def)
         on_construct = icefishing.on_construct,
 
         after_destruct = icefishing.after_destruct,
-})
+    })
 
     ---Register growing steps
     for i = 1, def.steps do
@@ -739,14 +743,14 @@ icefishing.register_equipment = function(name, def)
                     aspect_w = 16,
                     aspect_h = 16,
                     length = 2.0,
+                },
             },
-        },
             { name = mname .. "_" .. pname .. "_bottom.png" },
             { name = mname .. "_" .. pname .. "_right.png" },
             { name = mname .. "_" .. pname .. "_left.png" },
             { name = mname .. "_" .. pname .. "_front_" .. i .. ".png" },
             { name = mname .. "_" .. pname .. "_back_" .. i .. ".png" },
-    }
+        }
 
         if last_step then
             tiles[1] = {
@@ -757,8 +761,8 @@ icefishing.register_equipment = function(name, def)
                     aspect_w = 16,
                     aspect_h = 16,
                     length = 2.0,
-            },
-        }
+                },
+            }
         end
 
         minetest.register_node(mname .. ":" .. pname .. "_" .. i, {
@@ -777,21 +781,21 @@ icefishing.register_equipment = function(name, def)
                 fixed = {
                     { -0.5, -0.5, -0.5, 0.5, -0.375, 0.5 },
                     { -0.5, -0.375, 0, 0.5, 0.5, 0 },
-                    { 0, -0.375, -0.5, 0, -0.25, 0.5 },
-            }
-        },
+                        { 0, -0.375, -0.5, 0, -0.25, 0.5 },
+                }
+            },
             collision_box = {
                 type = "fixed",
                 fixed = {
                     { -0.5, -0.5, -0.5, 0.5, -0.375, 0.5 },
+                },
             },
-        },
             selection_box = {
                 type = "fixed",
                 fixed = {
                     { -0.5, -0.5, -0.5, 0.5, -0.375, 0.5 },
+                },
             },
-        },
             groups = { snappy = 3, plant = 1, not_in_creative_inventory = 1, attached_node = 1 },
             sounds = default.node_sound_leaves_defaults(),
             next_plant = next_plant,
@@ -800,7 +804,7 @@ icefishing.register_equipment = function(name, def)
             maxlight = 15,
 
             after_destruct = icefishing.after_destruct,
-    })
+        })
     end
 
     ---replacement LBM for pre-nodetimer plants
@@ -810,24 +814,24 @@ icefishing.register_equipment = function(name, def)
         action = function(pos, node)
             icefishing.tick_again(pos)
         end,
-})
+    })
 
     ---Return
     local r = {
         seed = mname .. ":seed_" .. pname
-}
+    }
     return r
 end
 
 icefishing.register_equipment("x_farming:icefishing", {
-    description = "Ice Fishing (Place on drilled Ice)",
+    description = S("Ice Fishing (Place on drilled Ice)"),
     steps = 9,
 })
 
 ---nodes
 
 minetest.register_node("x_farming:drilled_ice", {
-    description = "Drilled Ice",
+    description = S("Drilled Ice"),
     tiles = {
         "x_farming_drilled_ice.png",
         "default_ice.png",
@@ -835,7 +839,7 @@ minetest.register_node("x_farming:drilled_ice", {
         "default_ice.png",
         "default_ice.png",
         "default_ice.png",
-},
+    },
     paramtype = "light",
     drop = "default:ice",
     groups = { cracky = 3, cools_lava = 1, slippery = 3, not_in_creative_inventory = 1, ice_fishing = 1 },
@@ -845,7 +849,7 @@ minetest.register_node("x_farming:drilled_ice", {
 ---tools
 
 minetest.register_tool("x_farming:ice_auger", {
-    description = "Ice Auger drills hole in ice for ice fishing.",
+    description = S("Ice Auger drills hole in ice for ice fishing."),
     inventory_image = "x_farming_ice_auger.png",
     wield_image = "x_farming_ice_auger.png^[transformR270",
     stack_max = 1,
@@ -901,7 +905,7 @@ minetest.register_tool("x_farming:ice_auger", {
         minetest.sound_play("x_farming_ice_dug", {
             pos = pt.under,
             gain = 0.5,
-    }, true)
+        }, true)
 
         minetest.add_particlespawner({
             amount = 10,
@@ -917,7 +921,7 @@ minetest.register_tool("x_farming:ice_auger", {
             node = { name = "default:snowblock" },
             collisiondetection = true,
             object_collision = true,
-    })
+        })
 
         if not (creative and creative.is_enabled_for and creative.is_enabled_for(user:get_player_name())) then
             ---wear tool
@@ -929,6 +933,7 @@ minetest.register_tool("x_farming:ice_auger", {
                     gain = 0.5 }, true)
             end
         end
+
         return itemstack
     end,
     sound = { breaks = "default_tool_breaks" },
@@ -940,7 +945,7 @@ minetest.register_craft({
         { "group:stick", "default:coalblock", "group:stick" },
         { "", "default:steel_ingot", "" },
         { "", "default:steel_ingot", "" },
-}
+    }
 })
 
 ---decorations
@@ -957,7 +962,7 @@ minetest.register_decoration({
         seed = 2,
         octaves = 3,
         persist = 0.7
-},
+    },
     biomes = { "icesheet", "snowy_grassland", "icesheet_ocean" },
     y_max = 30,
     y_min = 1,
@@ -968,6 +973,6 @@ minetest.register_decoration({
 
 ---crate
 x_farming.register_crate('crate_fish_3', {
-    description = 'Fish Crate',
+    description = S('Fish Crate'),
     tiles = { 'x_farming_crate_fish_3.png' },
 })

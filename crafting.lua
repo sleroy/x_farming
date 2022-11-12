@@ -2,6 +2,8 @@
 -- Crafting recipes & items
 --
 
+local S = minetest.get_translator(minetest.get_current_modname())
+
 -- Cocoa
 minetest.register_craft({
     output = 'dye:brown',
@@ -11,7 +13,7 @@ minetest.register_craft({
 })
 
 minetest.register_craftitem('x_farming:cookie', {
-    description = 'Cookie' .. '\n' .. minetest.colorize(x_farming.colors.brown, 'Hunger: 2'),
+    description = S('Cookie') .. '\n' .. minetest.colorize(x_farming.colors.brown, S('Hunger') .. ': 2'),
     inventory_image = 'x_farming_cookie.png',
     on_use = minetest.item_eat(2),
 })
@@ -23,7 +25,7 @@ minetest.register_craft({
 })
 
 minetest.register_craftitem('x_farming:chocolate', {
-    description = 'Chocolate' .. '\n' .. minetest.colorize(x_farming.colors.brown, 'Hunger: 3'),
+    description = S('Chocolate') .. '\n' .. minetest.colorize(x_farming.colors.brown, S('Hunger') .. ': 3'),
     inventory_image = 'x_farming_chocolate.png',
     on_use = minetest.item_eat(3),
 })
@@ -39,7 +41,7 @@ minetest.register_craft({
 
 -- Soup Bowl
 minetest.register_craftitem('x_farming:bowl', {
-    description = 'Empty Soup Bowl',
+    description = S('Empty Soup Bowl'),
     inventory_image = 'x_farming_bowl.png',
 })
 
@@ -81,10 +83,10 @@ minetest.register_craft({
 })
 
 -- Carrot
-local golden_carrot_desc = 'Golden Carrot' .. '\n' .. minetest.colorize(x_farming.colors.brown, 'Hunger: 10')
+local golden_carrot_desc = S('Golden Carrot') .. '\n' .. minetest.colorize(x_farming.colors.brown, S('Hunger') .. ': 10')
 
 if x_farming.hbhunger ~= nil then
-    golden_carrot_desc = golden_carrot_desc .. '\n' .. minetest.colorize(x_farming.colors.red, 'Heal: 10')
+    golden_carrot_desc = golden_carrot_desc .. '\n' .. minetest.colorize(x_farming.colors.red, S('Heal') .. ': 10')
 end
 
 minetest.register_craftitem('x_farming:carrot_golden', {
@@ -105,7 +107,7 @@ minetest.register_craft({
 
 -- Coffee
 minetest.register_craftitem('x_farming:bottle_coffee', {
-    description = 'Coffee Bottle',
+    description = S('Coffee Bottle'),
     tiles = { 'x_farming_bottle_coffee.png' },
     inventory_image = 'x_farming_bottle_coffee.png',
     wield_image = 'x_farming_bottle_coffee.png',
@@ -131,7 +133,7 @@ minetest.register_alias('x_farming:coffee_cup', 'x_farming:bottle_coffee')
 
 -- Corn
 minetest.register_craftitem('x_farming:corn_pop', {
-    description = 'Popped corn' .. '\n' .. minetest.colorize(x_farming.colors.brown, 'Hunger: 1'),
+    description = S('Popped corn') .. '\n' .. minetest.colorize(x_farming.colors.brown, S('Hunger') .. ': 1'),
     inventory_image = 'x_farming_corn_pop.png',
     on_use = minetest.item_eat(1),
 })
@@ -153,10 +155,10 @@ minetest.register_craft({
 })
 
 -- Melon
-local golden_melon_desc = 'Golden Melon' .. '\n' .. minetest.colorize(x_farming.colors.brown, 'Hunger: 10')
+local golden_melon_desc = S('Golden Melon') .. '\n' .. minetest.colorize(x_farming.colors.brown, S('Hunger') .. ': 10')
 
 if x_farming.hbhunger ~= nil then
-    golden_melon_desc = golden_melon_desc .. '\n' .. minetest.colorize(x_farming.colors.red, 'Heal: 10')
+    golden_melon_desc = golden_melon_desc .. '\n' .. minetest.colorize(x_farming.colors.red, S('Heal') .. ': 10')
 end
 
 minetest.register_craftitem('x_farming:golden_melon', {
@@ -186,7 +188,7 @@ minetest.register_craft({
 
 -- Obsidian Wart
 minetest.register_craftitem('x_farming:wart_brick', {
-    description = 'Wart Brick',
+    description = S('Wart Brick'),
     inventory_image = 'x_farming_wart_brick.png',
 })
 
@@ -232,15 +234,17 @@ minetest.register_craft({
 
 -- Potato
 minetest.register_craftitem('x_farming:bakedpotato', {
-    description = 'Baked Potato' .. '\n' .. minetest.colorize(x_farming.colors.brown, 'Hunger: 6'),
+    description = S('Baked Potato') .. '\n' .. minetest.colorize(x_farming.colors.brown, S('Hunger') .. ': 6'),
     inventory_image = 'x_farming_potato_baked.png',
     on_use = minetest.item_eat(6),
 })
 
-local poisonouspotato_desc = 'Poisonous Potato' .. '\n' .. minetest.colorize(x_farming.colors.brown, 'Hunger: -6')
+local poisonouspotato_desc = S('Poisonous Potato') .. '\n'
+    .. minetest.colorize(x_farming.colors.brown, S('Hunger') .. ': -6')
 
 if x_farming.hbhunger ~= nil then
-    poisonouspotato_desc = poisonouspotato_desc .. '\n' .. minetest.colorize(x_farming.colors.green, 'Poison: 5')
+    poisonouspotato_desc = poisonouspotato_desc .. '\n'
+        .. minetest.colorize(x_farming.colors.green, S('Poison') .. ': 5')
 end
 
 minetest.register_craftitem('x_farming:poisonouspotato', {
@@ -289,7 +293,7 @@ minetest.register_craft({
 
 -- Bottle Water
 minetest.register_craftitem('x_farming:bottle_water', {
-    description = 'Water Bottle',
+    description = S('Water Bottle'),
     tiles = { 'x_farming_bottle_water.png' },
     inventory_image = 'x_farming_bottle_water.png',
     wield_image = 'x_farming_bottle_water.png',

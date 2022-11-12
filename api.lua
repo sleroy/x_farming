@@ -1,3 +1,5 @@
+local S = minetest.get_translator(minetest.get_current_modname())
+
 ---how often node timers for plants will tick, +/- some random value
 function x_farming.tick(pos)
     minetest.get_node_timer(pos):start(math.random(498, 1287))
@@ -260,14 +262,14 @@ function x_farming.register_crate(name, def)
             local inv_stack = inv:get_stack('main', 1)
 
             meta:set_string('infotext', _def.short_description
-                .. ' (owned by ' .. meta:get_string('owner') .. ')\n'
-                .. inv_stack:get_description() .. '\nQuantity: ' .. inv_stack:get_count())
+                .. ' (' .. S('owned by') .. ' ' .. meta:get_string('owner') .. ')\n'
+                .. inv_stack:get_description() .. '\n' .. S('Quantity') .. ': ' .. inv_stack:get_count())
         else
             local swap_node = minetest.registered_nodes['x_farming:crate_empty']
             if swap_node and inv:is_empty('main') and node.name ~= swap_node.name then
                 minetest.swap_node(pos, { name = swap_node.name, param2 = node.param2 })
                 meta:set_string('infotext', swap_node.short_description
-                    .. ' (owned by ' .. meta:get_string('owner') .. ')')
+                    .. ' (' .. S('owned by') .. ' ' .. meta:get_string('owner') .. ')')
             end
         end
     end
@@ -281,7 +283,7 @@ function x_farming.register_crate(name, def)
         local meta = minetest.get_meta(pos)
         local inv = meta:get_inventory()
         local inv_stack = inv:get_stack('main', 1)
-        local label_copy = _def.short_description .. ' (owned by ' .. meta:get_string('owner')
+        local label_copy = _def.short_description .. ' (' .. S('owned by') .. ' ' .. meta:get_string('owner')
             .. ')\n' .. inv_stack:get_description()
         minetest.show_formspec(p_name, _def.name, x_farming.get_crate_or_bag_formspec(pos, label_copy))
         minetest.sound_play('default_dig_choppy', { gain = 0.3, pos = pos, max_hear_distance = 10 }, true)
@@ -324,7 +326,7 @@ function x_farming.register_crate(name, def)
 
             meta_drop:set_string('crate_inv', minetest.serialize(inv_stack:to_table()))
             meta_drop:set_string('description', stack:get_description() .. '\n' .. inv_stack:get_description()
-                .. '\nQuantity: ' .. inv_stack:get_count())
+                .. '\n' .. S('Quantity') .. ': ' .. inv_stack:get_count())
 
             return
         end
@@ -388,14 +390,15 @@ function x_farming.register_crate(name, def)
 
             minetest.swap_node(pos, { name = swap_node.name, param2 = node.param2 })
 
-            local label_copy = swap_node.short_description .. ' (owned by ' .. meta:get_string('owner') .. ')\n'
+            local label_copy = swap_node.short_description .. ' (' .. S('owned by') .. ' ' .. meta:get_string('owner') .. ')\n'
                 .. inv_stack:get_description()
 
             minetest.show_formspec(p_name, _def.name, x_farming.get_crate_or_bag_formspec(pos, label_copy))
         end
 
-        meta:set_string('infotext', swap_node.short_description .. ' (owned by ' .. meta:get_string('owner') .. ')\n'
-            .. inv_stack:get_description() .. '\nQuantity: ' .. inv_stack:get_count())
+        meta:set_string('infotext', swap_node.short_description .. ' (' .. S('owned by')
+            .. ' ' .. meta:get_string('owner') .. ')\n'
+            .. inv_stack:get_description() .. '\n' .. S('Quantity') .. ': ' .. inv_stack:get_count())
     end
 
     _def.on_metadata_inventory_take = function(pos, listname, index, stack, player)
@@ -411,9 +414,9 @@ function x_farming.register_crate(name, def)
             if swap_node then
                 minetest.swap_node(pos, { name = swap_node.name, param2 = node.param2 })
                 meta:set_string('infotext', swap_node.short_description
-                    .. ' (owned by ' .. meta:get_string('owner') .. ')')
+                    .. ' (' .. S('owned by') .. ' ' .. meta:get_string('owner') .. ')')
 
-                local label_copy = swap_node.short_description .. ' (owned by '
+                local label_copy = swap_node.short_description .. ' (' .. S('owned by') .. ' '
                     .. meta:get_string('owner') .. ')\n' .. inv_stack:get_description()
 
                 minetest.show_formspec(p_name, _def.name, x_farming.get_crate_or_bag_formspec(pos, label_copy))
@@ -423,8 +426,8 @@ function x_farming.register_crate(name, def)
 
             if node_def then
                 meta:set_string('infotext', node_def.short_description
-                    .. ' (owned by ' .. meta:get_string('owner') .. ')\n'
-                    .. inv_stack:get_description() .. '\nQuantity: ' .. inv_stack:get_count())
+                    .. ' (' .. S('owned by') .. ' ' .. meta:get_string('owner') .. ')\n'
+                    .. inv_stack:get_description() .. '\n' .. S('Quantity') .. ': ' .. inv_stack:get_count())
             end
         end
     end
@@ -524,15 +527,15 @@ function x_farming.register_bag(name, def)
         if not inv:is_empty('main') then
             local inv_stack = inv:get_stack('main', 1)
 
-            meta:set_string('infotext', _def.short_description .. ' (owned by '
+            meta:set_string('infotext', _def.short_description .. ' (' .. S('owned by') .. ' '
                 .. meta:get_string('owner') .. ')\n' .. inv_stack:get_description()
-                .. '\nQuantity: ' .. inv_stack:get_count())
+                .. '\n' .. S('Quantity') .. ': ' .. inv_stack:get_count())
         else
             local swap_node = minetest.registered_nodes['x_farming:bag_empty']
             if swap_node and inv:is_empty('main') and node.name ~= swap_node.name then
                 minetest.swap_node(pos, { name = swap_node.name, param2 = node.param2 })
                 meta:set_string('infotext', swap_node.short_description
-                    .. ' (owned by ' .. meta:get_string('owner') .. ')')
+                    .. ' (' .. S('owned by') .. ' ' .. meta:get_string('owner') .. ')')
             end
         end
     end
@@ -547,7 +550,7 @@ function x_farming.register_bag(name, def)
         local meta = minetest.get_meta(pos)
         local inv = meta:get_inventory()
         local inv_stack = inv:get_stack('main', 1)
-        local label_copy = _def.short_description .. ' (owned by ' .. meta:get_string('owner') .. ')\n'
+        local label_copy = _def.short_description .. ' (' .. S('owned by') .. ' ' .. meta:get_string('owner') .. ')\n'
             .. inv_stack:get_description()
         minetest.show_formspec(p_name, _def.name, x_farming.get_crate_or_bag_formspec(pos, label_copy))
         minetest.sound_play('default_sand_footstep', { gain = 0.3, pos = pos, max_hear_distance = 10 }, true)
@@ -590,7 +593,7 @@ function x_farming.register_bag(name, def)
 
             meta_drop:set_string('bag_inv', minetest.serialize(inv_stack:to_table()))
             meta_drop:set_string('description', stack:get_description() .. '\n'
-                .. inv_stack:get_description() .. '\nQuantity: ' .. inv_stack:get_count())
+                .. inv_stack:get_description() .. '\n' .. S('Quantity') .. ': ' .. inv_stack:get_count())
 
             return
         end
@@ -635,14 +638,15 @@ function x_farming.register_bag(name, def)
 
             minetest.swap_node(pos, { name = swap_node.name, param2 = node.param2 })
 
-            local label_copy = swap_node.short_description .. ' (owned by ' .. meta:get_string('owner') .. ')\n'
+            local label_copy = swap_node.short_description .. ' (' .. S('owned by') .. ' ' .. meta:get_string('owner') .. ')\n'
                 .. inv_stack:get_description()
 
             minetest.show_formspec(p_name, _def.name, x_farming.get_crate_or_bag_formspec(pos, label_copy))
         end
 
-        meta:set_string('infotext', swap_node.short_description .. ' (owned by ' .. meta:get_string('owner') .. ')\n'
-            .. inv_stack:get_description() .. '\nQuantity: ' .. inv_stack:get_count())
+        meta:set_string('infotext', swap_node.short_description .. ' (' .. S('owned by')
+            .. ' ' .. meta:get_string('owner') .. ')\n'
+            .. inv_stack:get_description() .. '\n' .. S('Quantity') .. ': ' .. inv_stack:get_count())
     end
 
     _def.on_metadata_inventory_take = function(pos, listname, index, stack, player)
@@ -658,10 +662,10 @@ function x_farming.register_bag(name, def)
             if swap_node then
                 minetest.swap_node(pos, { name = swap_node.name, param2 = node.param2 })
                 meta:set_string('infotext', swap_node.short_description
-                    .. ' (owned by ' .. meta:get_string('owner') .. ')')
+                    .. ' (' .. S('owned by') .. ' ' .. meta:get_string('owner') .. ')')
 
                 local label_copy = swap_node.short_description
-                    .. ' (owned by ' .. meta:get_string('owner') .. ')\n' .. inv_stack:get_description()
+                    .. ' (' .. S('owned by') .. ' ' .. meta:get_string('owner') .. ')\n' .. inv_stack:get_description()
 
                 minetest.show_formspec(p_name, _def.name, x_farming.get_crate_or_bag_formspec(pos, label_copy))
             end
@@ -669,9 +673,9 @@ function x_farming.register_bag(name, def)
             local node_def = minetest.registered_nodes[node.name]
 
             if node_def then
-                meta:set_string('infotext', node_def.short_description .. ' (owned by '
+                meta:set_string('infotext', node_def.short_description .. ' (' .. S('owned by') .. ' '
                     .. meta:get_string('owner') .. ')\n' .. inv_stack:get_description()
-                    .. '\nQuantity: ' .. inv_stack:get_count())
+                    .. '\n' .. S('Quantity') .. ': ' .. inv_stack:get_count())
             end
         end
     end

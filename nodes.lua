@@ -1,6 +1,8 @@
+local S = minetest.get_translator(minetest.get_current_modname())
+
 -- Donuts
 minetest.register_node('x_farming:donut', {
-    description = 'Donut' .. '\n' .. minetest.colorize(x_farming.colors.brown, 'Hunger: 3'),
+    description = S('Donut') .. '\n' .. minetest.colorize(x_farming.colors.brown, S('Hunger') .. ': 3'),
     drawtype = 'mesh',
     mesh = 'x_farming_donut.obj',
     tiles = { 'x_farming_donut_mesh.png' },
@@ -24,7 +26,7 @@ minetest.register_node('x_farming:donut', {
 })
 
 minetest.register_node('x_farming:donut_chocolate', {
-    description = 'Chocolate Donut' .. '\n' .. minetest.colorize(x_farming.colors.brown, 'Hunger: 4'),
+    description = S('Chocolate Donut') .. '\n' .. minetest.colorize(x_farming.colors.brown, S('Hunger') .. ': 4'),
     drawtype = 'mesh',
     mesh = 'x_farming_donut.obj',
     tiles = { 'x_farming_donut_chocolate_mesh.png' },
@@ -49,7 +51,7 @@ minetest.register_node('x_farming:donut_chocolate', {
 
 -- Fries
 minetest.register_node('x_farming:fries', {
-    description = 'Fries' .. '\n' .. minetest.colorize(x_farming.colors.brown, 'Hunger: 6'),
+    description = S('Fries') .. '\n' .. minetest.colorize(x_farming.colors.brown, S('Hunger') .. ': 6'),
     drawtype = 'mesh',
     mesh = 'x_farming_fries.obj',
     tiles = { 'x_farming_fries_mesh.png' },
@@ -75,7 +77,7 @@ minetest.register_node('x_farming:fries', {
 
 -- Pumpkin pie
 minetest.register_node('x_farming:pumpkin_pie', {
-    description = 'Pumpkin Pie' .. '\n' .. minetest.colorize(x_farming.colors.brown, 'Hunger: 6'),
+    description = S('Pumpkin Pie') .. '\n' .. minetest.colorize(x_farming.colors.brown, S('Hunger') .. ': 6'),
     drawtype = 'mesh',
     mesh = 'x_farming_pumpkin_pie.obj',
     tiles = { 'x_farming_pumpkin_pie_mesh.png' },
@@ -101,7 +103,7 @@ minetest.register_node('x_farming:pumpkin_pie', {
 
 -- Beetroot soup
 minetest.register_node('x_farming:beetroot_soup', {
-    description = 'Beetroot Soup' .. '\n' .. minetest.colorize(x_farming.colors.brown, 'Hunger: 6'),
+    description = S('Beetroot Soup') .. '\n' .. minetest.colorize(x_farming.colors.brown, S('Hunger') .. ': 6'),
     drawtype = 'mesh',
     mesh = 'x_farming_beetroot_soup.obj',
     tiles = { 'x_farming_beetroot_soup_mesh.png' },
@@ -127,7 +129,7 @@ minetest.register_node('x_farming:beetroot_soup', {
 
 -- Hog Stew
 minetest.register_node('x_farming:hog_stew', {
-    description = 'Hog Stew' .. '\n' .. minetest.colorize(x_farming.colors.brown, 'Hunger: 8'),
+    description = S('Hog Stew') .. '\n' .. minetest.colorize(x_farming.colors.brown, S('Hunger') .. ': 8'),
     drawtype = 'mesh',
     mesh = 'x_farming_hog_stew.obj',
     tiles = { 'x_farming_hog_stew_mesh.png' },

@@ -1,6 +1,9 @@
+
+local S = minetest.get_translator(minetest.get_current_modname())
+
 -- CORN
 farming.register_plant('x_farming:corn', {
-    description = 'corn Seed',
+    description = S('Corn Seed'),
     paramtype2 = 'meshoptions',
     inventory_image = 'x_farming_corn_seed.png',
     steps = 10,
@@ -53,7 +56,7 @@ minetest.override_item('x_farming:corn_10', {
 
 -- popcorn
 minetest.register_node('x_farming:corn_popcorn', {
-    description = 'Popcorn' .. '\n' .. minetest.colorize(x_farming.colors.brown, 'Hunger: 5'),
+    description = S('Popcorn') .. '\n' .. minetest.colorize(x_farming.colors.brown, S('Hunger') .. ': 5'),
     drawtype = 'mesh',
     mesh = 'x_farming_corn_popcorn.obj',
     tiles = { 'x_farming_corn_popcorn_mesh.png' },
@@ -98,7 +101,7 @@ minetest.register_decoration({
 
 ---crate
 x_farming.register_crate('crate_corn_3', {
-    description = 'Corn Crate',
+    description = S('Corn Crate'),
     tiles = { 'x_farming_crate_corn_3.png' },
     _custom = {
         crate_item = 'x_farming:corn'

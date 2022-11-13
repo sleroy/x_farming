@@ -22,7 +22,16 @@ minetest.register_node('x_farming:seed_salt', {
     fertility = { 'grassland' },
     drawtype = 'nodebox',
     tiles = {
-        'x_farming_salt_1_top.png',
+        {
+            name = "x_farming_salt_1_top.png",
+            backface_culling = false,
+            animation = {
+                type = "vertical_frames",
+                aspect_w = 16,
+                aspect_h = 16,
+                length = 2.0,
+            },
+        },
         'x_farming_salt_1_bottom.png',
         'x_farming_salt_1_side.png',
         'x_farming_salt_1_side.png',
@@ -72,7 +81,16 @@ minetest.register_node('x_farming:salt_1', {
     description = S('Salt') .. ' 1',
     drawtype = 'nodebox',
     tiles = {
-        'x_farming_salt_1_top.png',
+        {
+            name = "x_farming_salt_1_top.png",
+            backface_culling = false,
+            animation = {
+                type = "vertical_frames",
+                aspect_w = 16,
+                aspect_h = 16,
+                length = 2.0,
+            },
+        },
         'x_farming_salt_1_bottom.png',
         'x_farming_salt_1_side.png',
         'x_farming_salt_1_side.png',
@@ -122,7 +140,16 @@ minetest.register_node('x_farming:salt_2', {
     description = S('Salt') .. ' 2',
     drawtype = 'nodebox',
     tiles = {
-        'x_farming_salt_2_top.png',
+        {
+            name = "x_farming_salt_2_top.png",
+            backface_culling = false,
+            animation = {
+                type = "vertical_frames",
+                aspect_w = 16,
+                aspect_h = 16,
+                length = 2.0,
+            },
+        },
         'x_farming_salt_1_bottom.png',
         'x_farming_salt_1_side.png',
         'x_farming_salt_1_side.png',
@@ -172,7 +199,16 @@ minetest.register_node('x_farming:salt_3', {
     description = S('Salt') .. ' 3',
     drawtype = 'nodebox',
     tiles = {
-        'x_farming_salt_2_top.png',
+        {
+            name = "x_farming_salt_2_top.png",
+            backface_culling = false,
+            animation = {
+                type = "vertical_frames",
+                aspect_w = 16,
+                aspect_h = 16,
+                length = 2.0,
+            },
+        },
         'x_farming_salt_1_bottom.png',
         'x_farming_salt_2_side.png',
         'x_farming_salt_2_side.png',
@@ -223,7 +259,16 @@ minetest.register_node('x_farming:salt_4', {
     description = S('Salt') .. ' 4',
     drawtype = 'nodebox',
     tiles = {
-        'x_farming_salt_3_top.png',
+        {
+            name = "x_farming_salt_3_top.png",
+            backface_culling = false,
+            animation = {
+                type = "vertical_frames",
+                aspect_w = 16,
+                aspect_h = 16,
+                length = 2.0,
+            },
+        },
         'x_farming_salt_1_bottom.png',
         'x_farming_salt_2_side.png',
         'x_farming_salt_2_side.png',
@@ -274,7 +319,16 @@ minetest.register_node('x_farming:salt_5', {
     description = S('Salt') .. ' 5',
     drawtype = 'nodebox',
     tiles = {
-        'x_farming_salt_3_top.png',
+        {
+            name = "x_farming_salt_3_top.png",
+            backface_culling = false,
+            animation = {
+                type = "vertical_frames",
+                aspect_w = 16,
+                aspect_h = 16,
+                length = 2.0,
+            },
+        },
         'x_farming_salt_1_bottom.png',
         'x_farming_salt_3_side.png',
         'x_farming_salt_3_side.png',
@@ -326,7 +380,16 @@ minetest.register_node('x_farming:salt_6', {
     description = S('Salt') .. ' 6',
     drawtype = 'nodebox',
     tiles = {
-        'x_farming_salt_4_top.png',
+        {
+            name = "x_farming_salt_4_top.png",
+            backface_culling = false,
+            animation = {
+                type = "vertical_frames",
+                aspect_w = 16,
+                aspect_h = 16,
+                length = 2.0,
+            },
+        },
         'x_farming_salt_1_bottom.png',
         'x_farming_salt_3_side.png',
         'x_farming_salt_3_side.png',
@@ -378,7 +441,16 @@ minetest.register_node('x_farming:salt_7', {
     description = S('Salt') .. ' 7',
     drawtype = 'nodebox',
     tiles = {
-        'x_farming_salt_4_top.png',
+        {
+            name = "x_farming_salt_4_top.png",
+            backface_culling = false,
+            animation = {
+                type = "vertical_frames",
+                aspect_w = 16,
+                aspect_h = 16,
+                length = 2.0,
+            },
+        },
         'x_farming_salt_1_bottom.png',
         'x_farming_salt_4_side.png',
         'x_farming_salt_4_side.png',

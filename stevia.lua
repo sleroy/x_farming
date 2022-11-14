@@ -2,7 +2,8 @@ local S = minetest.get_translator(minetest.get_current_modname())
 
 -- STEVIA
 farming.register_plant('x_farming:stevia', {
-    description = S('Stevia Seed'),
+    description = S('Stevia Seed') .. '\n' .. S('Compost chance') .. ': 30%',
+    short_description = S('Stevia Seed'),
     paramtype2 = 'meshoptions',
     inventory_image = 'x_farming_stevia_seed.png',
     steps = 8,
@@ -13,8 +14,16 @@ farming.register_plant('x_farming:stevia', {
     place_param2 = 4,
 })
 
+-- needed
+minetest.override_item('x_farming:stevia', {
+    description = S('Stevia') .. '\n' .. S('Compost chance') .. ': 65%',
+    short_description = S('Stevia'),
+    groups = { compost = 65 }
+})
+
 minetest.register_craftitem('x_farming:sugar', {
     description = S('Sugar'),
+    short_description = S('Sugar'),
     inventory_image = 'x_farming_sugar.png',
     groups = { flammable = 1 },
 })
@@ -54,6 +63,7 @@ minetest.register_decoration({
 ---crate
 x_farming.register_crate('crate_stevia_3', {
     description = S('Stevia Crate'),
+    short_description = S('Stevia Crate'),
     tiles = { 'x_farming_crate_stevia_3.png' },
     _custom = {
         crate_item = 'x_farming:stevia'

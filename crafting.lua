@@ -15,6 +15,7 @@ minetest.register_craft({
 minetest.register_craftitem('x_farming:cookie', {
     description = S('Cookie') .. '\n' .. minetest.colorize(x_farming.colors.brown, S('Hunger') .. ': 2'),
     inventory_image = 'x_farming_cookie.png',
+    groups = { compost = 85 },
     on_use = minetest.item_eat(2),
 })
 
@@ -27,6 +28,7 @@ minetest.register_craft({
 minetest.register_craftitem('x_farming:chocolate', {
     description = S('Chocolate') .. '\n' .. minetest.colorize(x_farming.colors.brown, S('Hunger') .. ': 3'),
     inventory_image = 'x_farming_chocolate.png',
+    groups = { compost = 65 },
     on_use = minetest.item_eat(3),
 })
 
@@ -133,8 +135,11 @@ minetest.register_alias('x_farming:coffee_cup', 'x_farming:bottle_coffee')
 
 -- Corn
 minetest.register_craftitem('x_farming:corn_pop', {
-    description = S('Popped corn') .. '\n' .. minetest.colorize(x_farming.colors.brown, S('Hunger') .. ': 1'),
+    description = S('Popped corn') .. '\n' .. S('Compost chance') .. ': 50%\n'
+    .. minetest.colorize(x_farming.colors.brown, S('Hunger') .. ': 1'),
+    short_description = S('Popped corn'),
     inventory_image = 'x_farming_corn_pop.png',
+    groups = { compost = 50 },
     on_use = minetest.item_eat(1),
 })
 
@@ -201,6 +206,7 @@ minetest.register_craft({
 
 minetest.register_craft({
     output = 'x_farming:wart_block',
+    groups = { compost = 85 },
     recipe = {
         { 'x_farming:obsidian_wart', 'x_farming:obsidian_wart', 'x_farming:obsidian_wart' },
         { 'x_farming:obsidian_wart', 'x_farming:obsidian_wart', 'x_farming:obsidian_wart' },
@@ -234,7 +240,10 @@ minetest.register_craft({
 
 -- Potato
 minetest.register_craftitem('x_farming:bakedpotato', {
-    description = S('Baked Potato') .. '\n' .. minetest.colorize(x_farming.colors.brown, S('Hunger') .. ': 6'),
+    description = S('Baked Potato') .. '\n' .. S('Compost chance') .. ': 85%\n'
+        .. minetest.colorize(x_farming.colors.brown, S('Hunger') .. ': 6'),
+    short_description = S('Baked Potato'),
+    groups = { compost = 85 },
     inventory_image = 'x_farming_potato_baked.png',
     on_use = minetest.item_eat(6),
 })
@@ -502,5 +511,15 @@ minetest.register_craft({
         { 'farming:straw', '', 'farming:straw' },
         { 'farming:straw', '', 'farming:straw' },
         { 'farming:straw', 'farming:straw', 'farming:straw' }
+    }
+})
+
+-- composter
+minetest.register_craft({
+    output = 'x_farming:composter_1',
+    recipe = {
+        { 'group:wood', 'group:fence', 'group:wood' },
+        { 'group:wood', 'group:fence', 'group:wood' },
+        { 'group:wood', 'group:wood', 'group:wood' }
     }
 })

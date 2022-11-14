@@ -45,6 +45,7 @@ dofile(path .. '/crafting.lua')
 dofile(path .. '/bonemeal.lua')
 dofile(path .. '/crates.lua')
 dofile(path .. '/bags.lua')
+dofile(path .. '/composter.lua')
 
 ---timer for crates
 minetest.register_lbm({

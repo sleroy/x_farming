@@ -25,6 +25,7 @@ minetest.register_decoration({
 
 minetest.register_node('x_farming:cactus_fruit', {
     description = S('Dragon Fruit'),
+    short_description = S('Dragon Fruit'),
     inventory_image = 'x_farming_cactus_fruit_sides.png',
     is_ground_content = false,
     tiles = {
@@ -69,6 +70,7 @@ minetest.register_node('x_farming:cactus_fruit', {
 
 minetest.register_node('x_farming:cactus_fruit_mark', {
     description = S('Cactus Fruit Marker'),
+    short_description = S('Cactus Fruit Marker'),
     inventory_image = 'x_farming_cactus_fruit_sides.png^default_invisible_node_overlay.png',
     wield_image = 'x_farming_cactus_fruit_sides.png^default_invisible_node_overlay.png',
     drawtype = 'airlike',
@@ -94,12 +96,15 @@ minetest.register_node('x_farming:cactus_fruit_mark', {
 })
 
 minetest.register_node('x_farming:cactus_fruit_item', {
-    description = S('Dragon Fruit') .. '\n' .. minetest.colorize(x_farming.colors.brown, S('Hunger') .. ': 2'),
+    description = S('Dragon Fruit') .. '\n' .. S('Compost chance') .. ': 65%\n'
+    .. minetest.colorize(x_farming.colors.brown, S('Hunger') .. ': 2'),
+    short_description = S('Dragon Fruit'),
     drawtype = 'plantlike',
     tiles = { 'x_farming_cactus_fruit_item.png' },
     inventory_image = 'x_farming_cactus_fruit_item.png',
     on_use = minetest.item_eat(2),
     sounds = default.node_sound_leaves_defaults(),
+    groups = { compost = 65 },
 
     after_place_node = function(pos, placer, itemstack, pointed_thing)
         minetest.set_node(pos, { name = 'x_farming:cactus_fruit' })
@@ -107,7 +112,8 @@ minetest.register_node('x_farming:cactus_fruit_item', {
 })
 
 minetest.register_node('x_farming:large_cactus_with_fruit_seedling', {
-    description = S('Large Cactus with Fruit Seedling'),
+    description = S('Large Cactus with Fruit Seedling') .. '\n' .. S('Compost chance') .. ': 30%',
+    short_description = S('Large Cactus with Fruit Seedling'),
     drawtype = 'plantlike',
     tiles = { 'x_farming_large_cactus_with_fruit_seedling.png' },
     inventory_image = 'x_farming_large_cactus_with_fruit_seedling.png',
@@ -122,7 +128,7 @@ minetest.register_node('x_farming:large_cactus_with_fruit_seedling', {
             5 / 16, 0.5, 5 / 16
         }
     },
-    groups = { choppy = 3, dig_immediate = 3, attached_node = 1 },
+    groups = { choppy = 3, dig_immediate = 3, attached_node = 1, compost = 30 },
     sounds = default.node_sound_wood_defaults(),
 
     on_place = function(itemstack, placer, pointed_thing)
@@ -207,6 +213,7 @@ minetest.register_craft({
 ---crate
 x_farming.register_crate('crate_cactus_fruit_item_3', {
     description = S('Cactus Fruit Crate'),
+    short_description = S('Cactus Fruit Crate'),
     tiles = { 'x_farming_crate_cactus_fruit_item_3.png' },
     _custom = {
         crate_item = 'x_farming:cactus_fruit_item'

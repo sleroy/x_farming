@@ -20,7 +20,8 @@ end
 
 -- PUMPKIN
 farming.register_plant('x_farming:pumpkin', {
-    description = S('Pumpkin Seed'),
+    description = S('Pumpkin Seed') .. '\n' .. S('Compost chance') .. ': 30%',
+    short_description = S('Pumpkin Seed'),
     inventory_image = 'x_farming_pumpkin_seed.png',
     steps = 8,
     minlight = 13,
@@ -33,6 +34,7 @@ farming.register_plant('x_farming:pumpkin', {
 -- PUMPKIN FRUIT - HARVEST
 minetest.register_node('x_farming:pumpkin_fruit', {
     description = S('Pumpkin Fruit'),
+    short_description = S('Pumpkin Fruit'),
     tiles = {
         'x_farming_pumpkin_fruit_top.png',
         'x_farming_pumpkin_fruit_top.png',
@@ -82,7 +84,8 @@ minetest.register_node('x_farming:pumpkin_fruit', {
 
 -- PUMPKIN BLOCK - HARVEST from crops
 minetest.register_node('x_farming:pumpkin_block', {
-    description = S('Pumpkin Block'),
+    description = S('Pumpkin Block') .. '\n' .. S('Compost chance') .. ': 65%',
+    short_description = S('Pumpkin Block'),
     tiles = {
         'x_farming_pumpkin_fruit_top.png',
         'x_farming_pumpkin_fruit_top.png',
@@ -94,13 +97,14 @@ minetest.register_node('x_farming:pumpkin_block', {
     paramtype2 = 'facedir',
     sounds = default.node_sound_wood_defaults(),
     is_ground_content = false,
-    groups = { snappy = 3, flammable = 4, fall_damage_add_percent = -30 },
+    groups = { snappy = 3, flammable = 4, fall_damage_add_percent = -30, compost = 65 },
     on_construct = pumpkin_on_construct
 })
 
 -- PUMPKIN LANTERN -- from recipe
 minetest.register_node('x_farming:pumpkin_lantern', {
     description = S('Pumpkin Lantern'),
+    short_description = S('Pumpkin Lantern'),
     tiles = {
         'x_farming_pumpkin_fruit_top.png',
         'x_farming_pumpkin_fruit_top.png',
@@ -160,6 +164,7 @@ minetest.register_decoration({
 ---crate
 x_farming.register_crate('crate_pumpkin_block_3', {
     description = S('Pumpkin Crate'),
+    short_description = S('Pumpkin Crate'),
     tiles = { 'x_farming_crate_pumpkin_block_3.png' },
     _custom = {
         crate_item = 'x_farming:pumpkin_block'

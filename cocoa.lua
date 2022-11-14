@@ -121,16 +121,20 @@ end
 
 -- COCOA
 minetest.register_craftitem('x_farming:cocoa_bean', {
-    description = S('Cocoa bean') .. '(' .. S('plant on jungle tree') .. ')',
+    description = S('Cocoa bean') .. ' (' .. S('plant on jungle tree trunk') .. ')'
+        .. '\n' .. S('Compost chance') .. ': 65%',
+    short_description = S('Cocoa bean'),
     tiles = { 'x_farming_cocoa_bean.png' },
     inventory_image = 'x_farming_cocoa_bean.png',
     wield_image = 'x_farming_cocoa_bean.png',
+    groups = { compost = 65 },
     on_place = x_farming.place_cocoa_bean,
 })
 
 -- 1
 minetest.register_node('x_farming:cocoa_1', {
     description = S('Cocoa') .. ' 1',
+    short_description = S('Cocoa') .. ' 1',
     drawtype = 'nodebox',
     tiles = {
         'x_farming_cocoa_top_1.png',
@@ -183,6 +187,7 @@ minetest.register_node('x_farming:cocoa_1', {
 -- 2
 minetest.register_node('x_farming:cocoa_2', {
     description = S('Cocoa') .. ' 2',
+    short_description = S('Cocoa') .. ' 2',
     drawtype = 'nodebox',
     tiles = {
         'x_farming_cocoa_top_2.png',
@@ -235,6 +240,7 @@ minetest.register_node('x_farming:cocoa_2', {
 -- 3
 minetest.register_node('x_farming:cocoa_3', {
     description = S('Cocoa') .. ' 3',
+    short_description = S('Cocoa') .. ' 3',
     drawtype = 'nodebox',
     tiles = {
         'x_farming_cocoa_top_3.png',
@@ -296,7 +302,8 @@ minetest.register_lbm({
 })
 
 minetest.register_node('x_farming:jungle_with_cocoa_sapling', {
-    description = S('Jungle Tree with Cocoa Sapling'),
+    description = S('Jungle Tree with Cocoa Sapling') .. '\n' .. S('Compost chance') .. ': 30%',
+    short_description = S('Jungle Tree with Cocoa Sapling'),
     drawtype = 'plantlike',
     tiles = { 'x_farming_junglesapling.png' },
     inventory_image = 'x_farming_junglesapling.png',
@@ -309,8 +316,13 @@ minetest.register_node('x_farming:jungle_with_cocoa_sapling', {
         type = 'fixed',
         fixed = { -4 / 16, -0.5, -4 / 16, 4 / 16, 7 / 16, 4 / 16 }
     },
-    groups = { snappy = 2, dig_immediate = 3, flammable = 2,
-        attached_node = 1, sapling = 1 },
+    groups = {
+        snappy = 2,
+        dig_immediate = 3,
+        flammable = 2,
+        attached_node = 1,
+        sapling = 1
+    },
     sounds = default.node_sound_leaves_defaults(),
 
     on_construct = function(pos)
@@ -333,6 +345,7 @@ minetest.register_node('x_farming:jungle_with_cocoa_sapling', {
 -- trunk
 minetest.register_node('x_farming:jungle_tree', {
     description = S('Jungle Tree'),
+    short_description = S('Jungle Tree'),
     tiles = { 'x_farming_jungle_tree_top.png', 'x_farming_jungle_tree_top.png', 'x_farming_jungle_tree.png' },
     paramtype2 = 'facedir',
     is_ground_content = false,
@@ -344,7 +357,8 @@ minetest.register_node('x_farming:jungle_tree', {
 
 -- leaves
 minetest.register_node('x_farming:jungle_leaves', {
-    description = S('Jungle Tree Leaves'),
+    description = S('Jungle Tree Leaves') .. '\n' .. S('Compost chance') .. ': 30%',
+    short_description = S('Jungle Tree Leaves'),
     drawtype = 'allfaces_optional',
     waving = 1,
     tiles = { 'x_farming_jungleleaves.png' },
@@ -382,6 +396,7 @@ default.register_leafdecay({
 -- planks
 minetest.register_node('x_farming:jungle_wood', {
     description = S('Jungle Wood Planks'),
+    short_description = S('Jungle Wood Planks'),
     paramtype2 = 'facedir',
     place_param2 = 0,
     tiles = { 'x_farming_jungle_wood.png' },
@@ -439,6 +454,7 @@ minetest.register_decoration({
 ---crate
 x_farming.register_crate('crate_cocoa_bean_3', {
     description = S('Cocoa Bean Crate'),
+    short_description = S('Cocoa Bean Crate'),
     tiles = { 'x_farming_crate_cocoa_bean_3.png' },
     _custom = {
         crate_item = 'x_farming:cocoa_bean'

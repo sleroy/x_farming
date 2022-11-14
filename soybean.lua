@@ -2,7 +2,8 @@ local S = minetest.get_translator(minetest.get_current_modname())
 
 -- SOYBEAN
 farming.register_plant('x_farming:soybean', {
-    description = S('Soybean Seed'),
+    description = S('Soybean Seed') .. '\n' .. S('Compost chance') .. ': 30%',
+    short_description = S('Soybean Seed'),
     paramtype2 = 'meshoptions',
     inventory_image = 'x_farming_soybean_seed.png',
     steps = 7,
@@ -13,8 +14,16 @@ farming.register_plant('x_farming:soybean', {
     place_param2 = 3,
 })
 
+-- needed
+minetest.override_item('x_farming:soybean', {
+    description = S('Soybean') .. '\n' .. S('Compost chance') .. ': 65%',
+    short_description = S('Soybean'),
+    groups = { compost = 65 }
+})
+
 minetest.register_craftitem('x_farming:bottle_soymilk', {
     description = S('Soymilk Bottle'),
+    short_description = S('Soymilk Bottle'),
     tiles = { 'x_farming_bottle_soymilk.png' },
     inventory_image = 'x_farming_bottle_soymilk.png',
     wield_image = 'x_farming_bottle_soymilk.png',
@@ -24,6 +33,7 @@ minetest.register_craftitem('x_farming:bottle_soymilk', {
 
 minetest.register_craftitem('x_farming:bottle_soymilk_raw', {
     description = S('Raw Soymilk Bottle'),
+    short_description = S('Raw Soymilk Bottle'),
     tiles = { 'x_farming_bottle_soymilk_raw.png' },
     inventory_image = 'x_farming_bottle_soymilk_raw.png',
     wield_image = 'x_farming_bottle_soymilk_raw.png',
@@ -79,6 +89,7 @@ minetest.register_decoration({
 ---crate
 x_farming.register_crate('crate_soybean_3', {
     description = S('Soybean Crate'),
+    short_description = S('Soybean Crate'),
     tiles = { 'x_farming_crate_soybean_3.png' },
     _custom = {
         crate_item = 'x_farming:soybean'

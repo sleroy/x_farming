@@ -2,15 +2,23 @@ local S = minetest.get_translator(minetest.get_current_modname())
 
 -- COFFEE
 farming.register_plant('x_farming:coffee', {
-    description = S('Coffee Seed'),
+    description = S('Coffee Seed') .. '\n' .. S('Compost chance') .. ': 30%',
+    short_description = S('Coffee Seed'),
     paramtype2 = 'meshoptions',
     inventory_image = 'x_farming_coffee_seed.png',
     steps = 5,
     minlight = 13,
     maxlight = default.LIGHT_MAX,
     fertility = { 'grassland' },
-    groups = { flammable = 4 },
+    groups = { flammable = 4, compost = 30 },
     place_param2 = 3,
+})
+
+-- needed
+minetest.override_item('x_farming:coffee', {
+    description = S('Coffee bean') .. '\n' .. S('Compost chance') .. ': 50%',
+    short_description = S('Coffee bean'),
+    groups = { compost = 50 }
 })
 
 -- hot cup of coffee
@@ -23,6 +31,7 @@ end
 
 minetest.register_node('x_farming:coffee_cup_hot', {
     description = coffee_cup_hot_desc,
+    short_description = coffee_cup_hot_desc,
     drawtype = 'mesh',
     mesh = 'x_farming_coffee_cup_hot.obj',
     tiles = { 'x_farming_coffee_cup_hot_mesh.png' },
@@ -69,6 +78,7 @@ minetest.register_decoration({
 ---crate
 x_farming.register_crate('crate_coffee_3', {
     description = S('Coffee Crate'),
+    short_description = S('Coffee Crate'),
     tiles = { 'x_farming_crate_coffee_3.png' },
     _custom = {
         crate_item = 'x_farming:coffee'

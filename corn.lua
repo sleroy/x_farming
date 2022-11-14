@@ -3,7 +3,8 @@ local S = minetest.get_translator(minetest.get_current_modname())
 
 -- CORN
 farming.register_plant('x_farming:corn', {
-    description = S('Corn Seed'),
+    description = S('Corn Seed') .. '\n' .. S('Compost chance') .. ': 30%',
+    short_description = S('Corn Seed'),
     paramtype2 = 'meshoptions',
     inventory_image = 'x_farming_corn_seed.png',
     steps = 10,
@@ -12,6 +13,13 @@ farming.register_plant('x_farming:corn', {
     fertility = { 'grassland' },
     groups = { flammable = 4 },
     place_param2 = 3,
+})
+
+-- needed
+minetest.override_item('x_farming:corn', {
+    description = S('Corn') .. '\n' .. S('Compost chance') .. ': 50%',
+    short_description = S('Corn'),
+    groups = { compost = 50 }
 })
 
 minetest.override_item('x_farming:corn_6', {
@@ -56,7 +64,9 @@ minetest.override_item('x_farming:corn_10', {
 
 -- popcorn
 minetest.register_node('x_farming:corn_popcorn', {
-    description = S('Popcorn') .. '\n' .. minetest.colorize(x_farming.colors.brown, S('Hunger') .. ': 5'),
+    description = S('Popcorn') .. '\n' .. S('Compost chance') .. ': 65%\n'
+        .. minetest.colorize(x_farming.colors.brown, S('Hunger') .. ': 5'),
+    short_description = S('Popcorn'),
     drawtype = 'mesh',
     mesh = 'x_farming_corn_popcorn.obj',
     tiles = { 'x_farming_corn_popcorn_mesh.png' },
@@ -73,7 +83,7 @@ minetest.register_node('x_farming:corn_popcorn', {
         type = 'fixed',
         fixed = { -0.3, -0.5, -0.3, 0.3, 0.25, 0.3 }
     },
-    groups = { dig_immediate = 3, attached_node = 1 },
+    groups = { dig_immediate = 3, attached_node = 1, compost = 65 },
     sounds = default.node_sound_leaves_defaults(),
     on_use = minetest.item_eat(5),
     sunlight_propagates = true
@@ -102,6 +112,7 @@ minetest.register_decoration({
 ---crate
 x_farming.register_crate('crate_corn_3', {
     description = S('Corn Crate'),
+    short_description = S('Corn Crate'),
     tiles = { 'x_farming_crate_corn_3.png' },
     _custom = {
         crate_item = 'x_farming:corn'

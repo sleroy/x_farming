@@ -27,6 +27,13 @@ Hunger points in the description assume that you have [hbhubger](https://forum.m
 - leafdecay with falling fruit after tree trunk is harvested
 - supports hbhunger mod
 - crates and bags for storage (holds 1 stack)
+- composter
+
+### Composter
+
+Right-click/place action with most plants, leaves, harvest, grass... will create/add compost. Once full another right-click/place action will give back bonemeal.
+Each item has different chance for creating compost. In general items harder to obtain have higher chance of creating compost.
+Additionally other mods can add group `{compost = 50}` to the items, where the number is chance of creating compost.
 
 ### Crates and Bags
 
@@ -785,8 +792,6 @@ GNU Lesser General Public License v2.1 or later (see included LICENSE file)
 - x_farming_bag_salt.png
 - x_farming_crate_beetroot_3.png
 - x_farming_crate_cactus_fruit_item_3.png
-- x_farming_crate_carrot_1.png
-- x_farming_crate_carrot_2.png
 - x_farming_crate_carrot_3.png
 - x_farming_crate_cocoa_bean_3.png
 - x_farming_crate_coffee_3.png
@@ -804,6 +809,11 @@ GNU Lesser General Public License v2.1 or later (see included LICENSE file)
 - x_farming_crate_strawberry_3.png
 - x_farming_crate_wheat_3.png
 - x_farming_fly.png
+- x_farming_composter_1.png
+- x_farming_composter_4.png
+- x_farming_composter_5.png
+- x_farming_composter_2.png
+- x_farming_composter_3.png
 
 **MIT**
 

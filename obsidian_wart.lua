@@ -6,7 +6,8 @@ local maxlight = default.LIGHT_MAX
 
 -- OBSIDIAN WART
 farming.register_plant('x_farming:obsidian_wart', {
-    description = S('Obsidian Wart Seed') .. '\n' .. S('Plant on Obsidian'),
+    description = S('Obsidian Wart Seed') .. '\n' .. S('Plant on Obsidian') .. '\n' .. S('Compost chance') .. ': 30%',
+    short_description = S('Obsidian Wart Seed'),
     paramtype2 = 'meshoptions',
     inventory_image = 'x_farming_obsidian_wart_seed.png',
     steps = 6,
@@ -15,6 +16,13 @@ farming.register_plant('x_farming:obsidian_wart', {
     fertility = { 'underground' },
     groups = { flammable = 4 },
     place_param2 = 3
+})
+
+-- needed
+minetest.override_item('x_farming:obsidian_wart', {
+    description = S('Obsidian Wart') .. '\n' .. S('Compost chance') .. ': 65%',
+    short_description = S('Obsidian Wart'),
+    groups = { compost = 65 }
 })
 
 -- default obsidian
@@ -30,6 +38,7 @@ minetest.override_item('default:obsidian', {
 -- obsidian - soil
 minetest.register_node('x_farming:obsidian_soil', {
     description = S('Obsidian Soil'),
+    short_description = S('Obsidian Soil'),
     drop = 'default:obsidian',
     tiles = { 'x_farming_obsidian_soil.png', 'default_obsidian.png' },
     groups = { cracky = 1, level = 2, soil = 2, underground = 1, field = 1, not_in_creative_inventory = 1 },
@@ -44,6 +53,7 @@ minetest.register_node('x_farming:obsidian_soil', {
 -- obsidian - soil - wet
 minetest.register_node('x_farming:obsidian_soil_wet', {
     description = S('Wet Obsidian Soil'),
+    short_description = S('Wet Obsidian Soil'),
     drop = 'default:obsidian',
     tiles = { 'x_farming_obsidian_soil_wet.png', 'x_farming_obsidian_soil_wet_side.png' },
     groups = { cracky = 1, level = 2, soil = 3, wet = 1, underground = 1, field = 1, not_in_creative_inventory = 1 },
@@ -59,14 +69,16 @@ minetest.register_node('x_farming:obsidian_soil_wet', {
 -- Nodes
 --
 minetest.register_node('x_farming:wart_block', {
-    description = S('Wart Block'),
+    description = S('Wart Block') .. '\n' .. S('Compost chance') .. ': 85%',
+    short_description = S('Wart Block'),
     tiles = { 'x_farming_wart_block.png' },
-    groups = { cracky = 3 },
+    groups = { cracky = 3, compost = 85 },
     sounds = default.node_sound_stone_defaults()
 })
 
 minetest.register_node('x_farming:wartrack', {
     description = S('Wartrack'),
+    short_description = S('Wartrack'),
     tiles = { 'x_farming_wartrack.png' },
     groups = { cracky = 3 },
     sounds = default.node_sound_stone_defaults()
@@ -74,6 +86,7 @@ minetest.register_node('x_farming:wartrack', {
 
 minetest.register_node('x_farming:wart_brick_block', {
     description = S('Wart Brick Block'),
+    short_description = S('Wart Brick Block'),
     tiles = { 'x_farming_wart_brick_block.png' },
     groups = { cracky = 2 },
     sounds = default.node_sound_stone_defaults()
@@ -81,6 +94,7 @@ minetest.register_node('x_farming:wart_brick_block', {
 
 minetest.register_node('x_farming:wart_red_brick_block', {
     description = S('Wart Red Brick Block'),
+    short_description = S('Wart Red Brick Block'),
     tiles = { 'x_farming_wart_red_brick_block.png' },
     groups = { cracky = 2 },
     sounds = default.node_sound_stone_defaults()
@@ -132,6 +146,7 @@ stairs.register_stair_and_slab(
 
 minetest.register_node('x_farming:obsidian_wart_decor', {
     description = S('Obsidian Wart'),
+    short_description = S('Obsidian Wart'),
     drawtype = 'plantlike_rooted',
     waving = 1,
     paramtype = 'light',
@@ -204,6 +219,7 @@ minetest.register_decoration({
 ---crate
 x_farming.register_crate('crate_obsidian_wart_3', {
     description = S('Obsidian Wart Crate'),
+    short_description = S('Obsidian Wart Crate'),
     tiles = { 'x_farming_crate_obsidian_wart_3.png' },
     _custom = {
         crate_item = 'x_farming:obsidian_wart'

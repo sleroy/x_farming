@@ -32,6 +32,7 @@ minetest.register_decoration({
 -- trunk
 minetest.register_node('x_farming:kiwi_tree', {
     description = S('Kiwi Tree'),
+    short_description = S('Kiwi Tree'),
     tiles = { 'x_farming_kiwi_tree_top.png', 'x_farming_kiwi_tree_top.png', 'x_farming_kiwi_tree.png' },
     paramtype2 = 'facedir',
     is_ground_content = false,
@@ -43,7 +44,8 @@ minetest.register_node('x_farming:kiwi_tree', {
 
 -- leaves
 minetest.register_node('x_farming:kiwi_leaves', {
-    description = S('Kiwi Tree Leaves'),
+    description = S('Kiwi Tree Leaves') .. '\n' .. S('Compost chance') .. ': 30%',
+    short_description = S('Kiwi Tree Leaves'),
     drawtype = 'allfaces_optional',
     waving = 1,
     tiles = { 'x_farming_kiwi_leaves.png' },
@@ -73,7 +75,8 @@ minetest.register_node('x_farming:kiwi_leaves', {
 
 -- sapling
 minetest.register_node('x_farming:kiwi_sapling', {
-    description = S('Kiwi Tree Sapling'),
+    description = S('Kiwi Tree Sapling') .. '\n' .. S('Compost chance') .. ': 30%',
+    short_description = S('Kiwi Tree Sapling'),
     drawtype = 'plantlike',
     tiles = { 'x_farming_kiwi_sapling.png' },
     inventory_image = 'x_farming_kiwi_sapling.png',
@@ -111,6 +114,7 @@ minetest.register_node('x_farming:kiwi_sapling', {
 -- fruit
 minetest.register_node('x_farming:kiwi', {
     description = S('Kiwi'),
+    short_description = S('Kiwi'),
     drawtype = 'plantlike',
     visual_scale = 0.5,
     tiles = { 'x_farming_kiwi.png' },
@@ -146,6 +150,7 @@ minetest.register_node('x_farming:kiwi', {
 
 minetest.register_node('x_farming:kiwi_mark', {
     description = S('Kiwi Marker'),
+    short_description = S('Kiwi Marker'),
     inventory_image = 'x_farming:kiwi_fruit.png^default_invisible_node_overlay.png',
     wield_image = 'x_farming:kiwi_fruit.png^default_invisible_node_overlay.png',
     drawtype = 'airlike',
@@ -169,7 +174,9 @@ minetest.register_node('x_farming:kiwi_mark', {
 })
 
 minetest.register_node('x_farming:kiwi_fruit', {
-    description = S('Kiwi') .. '\n' .. minetest.colorize(x_farming.colors.brown, S('Hunger') .. ': 2'),
+    description = S('Kiwi') .. '\n' .. S('Compost chance') .. ': 65%\n'
+        .. minetest.colorize(x_farming.colors.brown, S('Hunger') .. ': 2'),
+    short_description = S('Kiwi'),
     drawtype = 'mesh',
     mesh = 'x_farming_kiwi_fruit.obj',
     tiles = { 'x_farming_kiwi_fruit_mesh.png' },
@@ -186,7 +193,7 @@ minetest.register_node('x_farming:kiwi_fruit', {
         type = 'fixed',
         fixed = { -0.1, -0.5, -0.1, 0.1, -0.3, 0.1 }
     },
-    groups = { dig_immediate = 3, attached_node = 1 },
+    groups = { dig_immediate = 3, attached_node = 1, compost = 65 },
     sounds = default.node_sound_leaves_defaults(),
     on_use = minetest.item_eat(2),
     sunlight_propagates = true
@@ -203,6 +210,7 @@ default.register_leafdecay({
 -- planks
 minetest.register_node('x_farming:kiwi_wood', {
     description = S('Kiwi Wood Planks'),
+    short_description = S('Kiwi Wood Planks'),
     paramtype2 = 'facedir',
     place_param2 = 0,
     tiles = { 'x_farming_kiwi_wood.png' },
@@ -246,6 +254,7 @@ end
 ---crate
 x_farming.register_crate('crate_kiwi_fruit_3', {
     description = S('Kiwi Fruit Crate'),
+    short_description = S('Kiwi Fruit Crate'),
     tiles = { 'x_farming_crate_kiwi_fruit_3.png' },
     _custom = {
         crate_item = 'x_farming:kiwi_fruit'

@@ -26,6 +26,7 @@ minetest.register_decoration({
 -- trunk
 minetest.register_node('x_farming:pine_nut_tree', {
     description = S('Pine Nut Tree'),
+    short_description = S('Pine Nut Tree'),
     tiles = { 'x_farming_pine_nut_tree_top.png', 'x_farming_pine_nut_tree_top.png', 'x_farming_pine_nut_tree.png' },
     paramtype2 = 'facedir',
     is_ground_content = false,
@@ -37,7 +38,8 @@ minetest.register_node('x_farming:pine_nut_tree', {
 
 -- leaves
 minetest.register_node('x_farming:pine_nut_leaves', {
-    description = S('Pine Nut Needles'),
+    description = S('Pine Nut Needles') .. '\n' .. S('Compost chance') .. ': 30%',
+    short_description = S('Pine Nut Needles'),
     drawtype = 'allfaces_optional',
     waving = 1,
     tiles = { 'x_farming_pine_nut_leaves.png' },
@@ -67,7 +69,8 @@ minetest.register_node('x_farming:pine_nut_leaves', {
 
 -- sapling
 minetest.register_node('x_farming:pine_nut_sapling', {
-    description = S('Pine Nut Sapling'),
+    description = S('Pine Nut Sapling') .. '\n' .. S('Compost chance') .. ': 30%',
+    short_description = S('Pine Nut Sapling'),
     drawtype = 'plantlike',
     tiles = { 'x_farming_pine_nut_sapling.png' },
     inventory_image = 'x_farming_pine_nut_sapling.png',
@@ -104,7 +107,8 @@ minetest.register_node('x_farming:pine_nut_sapling', {
 
 -- fruit
 minetest.register_node('x_farming:pine_nut', {
-    description = S('Pine Nut'),
+    description = S('Pine Nut') .. '\n' .. S('Compost chance') .. ': 65%',
+    short_description = S('Pine Nut'),
     drawtype = 'plantlike',
     tiles = { 'x_farming_pine_nut.png' },
     inventory_image = 'x_farming_pine_nut.png',
@@ -123,8 +127,14 @@ minetest.register_node('x_farming:pine_nut', {
             4 / 16
         }
     },
-    groups = { fleshy = 3, dig_immediate = 3, flammable = 2,
-        leafdecay = 3, leafdecay_drop = 1 },
+    groups = {
+        fleshy = 3,
+        dig_immediate = 3,
+        flammable = 2,
+        leafdecay = 3,
+        leafdecay_drop = 1,
+        compost = 65
+    },
     sounds = default.node_sound_leaves_defaults(),
 
     after_place_node = function(pos, placer, itemstack, pointed_thing)
@@ -140,14 +150,17 @@ minetest.register_node('x_farming:pine_nut', {
 })
 
 minetest.register_craftitem('x_farming:pine_nut_roasted', {
-    description = S('Pine Nut Roasted') .. '\n' .. minetest.colorize(x_farming.colors.brown, S('Hunger') .. ': 2'),
+    description = S('Pine Nut Roasted') .. '\n' .. S('Compost chance') .. ': 85%\n'
+        .. minetest.colorize(x_farming.colors.brown, S('Hunger') .. ': 2'),
+    short_description = S('Pine Nut Roasted'),
     inventory_image = 'x_farming_pine_nut_roasted.png',
     on_use = minetest.item_eat(2),
-    groups = { flammable = 2 },
+    groups = { flammable = 2, compost = 85 },
 })
 
 minetest.register_node('x_farming:pine_nut_mark', {
     description = S('Pine Nut Marker'),
+    short_description = S('Pine Nut Marker'),
     inventory_image = 'x_farming:pine_nut.png^default_invisible_node_overlay.png',
     wield_image = 'x_farming:pine_nut.png^default_invisible_node_overlay.png',
     drawtype = 'airlike',
@@ -181,6 +194,7 @@ default.register_leafdecay({
 -- planks
 minetest.register_node('x_farming:pine_nut_wood', {
     description = S('Pine Nut Wood Planks'),
+    short_description = S('Pine Nut Wood Planks'),
     paramtype2 = 'facedir',
     place_param2 = 0,
     tiles = { 'x_farming_pine_nut_wood.png' },
@@ -231,6 +245,7 @@ end
 ---crate
 x_farming.register_crate('crate_pine_nut_3', {
     description = S('Pine Nut Crate'),
+    short_description = S('Pine Nut Crate'),
     tiles = { 'x_farming_crate_pine_nut_3.png' },
     _custom = {
         crate_item = 'x_farming:pine_nut'

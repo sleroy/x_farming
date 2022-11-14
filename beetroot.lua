@@ -6,21 +6,24 @@ local maxlight = default.LIGHT_MAX
 
 ---beetroot
 farming.register_plant('x_farming:beetroot', {
-    description = S('Beetroot Seed'),
+    description = S('Beetroot Seed') .. '\n' .. S('Compost chance') .. ': 30%',
+    short_description = S('Beetroot Seed'),
     paramtype2 = 'meshoptions',
     inventory_image = 'x_farming_beetroot_seed.png',
     steps = 8,
     minlight = minlight,
     maxlight = maxlight,
     fertility = { 'grassland' },
-    groups = { flammable = 4 },
+    groups = { flammable = 4, compost = 65 },
     place_param2 = 3,
     on_use = minetest.item_eat(3),
 })
 
 ---needed
 minetest.override_item('x_farming:beetroot', {
-    description = S('Beetroot') .. '\n' .. minetest.colorize(x_farming.colors.brown, S('Hunger') .. ': 3'),
+    description = S('Beetroot') .. '\n' .. S('Compost chance') .. ': 65%\n'
+        .. minetest.colorize(x_farming.colors.brown, S('Hunger') .. ': 3'),
+    short_description = S('Beetroot'),
     on_use = minetest.item_eat(3),
 })
 

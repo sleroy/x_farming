@@ -22,7 +22,6 @@ local icefishing = {
         tier_1 = {
             "default:stick",
             "default:wood",
-            "flowers:waterlily",
             "default:coral_brown",
             "default:coral_orange",
             "default:coral_skeleton",

@@ -137,16 +137,16 @@ minetest.register_node('x_farming:beetroot_soup', {
     sunlight_propagates = true
 })
 
--- Hog Stew
-minetest.register_node('x_farming:hog_stew', {
-    description = S('Hog Stew') .. '\n' .. S('Compost chance') .. ': 100%\n'
+-- Fish Stew
+minetest.register_node('x_farming:fish_stew', {
+    description = S('Fish Stew') .. '\n' .. S('Compost chance') .. ': 100%\n'
         .. minetest.colorize(x_farming.colors.brown, S('Hunger') .. ': 8'),
-    short_description = S('Hog Stew'),
+    short_description = S('Fish Stew'),
     drawtype = 'mesh',
-    mesh = 'x_farming_hog_stew.obj',
-    tiles = { 'x_farming_hog_stew_mesh.png' },
-    inventory_image = 'x_farming_hog_stew.png',
-    wield_image = 'x_farming_hog_stew.png',
+    mesh = 'x_farming_fish_stew.obj',
+    tiles = { 'x_farming_fish_stew_mesh.png' },
+    inventory_image = 'x_farming_fish_stew.png',
+    wield_image = 'x_farming_fish_stew.png',
     paramtype = 'light',
     paramtype2 = 'facedir',
     is_ground_content = false,

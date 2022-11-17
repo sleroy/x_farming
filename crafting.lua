@@ -56,21 +56,12 @@ minetest.register_craft({
 })
 
 
--- hog stew
+-- fish stew
 minetest.register_craft({
-    output = 'x_farming:hog_stew',
+    output = 'x_farming:fish_stew',
     recipe = {
-        { '', 'mobs:pork_raw', '' },
-        { 'x_farming:carrot', 'x_farming:bakedpotato', 'flowers:mushroom_brown' },
-        { '', 'x_farming:bowl', '' }
-    }
-})
-
-minetest.register_craft({
-    output = 'x_farming:hog_stew',
-    recipe = {
-        { '', 'mobs:pork_raw', '' },
-        { 'x_farming:carrot', 'x_farming:bakedpotato', 'flowers:mushroom_red' },
+        { '', 'group:fish', '' },
+        { 'x_farming:carrot', 'x_farming:bakedpotato', 'x_farming:salt' },
         { '', 'x_farming:bowl', '' }
     }
 })

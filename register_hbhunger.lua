@@ -27,8 +27,8 @@ hbhunger.register_food('x_farming:poisonouspotato', -6, nil, 5)
 -- pumpkin
 hbhunger.register_food('x_farming:pumpkin_pie', 6)
 
--- hog stew
-hbhunger.register_food('x_farming:hog_stew', 8, 'x_farming:bowl')
+-- fish stew
+hbhunger.register_food('x_farming:fish_stew', 8, 'x_farming:bowl')
 
 -- cocoa
 hbhunger.register_food('x_farming:cookie', 2)

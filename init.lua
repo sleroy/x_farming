@@ -3,6 +3,8 @@
 
 hbhunger = minetest.global_exists('hbhunger') and hbhunger --[[@as table]]
 
+minetest.register_alias('x_farming:hog_stew', 'x_farming:fish_stew')
+
 -- main class
 x_farming = {
     hbhunger = minetest.get_modpath('hbhunger'),

@@ -43,9 +43,9 @@ Crafting crate/bag will give you empty crate/bag and can be used as a storage fo
 
 Empty soup bowl is used as a vessel for soups and stew. To craft bowl put any kind of block with group wood in the middle of the bottom row in the crafting grid and then diagonal left and right also the same block, this will give you 3 empty soup bowls.
 
-### Hog Stew ![screenshot](textures/x_farming_hog_stew.png)
+### Fish Stew ![screenshot](textures/x_farming_fish_stew.png)
 
-Eating hog stew will restore 8 hunger points. To craft hog stew put empty soup bowl in the middle of the bottom row of the crafting grid, then bake potato above it, right from the potato will come mushroom (red or brown), left from the potato will come carrot, then on top of the potato put raw pork (mobs redo, pumba/warthog).
+Eating fish stew will restore 8 hunger points. To craft fish stew put empty soup bowl in the middle of the bottom row of the crafting grid, then bake potato above it, right from the potato will come salt, left from the potato will come carrot, then on top of the potato put any fish.
 
 ### Beetroot ![screenshot](textures/x_farming_beetroot.png)
 

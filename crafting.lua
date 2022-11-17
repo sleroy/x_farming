@@ -122,13 +122,23 @@ minetest.register_craft({
     recipe = { 'x_farming:coffee', 'x_farming:bottle_water' }
 })
 
-minetest.register_craft({
-    type = 'cooking',
-    cooktime = 7,
-    output = 'x_farming:coffee_cup_hot',
-    recipe = 'x_farming:bottle_coffee',
-    replacements = { { 'x_farming:bottle_coffee', 'vessels:glass_bottle' } }
-})
+if x_farming.vessels then
+    minetest.register_craft({
+        type = 'cooking',
+        cooktime = 7,
+        output = 'x_farming:coffee_cup_hot',
+        recipe = 'x_farming:bottle_coffee',
+        replacements = { { 'x_farming:bottle_coffee', 'vessels:glass_bottle' } }
+    })
+else
+    minetest.register_craft({
+        type = 'cooking',
+        cooktime = 7,
+        output = 'x_farming:coffee_cup_hot',
+        recipe = 'x_farming:bottle_coffee',
+        replacements = { { 'x_farming:bottle_coffee', 'x_farming:glass_bottle' } }
+    })
+end
 
 -- backwards compatibility
 minetest.register_alias('x_farming:coffee_cup', 'x_farming:bottle_coffee')
@@ -309,15 +319,47 @@ minetest.register_craftitem('x_farming:bottle_water', {
     groups = { vessel = 1 },
 })
 
-minetest.register_craft({
-    type = 'shapeless',
-    output = 'x_farming:bottle_water 5',
-    recipe = {
-        'vessels:glass_bottle', 'vessels:glass_bottle', 'vessels:glass_bottle',
-        'vessels:glass_bottle', 'vessels:glass_bottle', 'bucket:bucket_water'
-    },
-    replacements = { { 'bucket:water_bucket', 'bucket:bucket_empty' } },
-})
+if x_farming.vessels then
+    minetest.register_craft({
+        type = 'shapeless',
+        output = 'x_farming:bottle_water 5',
+        recipe = {
+            'vessels:glass_bottle', 'vessels:glass_bottle', 'vessels:glass_bottle',
+            'vessels:glass_bottle', 'vessels:glass_bottle', 'bucket:bucket_water'
+        },
+        replacements = { { 'bucket:water_bucket', 'bucket:bucket_empty' } },
+    })
+
+    minetest.register_craft({
+        type = 'shapeless',
+        output = 'x_farming:bottle_water 5',
+        recipe = {
+            'vessels:glass_bottle', 'vessels:glass_bottle', 'vessels:glass_bottle',
+            'vessels:glass_bottle', 'vessels:glass_bottle', 'x_farming:seed_salt'
+        },
+        replacements = { { 'x_farming:seed_salt', 'x_farming:seed_salt' } },
+    })
+else
+    minetest.register_craft({
+        type = 'shapeless',
+        output = 'x_farming:bottle_water 5',
+        recipe = {
+            'x_farming:glass_bottle', 'x_farming:glass_bottle', 'x_farming:glass_bottle',
+            'x_farming:glass_bottle', 'x_farming:glass_bottle', 'bucket:bucket_water'
+        },
+        replacements = { { 'bucket:water_bucket', 'bucket:bucket_empty' } },
+    })
+
+    minetest.register_craft({
+        type = 'shapeless',
+        output = 'x_farming:bottle_water 5',
+        recipe = {
+            'x_farming:glass_bottle', 'x_farming:glass_bottle', 'x_farming:glass_bottle',
+            'x_farming:glass_bottle', 'x_farming:glass_bottle', 'x_farming:seed_salt'
+        },
+        replacements = { { 'x_farming:seed_salt', 'x_farming:seed_salt' } },
+    })
+end
 
 -- Donuts
 minetest.register_craft({

@@ -14,8 +14,6 @@ mobs.npc_drops = {
   'default:axe_bronze',
   'farming:bread',
   'farming:hoe_steel',
-  'bucket:bucket_water',
-  'screwdriver:screwdriver',
   'default:diamond',
   'default:gold_lump',
   'default:coalblock'

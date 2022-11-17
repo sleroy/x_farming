@@ -404,8 +404,6 @@ Seeds can be found also in dungeon chests.
 
 - default
 - farming
-- vessels
-- bucket
 
 ## Optional Dependencies
 
@@ -416,6 +414,8 @@ Seeds can be found also in dungeon chests.
 - stairs
 - wool
 - dye
+- vessels (recipes, if not present then x_farming will load its own vessels needed for recipe)
+- bucket (recipes)
 
 ## License:
 
@@ -833,6 +833,10 @@ GNU Lesser General Public License v2.1 or later (see included LICENSE file)
 **Unknown**
 
 - x_farming_fries.png
+
+**CC BY-SA 3.0, modified by Thomas-S**
+
+- x_farming_vessels_glass_bottle.png
 
 ### Sound
 

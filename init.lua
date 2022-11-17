@@ -6,6 +6,8 @@ hbhunger = minetest.global_exists('hbhunger') and hbhunger --[[@as table]]
 -- main class
 x_farming = {
     hbhunger = minetest.get_modpath('hbhunger'),
+    vessels = minetest.get_modpath('vessels'),
+    bucket = minetest.get_modpath('bucket'),
     colors = {
         brown = '#DEB887',
         red = '#FF8080',
@@ -46,6 +48,10 @@ dofile(path .. '/bonemeal.lua')
 dofile(path .. '/crates.lua')
 dofile(path .. '/bags.lua')
 dofile(path .. '/composter.lua')
+
+if not x_farming.vessels then
+    dofile(path .. '/vessels.lua')
+end
 
 ---timer for crates
 minetest.register_lbm({

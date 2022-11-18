@@ -425,22 +425,6 @@ GNU Lesser General Public License v2.1 or later (see included LICENSE file)
 
 ### Textures
 
-**Industrial Craft 2**, https://forum.industrial-craft.net/
-
-- x_farming_coffee_1.png
-- x_farming_coffee_2.png
-- x_farming_coffee_3.png
-- x_farming_coffee_4.png
-- x_farming_coffee_5.png
-- x_farming_pumpkin_1.png
-- x_farming_pumpkin_2.png
-- x_farming_pumpkin_3.png
-- x_farming_pumpkin_4.png
-- x_farming_pumpkin_5.png
-- x_farming_pumpkin_6.png
-- x_farming_pumpkin_7.png
-- x_farming_pumpkin_8.png
-
 **CC BY-SA 4.0, Pixel Perfection by XSSheep**, https://minecraft.curseforge.com/projects/pixel-perfection-freshly-updated
 
 - x_farming_beetroot_1.png
@@ -478,14 +462,6 @@ GNU Lesser General Public License v2.1 or later (see included LICENSE file)
 - x_farming_melon_fruit_top.png
 - x_farming_melon.png
 - x_farming_golden_melon.png
-- x_farming_melon_1.png - modified by SaKeL
-- x_farming_melon_2.png - modified by SaKeL
-- x_farming_melon_3.png - modified by SaKeL
-- x_farming_melon_4.png - modified by SaKeL
-- x_farming_melon_5.png - modified by SaKeL
-- x_farming_melon_6.png - modified by SaKeL
-- x_farming_melon_7.png - modified by SaKeL
-- x_farming_melon_8.png - modified by SaKeL
 - x_farming_obsidian_wart_1.png
 - x_farming_obsidian_wart_2.png
 - x_farming_obsidian_wart_3.png
@@ -516,22 +492,15 @@ GNU Lesser General Public License v2.1 or later (see included LICENSE file)
 - x_farming_kiwi_tree.png
 - x_farming_kiwi_tree_top.png
 - x_farming_kiwi_tree_wood.png
-- x_farming_strawberry_1.png (modified by SaKeL)
-- x_farming_strawberry_2.png (modified by SaKeL)
-- x_farming_strawberry_3.png (modified by SaKeL)
-- x_farming_strawberry_4.png (modified by SaKeL)
 - x_farming_jungle_tree.png (Chorus edit)
 - x_farming_jungle_tree_top.png (Chorus edit)
 - x_farming_jungle_wood.png (Chorus edit)
-- x_farming_pine_nut_leaves.png (modified by SaKeL)
 - x_farming_pine_nut_tree.png
 - x_farming_pine_nut_tree_top.png
 - x_farming_pine_nut_wood.png
 - x_farming_sugar.png
-- x_farming_x_bonemeal_particles.png (modified by SaKeL)
-- x_farming_salt.png (modified by SaKeL)
 
-**https://www.minecraftforum.net/forums/mapping-and-modding-java-edition/minecraft-mods/3043897-vanilla-1-16-4-revamped-fishing-139-new-fish-new, by Lillie/Athesiel, https://archhive.gay**
+**by Lillie/Athesiel**, https://archhive.gay
 
 - x_farming_fish_albacore.png
 - x_farming_fish_anchovy.png
@@ -665,12 +634,8 @@ GNU Lesser General Public License v2.1 or later (see included LICENSE file)
 - x_farming_fish_woodskip.png
 - x_farming_fish_yellow_seashroom.png
 
-**MIT, Farmer's Delight by vectorwing, modified by SaKeL**
 
-- x_farming_bag_empty.png
-- x_farming_crate_empty.png
-
-**LGPL-2.1-or-later, by SaKeL**
+**CC BY-SA 4.0, by SaKeL**
 
 - x_farming_carrot_seed.png
 - x_farming_potato_seed.png
@@ -814,25 +779,43 @@ GNU Lesser General Public License v2.1 or later (see included LICENSE file)
 - x_farming_composter_5.png
 - x_farming_composter_2.png
 - x_farming_composter_3.png
-
-**MIT**
-
-- x_farming_kiwi_leaves.png (MTG - modified by SaKeL)
-- x_farming_junglesapling.png (MTG - modified by SaKeL)
-- x_farming_pine_nut_sapling.png (MTG - modified by SaKeL)
-- x_farming_salt_1_bottom.png
-
-**Created by GeMinecraft and edited by TenPlus1**
-
+- x_farming_coffee_1.png
+- x_farming_coffee_2.png
+- x_farming_coffee_3.png
+- x_farming_coffee_4.png
+- x_farming_coffee_5.png
+- x_farming_pumpkin_1.png
+- x_farming_pumpkin_2.png
+- x_farming_pumpkin_3.png
+- x_farming_pumpkin_4.png
+- x_farming_pumpkin_5.png
+- x_farming_pumpkin_6.png
+- x_farming_pumpkin_7.png
+- x_farming_pumpkin_8.png
 - x_farming_corn.png
-
-**Created by Itsoo1**
-
 - x_farming_chocolate.png
-
-**Unknown**
-
 - x_farming_fries.png
+- x_farming_bag_empty.png -- Derived from Farmer's Delight by vectorwing (MIT)
+- x_farming_crate_empty.png -- Derived from Farmer's Delight by vectorwing (MIT)
+- x_farming_melon_1.png -- Derived from texture Pixel Perfection by XSSheep (CC BY-SA 4.0)
+- x_farming_melon_2.png -- Derived from texture Pixel Perfection by XSSheep (CC BY-SA 4.0)
+- x_farming_melon_3.png -- Derived from texture Pixel Perfection by XSSheep (CC BY-SA 4.0)
+- x_farming_melon_4.png -- Derived from texture Pixel Perfection by XSSheep (CC BY-SA 4.0)
+- x_farming_melon_5.png -- Derived from texture Pixel Perfection by XSSheep (CC BY-SA 4.0)
+- x_farming_melon_6.png -- Derived from texture Pixel Perfection by XSSheep (CC BY-SA 4.0)
+- x_farming_melon_7.png -- Derived from texture Pixel Perfection by XSSheep (CC BY-SA 4.0)
+- x_farming_melon_8.png -- Derived from texture Pixel Perfection by XSSheep (CC BY-SA 4.0)
+- x_farming_strawberry_1.png -- Derived from texture Pixel Perfection by XSSheep (CC BY-SA 4.0)
+- x_farming_strawberry_2.png -- Derived from texture Pixel Perfection by XSSheep (CC BY-SA 4.0)
+- x_farming_strawberry_3.png -- Derived from texture Pixel Perfection by XSSheep (CC BY-SA 4.0)
+- x_farming_strawberry_4.png -- Derived from texture Pixel Perfection by XSSheep (CC BY-SA 4.0)
+- x_farming_pine_nut_leaves.png -- Derived from texture Pixel Perfection by XSSheep (CC BY-SA 4.0)
+- x_farming_x_bonemeal_particles.png -- Derived from texture Pixel Perfection by XSSheep (CC BY-SA 4.0)
+- x_farming_salt.png -- Derived from texture Pixel Perfection by XSSheep (CC BY-SA 4.0)
+- x_farming_kiwi_leaves.png (MTG -- Derived from texture by paramat (CC BY-SA 3.0)
+- x_farming_junglesapling.png -- Derived from texture by PilzAdam (CC BY-SA 3.0)
+- x_farming_pine_nut_sapling.png -- Derived from texture by Splizard (CC BY-SA 3.0)
+- x_farming_salt_1_bottom.png -- Derived from a texture by random-geek (CC BY-SA 3.0) -- Derived from texture by Neuromancer (CC BY-SA 3.0)
 
 **CC BY-SA 3.0, modified by Thomas-S**
 
@@ -840,17 +823,17 @@ GNU Lesser General Public License v2.1 or later (see included LICENSE file)
 
 ### Sound
 
-**freesound.org**
+**CC BY 3.0, by MaxDemianAGL**, https://freesound.org
 
 - x_farming_x_bonemeal_grow.ogg
 
-**MIT**
+**CC BY 3.0, by Angel_Perez_Grandi**, https://freesound.org
 
 - x_farming_ice_dug.ogg (MTG)
 
 ### Models
 
-****LGPL-2.1-or-later, by SaKeL**
+**CC BY-SA 4.0, by SaKeL**
 
 - x_farming_hog_stew.obj
 - x_farming_beetroot_soup.obj

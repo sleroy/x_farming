@@ -10,8 +10,8 @@ farming.register_plant('x_farming:coffee', {
     minlight = 13,
     maxlight = default.LIGHT_MAX,
     fertility = { 'grassland' },
-    groups = { flammable = 4, compost = 30 },
-    place_param2 = 3,
+    groups = { flammable = 4 },
+    place_param2 = 0,
 })
 
 -- needed

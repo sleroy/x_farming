@@ -531,7 +531,7 @@ GNU Lesser General Public License v2.1 or later (see included LICENSE file)
 - x_farming_x_bonemeal_particles.png (modified by SaKeL)
 - x_farming_salt.png (modified by SaKeL)
 
-**https://www.minecraftforum.net/forums/mapping-and-modding-java-edition/minecraft-mods/3043897-vanilla-1-16-4-revamped-fishing-139-new-fish-new, by Athesiel**
+**https://www.minecraftforum.net/forums/mapping-and-modding-java-edition/minecraft-mods/3043897-vanilla-1-16-4-revamped-fishing-139-new-fish-new, by Lillie/Athesiel, https://archhive.gay**
 
 - x_farming_fish_albacore.png
 - x_farming_fish_anchovy.png

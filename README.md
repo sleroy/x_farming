@@ -500,57 +500,6 @@ GNU Lesser General Public License v2.1 or later (see included LICENSE file)
 - x_farming_pine_nut_wood.png
 - x_farming_sugar.png
 
-**by Lillie/Athesiel**, https://archhive.gay
-
-- x_farming_fish_albacore.png
-- x_farming_fish_anchovy.png
-- x_farming_fish_angelfish.png
-- x_farming_fish_angler.png
-- x_farming_fish_armored_catfish.png
-- x_farming_fish_arrow_squid.png
-- x_farming_fish_barracuda.png
-- x_farming_fish_blobfish.png
-- x_farming_fish_bream.png
-- x_farming_fish_burbot.png
-- x_farming_fish_carp.png
-- x_farming_fish_catfish.png
-- x_farming_fish_catla.png
-- x_farming_fish_chorus_snail.png
-- x_farming_fish_chub.png
-- x_farming_fish_clam.png
-- x_farming_fish_conger.png
-- x_farming_fish_congo_tiger_fish.png
-- x_farming_fish_convict_cichlid.png
-- x_farming_fish_crab.png
-- x_farming_fish_crayfish.png
-- x_farming_fish_damselfish.png
-- x_farming_fish_danios.png
-- x_farming_fish_desert_sunfish.png
-- x_farming_fish_diamond_angler.png
-- x_farming_fish_dwarf_caiman.png
-- x_farming_fish_eel.png
-- x_farming_fish_electric_eel.png
-- x_farming_fish_endray.png
-- x_farming_fish_father_sun.png
-- x_farming_fish_flier.png
-- x_farming_fish_floral_faefish.png
-- x_farming_fish_flounder.png
-- x_farming_fish_fourhorn_sculpin.png
-- x_farming_fish_frozen_boneminnow.png
-- x_farming_fish_gar.png
-- x_farming_fish_giant_moray.png
-- x_farming_fish_goldeye.png
-- x_farming_fish_goldfish.png
-- x_farming_fish_grass_pickerel.png
-- x_farming_fish_guppy.png
-- x_farming_fish_hagfish.png
-- x_farming_fish_halibut.png
-- x_farming_fish_herring.png
-- x_farming_fish_illager_ghostfish.png
-- x_farming_fish_ironfish.png
-- x_farming_fish_koi.png
-- x_farming_fish_lamprey.png
-
 **CC BY-SA 4.0, by SaKeL**
 
 - x_farming_carrot_seed.png
@@ -815,6 +764,54 @@ GNU Lesser General Public License v2.1 or later (see included LICENSE file)
 - x_farming_fish_leerfish.png
 - x_farming_fish_leech.png
 - x_farming_fish_lava_eel.png
+- x_farming_fish_albacore.png
+- x_farming_fish_anchovy.png
+- x_farming_fish_angelfish.png
+- x_farming_fish_angler.png
+- x_farming_fish_armored_catfish.png
+- x_farming_fish_arrow_squid.png
+- x_farming_fish_barracuda.png
+- x_farming_fish_blobfish.png
+- x_farming_fish_bream.png
+- x_farming_fish_burbot.png
+- x_farming_fish_carp.png
+- x_farming_fish_catfish.png
+- x_farming_fish_catla.png
+- x_farming_fish_chorus_snail.png
+- x_farming_fish_chub.png
+- x_farming_fish_clam.png
+- x_farming_fish_conger.png
+- x_farming_fish_congo_tiger_fish.png
+- x_farming_fish_convict_cichlid.png
+- x_farming_fish_crab.png
+- x_farming_fish_crayfish.png
+- x_farming_fish_damselfish.png
+- x_farming_fish_danios.png
+- x_farming_fish_desert_sunfish.png
+- x_farming_fish_diamond_angler.png
+- x_farming_fish_dwarf_caiman.png
+- x_farming_fish_eel.png
+- x_farming_fish_electric_eel.png
+- x_farming_fish_endray.png
+- x_farming_fish_father_sun.png
+- x_farming_fish_flier.png
+- x_farming_fish_floral_faefish.png
+- x_farming_fish_flounder.png
+- x_farming_fish_fourhorn_sculpin.png
+- x_farming_fish_frozen_boneminnow.png
+- x_farming_fish_gar.png
+- x_farming_fish_giant_moray.png
+- x_farming_fish_goldeye.png
+- x_farming_fish_goldfish.png
+- x_farming_fish_grass_pickerel.png
+- x_farming_fish_guppy.png
+- x_farming_fish_hagfish.png
+- x_farming_fish_halibut.png
+- x_farming_fish_herring.png
+- x_farming_fish_illager_ghostfish.png
+- x_farming_fish_ironfish.png
+- x_farming_fish_koi.png
+- x_farming_fish_lamprey.png
 
 **CC BY-SA 3.0, modified by Thomas-S**
 

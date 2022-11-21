@@ -11,7 +11,7 @@ try {
         ref: 'master'
     }
 
-    const response = await fetch('https://content.minetest.net/api/packages/SaKeL/x_obsidianmese/releases/new/', {
+    const response = await fetch('https://content.minetest.net/api/packages/SaKeL/x_farming/releases/new/', {
         method: 'POST',
         body: JSON.stringify(body),
         headers: {

@@ -1,3 +1,5 @@
+stairs = stairs --[[@as MtgStairs]]
+
 local S = minetest.get_translator(minetest.get_current_modname())
 
 -- Donuts
@@ -164,3 +166,31 @@ minetest.register_node('x_farming:fish_stew', {
     sounds = default.node_sound_wood_defaults(),
     sunlight_propagates = true
 })
+
+-- Cactus brick
+minetest.register_node('x_farming:cactus_brick', {
+    description = S('Cactus Brick'),
+    short_description = S('Cactus Brick'),
+    paramtype2 = 'facedir',
+    place_param2 = 0,
+    tiles = {
+        'x_farming_cactus_brick.png^[transformFX',
+        'x_farming_cactus_brick.png',
+    },
+    is_ground_content = false,
+    groups = { cracky = 3 },
+    sounds = default.node_sound_stone_defaults()
+})
+
+if minetest.global_exists('stairs') and minetest.get_modpath('stairs') then
+    stairs.register_stair_and_slab(
+        'cactus_brick',
+        'x_farming:cactus_brick',
+        { cracky = 3 },
+        { 'x_farming_cactus_brick.png' },
+        S('Cactus Brick Stair'),
+        S('Cactus Brick Slab'),
+        default.node_sound_stone_defaults(),
+        false
+    )
+end

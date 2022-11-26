@@ -812,6 +812,7 @@ GNU Lesser General Public License v2.1 or later (see included LICENSE file)
 - x_farming_fish_ironfish.png
 - x_farming_fish_koi.png
 - x_farming_fish_lamprey.png
+- x_farming_cactus_brick.png -- Derived from a texture by Calinou (CC BY-SA 3.0)
 
 **CC BY-SA 3.0, modified by Thomas-S**
 

@@ -556,3 +556,12 @@ minetest.register_craft({
         { 'group:wood', 'group:wood', 'group:wood' }
     }
 })
+
+-- Cactus brick
+minetest.register_craft({
+    output = 'x_farming:cactus_brick',
+    recipe = {
+        { 'x_farming:cactus_fruit_item', 'x_farming:cactus_fruit_item' },
+        { 'x_farming:cactus_fruit_item', 'x_farming:cactus_fruit_item' },
+    }
+})

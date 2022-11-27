@@ -624,8 +624,10 @@ for i, def in ipairs(fishes) do
                 .. minetest.colorize(x_farming.colors.brown, S("Hunger") .. ": "
                 .. def.item_eat_cooked),
             tiles = { img },
-            inventory_image = img .. "^[colorize:#3B2510:204",
-            wield_image = img .. "^[transformFXR90^[colorize:#3B2510:204",
+            inventory_image = img .. '^[colorize:#3B2510:204' ..
+                '^(' .. img .. '^[colorize:#FFFFFF:255^[mask:x_farming_cooked_mask.png^[opacity:191)',
+            wield_image = img .. '^[transformFXR90^[colorize:#3B2510:204' ..
+                '^(' .. img .. '^[colorize:#FFFFFF:255^[mask:x_farming_cooked_mask.png^[opacity:191)',
             on_use = minetest.item_eat(def.item_eat_cooked),
         })
 

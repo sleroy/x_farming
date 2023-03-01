@@ -30,7 +30,9 @@ x_farming = {
         red = '#FF8080',
         green = '#98E698'
     },
-    x_bonemeal = {},
+    x_bonemeal = {
+        tree_defs = {}
+    },
     allowed_crate_items = {},
     allowed_bag_items = {},
     registered_crates = {},

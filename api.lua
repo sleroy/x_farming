@@ -1144,3 +1144,17 @@ function x_farming.x_bonemeal.grow_farming(itemstack, user, pointed_thing)
 
     return itemstack
 end
+
+--- API for registering tree growing from saplings using bonemeal
+function x_farming.x_bonemeal.register_tree_defs(self, defs)
+    if not defs or type(defs) ~= 'table' then
+        minetest.log('warning', '[x_farming][x_bonemeal] Missing or incorrect definition: \n' .. dump(defs))
+    end
+
+    for _, value in ipairs(defs) do
+        local def = table.copy(value)
+        if not self.tree_defs[def.name] then
+            self.tree_defs[def.name] = value
+        end
+    end
+end

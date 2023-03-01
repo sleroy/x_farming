@@ -68,7 +68,7 @@ minetest.register_craftitem('x_farming:bonemeal', {
 
             --christmas tree
         elseif node.name == 'x_default:christmas_tree_sapling' then
-            local chance = math.random(2)
+            local chance = math.random(1, 2)
             if not x_farming.x_bonemeal.is_on_soil(under) then
                 return
             end
@@ -90,7 +90,7 @@ minetest.register_craftitem('x_farming:bonemeal', {
 
             --apple tree
         elseif node.name == 'default:sapling' then
-            local chance = math.random(2)
+            local chance = math.random(1, 2)
             if not x_farming.x_bonemeal.is_on_soil(under) then
                 return
             end
@@ -107,7 +107,7 @@ minetest.register_craftitem('x_farming:bonemeal', {
 
             --jungle tree
         elseif node.name == 'default:junglesapling' then
-            local chance = math.random(2)
+            local chance = math.random(1, 2)
             if not x_farming.x_bonemeal.is_on_soil(under) then
                 return
             end
@@ -124,7 +124,7 @@ minetest.register_craftitem('x_farming:bonemeal', {
 
             --emergent jungle tree
         elseif node.name == 'default:emergent_jungle_sapling' then
-            local chance = math.random(2)
+            local chance = math.random(1, 2)
             if not x_farming.x_bonemeal.is_on_soil(under) then
                 return
             end
@@ -141,7 +141,7 @@ minetest.register_craftitem('x_farming:bonemeal', {
 
             --acacia tree
         elseif node.name == 'default:acacia_sapling' then
-            local chance = math.random(2)
+            local chance = math.random(1, 2)
             if not x_farming.x_bonemeal.is_on_soil(under) then
                 return
             end
@@ -158,7 +158,7 @@ minetest.register_craftitem('x_farming:bonemeal', {
 
             --aspen tree
         elseif node.name == 'default:aspen_sapling' then
-            local chance = math.random(2)
+            local chance = math.random(1, 2)
             if not x_farming.x_bonemeal.is_on_soil(under) then
                 return
             end
@@ -175,7 +175,7 @@ minetest.register_craftitem('x_farming:bonemeal', {
 
             --pine tree
         elseif node.name == 'default:pine_sapling' then
-            local chance = math.random(4)
+            local chance = math.random(1, 4)
             if not x_farming.x_bonemeal.is_on_soil(under) then
                 return
             end
@@ -194,7 +194,7 @@ minetest.register_craftitem('x_farming:bonemeal', {
 
             --Bush
         elseif node.name == 'default:bush_sapling' then
-            local chance = math.random(2)
+            local chance = math.random(1, 2)
 
             if chance == 1 then
                 if not x_farming.x_bonemeal.is_on_soil(under) then
@@ -211,7 +211,7 @@ minetest.register_craftitem('x_farming:bonemeal', {
 
             --Acacia bush
         elseif node.name == 'default:acacia_bush_sapling' then
-            local chance = math.random(2)
+            local chance = math.random(1, 2)
 
             if chance == 1 then
                 if not x_farming.x_bonemeal.is_on_soil(under) then
@@ -228,7 +228,7 @@ minetest.register_craftitem('x_farming:bonemeal', {
 
             --Pine bush
         elseif node.name == 'default:pine_bush_sapling' then
-            local chance = math.random(2)
+            local chance = math.random(1, 2)
 
             if chance == 1 then
                 if not x_farming.x_bonemeal.is_on_soil(under) then
@@ -245,7 +245,7 @@ minetest.register_craftitem('x_farming:bonemeal', {
 
             --Blueberry bush
         elseif node.name == 'default:blueberry_bush_sapling' then
-            local chance = math.random(2)
+            local chance = math.random(1, 2)
 
             if chance == 1 then
                 if not x_farming.x_bonemeal.is_on_soil(under) then
@@ -262,7 +262,7 @@ minetest.register_craftitem('x_farming:bonemeal', {
 
             --Papyrus
         elseif node.name == 'default:papyrus' then
-            local chance = math.random(2)
+            local chance = math.random(1, 2)
 
             if chance == 1 then
                 if not x_farming.x_bonemeal.is_on_soil(under) then
@@ -279,7 +279,7 @@ minetest.register_craftitem('x_farming:bonemeal', {
 
             --Large Cactus
         elseif node.name == 'default:large_cactus_seedling' then
-            local chance = math.random(2)
+            local chance = math.random(1, 2)
 
             if chance == 1 then
                 if not x_farming.x_bonemeal.is_on_sand(under) then
@@ -296,7 +296,7 @@ minetest.register_craftitem('x_farming:bonemeal', {
 
             --Kiwi Tree
         elseif node.name == 'x_farming:kiwi_sapling' then
-            local chance = math.random(2)
+            local chance = math.random(1, 2)
 
             if chance == 1 then
                 x_farming.grow_kiwi_tree(under)
@@ -310,7 +310,7 @@ minetest.register_craftitem('x_farming:bonemeal', {
 
             --Cactus Seedling
         elseif node.name == 'x_farming:large_cactus_with_fruit_seedling' then
-            local chance = math.random(2)
+            local chance = math.random(1, 2)
 
             if chance == 1 then
                 if not x_farming.x_bonemeal.is_on_sand(under) then
@@ -327,7 +327,7 @@ minetest.register_craftitem('x_farming:bonemeal', {
 
             --Jungle Tree with Cocoa
         elseif node.name == 'x_farming:jungle_with_cocoa_sapling' then
-            local chance = math.random(2)
+            local chance = math.random(1, 2)
 
             if chance == 1 then
                 x_farming.grow_jungle_tree(under)
@@ -341,7 +341,7 @@ minetest.register_craftitem('x_farming:bonemeal', {
 
             --Pine Nut Tree
         elseif node.name == 'x_farming:pine_nut_sapling' then
-            local chance = math.random(2)
+            local chance = math.random(1, 2)
 
             if chance == 1 then
                 x_farming.grow_pine_nut_tree(under)
@@ -353,6 +353,20 @@ minetest.register_craftitem('x_farming:bonemeal', {
             end
             return itemstack
 
+        elseif x_farming.x_bonemeal.tree_defs[node.name] then
+            local def = x_farming.x_bonemeal.tree_defs[node.name]
+            local chance = math.random(1, def.chance)
+
+            if chance == 1 then
+                def.grow_tree(under)
+                x_farming.x_bonemeal.particle_effect({ x = under.x, y = under.y + 1, z = under.z })
+            end
+
+            --take item if not in creative
+            if not x_farming.x_bonemeal.is_creative(user:get_player_name()) then
+                itemstack:take_item()
+            end
+            return itemstack
         else
             x_farming.x_bonemeal.grow_grass_and_flowers(itemstack, user, pointed_thing)
         end

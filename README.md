@@ -815,6 +815,8 @@ GNU Lesser General Public License v2.1 or later (see included LICENSE file)
 - x_farming_fish_lamprey.png
 - x_farming_cactus_brick.png -- Derived from a texture by Calinou (CC BY-SA 3.0)
 - x_farming_cooked_mask.png
+- x_farming_scarecrow_1_item.png
+- x_farming_scarecrow_1.png
 
 **CC-BY-SA-3.0, modified by Thomas-S**
 
@@ -844,6 +846,7 @@ GNU Lesser General Public License v2.1 or later (see included LICENSE file)
 - x_farming_donut.obj
 - x_farming_crate.obj
 - x_farming_bag.obj
+- x_farming_scarecrow.obj
 
 ## Installation
 

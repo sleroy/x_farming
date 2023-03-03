@@ -212,3 +212,29 @@ if minetest.global_exists('stairs') and minetest.get_modpath('stairs') then
         false
     )
 end
+
+-- Scarecrow
+minetest.register_node('x_farming:scarecrow', {
+    description = S('Scarecrow'),
+    short_description = S('Scarecrow'),
+    drawtype = 'mesh',
+    mesh = 'x_farming_scarecrow.obj',
+    tiles = { 'x_farming_scarecrow_1.png' },
+    inventory_image = 'x_farming_scarecrow_1_item.png',
+    wield_image = 'x_farming_scarecrow_1_item.png',
+    paramtype = 'light',
+    sunlight_propagates = true,
+    paramtype2 = 'facedir',
+    is_ground_content = false,
+    walkable = true,
+    selection_box = {
+        type = 'fixed',
+        fixed = { -0.4, -0.5, -0.4, 0.4, 1.5, 0.4 }
+    },
+    collision_box = {
+        type = 'fixed',
+        fixed = { -0.4, -0.5, -0.4, 0.4, 1.5, 0.4 }
+    },
+    groups = { choppy = 1, oddly_breakable_by_hand = 1, flammable = 2 },
+    sounds = default.node_sound_wood_defaults(),
+})

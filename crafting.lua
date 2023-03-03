@@ -583,3 +583,13 @@ minetest.register_craft({
         { 'x_farming:cactus_fruit_item', 'x_farming:cactus_fruit_item' },
     }
 })
+
+-- Scarecrow
+minetest.register_craft({
+    output = 'x_farming:scarecrow',
+    recipe = {
+        { '', 'x_farming:pumpkin_block', '' },
+        { 'farming:straw', 'group:wool', 'farming:straw' },
+        { '', 'group:wood', '' },
+    }
+})

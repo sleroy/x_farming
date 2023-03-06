@@ -10,6 +10,7 @@ Hunger points in the description assume that you have [hbhubger](https://forum.m
 
 ## Features
 
+- adds christmas tree
 - adds scarecrow
 - adds food source to almost every biome, allows traveling the world without relying on apples only
 - block farming, instead of food items, blocks can be harvested/crafted and used for building or decoration

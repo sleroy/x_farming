@@ -593,3 +593,13 @@ minetest.register_craft({
         { '', 'group:wood', '' },
     }
 })
+
+-- Christmas tree
+minetest.register_craft({
+    output = 'x_farming:christmas_tree_sapling',
+    recipe = {
+        { 'default:goldblock', 'default:meselamp', 'default:goldblock' },
+        { 'wool:green', 'default:pine_sapling', 'wool:blue' },
+        { 'wool:yellow', 'default:pine_sapling', 'wool:red' }
+    }
+})

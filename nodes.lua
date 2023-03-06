@@ -213,6 +213,11 @@ if minetest.global_exists('stairs') and minetest.get_modpath('stairs') then
     )
 end
 
+local function tick_scarecrow(pos)
+    -- minetest.get_node_timer(pos):start(math.random(1, 2))
+    minetest.get_node_timer(pos):start(math.random(83, 143))
+end
+
 -- Scarecrow
 minetest.register_node('x_farming:scarecrow', {
     description = S('Scarecrow'),
@@ -237,4 +242,188 @@ minetest.register_node('x_farming:scarecrow', {
     },
     groups = { choppy = 1, oddly_breakable_by_hand = 1, flammable = 2 },
     sounds = default.node_sound_wood_defaults(),
+    on_construct = function(pos)
+        local meta = minetest.get_meta(pos)
+        meta:set_string('x_farming_scarecrow_state', 'inactive')
+        meta:set_string('infotext', 'Scarecrow - Activate with bonemeal.')
+        meta:set_string('owner', '')
+    end,
+    after_place_node = function(pos, placer, itemstack, pointed_thing)
+        if not placer then
+            return
+        end
+
+        local meta = minetest.get_meta(pos)
+
+        meta:set_string('owner', placer:get_player_name() or '')
+        meta:set_string('infotext', S('Scarecrow (owned by @1) - Activate with bonemeal.', meta:get_string('owner')))
+    end,
+    on_rightclick = function(pos, node, clicker, itemstack, pointed_thing)
+        local player_name = clicker:get_player_name()
+
+        if minetest.is_protected(pos, player_name)
+            and not minetest.check_player_privs(player_name, 'protection_bypass')
+        then
+            minetest.record_protection_violation(pos, player_name)
+            return itemstack
+        end
+
+        if itemstack:get_name() ~= 'x_farming:bonemeal' then
+            return itemstack
+        end
+
+        local meta = minetest.get_meta(pos)
+        local state = meta:get_string('x_farming_scarecrow_state')
+
+        if state == 'inactive' then
+            meta:set_string('x_farming_scarecrow_state', 'active')
+            meta:set_string('infotext', S('Scarecrow (owned by @1) - Active', meta:get_string('owner')))
+            minetest.swap_node(pos, { name = 'x_farming:scarecrow_2', param2 = node.param2 })
+            meta:set_int('x_farming_scarecrow_fails', 0)
+            tick_scarecrow(pos)
+            itemstack:take_item()
+        end
+
+        return itemstack
+    end,
+})
+
+minetest.register_node('x_farming:scarecrow_2', {
+    description = S('Scarecrow 2'),
+    short_description = S('Scarecrow 2'),
+    drawtype = 'mesh',
+    mesh = 'x_farming_scarecrow_2.obj',
+    tiles = { 'x_farming_scarecrow_2.png' },
+    inventory_image = 'x_farming_scarecrow_1_item.png',
+    wield_image = 'x_farming_scarecrow_1_item.png',
+    paramtype = 'light',
+    sunlight_propagates = true,
+    paramtype2 = 'facedir',
+    is_ground_content = false,
+    walkable = true,
+    drop = 'x_farming:scarecrow',
+    selection_box = {
+        type = 'fixed',
+        fixed = { -0.4, -0.5, -0.4, 0.4, 1.5, 0.4 }
+    },
+    collision_box = {
+        type = 'fixed',
+        fixed = { -0.4, -0.5, -0.4, 0.4, 1.5, 0.4 }
+    },
+    groups = { choppy = 1, oddly_breakable_by_hand = 1, flammable = 2 },
+    sounds = default.node_sound_wood_defaults(),
+    on_construct = function(pos)
+        local meta = minetest.get_meta(pos)
+        meta:set_string('x_farming_scarecrow_state', 'active')
+    end,
+    on_rightclick = function(pos, node, clicker, itemstack, pointed_thing)
+        local player_name = clicker:get_player_name()
+
+        if minetest.is_protected(pos, player_name)
+            and not minetest.check_player_privs(player_name, 'protection_bypass')
+        then
+            minetest.record_protection_violation(pos, player_name)
+            return itemstack
+        end
+
+        local meta = minetest.get_meta(pos)
+        local state = meta:get_string('x_farming_scarecrow_state')
+
+        if state == 'active' then
+            meta:set_string('x_farming_scarecrow_state', 'inactive')
+            meta:set_string('infotext', S('Scarecrow (owned by @1) - Activate with bonemeal.', meta:get_string('owner')))
+            minetest.swap_node(pos, { name = 'x_farming:scarecrow', param2 = node.param2 })
+        end
+
+        return itemstack
+    end,
+    on_timer = function(pos, elapsed)
+        local meta = minetest.get_meta(pos)
+        local state = meta:get_string('x_farming_scarecrow_state')
+        local fails = meta:get_int('x_farming_scarecrow_fails')
+        local player_name = meta:get_string('owner')
+        local player = minetest.get_player_by_name(player_name)
+        local node = minetest.get_node(pos)
+
+        if not player then
+            return true
+        end
+
+        if minetest.is_protected(pos, player_name)
+            and not minetest.check_player_privs(player_name, 'protection_bypass')
+        then
+            return true
+        end
+
+        if state ~= 'active' then
+            return false
+        end
+
+        -- bonemeal it
+        local positions_raw = minetest.find_nodes_in_area(
+            vector.subtract(vector.new(pos), 5),
+            vector.add(vector.new(pos), 5),
+            {
+                'group:sand',
+                'group:soil',
+                'group:seed',
+                'group:plant'
+            }
+        )
+
+        local positions = {}
+
+        for _, p in ipairs(positions_raw) do
+            local n = minetest.get_node(p)
+            if minetest.get_item_group(n.name, 'field') == 0 then
+                local n_above = minetest.get_node(vector.new(p.x, p.y + 1, p.z))
+
+                if minetest.get_item_group(n.name, 'seed') > 0 or minetest.get_item_group(n.name, 'plant') > 0 then
+                    local ndef = minetest.registered_nodes[n.name]
+
+                    if ndef.next_plant
+                        and ndef.next_plant ~= 'x_farming:pumpkin_fruit'
+                        and ndef.next_plant ~= 'x_farming:melon_fruit'
+                    then
+                        table.insert(positions, p)
+                    end
+                elseif n_above.name == 'air' then
+                    table.insert(positions, p)
+                end
+            end
+        end
+
+        if #positions == 0 then
+            meta:set_string('x_farming_scarecrow_state', 'inactive')
+            meta:set_string('infotext', S('Scarecrow (owned by @1) - Activate with bonemeal.', meta:get_string('owner')))
+            minetest.swap_node(pos, { name = 'x_farming:scarecrow', param2 = node.param2 })
+
+            return false
+        end
+
+        local pos_rand = positions[math.random(1, #positions)]
+
+        local pointed_thing = {
+            type = 'node',
+            under = pos_rand,
+            above = vector.new(pos_rand.x, pos_rand.y + 1, pos_rand.z),
+        }
+
+        local result = x_farming.x_bonemeal:on_use(ItemStack({ name = 'x_farming:bonemeal' }), player, pointed_thing)
+
+        if not result.success then
+            fails = fails + 1
+            meta:set_int('x_farming_scarecrow_fails', fails)
+        end
+
+        if fails < 7 then
+            tick_scarecrow(pos)
+        else
+            meta:set_string('x_farming_scarecrow_state', 'inactive')
+            meta:set_string('infotext', S('Scarecrow (owned by @1) - Activate with bonemeal.', meta:get_string('owner')))
+            minetest.swap_node(pos, { name = 'x_farming:scarecrow', param2 = node.param2 })
+
+            return false
+        end
+    end,
 })

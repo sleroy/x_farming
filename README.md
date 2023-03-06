@@ -678,7 +678,7 @@ GNU Lesser General Public License v2.1 or later (see included LICENSE file)
 - x_farming_pine_nut_leaves.png -- Derived from texture Pixel Perfection by XSSheep (CC-BY-SA-4.0)
 - x_farming_x_bonemeal_particles.png -- Derived from texture Pixel Perfection by XSSheep (CC-BY-SA-4.0)
 - x_farming_salt.png -- Derived from texture Pixel Perfection by XSSheep (CC-BY-SA-4.0)
-- x_farming_kiwi_leaves.png (MTG -- Derived from texture by paramat (CC BY-SA 3.0)
+- x_farming_kiwi_leaves.png -- Derived from texture by paramat (CC BY-SA 3.0)
 - x_farming_junglesapling.png -- Derived from texture by PilzAdam (CC BY-SA 3.0)
 - x_farming_pine_nut_sapling.png -- Derived from texture by Splizard (CC BY-SA 3.0)
 - x_farming_salt_1_bottom.png -- Derived from a texture by random-geek (CC BY-SA 3.0) -- Derived from texture by Neuromancer (CC BY-SA 3.0)
@@ -817,6 +817,11 @@ GNU Lesser General Public License v2.1 or later (see included LICENSE file)
 - x_farming_cooked_mask.png
 - x_farming_scarecrow_1_item.png
 - x_farming_scarecrow_1.png
+- x_farming_christmas_tree_leaves_animated.png  -- Derived from texture by Splizard (CC BY-SA 3.0)
+- x_farming_christmas_tree_leaves_decorated.png -- Derived from texture by Splizard (CC BY-SA 3.0)
+- x_farming_christmas_tree_sapling.png
+- x_farming_christmas_tree_star.png
+- x_farming_scarecrow_2.png
 
 **CC-BY-SA-3.0, modified by Thomas-S**
 
@@ -847,6 +852,7 @@ GNU Lesser General Public License v2.1 or later (see included LICENSE file)
 - x_farming_crate.obj
 - x_farming_bag.obj
 - x_farming_scarecrow.obj
+- x_farming_scarecrow_2.obj
 
 ## Installation
 

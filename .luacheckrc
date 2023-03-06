@@ -13,6 +13,7 @@ exclude_files = {
     './docs',
     './locale',
     './types',
+    './assets',
 }
 
 globals = {

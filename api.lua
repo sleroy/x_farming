@@ -200,6 +200,19 @@ function x_farming.grow_pine_nut_tree(pos)
         path, '0', nil, false)
 end
 
+---Christmas Tree
+
+function x_farming.grow_christmas_tree(pos)
+    local path
+    if math.random() > 0.5 then
+        path = minetest.get_modpath('x_farming')..'/schematics/x_farming_christmas_tree_large.mts'
+        minetest.place_schematic({ x = pos.x - 2, y = pos.y, z = pos.z - 2 }, path, '0', nil, false)
+    else
+        path = minetest.get_modpath('x_farming')..'/schematics/x_farming_christmas_tree.mts'
+        minetest.place_schematic({ x = pos.x - 1, y = pos.y, z = pos.z - 1 }, path, '0', nil, false)
+    end
+end
+
 ----
 --- Crates and Bags
 ----
@@ -725,10 +738,16 @@ end
 ---@param under Vector of position
 ---@return boolean
 function x_farming.x_bonemeal.is_on_soil(under)
-    local below = minetest.get_node({ x = under.x, y = under.y - 1, z = under.z })
+    local below = minetest.get_node_or_nil({ x = under.x, y = under.y - 1, z = under.z })
+
+    if not below then
+        return false
+    end
+
     if minetest.get_item_group(below.name, 'soil') == 0 then
         return false
     end
+
     return true
 end
 
@@ -736,10 +755,16 @@ end
 ---@param under Vector of position
 ---@return boolean
 function x_farming.x_bonemeal.is_on_sand(under)
-    local below = minetest.get_node({ x = under.x, y = under.y - 1, z = under.z })
+    local below = minetest.get_node_or_nil({ x = under.x, y = under.y - 1, z = under.z })
+
+    if not below then
+        return false
+    end
+
     if minetest.get_item_group(below.name, 'sand') == 0 then
         return false
     end
+
     return true
 end
 
@@ -825,11 +850,19 @@ function x_farming.x_bonemeal.groupContains(groups, fertility, value)
 end
 
 ---Handle growth of decorations based on biome
+---@param itemstack ItemStack
+---@param user ObjectRef | nil
+---@param pointed_thing PointedThingDef
+---@return { ['success']: boolean, ['itemstack']: ItemStack }
 function x_farming.x_bonemeal.grow_grass_and_flowers(itemstack, user, pointed_thing)
+    local result = {
+        success = false,
+        itemstack = itemstack
+    }
     local node = minetest.get_node(pointed_thing.under)
 
     if not node then
-        return itemstack
+        return result
     end
 
     local pos0 = vector.subtract(pointed_thing.under, 3)
@@ -837,13 +870,19 @@ function x_farming.x_bonemeal.grow_grass_and_flowers(itemstack, user, pointed_th
     local biome_data = minetest.get_biome_data(pointed_thing.under)
 
     if not biome_data then
-        return itemstack
+        return result
     end
 
     local biome_name = minetest.get_biome_name(biome_data.biome)
+
+    if not biome_name then
+        return result
+    end
+
     local random_number = math.random(2, 6)
     local registered_decorations_filtered = {}
-    local returned_itemstack = ItemStack(node.name .. ' 1')
+    ---@type ItemStack | nil
+    local returned_itemstack
     local node_def = minetest.registered_nodes[node.name]
     local below_water = false
     local floats_on_water = false
@@ -906,11 +945,16 @@ function x_farming.x_bonemeal.grow_grass_and_flowers(itemstack, user, pointed_th
             if x_farming.x_bonemeal.tableContains(v.biomes, biome_name) then
                 table.insert(registered_decorations_filtered, v)
             end
-
         end
 
         ---clicked node is in decoration
-        if v.decoration == node.name then
+        local _decoration = v.decoration
+
+        if type(v.decoration) == 'string' then
+            _decoration = { v.decoration }
+        end
+
+        if x_farming.x_bonemeal.tableContains(_decoration, node.name) then
             node_in_decor = true
         end
 
@@ -961,7 +1005,7 @@ function x_farming.x_bonemeal.grow_grass_and_flowers(itemstack, user, pointed_th
 
     ---find suitable positions (float on water)
     if floats_on_water then
-        for j, pos_value in ipairs(positions_dirty) do
+        for _, pos_value in ipairs(positions_dirty) do
             local node_at_pos_below = minetest.get_node({ x = pos_value.x, y = pos_value.y - 1, z = pos_value.z })
             local test_node_def4 = minetest.registered_nodes[node_at_pos_below.name]
 
@@ -974,19 +1018,20 @@ function x_farming.x_bonemeal.grow_grass_and_flowers(itemstack, user, pointed_th
         end
     end
 
+    local returned_itemstack_success = 0
 
     ---place decorations on random positions
     if #positions > 0 and #registered_decorations_filtered > 0 then
         for i = 1, random_number do
-            local idx = math.random(#positions)
+            local idx = math.random(1, #positions)
             local random_pos = positions[idx]
-            local random_decor = registered_decorations_filtered[math.random(#registered_decorations_filtered)]
+            local random_decor = registered_decorations_filtered[math.random(1, #registered_decorations_filtered)]
             local random_decor_item = random_decor.decoration
 
             if floats_on_water and node_in_decor then
                 random_decor_item = node.name
             elseif type(random_decor.decoration) == 'table' then
-                random_decor_item = random_decor.decoration[math.random(#random_decor.decoration)]
+                random_decor_item = random_decor.decoration[math.random(1, #random_decor.decoration)]
             end
 
             local random_decor_item_def = minetest.registered_nodes[random_decor_item]
@@ -1014,7 +1059,9 @@ function x_farming.x_bonemeal.grow_grass_and_flowers(itemstack, user, pointed_th
                     end
 
                     returned_itemstack = random_decor_item_def.on_place(ItemStack(random_decor_item), user, pt)
+
                     if returned_itemstack and returned_itemstack:is_empty() then
+                        returned_itemstack_success = returned_itemstack_success + 1
                         x_farming.x_bonemeal.particle_effect(pt.above)
                     end
                 elseif random_decor_item_def ~= nil then
@@ -1025,7 +1072,6 @@ function x_farming.x_bonemeal.grow_grass_and_flowers(itemstack, user, pointed_th
                         pos_y = random_decor.place_offset_y
                     end
 
-                    returned_itemstack = ItemStack('')
                     x_farming.x_bonemeal.particle_effect(random_pos)
                     minetest.set_node({
                         x = random_pos.x,
@@ -1036,24 +1082,37 @@ function x_farming.x_bonemeal.grow_grass_and_flowers(itemstack, user, pointed_th
                 end
 
                 table.remove(positions, idx)
+            else
+                return result
             end
         end
+    else
+        return result
     end
 
     ---take item
-    if returned_itemstack
-        and returned_itemstack:is_empty()
+    if returned_itemstack_success > 0
         and not x_farming.x_bonemeal.is_creative(user:get_player_name())
     then
         itemstack:take_item()
     end
 
-    return itemstack
+    result.success = true
+    result.itemstack = itemstack
+    return result
 end
 
 ---Handle farming and farming addons plants.
 ---Needed to copy this function from minetest_game and modify it in order to ommit some checks (e.g. light..)
+---@param itemstack ItemStack
+---@param user ObjectRef | nil
+---@param pointed_thing PointedThingDef
+---@return { ['success']: boolean, ['itemstack']: ItemStack }
 function x_farming.x_bonemeal.grow_farming(itemstack, user, pointed_thing)
+    local result = {
+        success = false,
+        itemstack = itemstack
+    }
     local pos_under = pointed_thing.under
     local replace_node_name = minetest.get_node(pos_under).name
     local ndef = minetest.registered_nodes[replace_node_name]
@@ -1063,7 +1122,7 @@ function x_farming.x_bonemeal.grow_farming(itemstack, user, pointed_thing)
         or ndef.next_plant == 'x_farming:pumpkin_fruit'
         or ndef.next_plant == 'x_farming:melon_fruit'
     then
-        return itemstack
+        return result
     end
 
     local pos0 = vector.subtract(pointed_thing.under, 3)
@@ -1142,7 +1201,88 @@ function x_farming.x_bonemeal.grow_farming(itemstack, user, pointed_thing)
         itemstack:take_item()
     end
 
-    return itemstack
+    return {
+        success = true,
+        itemstack = itemstack
+    }
+end
+
+---XBonemeal on_use
+---@param self table x_farming.x_bonemeal
+---@param itemstack ItemStack
+---@param user ObjectRef | nil
+---@param pointed_thing any
+---@return { ['success']: boolean, ['itemstack']: ItemStack }
+function x_farming.x_bonemeal.on_use(self, itemstack, user, pointed_thing)
+    local result = {
+        success = false,
+        itemstack = itemstack
+    }
+
+    if not user then
+        return result
+    end
+
+    local under = pointed_thing.under
+
+    if not under then
+        return result
+    end
+    if pointed_thing.type ~= 'node' then
+        return result
+    end
+    if minetest.is_protected(under, user:get_player_name()) then
+        return result
+    end
+
+    local node = minetest.get_node(under)
+
+    if not node then
+        return result
+    end
+    if node.name == 'ignore' then
+        return result
+    end
+
+    local mod = node.name:split(':')[1]
+
+    if (mod == 'farming' or mod == 'x_farming')
+        and not string.find(node.name, '_sapling')
+        and not string.find(node.name, '_seedling')
+    then
+        --
+        -- Farming
+        --
+        return self.grow_farming(itemstack, user, pointed_thing)
+    elseif self.tree_defs[node.name] then
+        --
+        -- Default (Trees, Bushes, Papyrus)
+        --
+        local def = self.tree_defs[node.name]
+        local chance = math.random(1, def.chance)
+
+        if chance == 1 then
+            local success = def.grow_tree(under)
+
+            if not success then
+                return result
+            end
+
+            self.particle_effect({ x = under.x, y = under.y + 1, z = under.z })
+        end
+
+        -- take item if not in creative
+        if not self.is_creative(user:get_player_name()) then
+            itemstack:take_item()
+        end
+
+        return {
+            success = true,
+            itemstack = itemstack
+        }
+    else
+        return self.grow_grass_and_flowers(itemstack, user, pointed_thing)
+    end
 end
 
 --- API for registering tree growing from saplings using bonemeal

@@ -22,7 +22,7 @@ local S = minetest.get_translator(minetest.get_current_modname())
 
 --- Register craftitem definition - added to minetest.registered_items[name]
 minetest.register_craftitem('x_farming:bonemeal', {
-    description = S('Bonemeal - use it as a fertilizer for most plants'),
+    description = S('Bonemeal - use it as a fertilizer for most plants.'),
     inventory_image = 'x_farming_x_bonemeal_bonemeal.png',
     on_use = function(itemstack, user, pointed_thing)
         local result = x_farming.x_bonemeal:on_use(itemstack, user, pointed_thing)

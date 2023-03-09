@@ -91,7 +91,6 @@ minetest.register_node('x_farming:christmas_tree_star', {
     inventory_image = 'x_farming_christmas_tree_star.png',
     wield_image = 'x_farming_christmas_tree_star.png',
     drawtype = 'plantlike',
-    paramtype2 = 0,
     paramtype = 'light',
     walkable = false,
     groups = {

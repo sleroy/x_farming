@@ -205,10 +205,10 @@ end
 function x_farming.grow_christmas_tree(pos)
     local path
     if math.random() > 0.5 then
-        path = minetest.get_modpath('x_farming')..'/schematics/x_farming_christmas_tree_large.mts'
+        path = minetest.get_modpath('x_farming') .. '/schematics/x_farming_christmas_tree_large.mts'
         minetest.place_schematic({ x = pos.x - 2, y = pos.y, z = pos.z - 2 }, path, '0', nil, false)
     else
-        path = minetest.get_modpath('x_farming')..'/schematics/x_farming_christmas_tree.mts'
+        path = minetest.get_modpath('x_farming') .. '/schematics/x_farming_christmas_tree.mts'
         minetest.place_schematic({ x = pos.x - 1, y = pos.y, z = pos.z - 1 }, path, '0', nil, false)
     end
 end
@@ -1093,7 +1093,7 @@ function x_farming.x_bonemeal.grow_grass_and_flowers(itemstack, user, pointed_th
     end
 
     ---take item
-    if returned_itemstack_success > 0
+    if user and returned_itemstack_success > 0
         and not x_farming.x_bonemeal.is_creative(user:get_player_name())
     then
         itemstack:take_item()

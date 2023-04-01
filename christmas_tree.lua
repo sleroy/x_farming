@@ -87,7 +87,7 @@ minetest.register_node('x_farming:christmas_tree_leaves', {
 -- Star
 minetest.register_node('x_farming:christmas_tree_star', {
     description = S('Christmas Tree Star'),
-    tiles = {'x_farming_christmas_tree_star.png'},
+    tiles = { 'x_farming_christmas_tree_star.png' },
     inventory_image = 'x_farming_christmas_tree_star.png',
     wield_image = 'x_farming_christmas_tree_star.png',
     drawtype = 'plantlike',

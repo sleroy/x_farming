@@ -1199,7 +1199,7 @@ function x_farming.x_bonemeal.grow_farming(itemstack, user, pointed_thing)
     end
 
     ---take item if not in creative
-    if not x_farming.x_bonemeal.is_creative(user:get_player_name()) and take_item then
+    if user and not x_farming.x_bonemeal.is_creative(user:get_player_name()) and take_item then
         itemstack:take_item()
     end
 

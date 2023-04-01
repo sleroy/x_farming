@@ -87,6 +87,7 @@ minetest.register_node('x_farming:corn_popcorn', {
     drawtype = 'mesh',
     mesh = 'x_farming_corn_popcorn.obj',
     tiles = { 'x_farming_corn_popcorn_mesh.png' },
+    use_texture_alpha = 'clip',
     inventory_image = 'x_farming_corn_popcorn.png',
     wield_image = 'x_farming_corn_popcorn.png',
     paramtype = 'light',

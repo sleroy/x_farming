@@ -58,6 +58,7 @@ minetest.register_node('x_farming:seed_salt', {
         'x_farming_salt_1_side.png',
         'x_farming_salt_1_side.png'
     },
+    use_texture_alpha = 'clip',
     node_box = {
         type = 'fixed',
         fixed = {
@@ -118,6 +119,7 @@ minetest.register_node('x_farming:salt_1', {
         'x_farming_salt_1_side.png',
         'x_farming_salt_1_side.png'
     },
+    use_texture_alpha = 'clip',
     paramtype = 'light',
     sunlight_propagates = true,
     on_rotate = screwdriver.disallow,
@@ -178,6 +180,7 @@ minetest.register_node('x_farming:salt_2', {
         'x_farming_salt_1_side.png',
         'x_farming_salt_1_side.png'
     },
+    use_texture_alpha = 'clip',
     paramtype = 'light',
     sunlight_propagates = true,
     on_rotate = screwdriver.disallow,
@@ -238,6 +241,7 @@ minetest.register_node('x_farming:salt_3', {
         'x_farming_salt_2_side.png',
         'x_farming_salt_2_side.png'
     },
+    use_texture_alpha = 'clip',
     paramtype = 'light',
     sunlight_propagates = true,
     on_rotate = screwdriver.disallow,
@@ -299,6 +303,7 @@ minetest.register_node('x_farming:salt_4', {
         'x_farming_salt_2_side.png',
         'x_farming_salt_2_side.png'
     },
+    use_texture_alpha = 'clip',
     paramtype = 'light',
     sunlight_propagates = true,
     on_rotate = screwdriver.disallow,
@@ -360,6 +365,7 @@ minetest.register_node('x_farming:salt_5', {
         'x_farming_salt_3_side.png',
         'x_farming_salt_3_side.png'
     },
+    use_texture_alpha = 'clip',
     paramtype = 'light',
     sunlight_propagates = true,
     on_rotate = screwdriver.disallow,
@@ -422,6 +428,7 @@ minetest.register_node('x_farming:salt_6', {
         'x_farming_salt_3_side.png',
         'x_farming_salt_3_side.png'
     },
+    use_texture_alpha = 'clip',
     paramtype = 'light',
     sunlight_propagates = true,
     on_rotate = screwdriver.disallow,
@@ -484,6 +491,7 @@ minetest.register_node('x_farming:salt_7', {
         'x_farming_salt_4_side.png',
         'x_farming_salt_4_side.png'
     },
+    use_texture_alpha = 'clip',
     paramtype = 'light',
     sunlight_propagates = true,
     on_rotate = screwdriver.disallow,

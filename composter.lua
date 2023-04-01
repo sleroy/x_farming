@@ -51,6 +51,7 @@ for i = 1, 5, 1 do
     def.drawtype = 'mesh'
     def.mesh = 'x_farming_crate.obj'
     def.tiles = { 'x_farming_composter_' .. i .. '.png' }
+    def.use_texture_alpha = 'clip'
     def.sounds = default.node_sound_wood_defaults()
     def.paramtype = 'light'
     def.paramtype2 = 'facedir'

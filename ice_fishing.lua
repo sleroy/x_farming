@@ -685,6 +685,7 @@ icefishing.register_equipment = function(name, def)
             "x_farming_icefishing_front_0.png",
             "x_farming_icefishing_back_0.png"
         },
+        use_texture_alpha = 'clip',
         inventory_image = "x_farming_icefishing_inv.png",
         wield_image = "x_farming_icefishing_inv.png",
         drawtype = "nodebox",
@@ -789,6 +790,7 @@ icefishing.register_equipment = function(name, def)
             ---Textures of node; +Y, -Y, +X, -X, +Z, -Z
             ---Textures of node; top, bottom, right, left, front, back
             tiles = tiles,
+            use_texture_alpha = 'clip',
             paramtype = "light",
             walkable = false,
             buildable_to = true,

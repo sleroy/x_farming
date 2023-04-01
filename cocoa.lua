@@ -162,6 +162,7 @@ minetest.register_node('x_farming:cocoa_1', {
         'x_farming_cocoa_front_1.png',
         'x_farming_cocoa_front_1.png'
     },
+    use_texture_alpha = 'clip',
     paramtype = 'light',
     sunlight_propagates = true,
     wield_scale = { x = 2, y = 2, z = 2 },
@@ -215,6 +216,7 @@ minetest.register_node('x_farming:cocoa_2', {
         'x_farming_cocoa_front_2.png',
         'x_farming_cocoa_front_2.png'
     },
+    use_texture_alpha = 'clip',
     paramtype = 'light',
     sunlight_propagates = true,
     wield_scale = { x = 1.5, y = 1.5, z = 1.5 },
@@ -268,6 +270,7 @@ minetest.register_node('x_farming:cocoa_3', {
         'x_farming_cocoa_front_3.png',
         'x_farming_cocoa_front_3.png'
     },
+    use_texture_alpha = 'clip',
     paramtype = 'light',
     sunlight_propagates = true,
     wield_scale = { x = 1.5, y = 1.5, z = 1.5 },

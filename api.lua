@@ -257,6 +257,7 @@ function x_farming.register_crate(name, def)
     _def.paramtype2 = 'facedir'
     _def.mesh = 'x_farming_crate.obj'
     _def.tiles = def.tiles
+    _def.use_texture_alpha = 'clip'
     _def.sounds = def.sounds or default.node_sound_wood_defaults()
     _def.is_ground_content = false
     _def.groups = def.groups or { choppy = 2, oddly_breakable_by_hand = 2, not_in_creative_inventory = 1, flammable = 2 }
@@ -523,6 +524,7 @@ function x_farming.register_bag(name, def)
     _def.paramtype2 = 'facedir'
     _def.mesh = 'x_farming_bag.obj'
     _def.tiles = def.tiles
+    _def.use_texture_alpha = 'clip'
     _def.sounds = def.sounds or default.node_sound_sand_defaults()
     _def.is_ground_content = false
     _def.groups = def.groups or { choppy = 2, oddly_breakable_by_hand = 2, not_in_creative_inventory = 1, flammable = 2 }

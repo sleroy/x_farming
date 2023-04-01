@@ -198,6 +198,7 @@ minetest.register_node('x_farming:kiwi_fruit', {
     drawtype = 'mesh',
     mesh = 'x_farming_kiwi_fruit.obj',
     tiles = { 'x_farming_kiwi_fruit_mesh.png' },
+    use_texture_alpha = 'clip',
     inventory_image = 'x_farming_kiwi_fruit.png',
     wield_image = 'x_farming_kiwi_fruit.png',
     paramtype = 'light',

@@ -53,6 +53,7 @@ minetest.register_node('x_farming:coffee_cup_hot', {
     drawtype = 'mesh',
     mesh = 'x_farming_coffee_cup_hot.obj',
     tiles = { 'x_farming_coffee_cup_hot_mesh.png' },
+    use_texture_alpha = 'clip',
     inventory_image = 'x_farming_coffee_cup_hot.png',
     wield_image = 'x_farming_coffee_cup_hot.png',
     paramtype = 'light',

@@ -54,6 +54,7 @@ minetest.register_node('x_farming:cactus_fruit', {
         'x_farming_cactus_fruit_sides.png',
         'x_farming_cactus_fruit_sides.png'
     },
+    use_texture_alpha = 'clip',
     drawtype = 'nodebox',
     paramtype = 'light',
     node_box = {

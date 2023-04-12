@@ -18,32 +18,14 @@
 
 local S = minetest.get_translator(minetest.get_current_modname())
 
--- spawn snow golem
-local function pumpkin_on_construct(pos)
-    if not minetest.get_modpath('mobs_npc') then return end
-
-    for i = 1, 2 do
-        if minetest.get_node({ x = pos.x, y = pos.y - i, z = pos.z }).name ~= 'default:snowblock' then
-            return
-        end
-    end
-
-    --if 3 snow block are placed, this will make snow golem
-    for i = 0, 2 do
-        minetest.remove_node({ x = pos.x, y = pos.y - i, z = pos.z })
-    end
-
-    minetest.add_entity({ x = pos.x, y = pos.y - 1, z = pos.z }, 'mobs_npc:snow_golem')
-end
-
 -- PUMPKIN
-farming.register_plant('x_farming:pumpkin', {
+x_farming.register_plant('x_farming:pumpkin', {
     description = S('Pumpkin Seed') .. '\n' .. S('Compost chance') .. ': 30%',
     short_description = S('Pumpkin Seed'),
     inventory_image = 'x_farming_pumpkin_seed.png',
     steps = 8,
     minlight = 13,
-    maxlight = default.LIGHT_MAX,
+    maxlight = 14,
     fertility = { 'grassland', 'desert' },
     groups = { flammable = 4 },
     place_param2 = 3,
@@ -95,7 +77,7 @@ minetest.register_node('x_farming:pumpkin_fruit', {
             and parent_node ~= nil
             and parent_node.name == 'x_farming:pumpkin_8' then
 
-            x_farming.tick(parent_pos_from_child)
+            x_farming.tick_block(parent_pos_from_child)
         end
     end
 })
@@ -116,7 +98,6 @@ minetest.register_node('x_farming:pumpkin_block', {
     sounds = default.node_sound_wood_defaults(),
     is_ground_content = false,
     groups = { snappy = 3, flammable = 4, fall_damage_add_percent = -30, compost = 65 },
-    on_construct = pumpkin_on_construct
 })
 
 -- PUMPKIN LANTERN -- from recipe
@@ -138,7 +119,6 @@ minetest.register_node('x_farming:pumpkin_lantern', {
     light_source = 12,
     drop = 'x_farming:pumpkin_lantern',
     groups = { snappy = 3, flammable = 4, fall_damage_add_percent = -30 },
-    on_construct = pumpkin_on_construct
 })
 
 -- drop blocks instead of items
@@ -155,7 +135,7 @@ minetest.register_lbm({
     name = 'x_farming:start_nodetimer_pumpkin',
     nodenames = { 'x_farming:pumpkin_8' },
     action = function(pos, node)
-        x_farming.tick_short(pos)
+        x_farming.tick_block_short(pos)
     end,
 })
 

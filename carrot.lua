@@ -18,10 +18,10 @@
 
 local S = minetest.get_translator(minetest.get_current_modname())
 local minlight = 13
-local maxlight = default.LIGHT_MAX
+local maxlight = 14
 
 -- carrot
-farming.register_plant('x_farming:carrot', {
+x_farming.register_plant('x_farming:carrot', {
     description = S('Planting Carrot') .. '\n' .. S('Compost chance') .. ': 30%',
     short_description = S('Planting Carrot'),
     paramtype2 = 'meshoptions',

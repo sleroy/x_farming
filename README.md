@@ -1,6 +1,6 @@
-# Farming Addons [x_farming]
+# X Farming [x_farming]
 
-Extends Minetest default farming mod with new plants, crops and ice fishing using only minetest_game API (except couple of functions for e.g. block farming, ice fishing).
+Farming mod with new plants, crops and ice fishing.
 
 ![screenshot](screenshot.png)
 
@@ -405,14 +405,10 @@ Seeds can be found also in dungeon chests.
 ## Dependencies
 
 - default
-- farming
 
 ## Optional Dependencies
 
 - hbhunger
-- flowers
-- mobs_animal
-- mobs_npc
 - stairs
 - wool
 - dye
@@ -823,6 +819,36 @@ GNU Lesser General Public License v2.1 or later (see included LICENSE file)
 - x_farming_christmas_tree_sapling.png
 - x_farming_christmas_tree_star.png
 - x_farming_scarecrow_2.png
+- x_farming_barley.png
+- x_farming_barley_1.png
+- x_farming_barley_2.png
+- x_farming_barley_3.png
+- x_farming_barley_4.png
+- x_farming_barley_5.png
+- x_farming_barley_6.png
+- x_farming_barley_7.png
+- x_farming_barley_8.png
+- x_farming_barley_seed.png
+- x_farming_barley_stack_side.png
+- x_farming_barley_stack_top.png
+- x_farming_bread.png
+- x_farming_cotton.png
+- x_farming_cotton_1.png
+- x_farming_cotton_2.png
+- x_farming_cotton_3.png
+- x_farming_cotton_4.png
+- x_farming_cotton_5.png
+- x_farming_cotton_6.png
+- x_farming_cotton_7.png
+- x_farming_cotton_8.png
+- x_farming_cotton_seed.png
+- x_farming_crate_barley_3.png
+- x_farming_crate_cotton2_3.png
+- x_farming_flour.png
+- x_farming_string.png
+- x_farming_tool_steelhoe.png
+- x_farming_tool_stonehoe.png
+- x_farming_tool_woodhoe.png
 
 **CC-BY-SA-3.0, modified by Thomas-S**
 
@@ -836,7 +862,7 @@ GNU Lesser General Public License v2.1 or later (see included LICENSE file)
 
 **CC-BY-3.0, by Angel_Perez_Grandi**, https://freesound.org
 
-- x_farming_ice_dug.ogg (MTG)
+- x_farming_ice_dug.ogg
 
 ### Models
 

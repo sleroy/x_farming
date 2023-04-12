@@ -80,7 +80,7 @@ minetest.register_node('x_farming:seed_salt', {
     groups = { seed = 1, snappy = 3, flammable = 2, plant = 1, attached_node = 1 },
     sounds = default.node_sound_leaves_defaults(),
     next_plant = 'x_farming:salt_1',
-    on_timer = farming.grow_plant,
+    on_timer = x_farming.grow_plant,
 
     on_place = function(itemstack, placer, pointed_thing)
         local under = pointed_thing.under
@@ -93,7 +93,7 @@ minetest.register_node('x_farming:seed_salt', {
                 pointed_thing) or itemstack
         end
 
-        return farming.place_seed(itemstack, placer, pointed_thing, 'x_farming:seed_salt')
+        return x_farming.place_seed(itemstack, placer, pointed_thing, 'x_farming:seed_salt')
     end,
 })
 
@@ -153,7 +153,7 @@ minetest.register_node('x_farming:salt_1', {
     groups = { snappy = 3, flammable = 2, plant = 1, not_in_creative_inventory = 1, attached_node = 1 },
     sounds = default.node_sound_leaves_defaults(),
     next_plant = 'x_farming:salt_2',
-    on_timer = farming.grow_plant,
+    on_timer = x_farming.grow_plant,
     minlight = 13,
     maxlight = 15
 })
@@ -214,7 +214,7 @@ minetest.register_node('x_farming:salt_2', {
     groups = { snappy = 3, flammable = 2, plant = 1, not_in_creative_inventory = 1, attached_node = 1 },
     sounds = default.node_sound_leaves_defaults(),
     next_plant = 'x_farming:salt_3',
-    on_timer = farming.grow_plant,
+    on_timer = x_farming.grow_plant,
     minlight = 13,
     maxlight = 15
 })
@@ -276,7 +276,7 @@ minetest.register_node('x_farming:salt_3', {
     groups = { snappy = 3, flammable = 2, plant = 1, not_in_creative_inventory = 1, attached_node = 1 },
     sounds = default.node_sound_leaves_defaults(),
     next_plant = 'x_farming:salt_4',
-    on_timer = farming.grow_plant,
+    on_timer = x_farming.grow_plant,
     minlight = 13,
     maxlight = 15
 })
@@ -338,7 +338,7 @@ minetest.register_node('x_farming:salt_4', {
     groups = { snappy = 3, flammable = 2, plant = 1, not_in_creative_inventory = 1, attached_node = 1 },
     sounds = default.node_sound_leaves_defaults(),
     next_plant = 'x_farming:salt_5',
-    on_timer = farming.grow_plant,
+    on_timer = x_farming.grow_plant,
     minlight = 13,
     maxlight = 15
 })
@@ -401,7 +401,7 @@ minetest.register_node('x_farming:salt_5', {
     groups = { snappy = 3, flammable = 2, plant = 1, not_in_creative_inventory = 1, attached_node = 1 },
     sounds = default.node_sound_leaves_defaults(),
     next_plant = 'x_farming:salt_6',
-    on_timer = farming.grow_plant,
+    on_timer = x_farming.grow_plant,
     minlight = 13,
     maxlight = 15
 })
@@ -464,7 +464,7 @@ minetest.register_node('x_farming:salt_6', {
     groups = { snappy = 3, flammable = 2, plant = 1, not_in_creative_inventory = 1, attached_node = 1 },
     sounds = default.node_sound_leaves_defaults(),
     next_plant = 'x_farming:salt_7',
-    on_timer = farming.grow_plant,
+    on_timer = x_farming.grow_plant,
     minlight = 13,
     maxlight = 15
 })

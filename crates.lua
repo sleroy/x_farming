@@ -26,20 +26,24 @@ x_farming.register_crate('crate_empty', {
     stack_max = tonumber(minetest.settings:get('default_stack_max')) or 99
 })
 
----crate wheat
-x_farming.register_crate('crate_wheat_3', {
-    description = S('Wheat Crate'),
-    tiles = { 'x_farming_crate_wheat_3.png' },
-    _custom = {
-        crate_item = 'farming:wheat'
-    }
-})
+if minetest.get_modpath('farming') then
+    ---crate wheat
+    x_farming.register_crate('crate_wheat_3', {
+        description = S('Wheat Crate'),
+        short_description = S('Wheat Crate'),
+        tiles = { 'x_farming_crate_wheat_3.png' },
+        _custom = {
+            crate_item = 'farming:wheat'
+        }
+    })
 
----crate cotton
-x_farming.register_crate('crate_cotton_3', {
-    description = S('Cotton Crate'),
-    tiles = { 'x_farming_crate_cotton_3.png' },
-    _custom = {
-        crate_item = 'farming:cotton'
-    }
-})
+    ---crate cotton
+    x_farming.register_crate('crate_cotton_3', {
+        description = S('Cotton Crate'),
+        short_description = S('Cotton Crate'),
+        tiles = { 'x_farming_crate_cotton_3.png' },
+        _custom = {
+            crate_item = 'farming:cotton'
+        }
+    })
+end

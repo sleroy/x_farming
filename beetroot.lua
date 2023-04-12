@@ -16,14 +16,12 @@
     License along with this library; if not, write to juraj.vajda@gmail.com
 --]]
 
-farming = minetest.global_exists('farming') and farming --[[@as MtgFarming]]
-
 local S = minetest.get_translator(minetest.get_current_modname())
 local minlight = 13
-local maxlight = default.LIGHT_MAX
+local maxlight = 14
 
 ---beetroot
-farming.register_plant('x_farming:beetroot', {
+x_farming.register_plant('x_farming:beetroot', {
     description = S('Beetroot Seed') .. '\n' .. S('Compost chance') .. ': 30%',
     short_description = S('Beetroot Seed'),
     paramtype2 = 'meshoptions',

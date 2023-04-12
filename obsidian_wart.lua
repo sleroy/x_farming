@@ -20,10 +20,10 @@ stairs = stairs --[[@as MtgStairs]]
 
 local S = minetest.get_translator(minetest.get_current_modname())
 local minlight = 0
-local maxlight = default.LIGHT_MAX
+local maxlight = 14
 
 -- OBSIDIAN WART
-farming.register_plant('x_farming:obsidian_wart', {
+x_farming.register_plant('x_farming:obsidian_wart', {
     description = S('Obsidian Wart Seed') .. '\n' .. S('Plant on Obsidian') .. '\n' .. S('Compost chance') .. ': 30%',
     short_description = S('Obsidian Wart Seed'),
     paramtype2 = 'meshoptions',

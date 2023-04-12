@@ -19,14 +19,14 @@
 local S = minetest.get_translator(minetest.get_current_modname())
 
 -- SOYBEAN
-farming.register_plant('x_farming:soybean', {
+x_farming.register_plant('x_farming:soybean', {
     description = S('Soybean Seed') .. '\n' .. S('Compost chance') .. ': 30%',
     short_description = S('Soybean Seed'),
     paramtype2 = 'meshoptions',
     inventory_image = 'x_farming_soybean_seed.png',
     steps = 7,
     minlight = 13,
-    maxlight = default.LIGHT_MAX,
+    maxlight = 14,
     fertility = { 'grassland' },
     groups = { flammable = 4 },
     place_param2 = 3,

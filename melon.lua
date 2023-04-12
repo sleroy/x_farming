@@ -19,13 +19,13 @@
 local S = minetest.get_translator(minetest.get_current_modname())
 
 -- MELON
-farming.register_plant('x_farming:melon', {
+x_farming.register_plant('x_farming:melon', {
     description = S('Melon Seed') .. '\n' .. S('Compost chance') .. ': 30%',
     short_description = S('Melon Seed'),
     inventory_image = 'x_farming_melon_seed.png',
     steps = 8,
     minlight = 13,
-    maxlight = default.LIGHT_MAX,
+    maxlight = 14,
     fertility = { 'grassland' },
     groups = { flammable = 4 },
     place_param2 = 3,
@@ -104,7 +104,7 @@ minetest.register_node('x_farming:melon_fruit', {
             and parent_node ~= nil
             and parent_node.name == 'x_farming:melon_8' then
 
-            x_farming.tick(parent_pos_from_child)
+            x_farming.tick_block(parent_pos_from_child)
         end
     end
 })
@@ -137,7 +137,7 @@ minetest.register_lbm({
     name = 'x_farming:start_nodetimer_melon',
     nodenames = { 'x_farming:melon_8' },
     action = function(pos, node)
-        x_farming.tick_short(pos)
+        x_farming.tick_block_short(pos)
     end,
 })
 

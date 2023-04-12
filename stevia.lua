@@ -19,14 +19,14 @@
 local S = minetest.get_translator(minetest.get_current_modname())
 
 -- STEVIA
-farming.register_plant('x_farming:stevia', {
+x_farming.register_plant('x_farming:stevia', {
     description = S('Stevia Seed') .. '\n' .. S('Compost chance') .. ': 30%',
     short_description = S('Stevia Seed'),
     paramtype2 = 'meshoptions',
     inventory_image = 'x_farming_stevia_seed.png',
     steps = 8,
     minlight = 13,
-    maxlight = default.LIGHT_MAX,
+    maxlight = 14,
     fertility = { 'grassland' },
     groups = { flammable = 4 },
     place_param2 = 4,

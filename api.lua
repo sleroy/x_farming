@@ -18,14 +18,288 @@
 
 local S = minetest.get_translator(minetest.get_current_modname())
 
+-- main class
+x_farming = {
+    hbhunger = minetest.get_modpath('hbhunger'),
+    vessels = minetest.get_modpath('vessels'),
+    bucket = minetest.get_modpath('bucket'),
+    colors = {
+        brown = '#DEB887',
+        red = '#FF8080',
+        green = '#98E698'
+    },
+    x_bonemeal = {
+        tree_defs = {
+            ['x_farming:christmas_tree_sapling'] = {
+                -- christmas tree
+                name = 'x_farming:christmas_tree_sapling',
+                chance = 2,
+                grow_tree = function(pos)
+                    if not x_farming.x_bonemeal.is_on_soil(pos) then
+                        return false
+                    end
+
+                    x_farming.grow_christmas_tree(pos)
+
+                    return true
+                end
+            },
+            ['default:sapling'] = {
+                -- apple tree
+                name = 'default:sapling',
+                chance = 2,
+                grow_tree = function(pos)
+                    if not x_farming.x_bonemeal.is_on_soil(pos) then
+                        return false
+                    end
+
+                    default.grow_new_apple_tree(pos)
+
+                    return true
+                end
+            },
+            ['default:junglesapling'] = {
+                -- jungle tree
+                name = 'default:junglesapling',
+                chance = 2,
+                grow_tree = function(pos)
+                    if not x_farming.x_bonemeal.is_on_soil(pos) then
+                        return false
+                    end
+
+                    default.grow_new_jungle_tree(pos)
+
+                    return true
+                end
+            },
+            ['default:emergent_jungle_sapling'] = {
+                -- emergent jungle tree
+                name = 'default:emergent_jungle_sapling',
+                chance = 2,
+                grow_tree = function(pos)
+                    if not x_farming.x_bonemeal.is_on_soil(pos) then
+                        return false
+                    end
+
+                    default.grow_new_emergent_jungle_tree(pos)
+
+                    return true
+                end
+            },
+            ['default:acacia_sapling'] = {
+                -- acacia tree
+                name = 'default:acacia_sapling',
+                chance = 2,
+                grow_tree = function(pos)
+                    if not x_farming.x_bonemeal.is_on_soil(pos) then
+                        return false
+                    end
+
+                    default.grow_new_acacia_tree(pos)
+
+                    return true
+                end
+            },
+            ['default:aspen_sapling'] = {
+                -- aspen tree
+                name = 'default:aspen_sapling',
+                chance = 2,
+                grow_tree = function(pos)
+                    if not x_farming.x_bonemeal.is_on_soil(pos) then
+                        return false
+                    end
+
+                    default.grow_new_aspen_tree(pos)
+
+                    return true
+                end
+            },
+            ['default:pine_sapling'] = {
+                -- pine tree
+                name = 'default:pine_sapling',
+                chance = 2,
+                grow_tree = function(pos)
+                    if not x_farming.x_bonemeal.is_on_soil(pos) then
+                        return false
+                    end
+
+                    if minetest.find_node_near(pos, 1, { 'group:snowy' }) then
+                        default.grow_new_snowy_pine_tree(pos)
+                    else
+                        default.grow_new_pine_tree(pos)
+                    end
+
+                    return true
+                end
+            },
+            ['default:bush_sapling'] = {
+                -- Bush
+                name = 'default:bush_sapling',
+                chance = 2,
+                grow_tree = function(pos)
+                    if not x_farming.x_bonemeal.is_on_soil(pos) then
+                        return false
+                    end
+
+                    default.grow_bush(pos)
+
+                    return true
+                end
+            },
+            ['default:acacia_bush_sapling'] = {
+                -- Acacia bush
+                name = 'default:acacia_bush_sapling',
+                chance = 2,
+                grow_tree = function(pos)
+                    if not x_farming.x_bonemeal.is_on_soil(pos) then
+                        return false
+                    end
+
+                    default.grow_acacia_bush(pos)
+
+                    return true
+                end
+            },
+            ['default:pine_bush_sapling'] = {
+                -- Pine bush
+                name = 'default:pine_bush_sapling',
+                chance = 2,
+                grow_tree = function(pos)
+                    if not x_farming.x_bonemeal.is_on_soil(pos) then
+                        return false
+                    end
+
+                    default.grow_pine_bush(pos)
+
+                    return true
+                end
+            },
+            ['default:blueberry_bush_sapling'] = {
+                -- Blueberry bush
+                name = 'default:blueberry_bush_sapling',
+                chance = 2,
+                grow_tree = function(pos)
+                    if not x_farming.x_bonemeal.is_on_soil(pos) then
+                        return false
+                    end
+
+                    default.grow_blueberry_bush(pos)
+
+                    return true
+                end
+            },
+            ['default:papyrus'] = {
+                -- Papyrus
+                name = 'default:papyrus',
+                chance = 2,
+                grow_tree = function(pos)
+                    if not x_farming.x_bonemeal.is_on_soil(pos) then
+                        return false
+                    end
+
+                    local node = minetest.get_node(pos)
+
+                    default.grow_papyrus(pos, node)
+
+                    return true
+                end
+            },
+            ['default:large_cactus_seedling'] = {
+                -- Large Cactus
+                name = 'default:large_cactus_seedling',
+                chance = 2,
+                grow_tree = function(pos)
+                    if not x_farming.x_bonemeal.is_on_sand(pos) then
+                        return false
+                    end
+
+                    default.grow_large_cactus(pos)
+
+                    return true
+                end
+            },
+            ['x_farming:kiwi_sapling'] = {
+                -- Kiwi Tree
+                name = 'x_farming:kiwi_sapling',
+                chance = 2,
+                grow_tree = function(pos)
+                    if not x_farming.x_bonemeal.is_on_soil(pos) then
+                        return false
+                    end
+
+                    x_farming.grow_kiwi_tree(pos)
+
+                    return true
+                end
+            },
+            ['x_farming:large_cactus_with_fruit_seedling'] = {
+                -- Cactus Seedling
+                name = 'x_farming:large_cactus_with_fruit_seedling',
+                chance = 2,
+                grow_tree = function(pos)
+                    if not x_farming.x_bonemeal.is_on_sand(pos) then
+                        return false
+                    end
+
+                    x_farming.grow_large_cactus(pos)
+
+                    return true
+                end
+            },
+            ['x_farming:jungle_with_cocoa_sapling'] = {
+                -- Jungle Tree with Cocoa
+                name = 'x_farming:jungle_with_cocoa_sapling',
+                chance = 2,
+                grow_tree = function(pos)
+                    if not x_farming.x_bonemeal.is_on_soil(pos) then
+                        return false
+                    end
+
+                    x_farming.grow_jungle_tree(pos)
+
+                    return true
+                end
+            },
+            ['x_farming:pine_nut_sapling'] = {
+                -- Pine Nut Tree
+                name = 'x_farming:pine_nut_sapling',
+                chance = 2,
+                grow_tree = function(pos)
+                    if not x_farming.x_bonemeal.is_on_soil(pos) then
+                        return false
+                    end
+
+                    x_farming.grow_pine_nut_tree(pos)
+
+                    return true
+                end
+            },
+        }
+    },
+    allowed_crate_items = {},
+    allowed_bag_items = {},
+    registered_crates = {},
+    lbm_nodenames_crates = {},
+    registered_plants = {}
+}
+
 ---how often node timers for plants will tick, +/- some random value
-function x_farming.tick(pos)
+function x_farming.tick_block(pos)
     minetest.get_node_timer(pos):start(math.random(498, 1287))
 end
 
 ---how often a growth failure tick is retried (e.g. too dark)
-function x_farming.tick_short(pos)
+function x_farming.tick_block_short(pos)
     minetest.get_node_timer(pos):start(math.random(332, 858))
+end
+
+-- how often node timers for plants will tick, +/- some random value
+function x_farming.tick(pos)
+    minetest.get_node_timer(pos):start(math.random(166, 286))
+end
+-- how often a growth failure tick is retried (e.g. too dark)
+function x_farming.tick_again(pos)
+    minetest.get_node_timer(pos):start(math.random(40, 80))
 end
 
 ---just shorthand for minetest metadata handling
@@ -55,6 +329,437 @@ end
 ---Change an entire string to Title Case (i.e. capitalise the first letter of each word)
 function x_farming.tchelper(first, rest)
     return first:upper() .. rest:lower()
+end
+
+--- Hoes - copy from MTG
+
+x_farming.hoe_on_use = function(itemstack, user, pointed_thing, uses)
+    local pt = pointed_thing
+    -- check if pointing at a node
+    if not pt then
+        return
+    end
+    if pt.type ~= 'node' then
+        return
+    end
+
+    local under = minetest.get_node(pt.under)
+    local p = { x = pt.under.x, y = pt.under.y + 1, z = pt.under.z }
+    local above = minetest.get_node(p)
+
+    -- return if any of the nodes is not registered
+    if not minetest.registered_nodes[under.name] then
+        return
+    end
+    if not minetest.registered_nodes[above.name] then
+        return
+    end
+
+    -- check if the node above the pointed thing is air
+    if above.name ~= 'air' then
+        return
+    end
+
+    -- check if pointing at soil
+    if minetest.get_item_group(under.name, 'soil') ~= 1 then
+        return
+    end
+
+    -- check if (wet) soil defined
+    local regN = minetest.registered_nodes
+    if regN[under.name].soil == nil or regN[under.name].soil.wet == nil or regN[under.name].soil.dry == nil then
+        return
+    end
+
+    local player_name = user and user:get_player_name() or ''
+
+    if minetest.is_protected(pt.under, player_name) then
+        minetest.record_protection_violation(pt.under, player_name)
+        return
+    end
+
+    if minetest.is_protected(pt.above, player_name) then
+        minetest.record_protection_violation(pt.above, player_name)
+        return
+    end
+
+    -- turn the node into soil and play sound
+    minetest.set_node(pt.under, { name = regN[under.name].soil.dry })
+    minetest.sound_play('default_dig_crumbly', {
+        pos = pt.under,
+        gain = 0.3,
+    }, true)
+
+    if not minetest.is_creative_enabled(player_name) then
+        -- wear tool
+        local wdef = itemstack:get_definition()
+        itemstack:add_wear_by_uses(uses)
+        -- tool break sound
+        if itemstack:get_count() == 0 and wdef.sound and wdef.sound.breaks then
+            minetest.sound_play(wdef.sound.breaks, {pos = pt.above,
+                gain = 0.5}, true)
+        end
+    end
+    return itemstack
+end
+
+-- Register new hoes
+x_farming.register_hoe = function(name, def)
+    -- Check for : prefix (register new hoes in your mod's namespace)
+    if name:sub(1, 1) ~= ':' then
+        name = ':' .. name
+    end
+    -- Check def table
+    if def.description == nil then
+        def.description = S('Hoe')
+    end
+    if def.inventory_image == nil then
+        def.inventory_image = 'x_farming_unknown_item.png'
+    end
+    if def.max_uses == nil then
+        def.max_uses = 30
+    end
+    -- Register the tool
+    minetest.register_tool(name, {
+        description = def.description,
+        inventory_image = def.inventory_image,
+        on_use = function(itemstack, user, pointed_thing)
+            return x_farming.hoe_on_use(itemstack, user, pointed_thing, def.max_uses)
+        end,
+        groups = def.groups,
+        sound = { breaks = 'default_tool_breaks' },
+        wield_scale = def.wield_scale or { x = 1, y = 1, z = 1 }
+    })
+    -- Register its recipe
+    if def.recipe then
+        minetest.register_craft({
+            output = name:sub(2),
+            recipe = def.recipe
+        })
+    elseif def.material then
+        minetest.register_craft({
+            output = name:sub(2),
+            recipe = {
+                { def.material, 'group:stick' },
+                { def.material, 'group:stick' },
+                { '', 'group:stick' }
+            }
+        })
+    end
+end
+
+--
+-- Log API / helpers - copy from MTG
+--
+
+local log_non_player_actions = minetest.settings:get_bool('log_non_player_actions', false)
+
+local is_pos = function(v)
+    return type(v) == 'table' and
+        type(v.x) == 'number' and type(v.y) == 'number' and type(v.z) == 'number'
+end
+
+function x_farming.log_player_action(player, ...)
+    local msg = player:get_player_name()
+    if player.is_fake_player or not player:is_player() then
+        if not log_non_player_actions then
+            return
+        end
+        msg = msg .. '(' .. (type(player.is_fake_player) == 'string'
+            and player.is_fake_player or '*') .. ')'
+    end
+    for _, v in ipairs({ ... }) do
+        -- translate pos
+        local part = is_pos(v) and minetest.pos_to_string(v) or v
+        -- no leading spaces before punctuation marks
+        msg = msg .. (string.match(part, '^[;,.]') and '' or ' ') .. part
+    end
+    minetest.log('action', msg)
+end
+
+function x_farming.set_inventory_action_loggers(def, name)
+    def.on_metadata_inventory_move = function(pos, from_list, from_index, to_list, to_index, count, player)
+        x_farming.log_player_action(player, 'moves stuff in', name, 'at', pos)
+    end
+    def.on_metadata_inventory_put = function(pos, listname, index, stack, player)
+        x_farming.log_player_action(player, 'moves', stack:get_name(), 'to', name, 'at', pos)
+    end
+    def.on_metadata_inventory_take = function(pos, listname, index, stack, player)
+        x_farming.log_player_action(player, 'takes', stack:get_name(), 'from', name, 'at', pos)
+    end
+end
+
+-- Seed placement - copy from MTG
+function x_farming.place_seed(itemstack, placer, pointed_thing, plantname)
+    local pt = pointed_thing
+    -- check if pointing at a node
+    if not pt then
+        return itemstack
+    end
+    if pt.type ~= 'node' then
+        return itemstack
+    end
+
+    local under = minetest.get_node(pt.under)
+    local above = minetest.get_node(pt.above)
+
+    local player_name = placer and placer:get_player_name() or ''
+
+    if minetest.is_protected(pt.under, player_name) then
+        minetest.record_protection_violation(pt.under, player_name)
+        return itemstack
+    end
+    if minetest.is_protected(pt.above, player_name) then
+        minetest.record_protection_violation(pt.above, player_name)
+        return itemstack
+    end
+
+    -- return if any of the nodes is not registered
+    if not minetest.registered_nodes[under.name] then
+        return itemstack
+    end
+    if not minetest.registered_nodes[above.name] then
+        return itemstack
+    end
+
+    -- check if pointing at the top of the node
+    if pt.above.y ~= pt.under.y + 1 then
+        return itemstack
+    end
+
+    -- check if you can replace the node above the pointed node
+    if not minetest.registered_nodes[above.name].buildable_to then
+        return itemstack
+    end
+
+    -- check if pointing at soil
+    if minetest.get_item_group(under.name, 'soil') < 2 then
+        return itemstack
+    end
+
+    -- add the node and remove 1 item from the itemstack
+    x_farming.log_player_action(placer, 'places node', plantname, 'at', pt.above)
+    minetest.add_node(pt.above, { name = plantname, param2 = 1 })
+    x_farming.tick(pt.above)
+    if not minetest.is_creative_enabled(player_name) then
+        itemstack:take_item()
+    end
+
+    return itemstack
+end
+
+x_farming.grow_plant = function(pos, elapsed)
+    local node = minetest.get_node(pos)
+    local name = node.name
+    local def = minetest.registered_nodes[name]
+
+    if not def.next_plant then
+        -- disable timer for fully grown plant
+        return
+    end
+
+    -- grow seed
+    if minetest.get_item_group(node.name, 'seed') and def.fertility then
+        local soil_node = minetest.get_node_or_nil({ x = pos.x, y = pos.y - 1, z = pos.z })
+        if not soil_node then
+            x_farming.tick_again(pos)
+            return
+        end
+        -- omitted is a check for light, we assume seeds can germinate in the dark.
+        for _, v in pairs(def.fertility) do
+            if minetest.get_item_group(soil_node.name, v) ~= 0 then
+                local placenode = { name = def.next_plant }
+                if def.place_param2 then
+                    placenode.param2 = def.place_param2
+                end
+                minetest.swap_node(pos, placenode)
+                if minetest.registered_nodes[def.next_plant].next_plant then
+                    x_farming.tick(pos)
+                    return
+                end
+            end
+        end
+
+        return
+    end
+
+    -- check if on wet soil
+    local below = minetest.get_node({ x = pos.x, y = pos.y - 1, z = pos.z })
+    if minetest.get_item_group(below.name, 'soil') < 3 then
+        x_farming.tick_again(pos)
+        return
+    end
+
+    -- check light
+    local light = minetest.get_node_light(pos)
+    if not light or light < def.minlight or light > def.maxlight then
+        x_farming.tick_again(pos)
+        return
+    end
+
+    -- grow
+    local placenode = { name = def.next_plant }
+    if def.place_param2 then
+        placenode.param2 = def.place_param2
+    end
+    minetest.swap_node(pos, placenode)
+
+    -- new timer needed?
+    if minetest.registered_nodes[def.next_plant].next_plant then
+        x_farming.tick(pos)
+    end
+    return
+end
+
+-- Register plants
+x_farming.register_plant = function(name, def)
+    local mname = name:split(':')[1]
+    local pname = name:split(':')[2]
+
+    -- Check def table
+    if not def.description then
+        def.description = S('Seed')
+    end
+    if not def.harvest_description then
+        def.harvest_description = pname:gsub('^%l', string.upper)
+    end
+    if not def.inventory_image then
+        def.inventory_image = 'unknown_item.png'
+    end
+    if not def.steps then
+        return nil
+    end
+    if not def.minlight then
+        def.minlight = 1
+    end
+    if not def.maxlight then
+        def.maxlight = 14
+    end
+    if not def.fertility then
+        def.fertility = {}
+    end
+
+    x_farming.registered_plants[pname] = def
+
+    -- Register seed
+    local lbm_nodes = { mname .. ':seed_' .. pname }
+    local g = { seed = 1, snappy = 3, attached_node = 1, flammable = 2 }
+
+    for k, v in pairs(def.fertility) do
+        g[v] = 1
+    end
+
+    minetest.register_node(':' .. mname .. ':seed_' .. pname, {
+        description = def.description,
+        tiles = {def.inventory_image},
+        inventory_image = def.inventory_image,
+        wield_image = def.inventory_image,
+        drawtype = 'signlike',
+        groups = g,
+        paramtype = 'light',
+        paramtype2 = 'wallmounted',
+        place_param2 = def.place_param2 or nil, -- this isn't actually used for placement
+        walkable = false,
+        sunlight_propagates = true,
+        selection_box = {
+            type = 'fixed',
+            fixed = { -0.5, -0.5, -0.5, 0.5, -5 / 16, 0.5 },
+        },
+        fertility = def.fertility,
+        sounds = default.node_sound_dirt_defaults({
+            dig = { name = '', gain = 0 },
+            dug = { name = 'default_grass_footstep', gain = 0.2 },
+            place = { name = 'default_place_node', gain = 0.25 },
+        }),
+
+        on_place = function(itemstack, placer, pointed_thing)
+            local under = pointed_thing.under
+            local node = minetest.get_node(under)
+            local udef = minetest.registered_nodes[node.name]
+            if udef and udef.on_rightclick and
+                    not (placer and placer:is_player() and
+                    placer:get_player_control().sneak) then
+                return udef.on_rightclick(under, node, placer, itemstack,
+                    pointed_thing) or itemstack
+            end
+
+            return x_farming.place_seed(itemstack, placer, pointed_thing, mname .. ':seed_' .. pname)
+        end,
+        next_plant = mname .. ':' .. pname .. '_1',
+        on_timer = x_farming.grow_plant,
+        minlight = def.minlight,
+        maxlight = def.maxlight,
+    })
+
+    -- Register harvest
+    minetest.register_craftitem(':' .. mname .. ':' .. pname, {
+        description = def.harvest_description,
+        inventory_image = mname .. '_' .. pname .. '.png',
+        groups = def.groups or { flammable = 2 },
+    })
+
+    -- Register growing steps
+    for i = 1, def.steps do
+        local base_rarity = 1
+        if def.steps ~= 1 then
+            base_rarity = 8 - (i - 1) * 7 / (def.steps - 1)
+        end
+        local drop = {
+            items = {
+                {items = { mname .. ':' .. pname }, rarity = base_rarity },
+                {items = { mname .. ':' .. pname }, rarity = base_rarity * 2 },
+                {items = { mname .. ':seed_' .. pname }, rarity = base_rarity },
+                {items = { mname .. ':seed_' .. pname }, rarity = base_rarity * 2 },
+            }
+        }
+        local nodegroups = { snappy = 3, flammable = 2, plant = 1, not_in_creative_inventory = 1, attached_node = 1 }
+        nodegroups[pname] = i
+
+        local next_plant = nil
+
+        if i < def.steps then
+            next_plant = mname .. ':' .. pname .. '_' .. (i + 1)
+            lbm_nodes[#lbm_nodes + 1] = mname .. ':' .. pname .. '_' .. i
+        end
+
+        minetest.register_node(':' .. mname .. ':' .. pname .. '_' .. i, {
+            drawtype = 'plantlike',
+            waving = 1,
+            tiles = { mname .. '_' .. pname .. '_' .. i .. '.png' },
+            paramtype = 'light',
+            paramtype2 = def.paramtype2 or nil,
+            place_param2 = def.place_param2 or nil,
+            walkable = false,
+            buildable_to = true,
+            drop = drop,
+            selection_box = {
+                type = 'fixed',
+                fixed = { -0.5, -0.5, -0.5, 0.5, -5 / 16, 0.5 },
+            },
+            groups = nodegroups,
+            sounds = default.node_sound_leaves_defaults(),
+            next_plant = next_plant,
+            on_timer = x_farming.grow_plant,
+            minlight = def.minlight,
+            maxlight = def.maxlight,
+        })
+    end
+
+    -- replacement LBM for pre-nodetimer plants
+    minetest.register_lbm({
+        name = ':' .. mname .. ':start_nodetimer_' .. pname,
+        nodenames = lbm_nodes,
+        action = function(pos, node)
+            x_farming.tick_again(pos)
+        end,
+    })
+
+    -- Return
+    local r = {
+        seed = mname .. ':seed_' .. pname,
+        harvest = mname .. ':' .. pname
+    }
+    return r
 end
 
 ---grow blocks next to the plant
@@ -115,7 +820,7 @@ function x_farming.grow_block(pos, elapsed)
 
     ---plant is closed from all sides
     if #spawn_positions < 1 then
-        x_farming.tick_short(pos)
+        x_farming.tick_block_short(pos)
         return
     else
         ---pick random from the open sides
@@ -136,8 +841,8 @@ function x_farming.grow_block(pos, elapsed)
 
     ---check light
     local light = minetest.get_node_light(pos)
-    if not light or light < 13 or light > default.LIGHT_MAX then
-        x_farming.tick_short(pos)
+    if not light or light < 13 or light > 14 then
+        x_farming.tick_block_short(pos)
         return
     end
 
@@ -409,6 +1114,10 @@ function x_farming.register_crate(name, def)
 
         if minetest.get_item_group(stack_name, 'fish') ~= 0 then
             split_name = { 'x_farming', 'fish' }
+        end
+
+        if stack_name == 'x_farming:cotton' then
+            split_name = { 'x_farming', 'cotton2' }
         end
 
         local swap_node = minetest.registered_nodes['x_farming:crate_' .. split_name[2] .. '_3']
@@ -787,6 +1496,8 @@ local farming_steps = {
     ['x_farming:stevia'] = 8,
     ['x_farming:soybean'] = 7,
     ['x_farming:salt'] = 7,
+    ['x_farming:barley'] = 8,
+    ['x_farming:cotton'] = 8,
 }
 
 ---Particle and sound effect after the bone meal is successfully used

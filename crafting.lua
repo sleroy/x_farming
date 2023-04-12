@@ -23,12 +23,14 @@
 local S = minetest.get_translator(minetest.get_current_modname())
 
 -- Cocoa
-minetest.register_craft({
-    output = 'dye:brown',
-    recipe = {
-        { 'x_farming:cocoa_bean' },
-    }
-})
+if minetest.get_modpath('dye') then
+    minetest.register_craft({
+        output = 'dye:brown',
+        recipe = {
+            { 'x_farming:cocoa_bean' },
+        }
+    })
+end
 
 minetest.register_craftitem('x_farming:cookie', {
     description = S('Cookie') .. '\n' .. minetest.colorize(x_farming.colors.brown, S('Hunger') .. ': 2'),
@@ -40,7 +42,7 @@ minetest.register_craftitem('x_farming:cookie', {
 minetest.register_craft({
     type = 'shapeless',
     output = 'x_farming:cookie 8',
-    recipe = { 'farming:wheat', 'x_farming:cocoa_bean', 'farming:flour', 'x_farming:bottle_soymilk', 'x_farming:sugar' }
+    recipe = { 'x_farming:barley', 'x_farming:cocoa_bean', 'x_farming:flour', 'x_farming:bottle_soymilk', 'x_farming:sugar' }
 })
 
 minetest.register_craftitem('x_farming:chocolate', {
@@ -303,8 +305,10 @@ minetest.register_craft({
 minetest.register_craft({
     type = 'shapeless',
     output = 'x_farming:pumpkin_pie',
-    recipe = { 'x_farming:pumpkin_block', 'farming:flour', 'x_farming:bottle_soymilk', 'x_farming:sugar' }
+    recipe = { 'x_farming:pumpkin_block', 'x_farming:flour', 'x_farming:bottle_soymilk', 'x_farming:sugar' }
 })
+
+--- FUELS
 
 -- pumpkin as fuel (better than cactus)
 minetest.register_craft({
@@ -317,6 +321,12 @@ minetest.register_craft({
     type = 'fuel',
     recipe = 'x_farming:pumpkin_lantern',
     burntime = 20,
+})
+
+minetest.register_craft({
+    type = 'fuel',
+    recipe = 'x_farming:string',
+    burntime = 1,
 })
 
 -- Bottle Water
@@ -374,13 +384,13 @@ end
 minetest.register_craft({
     type = 'shapeless',
     output = 'x_farming:donut',
-    recipe = { 'x_farming:bottle_soymilk', 'x_farming:sugar', 'farming:flour' }
+    recipe = { 'x_farming:bottle_soymilk', 'x_farming:sugar', 'x_farming:flour' }
 })
 
 minetest.register_craft({
     type = 'shapeless',
     output = 'x_farming:donut_chocolate',
-    recipe = { 'x_farming:bottle_soymilk', 'x_farming:sugar', 'farming:flour', 'x_farming:cocoa_bean' }
+    recipe = { 'x_farming:bottle_soymilk', 'x_farming:sugar', 'x_farming:flour', 'x_farming:cocoa_bean' }
 })
 
 -- Fries
@@ -399,116 +409,118 @@ minetest.register_craft({
 minetest.register_craft({
     output = 'x_farming:seed_icefishing',
     recipe = {
-        { 'group:wool', 'farming:string', 'group:stick' },
-        { '', 'farming:string', 'group:stick' },
-        { '', 'farming:string', 'group:stick' }
+        { 'group:wool', 'x_farming:string', 'group:stick' },
+        { '', 'x_farming:string', 'group:stick' },
+        { '', 'x_farming:string', 'group:stick' }
     },
 })
 
-minetest.register_craft({
-    output = 'dye:black 4',
-    recipe = {
-        { 'x_farming:black_seashroom' }
-    }
-})
+if minetest.get_modpath('dye') then
+    minetest.register_craft({
+        output = 'dye:black 4',
+        recipe = {
+            { 'x_farming:black_seashroom' }
+        }
+    })
 
-minetest.register_craft({
-    output = 'dye:blue 4',
-    recipe = {
-        { 'x_farming:blue_seashroom' }
-    }
-})
+    minetest.register_craft({
+        output = 'dye:blue 4',
+        recipe = {
+            { 'x_farming:blue_seashroom' }
+        }
+    })
 
-minetest.register_craft({
-    output = 'dye:brown 4',
-    recipe = {
-        { 'x_farming:brown_seashroom' }
-    }
-})
+    minetest.register_craft({
+        output = 'dye:brown 4',
+        recipe = {
+            { 'x_farming:brown_seashroom' }
+        }
+    })
 
-minetest.register_craft({
-    output = 'dye:cyan 4',
-    recipe = {
-        { 'x_farming:cyan_seashroom' }
-    }
-})
+    minetest.register_craft({
+        output = 'dye:cyan 4',
+        recipe = {
+            { 'x_farming:cyan_seashroom' }
+        }
+    })
 
-minetest.register_craft({
-    output = 'dye:dark_grey 4',
-    recipe = {
-        { 'x_farming:gray_seashroom' }
-    }
-})
+    minetest.register_craft({
+        output = 'dye:dark_grey 4',
+        recipe = {
+            { 'x_farming:gray_seashroom' }
+        }
+    })
 
-minetest.register_craft({
-    output = 'dye:grey 4',
-    recipe = {
-        { 'x_farming:light_gray_seashroom' }
-    }
-})
+    minetest.register_craft({
+        output = 'dye:grey 4',
+        recipe = {
+            { 'x_farming:light_gray_seashroom' }
+        }
+    })
 
-minetest.register_craft({
-    output = 'dye:dark_green 4',
-    recipe = {
-        { 'x_farming:green_seashroom' }
-    }
-})
+    minetest.register_craft({
+        output = 'dye:dark_green 4',
+        recipe = {
+            { 'x_farming:green_seashroom' }
+        }
+    })
 
-minetest.register_craft({
-    output = 'dye:green 4',
-    recipe = {
-        { 'x_farming:lime_seashroom' }
-    }
-})
+    minetest.register_craft({
+        output = 'dye:green 4',
+        recipe = {
+            { 'x_farming:lime_seashroom' }
+        }
+    })
 
-minetest.register_craft({
-    output = 'dye:magenta 4',
-    recipe = {
-        { 'x_farming:magenta_seashroom' }
-    }
-})
+    minetest.register_craft({
+        output = 'dye:magenta 4',
+        recipe = {
+            { 'x_farming:magenta_seashroom' }
+        }
+    })
 
-minetest.register_craft({
-    output = 'dye:orange 4',
-    recipe = {
-        { 'x_farming:orange_seashroom' }
-    }
-})
+    minetest.register_craft({
+        output = 'dye:orange 4',
+        recipe = {
+            { 'x_farming:orange_seashroom' }
+        }
+    })
 
-minetest.register_craft({
-    output = 'dye:pink 4',
-    recipe = {
-        { 'x_farming:pink_seashroom' }
-    }
-})
+    minetest.register_craft({
+        output = 'dye:pink 4',
+        recipe = {
+            { 'x_farming:pink_seashroom' }
+        }
+    })
 
-minetest.register_craft({
-    output = 'dye:violet 4',
-    recipe = {
-        { 'x_farming:purple_seashroom' }
-    }
-})
+    minetest.register_craft({
+        output = 'dye:violet 4',
+        recipe = {
+            { 'x_farming:purple_seashroom' }
+        }
+    })
 
-minetest.register_craft({
-    output = 'dye:red 4',
-    recipe = {
-        { 'x_farming:red_seashroom' }
-    }
-})
+    minetest.register_craft({
+        output = 'dye:red 4',
+        recipe = {
+            { 'x_farming:red_seashroom' }
+        }
+    })
 
-minetest.register_craft({
-    output = 'dye:white 4',
-    recipe = {
-        { 'x_farming:white_seashroom' }
-    }
-})
+    minetest.register_craft({
+        output = 'dye:white 4',
+        recipe = {
+            { 'x_farming:white_seashroom' }
+        }
+    })
 
-minetest.register_craft({
-    output = 'dye:yellow 4',
-    recipe = {
-        { 'x_farming:yellow_seashroom' }
-    }
-})
+    minetest.register_craft({
+        output = 'dye:yellow 4',
+        recipe = {
+            { 'x_farming:yellow_seashroom' }
+        }
+    })
+end
 
 minetest.register_craft({
     output = 'default:diamond',
@@ -559,9 +571,9 @@ minetest.register_craft({
 minetest.register_craft({
     output = 'x_farming:bag_empty',
     recipe = {
-        { 'farming:straw', '', 'farming:straw' },
-        { 'farming:straw', '', 'farming:straw' },
-        { 'farming:straw', 'farming:straw', 'farming:straw' }
+        { 'x_farming:barley_stack', '', 'x_farming:barley_stack' },
+        { 'x_farming:barley_stack', '', 'x_farming:barley_stack' },
+        { 'x_farming:barley_stack', 'x_farming:barley_stack', 'x_farming:barley_stack' }
     }
 })
 
@@ -589,7 +601,7 @@ minetest.register_craft({
     output = 'x_farming:scarecrow',
     recipe = {
         { '', 'x_farming:pumpkin_block', '' },
-        { 'farming:straw', 'group:wool', 'farming:straw' },
+        { 'x_farming:barley_stack', 'group:wool', 'x_farming:barley_stack' },
         { '', 'group:wood', '' },
     }
 })
@@ -602,4 +614,19 @@ minetest.register_craft({
         { 'wool:green', 'default:pine_sapling', 'wool:blue' },
         { 'wool:yellow', 'default:pine_sapling', 'wool:red' }
     }
+})
+
+-- Barley
+
+minetest.register_craft({
+    type = 'shapeless',
+    output = 'x_farming:flour',
+    recipe = { 'x_farming:barley', 'x_farming:barley', 'x_farming:barley', 'x_farming:barley' }
+})
+
+minetest.register_craft({
+    type = 'cooking',
+    cooktime = 15,
+    output = 'x_farming:bread',
+    recipe = 'x_farming:flour'
 })

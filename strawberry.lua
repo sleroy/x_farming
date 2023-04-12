@@ -19,14 +19,14 @@
 local S = minetest.get_translator(minetest.get_current_modname())
 
 -- STRAWBERRY
-farming.register_plant('x_farming:strawberry', {
+x_farming.register_plant('x_farming:strawberry', {
     description = S('Strawberry Seed') .. '\n' .. S('Compost chance') .. ': 30%',
     short_description = S('Strawberry Seed'),
     paramtype2 = 'meshoptions',
     inventory_image = 'x_farming_strawberry_seed.png',
     steps = 4,
     minlight = 13,
-    maxlight = default.LIGHT_MAX,
+    maxlight = 14,
     fertility = { 'grassland' },
     groups = { flammable = 4 },
     place_param2 = 0

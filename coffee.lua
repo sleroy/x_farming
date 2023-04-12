@@ -19,14 +19,14 @@
 local S = minetest.get_translator(minetest.get_current_modname())
 
 -- COFFEE
-farming.register_plant('x_farming:coffee', {
+x_farming.register_plant('x_farming:coffee', {
     description = S('Coffee Seed') .. '\n' .. S('Compost chance') .. ': 30%',
     short_description = S('Coffee Seed'),
     paramtype2 = 'meshoptions',
     inventory_image = 'x_farming_coffee_seed.png',
     steps = 5,
     minlight = 13,
-    maxlight = default.LIGHT_MAX,
+    maxlight = 14,
     fertility = { 'grassland' },
     groups = { flammable = 4 },
     place_param2 = 0,

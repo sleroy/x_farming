@@ -19,10 +19,17 @@
 local mod_start_time = minetest.get_us_time()
 local path = minetest.get_modpath('x_farming')
 
+-- Legacy backwards compatibility
 minetest.register_alias('x_farming:hog_stew', 'x_farming:fish_stew')
+
+-- MineClone2 support
+if minetest.get_modpath('mcl_core') and minetest.global_exists('mcl_core') then
+    dofile(path .. '/mod_support_mcl_aliases.lua')
+end
 
 dofile(path .. '/api.lua')
 dofile(path .. '/craftitems.lua')
+dofile(path .. '/nodes.lua')
 
 dofile(path .. '/melon.lua')
 dofile(path .. '/pumpkin.lua')
@@ -38,6 +45,7 @@ dofile(path .. '/kiwi_tree.lua')
 dofile(path .. '/cactus.lua')
 dofile(path .. '/strawberry.lua')
 dofile(path .. '/pine_nut.lua')
+dofile(path .. '/christmas_tree.lua')
 dofile(path .. '/stevia.lua')
 dofile(path .. '/soybean.lua')
 dofile(path .. '/salt.lua')
@@ -49,8 +57,6 @@ if not minetest.get_modpath('farming') then
 end
 
 dofile(path .. '/ice_fishing.lua')
-dofile(path .. '/nodes.lua')
-dofile(path .. '/christmas_tree.lua')
 dofile(path .. '/bonemeal.lua')
 dofile(path .. '/crates.lua')
 dofile(path .. '/bags.lua')
@@ -76,6 +82,12 @@ if x_farming.hbhunger ~= nil then
     if hbhunger.register_food ~= nil then
         dofile(path .. '/register_hbhunger.lua')
     end
+end
+
+-- MOD support
+
+if minetest.get_modpath('default') then
+    dofile(path .. '/mod_support_default.lua')
 end
 
 local mod_end_time = (minetest.get_us_time() - mod_start_time) / 1000000

@@ -43,26 +43,6 @@ minetest.override_item('x_farming:carrot', {
     on_use = minetest.item_eat(3),
 })
 
-minetest.register_decoration({
-    name = 'x_farming:carrot_8',
-    deco_type = 'simple',
-    place_on = { 'default:dirt_with_grass' },
-    sidelen = 16,
-    noise_params = {
-        offset = -0.1,
-        scale = 0.1,
-        spread = { x = 50, y = 50, z = 50 },
-        seed = 4242,
-        octaves = 3,
-        persist = 0.7
-    },
-    biomes = { 'grassland' },
-    y_max = 31000,
-    y_min = 1,
-    decoration = 'x_farming:carrot_8',
-    param2 = 3,
-})
-
 ---crate
 x_farming.register_crate('crate_carrot_3', {
     description = S('Carrot Crate'),
@@ -72,3 +52,47 @@ x_farming.register_crate('crate_carrot_3', {
         crate_item = 'x_farming:carrot'
     }
 })
+
+minetest.register_on_mods_loaded(function()
+    local deco_place_on = {}
+    local deco_biomes = {}
+
+    -- MTG
+    if minetest.get_modpath('default') then
+        table.insert(deco_place_on, 'default:dirt_with_grass')
+        table.insert(deco_biomes, 'grassland')
+    end
+
+    -- Everness
+    if minetest.get_modpath('everness') then
+        table.insert(deco_place_on, 'everness:dirt_with_coral_grass')
+        table.insert(deco_biomes, 'everness_coral_forest')
+    end
+
+    if next(deco_place_on) and next(deco_biomes) then
+        minetest.register_decoration({
+            name = 'x_farming:carrot',
+            deco_type = 'simple',
+            place_on = deco_place_on,
+            sidelen = 16,
+            noise_params = {
+                offset = -0.1,
+                scale = 0.1,
+                spread = { x = 50, y = 50, z = 50 },
+                seed = 4242,
+                octaves = 3,
+                persist = 0.7
+            },
+            biomes = deco_biomes,
+            y_max = 31000,
+            y_min = 1,
+            decoration = {
+                'x_farming:carrot_5',
+                'x_farming:carrot_6',
+                'x_farming:carrot_7',
+                'x_farming:carrot_8',
+            },
+            param2 = 3,
+        })
+    end
+end)

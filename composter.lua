@@ -52,7 +52,7 @@ for i = 1, 5, 1 do
     def.mesh = 'x_farming_crate.obj'
     def.tiles = { 'x_farming_composter_' .. i .. '.png' }
     def.use_texture_alpha = 'clip'
-    def.sounds = default.node_sound_wood_defaults()
+    def.sounds = x_farming.node_sound_wood_defaults()
     def.paramtype = 'light'
     def.paramtype2 = 'facedir'
     def.place_param2 = 0
@@ -146,7 +146,7 @@ for i = 1, 5, 1 do
             end
         end
 
-        minetest.sound_play('default_dig_crumbly', { gain = 0.3, pos = pos, max_hear_distance = 10 }, true)
+        minetest.sound_play('x_farming_dirt_hit', { gain = 0.3, pos = pos, max_hear_distance = 10 }, true)
 
         return itemstack
     end
@@ -186,7 +186,7 @@ for i = 1, 5, 1 do
             local above = vector.new(pos.x, pos.y + 0.5, pos.z)
             local drop_pos = minetest.find_node_near(above, 0.5, { 'air' }) or above
 
-            minetest.sound_play('default_dig_crumbly', { gain = 0.3, pos = pos, max_hear_distance = 10 }, true)
+            minetest.sound_play('x_farming_dirt_hit', { gain = 0.3, pos = pos, max_hear_distance = 10 }, true)
             -- drop bonemeal
             minetest.item_drop(ItemStack({ name = 'x_farming:bonemeal' }), nil, drop_pos)
             -- swap to beginning

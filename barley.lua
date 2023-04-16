@@ -94,7 +94,7 @@ minetest.register_node('x_farming:barley_stack', {
     paramtype2 = 'facedir',
     is_ground_content = false,
     groups = { snappy = 3, flammable = 4, fall_damage_add_percent = -30 },
-    sounds = default.node_sound_leaves_defaults(),
+    sounds = x_farming.node_sound_leaves_defaults(),
     on_place = minetest.rotate_node
 })
 
@@ -119,7 +119,7 @@ if minetest.get_modpath('stairs') then
         local recipe = 'x_farming:barley'
         local groups = { snappy = 3, flammable = 4 }
         local images = { 'x_farming_barley_stack_side.png' }
-        local sounds = default.node_sound_leaves_defaults()
+        local sounds = x_farming.node_sound_leaves_defaults()
 
         stairs.register_stair('barley_stack', recipe, groups, images, S('Barley Stack Stair'),
             sounds, true)

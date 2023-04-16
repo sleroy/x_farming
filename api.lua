@@ -44,180 +44,6 @@ x_farming = {
                     return true
                 end
             },
-            ['default:sapling'] = {
-                -- apple tree
-                name = 'default:sapling',
-                chance = 2,
-                grow_tree = function(pos)
-                    if not x_farming.x_bonemeal.is_on_soil(pos) then
-                        return false
-                    end
-
-                    default.grow_new_apple_tree(pos)
-
-                    return true
-                end
-            },
-            ['default:junglesapling'] = {
-                -- jungle tree
-                name = 'default:junglesapling',
-                chance = 2,
-                grow_tree = function(pos)
-                    if not x_farming.x_bonemeal.is_on_soil(pos) then
-                        return false
-                    end
-
-                    default.grow_new_jungle_tree(pos)
-
-                    return true
-                end
-            },
-            ['default:emergent_jungle_sapling'] = {
-                -- emergent jungle tree
-                name = 'default:emergent_jungle_sapling',
-                chance = 2,
-                grow_tree = function(pos)
-                    if not x_farming.x_bonemeal.is_on_soil(pos) then
-                        return false
-                    end
-
-                    default.grow_new_emergent_jungle_tree(pos)
-
-                    return true
-                end
-            },
-            ['default:acacia_sapling'] = {
-                -- acacia tree
-                name = 'default:acacia_sapling',
-                chance = 2,
-                grow_tree = function(pos)
-                    if not x_farming.x_bonemeal.is_on_soil(pos) then
-                        return false
-                    end
-
-                    default.grow_new_acacia_tree(pos)
-
-                    return true
-                end
-            },
-            ['default:aspen_sapling'] = {
-                -- aspen tree
-                name = 'default:aspen_sapling',
-                chance = 2,
-                grow_tree = function(pos)
-                    if not x_farming.x_bonemeal.is_on_soil(pos) then
-                        return false
-                    end
-
-                    default.grow_new_aspen_tree(pos)
-
-                    return true
-                end
-            },
-            ['default:pine_sapling'] = {
-                -- pine tree
-                name = 'default:pine_sapling',
-                chance = 2,
-                grow_tree = function(pos)
-                    if not x_farming.x_bonemeal.is_on_soil(pos) then
-                        return false
-                    end
-
-                    if minetest.find_node_near(pos, 1, { 'group:snowy' }) then
-                        default.grow_new_snowy_pine_tree(pos)
-                    else
-                        default.grow_new_pine_tree(pos)
-                    end
-
-                    return true
-                end
-            },
-            ['default:bush_sapling'] = {
-                -- Bush
-                name = 'default:bush_sapling',
-                chance = 2,
-                grow_tree = function(pos)
-                    if not x_farming.x_bonemeal.is_on_soil(pos) then
-                        return false
-                    end
-
-                    default.grow_bush(pos)
-
-                    return true
-                end
-            },
-            ['default:acacia_bush_sapling'] = {
-                -- Acacia bush
-                name = 'default:acacia_bush_sapling',
-                chance = 2,
-                grow_tree = function(pos)
-                    if not x_farming.x_bonemeal.is_on_soil(pos) then
-                        return false
-                    end
-
-                    default.grow_acacia_bush(pos)
-
-                    return true
-                end
-            },
-            ['default:pine_bush_sapling'] = {
-                -- Pine bush
-                name = 'default:pine_bush_sapling',
-                chance = 2,
-                grow_tree = function(pos)
-                    if not x_farming.x_bonemeal.is_on_soil(pos) then
-                        return false
-                    end
-
-                    default.grow_pine_bush(pos)
-
-                    return true
-                end
-            },
-            ['default:blueberry_bush_sapling'] = {
-                -- Blueberry bush
-                name = 'default:blueberry_bush_sapling',
-                chance = 2,
-                grow_tree = function(pos)
-                    if not x_farming.x_bonemeal.is_on_soil(pos) then
-                        return false
-                    end
-
-                    default.grow_blueberry_bush(pos)
-
-                    return true
-                end
-            },
-            ['default:papyrus'] = {
-                -- Papyrus
-                name = 'default:papyrus',
-                chance = 2,
-                grow_tree = function(pos)
-                    if not x_farming.x_bonemeal.is_on_soil(pos) then
-                        return false
-                    end
-
-                    local node = minetest.get_node(pos)
-
-                    default.grow_papyrus(pos, node)
-
-                    return true
-                end
-            },
-            ['default:large_cactus_seedling'] = {
-                -- Large Cactus
-                name = 'default:large_cactus_seedling',
-                chance = 2,
-                grow_tree = function(pos)
-                    if not x_farming.x_bonemeal.is_on_sand(pos) then
-                        return false
-                    end
-
-                    default.grow_large_cactus(pos)
-
-                    return true
-                end
-            },
             ['x_farming:kiwi_sapling'] = {
                 -- Kiwi Tree
                 name = 'x_farming:kiwi_sapling',
@@ -280,8 +106,81 @@ x_farming = {
     allowed_bag_items = {},
     registered_crates = {},
     lbm_nodenames_crates = {},
-    registered_plants = {}
+    registered_plants = {},
+    mcl = {}
 }
+
+function x_farming.node_sound_grass_defaults(table)
+    table = table or {}
+    table.footstep = table.footstep or { name = 'x_farming_grass_footstep', gain = 0.4 }
+    table.dig = table.dig or { name = 'x_farming_grass_hit', gain = 1.2 }
+    table.dug = table.dug or { name = 'x_farming_dirt_hit', gain = 1.0 }
+    table.place = table.place or { name = 'x_farming_dirt_hit', gain = 1.0 }
+    return table
+end
+
+function x_farming.node_sound_leaves_defaults(table)
+    table = table or {}
+    table.footstep = table.footstep or { name = 'x_farming_leaves_footstep', gain = 0.1 }
+    table.dig = table.dig or { name = 'x_farming_leaves_hit', gain = 0.25 }
+    table.dug = table.dug or { name = 'x_farming_leaves_dug', gain = 0.5 }
+    table.place = table.place or { name = 'x_farming_leaves_place', gain = 0.4 }
+    return table
+end
+
+function x_farming.node_sound_wood_defaults(table)
+    table = table or {}
+    table.footstep = table.footstep or { name = 'x_farming_wood_footstep', gain = 0.15 }
+    table.dig = table.dig or { name = 'x_farming_wood_hit', gain = 0.5 }
+    table.dug = table.dug or { name = 'x_farming_wood_place', gain = 0.1 }
+    table.place = table.place or { name = 'x_farming_wood_place', gain = 0.15 }
+    return table
+end
+
+function x_farming.node_sound_sand_defaults(table)
+    table = table or {}
+    table.footstep = table.footstep or { name = 'x_farming_sand_footstep', gain = 0.1 }
+    table.dig = table.dig or { name = 'x_farming_sand_hit', gain = 0.5 }
+    table.dug = table.dug or { name = 'x_farming_sand_dug', gain = 0.1 }
+    table.place = table.place or { name = 'x_farming_sand_place', gain = 0.15 }
+    return table
+end
+
+function x_farming.node_sound_thin_glass_defaults(table)
+    table = table or {}
+    table.footstep = table.footstep or { name = 'x_farming_thin_glass_footstep', gain = 0.3 }
+    table.dig = table.dig or { name = 'x_farming_thin_glass_footstep', gain = 0.5 }
+    table.dug = table.dug or { name = 'x_farming_break_thin_glass', gain = 1.0 }
+    table.place = table.place or { name = 'x_farming_glass_place', gain = 0.2 }
+    return table
+end
+
+function x_farming.node_sound_dirt_defaults(table)
+    table = table or {}
+    table.footstep = table.footstep or { name = 'x_farming_dirt_footstep', gain = 0.15 }
+    table.dig = table.dig or { name = 'x_farming_dirt_hit', gain = 0.4 }
+    table.dug = table.dug or { name = 'x_farming_dirt_hit', gain = 1.0 }
+    table.place = table.place or { name = 'x_farming_dirt_hit', gain = 1.0 }
+    return table
+end
+
+function x_farming.node_sound_ice_defaults(table)
+    table = table or {}
+    table.footstep = table.footstep or { name = 'x_farming_ice_footstep', gain = 0.2 }
+    table.dig = table.dig or { name = 'x_farming_ice_hit', gain = 0.4 }
+    table.dug = table.dug or { name = 'x_farming_ice_hit', gain = 1.0 }
+    table.place = table.place or { name = 'x_farming_ice_hit', gain = 1.0 }
+    return table
+end
+
+function x_farming.node_sound_stone_defaults(table)
+    table = table or {}
+    table.footstep = table.footstep or { name = 'x_farming_stone_footstep', gain = 0.2 }
+    table.dig = table.dig or { name = 'x_farming_stone_hit', gain = 1.0 }
+    table.dug = table.dug or { name = 'x_farming_stone_dug', gain = 0.6 }
+    table.place = table.place or { name = 'x_farming_stone_place', gain = 1.0 }
+    return table
+end
 
 ---how often node timers for plants will tick, +/- some random value
 function x_farming.tick_block(pos)
@@ -295,11 +194,13 @@ end
 
 -- how often node timers for plants will tick, +/- some random value
 function x_farming.tick(pos)
-    minetest.get_node_timer(pos):start(math.random(166, 286))
+    minetest.get_node_timer(pos):start(math.random(1, 2))
+    -- minetest.get_node_timer(pos):start(math.random(166, 286))
 end
 -- how often a growth failure tick is retried (e.g. too dark)
 function x_farming.tick_again(pos)
-    minetest.get_node_timer(pos):start(math.random(40, 80))
+    minetest.get_node_timer(pos):start(math.random(1, 2))
+    -- minetest.get_node_timer(pos):start(math.random(40, 80))
 end
 
 ---just shorthand for minetest metadata handling
@@ -385,7 +286,7 @@ x_farming.hoe_on_use = function(itemstack, user, pointed_thing, uses)
 
     -- turn the node into soil and play sound
     minetest.set_node(pt.under, { name = regN[under.name].soil.dry })
-    minetest.sound_play('default_dig_crumbly', {
+    minetest.sound_play('x_farming_dirt_hit', {
         pos = pt.under,
         gain = 0.3,
     }, true)
@@ -419,15 +320,19 @@ x_farming.register_hoe = function(name, def)
     if def.max_uses == nil then
         def.max_uses = 30
     end
+
     -- Register the tool
     minetest.register_tool(name, {
         description = def.description,
         inventory_image = def.inventory_image,
+        -- MTG
         on_use = function(itemstack, user, pointed_thing)
             return x_farming.hoe_on_use(itemstack, user, pointed_thing, def.max_uses)
         end,
+        -- MCL
+        on_place = minetest.get_modpath('mcl_farming') and x_farming.mcl.hoe_on_place_function(def.max_uses) or minetest.item_place,
         groups = def.groups,
-        sound = { breaks = 'default_tool_breaks' },
+        sound = { breaks = 'x_farming_tool_breaks' },
         wield_scale = def.wield_scale or { x = 1, y = 1, z = 1 }
     })
     -- Register its recipe
@@ -486,6 +391,186 @@ function x_farming.set_inventory_action_loggers(def, name)
     end
     def.on_metadata_inventory_take = function(pos, listname, index, stack, player)
         x_farming.log_player_action(player, 'takes', stack:get_name(), 'from', name, 'at', pos)
+    end
+end
+
+--
+-- Sapling 'on place' function to check protection of node and resulting tree volume
+--
+
+function x_farming.sapling_on_place(itemstack, placer, pointed_thing, sapling_name, minp_relative, maxp_relative, interval)
+    -- Position of sapling
+    local pos = pointed_thing.under
+    local node = minetest.get_node_or_nil(pos)
+    local pdef = node and minetest.registered_nodes[node.name]
+
+    if not node then
+        return itemstack
+    end
+
+    if pdef and pdef.on_rightclick and
+        not (placer and placer:is_player() and
+        placer:get_player_control().sneak)
+    then
+        return pdef.on_rightclick(pos, node, placer, itemstack, pointed_thing)
+    end
+
+    if not pdef or not pdef.buildable_to then
+        pos = pointed_thing.above
+        node = minetest.get_node_or_nil(pos)
+        pdef = node and minetest.registered_nodes[node.name]
+        if not pdef or not pdef.buildable_to then
+            return itemstack
+        end
+    end
+
+    local player_name = placer and placer:get_player_name() or ''
+
+    -- Check sapling position for protection
+    if minetest.is_protected(pos, player_name) then
+        minetest.record_protection_violation(pos, player_name)
+        return itemstack
+    end
+
+    -- Check tree volume for protection
+    if minetest.is_area_protected(
+            vector.add(pos, minp_relative),
+            vector.add(pos, maxp_relative),
+            player_name,
+            interval) then
+        minetest.record_protection_violation(pos, player_name)
+        -- Print extra information to explain
+        -- minetest.chat_send_player(player_name,
+        -- itemstack:get_definition().description .. ' will intersect protection ' ..
+        -- 'on growth')
+        minetest.chat_send_player(
+            player_name,
+            S('@1 will intersect protection on growth.', itemstack:get_definition().description)
+        )
+        return itemstack
+    end
+
+    x_farming.log_player_action(placer, 'places node', sapling_name, 'at', pos)
+
+    local take_item = not minetest.is_creative_enabled(player_name)
+    local newnode = { name = sapling_name }
+    local ndef = minetest.registered_nodes[sapling_name]
+    minetest.set_node(pos, newnode)
+
+    -- Run callback
+    if ndef and ndef.after_place_node then
+        -- Deepcopy place_to and pointed_thing because callback can modify it
+        if ndef.after_place_node(table.copy(pos), placer, itemstack, table.copy(pointed_thing)) then
+            take_item = false
+        end
+    end
+
+    -- Run script hook
+    for _, callback in ipairs(minetest.registered_on_placenodes) do
+        -- Deepcopy pos, node and pointed_thing because callback can modify them
+        if callback(table.copy(pos), table.copy(newnode),
+                placer, table.copy(node or {}),
+                itemstack, table.copy(pointed_thing)) then
+            take_item = false
+        end
+    end
+
+    if take_item then
+        itemstack:take_item()
+    end
+
+    return itemstack
+end
+
+--
+-- Leafdecay
+--
+
+-- Prevent decay of placed leaves
+
+function x_farming.after_place_leaves(pos, placer, itemstack, pointed_thing)
+    if placer and placer:is_player() then
+        local node = minetest.get_node(pos)
+        node.param2 = 1
+        minetest.set_node(pos, node)
+    end
+end
+
+-- Leafdecay
+local function leafdecay_after_destruct(pos, oldnode, def)
+    for _, v in pairs(minetest.find_nodes_in_area(vector.subtract(pos, def.radius), vector.add(pos, def.radius), def.leaves)) do
+        local node = minetest.get_node(v)
+        local timer = minetest.get_node_timer(v)
+        if node.param2 ~= 1 and not timer:is_started() then
+            timer:start(math.random(20, 120) / 10)
+        end
+    end
+end
+
+local movement_gravity = tonumber(minetest.settings:get('movement_gravity')) or 9.81
+
+local function leafdecay_on_timer(pos, def)
+    if minetest.find_node_near(pos, def.radius, def.trunks) then
+        return false
+    end
+
+    local node = minetest.get_node(pos)
+    local drops = minetest.get_node_drops(node.name)
+    for _, item in ipairs(drops) do
+        local is_leaf
+        for _, v in pairs(def.leaves) do
+            if v == item then
+                is_leaf = true
+            end
+        end
+
+        if minetest.get_item_group(item, 'leafdecay_drop') ~= 0 or not is_leaf then
+            minetest.add_item({
+                x = pos.x - 0.5 + math.random(),
+                y = pos.y - 0.5 + math.random(),
+                z = pos.z - 0.5 + math.random(),
+            }, item)
+        end
+    end
+
+    minetest.remove_node(pos)
+    minetest.check_for_falling(pos)
+
+    -- spawn a few particles for the removed node
+    minetest.add_particlespawner({
+        amount = 8,
+        time = 0.001,
+        minpos = vector.subtract(pos, { x = 0.5, y = 0.5, z = 0.5 }),
+        maxpos = vector.add(pos, { x = 0.5, y = 0.5, z = 0.5 }),
+        minvel = vector.new(-0.5, -1, -0.5),
+        maxvel = vector.new(0.5, 0, 0.5),
+        minacc = vector.new(0, -movement_gravity, 0),
+        maxacc = vector.new(0, -movement_gravity, 0),
+        minsize = 0,
+        maxsize = 0,
+        node = node,
+    })
+end
+
+function x_farming.register_leafdecay(def)
+    assert(def.leaves)
+    assert(def.trunks)
+    assert(def.radius)
+
+    for _, v in pairs(def.trunks) do
+        minetest.override_item(v, {
+            after_destruct = function(pos, oldnode)
+                leafdecay_after_destruct(pos, oldnode, def)
+            end,
+        })
+    end
+
+    for _, v in pairs(def.leaves) do
+        minetest.override_item(v, {
+            on_timer = function(pos)
+                leafdecay_on_timer(pos, def)
+            end,
+        })
     end
 end
 
@@ -555,6 +640,7 @@ x_farming.grow_plant = function(pos, elapsed)
 
     if not def.next_plant then
         -- disable timer for fully grown plant
+        print('1')
         return
     end
 
@@ -563,11 +649,12 @@ x_farming.grow_plant = function(pos, elapsed)
         local soil_node = minetest.get_node_or_nil({ x = pos.x, y = pos.y - 1, z = pos.z })
         if not soil_node then
             x_farming.tick_again(pos)
+            print('2')
             return
         end
         -- omitted is a check for light, we assume seeds can germinate in the dark.
         for _, v in pairs(def.fertility) do
-            if minetest.get_item_group(soil_node.name, v) ~= 0 then
+            if minetest.get_item_group(soil_node.name, v) ~= 0 or string.find(soil_node.name, 'mcl_farming:soil') then
                 local placenode = { name = def.next_plant }
                 if def.place_param2 then
                     placenode.param2 = def.place_param2
@@ -575,11 +662,12 @@ x_farming.grow_plant = function(pos, elapsed)
                 minetest.swap_node(pos, placenode)
                 if minetest.registered_nodes[def.next_plant].next_plant then
                     x_farming.tick(pos)
+                    print('3')
                     return
                 end
             end
         end
-
+        print('4')
         return
     end
 
@@ -587,6 +675,7 @@ x_farming.grow_plant = function(pos, elapsed)
     local below = minetest.get_node({ x = pos.x, y = pos.y - 1, z = pos.z })
     if minetest.get_item_group(below.name, 'soil') < 3 then
         x_farming.tick_again(pos)
+        print('5')
         return
     end
 
@@ -594,6 +683,7 @@ x_farming.grow_plant = function(pos, elapsed)
     local light = minetest.get_node_light(pos)
     if not light or light < def.minlight or light > def.maxlight then
         x_farming.tick_again(pos)
+        print('6')
         return
     end
 
@@ -666,21 +756,17 @@ x_farming.register_plant = function(name, def)
             fixed = { -0.5, -0.5, -0.5, 0.5, -5 / 16, 0.5 },
         },
         fertility = def.fertility,
-        sounds = default.node_sound_dirt_defaults({
-            dig = { name = '', gain = 0 },
-            dug = { name = 'default_grass_footstep', gain = 0.2 },
-            place = { name = 'default_place_node', gain = 0.25 },
-        }),
+        sounds = x_farming.node_sound_grass_defaults(),
 
         on_place = function(itemstack, placer, pointed_thing)
             local under = pointed_thing.under
             local node = minetest.get_node(under)
             local udef = minetest.registered_nodes[node.name]
             if udef and udef.on_rightclick and
-                    not (placer and placer:is_player() and
-                    placer:get_player_control().sneak) then
-                return udef.on_rightclick(under, node, placer, itemstack,
-                    pointed_thing) or itemstack
+                not (placer and placer:is_player() and
+                placer:get_player_control().sneak)
+            then
+                return udef.on_rightclick(under, node, placer, itemstack, pointed_thing) or itemstack
             end
 
             return x_farming.place_seed(itemstack, placer, pointed_thing, mname .. ':seed_' .. pname)
@@ -737,7 +823,7 @@ x_farming.register_plant = function(name, def)
                 fixed = { -0.5, -0.5, -0.5, 0.5, -5 / 16, 0.5 },
             },
             groups = nodegroups,
-            sounds = default.node_sound_leaves_defaults(),
+            sounds = x_farming.node_sound_leaves_defaults(),
             next_plant = next_plant,
             on_timer = x_farming.grow_plant,
             minlight = def.minlight,
@@ -861,10 +947,31 @@ function x_farming.grow_kiwi_tree(pos)
         path, 'random', nil, false)
 end
 
+-- 'can grow' function - copy from MTG
+
+function x_farming.can_grow(pos)
+    local node_under = minetest.get_node_or_nil({ x = pos.x, y = pos.y - 1, z = pos.z })
+    if not node_under then
+        return false
+    end
+
+    if minetest.get_item_group(node_under.name, 'soil') == 0 then
+        return false
+    end
+
+    local light_level = minetest.get_node_light(pos)
+
+    if not light_level or light_level < 13 then
+        return false
+    end
+
+    return true
+end
+
 ---Grow sapling
 
 function x_farming.grow_sapling(pos)
-    if not default.can_grow(pos) then
+    if not x_farming.can_grow(pos) then
         ---try again 5 min later
         minetest.get_node_timer(pos):start(300)
         return
@@ -873,7 +980,7 @@ function x_farming.grow_sapling(pos)
     local node = minetest.get_node(pos)
     if node.name == 'x_farming:kiwi_sapling' then
         minetest.log('action', 'A sapling grows into a tree at ' ..
-        minetest.pos_to_string(pos))
+            minetest.pos_to_string(pos))
         x_farming.grow_kiwi_tree(pos)
     end
 end
@@ -932,6 +1039,13 @@ end
 
 function x_farming.get_crate_or_bag_formspec(pos, label_copy)
     local spos = pos.x .. ',' .. pos.y .. ',' .. pos.z
+
+    -- Hotbar background
+    local hotbar_bg = ''
+    for i = 0, 7, 1 do
+        hotbar_bg = hotbar_bg .. 'image[' .. 0 + i .. ', ' .. 4.85 .. ';1,1;x_farming_gui_hb_bg.png]'
+    end
+
     local formspec = {
         'size[8,9]',
         'list[nodemeta:', spos, ';main;0,0.3;8,4;]',
@@ -940,7 +1054,7 @@ function x_farming.get_crate_or_bag_formspec(pos, label_copy)
         'listring[nodemeta:', spos, ';main]',
         'listring[current_player;main]',
         'label[2,0;' .. minetest.formspec_escape(label_copy) .. ']',
-        default.get_hotbar_bg(0, 4.85)
+        hotbar_bg
     }
 
     formspec = table.concat(formspec, '')
@@ -963,7 +1077,7 @@ function x_farming.register_crate(name, def)
     _def.mesh = 'x_farming_crate.obj'
     _def.tiles = def.tiles
     _def.use_texture_alpha = 'clip'
-    _def.sounds = def.sounds or default.node_sound_wood_defaults()
+    _def.sounds = def.sounds or x_farming.node_sound_wood_defaults()
     _def.is_ground_content = false
     _def.groups = def.groups or { choppy = 2, oddly_breakable_by_hand = 2, not_in_creative_inventory = 1, flammable = 2 }
     _def.stack_max = def.stack_max or 1
@@ -1023,7 +1137,7 @@ function x_farming.register_crate(name, def)
         local label_copy = _def.short_description .. ' (' .. S('owned by') .. ' ' .. meta:get_string('owner')
             .. ')\n' .. inv_stack:get_description()
         minetest.show_formspec(p_name, _def.name, x_farming.get_crate_or_bag_formspec(pos, label_copy))
-        minetest.sound_play('default_dig_choppy', { gain = 0.3, pos = pos, max_hear_distance = 10 }, true)
+        minetest.sound_play('x_farming_wood_hit', { gain = 0.3, pos = pos, max_hear_distance = 10 }, true)
     end
 
     _def.on_blast = function(pos, intensity)
@@ -1234,7 +1348,7 @@ function x_farming.register_bag(name, def)
     _def.mesh = 'x_farming_bag.obj'
     _def.tiles = def.tiles
     _def.use_texture_alpha = 'clip'
-    _def.sounds = def.sounds or default.node_sound_sand_defaults()
+    _def.sounds = def.sounds or x_farming.node_sound_sand_defaults()
     _def.is_ground_content = false
     _def.groups = def.groups or { choppy = 2, oddly_breakable_by_hand = 2, not_in_creative_inventory = 1, flammable = 2 }
     _def.stack_max = def.stack_max or 1
@@ -1295,7 +1409,7 @@ function x_farming.register_bag(name, def)
         local label_copy = _def.short_description .. ' (' .. S('owned by') .. ' ' .. meta:get_string('owner') .. ')\n'
             .. inv_stack:get_description()
         minetest.show_formspec(p_name, _def.name, x_farming.get_crate_or_bag_formspec(pos, label_copy))
-        minetest.sound_play('default_sand_footstep', { gain = 0.3, pos = pos, max_hear_distance = 10 }, true)
+        minetest.sound_play('x_farming_sand_footstep', { gain = 0.3, pos = pos, max_hear_distance = 10 }, true)
     end
 
     _def.on_blast = function(pos, intensity)
@@ -1472,7 +1586,9 @@ function x_farming.x_bonemeal.is_on_sand(under)
         return false
     end
 
-    if minetest.get_item_group(below.name, 'sand') == 0 then
+    if minetest.get_item_group(below.name, 'sand') == 0
+        and minetest.get_item_group(below.name, 'everness_sand') == 0
+    then
         return false
     end
 
@@ -2008,6 +2124,69 @@ function x_farming.x_bonemeal.register_tree_defs(self, defs)
         local def = table.copy(value)
         if not self.tree_defs[def.name] then
             self.tree_defs[def.name] = value
+        end
+    end
+end
+
+--
+-- MCL
+--
+
+function x_farming.mcl.create_soil(pos, inv)
+    if pos == nil then
+        return false
+    end
+    local node = minetest.get_node(pos)
+    local name = node.name
+    local above = minetest.get_node({ x = pos.x, y = pos.y + 1, z = pos.z })
+    if minetest.get_item_group(name, 'cultivatable') == 2 then
+        if above.name == 'air' then
+            node.name = 'mcl_farming:soil'
+            minetest.set_node(pos, node)
+            minetest.sound_play('x_farming_dirt_hit', { pos = pos, gain = 0.5 }, true)
+            return true
+        end
+    elseif minetest.get_item_group(name, 'cultivatable') == 1 then
+        if above.name == 'air' then
+            node.name = 'mcl_core:dirt'
+            minetest.set_node(pos, node)
+            minetest.sound_play('x_farming_dirt_hit', { pos = pos, gain = 0.6 }, true)
+            return true
+        end
+    end
+    return false
+end
+
+function x_farming.mcl.hoe_on_place_function(uses)
+    return function(itemstack, user, pointed_thing)
+        -- Call on_rightclick if the pointed node defines it
+        local node = minetest.get_node(pointed_thing.under)
+
+        -- Custom: add support for MTG definition farming
+        local regN = minetest.registered_nodes
+        if regN[node.name].soil ~= nil
+            and regN[node.name].soil.wet ~= nil
+            and regN[node.name].soil.dry ~= nil
+        then
+            return x_farming.hoe_on_use(itemstack, user, pointed_thing, uses)
+        end
+
+        if user and not user:get_player_control().sneak then
+            if minetest.registered_nodes[node.name] and minetest.registered_nodes[node.name].on_rightclick then
+                return minetest.registered_nodes[node.name].on_rightclick(pointed_thing.under, node, user, itemstack) or itemstack
+            end
+        end
+
+        if minetest.is_protected(pointed_thing.under, user:get_player_name()) then
+            minetest.record_protection_violation(pointed_thing.under, user:get_player_name())
+            return itemstack
+        end
+
+        if x_farming.mcl.create_soil(pointed_thing.under, user:get_inventory()) then
+            if not minetest.is_creative_enabled(user:get_player_name()) then
+                itemstack:add_wear_by_uses(uses)
+            end
+            return itemstack
         end
     end
 end

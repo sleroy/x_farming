@@ -16,8 +16,6 @@
     License along with this library; if not, write to juraj.vajda@gmail.com
 --]]
 
-creative = creative --[[@as MtgCreative]]
-screwdriver = screwdriver --[[@as MtgScrewdriver]]
 stairs = stairs --[[@as MtgStairs]]
 
 local S = minetest.get_translator(minetest.get_current_modname())
@@ -108,8 +106,9 @@ function x_farming.place_cocoa_bean(itemstack, placer, pointed_thing)
     end
 
     -- check if NOT pointing at the top/below of the node
-    if pt.above.y == pt.under.y - 1 or
-         pt.above.y == pt.under.y + 1 then
+    if pt.above.y == pt.under.y - 1
+        or pt.above.y == pt.under.y + 1
+    then
         return itemstack
     end
 
@@ -130,10 +129,10 @@ function x_farming.place_cocoa_bean(itemstack, placer, pointed_thing)
     minetest.set_node(pt.above, { name = 'x_farming:cocoa_1', param2 = new_param2 })
 
     tick(pt.above)
-    if not (creative and creative.is_enabled_for
-            and creative.is_enabled_for(player_name)) then
+    if not minetest.is_creative_enabled(player_name) then
         itemstack:take_item()
     end
+
     return itemstack
 end
 
@@ -166,7 +165,9 @@ minetest.register_node('x_farming:cocoa_1', {
     paramtype = 'light',
     sunlight_propagates = true,
     wield_scale = { x = 2, y = 2, z = 2 },
-    on_rotate = screwdriver.disallow,
+    on_rotate = function(pos, node, user, mode, new_param2)
+        return false
+    end,
     paramtype2 = 'facedir',
     is_ground_content = false,
     drop = {
@@ -196,7 +197,7 @@ minetest.register_node('x_farming:cocoa_1', {
         },
     },
     groups = { choppy = 3, flammable = 2, plant = 1, not_in_creative_inventory = 1 },
-    sounds = default.node_sound_wood_defaults(),
+    sounds = x_farming.node_sound_wood_defaults(),
     next_plant = 'x_farming:cocoa_2',
     on_timer = x_farming.grow_cocoa_plant,
     minlight = 13,
@@ -220,7 +221,9 @@ minetest.register_node('x_farming:cocoa_2', {
     paramtype = 'light',
     sunlight_propagates = true,
     wield_scale = { x = 1.5, y = 1.5, z = 1.5 },
-    on_rotate = screwdriver.disallow,
+    on_rotate = function(pos, node, user, mode, new_param2)
+	return false
+end,
     paramtype2 = 'facedir',
     is_ground_content = false,
     drop = {
@@ -250,7 +253,7 @@ minetest.register_node('x_farming:cocoa_2', {
         },
     },
     groups = { choppy = 3, flammable = 2, plant = 1, not_in_creative_inventory = 1 },
-    sounds = default.node_sound_wood_defaults(),
+    sounds = x_farming.node_sound_wood_defaults(),
     next_plant = 'x_farming:cocoa_3',
     on_timer = x_farming.grow_cocoa_plant,
     minlight = 13,
@@ -274,7 +277,9 @@ minetest.register_node('x_farming:cocoa_3', {
     paramtype = 'light',
     sunlight_propagates = true,
     wield_scale = { x = 1.5, y = 1.5, z = 1.5 },
-    on_rotate = screwdriver.disallow,
+    on_rotate = function(pos, node, user, mode, new_param2)
+	return false
+end,
     paramtype2 = 'facedir',
     is_ground_content = false,
     drop = {
@@ -305,7 +310,7 @@ minetest.register_node('x_farming:cocoa_3', {
         },
     },
     groups = { choppy = 3, flammable = 2, plant = 1, not_in_creative_inventory = 1, leafdecay = 3, leafdecay_drop = 1 },
-    sounds = default.node_sound_wood_defaults(),
+    sounds = x_farming.node_sound_wood_defaults(),
     minlight = 13,
     maxlight = 15
 })
@@ -344,14 +349,14 @@ minetest.register_node('x_farming:jungle_with_cocoa_sapling', {
         attached_node = 1,
         sapling = 1
     },
-    sounds = default.node_sound_leaves_defaults(),
+    sounds = x_farming.node_sound_leaves_defaults(),
 
     on_construct = function(pos)
         minetest.get_node_timer(pos):start(math.random(300, 1500))
     end,
 
     on_place = function(itemstack, placer, pointed_thing)
-        itemstack = default.sapling_on_place(itemstack, placer, pointed_thing,
+        itemstack = x_farming.sapling_on_place(itemstack, placer, pointed_thing,
             'x_farming:jungle_with_cocoa_sapling',
             -- minp, maxp to be checked, relative to sapling pos
             { x = -3, y = -5, z = -3 },
@@ -371,7 +376,7 @@ minetest.register_node('x_farming:jungle_tree', {
     paramtype2 = 'facedir',
     is_ground_content = false,
     groups = { tree = 1, choppy = 2, oddly_breakable_by_hand = 1, flammable = 2 },
-    sounds = default.node_sound_wood_defaults(),
+    sounds = x_farming.node_sound_wood_defaults(),
 
     on_place = minetest.rotate_node
 })
@@ -402,13 +407,13 @@ minetest.register_node('x_farming:jungle_leaves', {
             }
         }
     },
-    sounds = default.node_sound_leaves_defaults(),
+    sounds = x_farming.node_sound_leaves_defaults(),
 
-    after_place_node = default.after_place_leaves,
+    after_place_node = x_farming.after_place_leaves,
 })
 
 -- leafdecay
-default.register_leafdecay({
+x_farming.register_leafdecay({
     trunks = { 'x_farming:jungle_tree' },
     leaves = { 'x_farming:cocoa_3', 'x_farming:jungle_leaves' },
     radius = 2,
@@ -423,7 +428,7 @@ minetest.register_node('x_farming:jungle_wood', {
     tiles = { 'x_farming_jungle_wood.png' },
     is_ground_content = false,
     groups = { choppy = 2, oddly_breakable_by_hand = 2, flammable = 2, wood = 1 },
-    sounds = default.node_sound_wood_defaults(),
+    sounds = x_farming.node_sound_wood_defaults(),
 })
 
 minetest.register_craft({
@@ -453,24 +458,10 @@ if minetest.global_exists('stairs') and minetest.get_modpath('stairs') then
         { 'x_farming_jungle_wood.png' },
         'Jungle Wooden Stair',
         'Jungle Wooden Slab',
-        default.node_sound_wood_defaults(),
+        x_farming.node_sound_wood_defaults(),
         false
     )
 end
-
-minetest.register_decoration({
-    name = 'x_farming:jungle_tree',
-    deco_type = 'schematic',
-    place_on = { 'default:dirt_with_rainforest_litter' },
-    sidelen = 80,
-    fill_ratio = 0.025,
-    biomes = { 'rainforest' },
-    y_max = 31000,
-    y_min = 1,
-    schematic = minetest.get_modpath('x_farming') .. '/schematics/x_farming_jungle_tree_with_cocoa.mts',
-    flags = 'place_center_x, place_center_z',
-    rotation = '0',
-})
 
 ---crate
 x_farming.register_crate('crate_cocoa_bean_3', {
@@ -481,3 +472,38 @@ x_farming.register_crate('crate_cocoa_bean_3', {
         crate_item = 'x_farming:cocoa_bean'
     }
 })
+
+minetest.register_on_mods_loaded(function()
+    local deco_place_on = {}
+    local deco_biomes = {}
+    local deco_fill_ratio = 0.025
+
+    -- MTG
+    if minetest.get_modpath('default') then
+        table.insert(deco_place_on, 'default:dirt_with_rainforest_litter')
+        table.insert(deco_biomes, 'rainforest')
+    end
+
+    -- Everness
+    if minetest.get_modpath('everness') then
+        table.insert(deco_place_on, 'everness:dirt_with_grass_1')
+        table.insert(deco_biomes, 'everness_bamboo_forest')
+        deco_fill_ratio = deco_fill_ratio / 20
+    end
+
+    if next(deco_place_on) and next(deco_biomes) then
+        minetest.register_decoration({
+            name = 'x_farming:jungle_tree',
+            deco_type = 'schematic',
+            place_on = deco_place_on,
+            sidelen = 80,
+            fill_ratio = deco_fill_ratio,
+            biomes = deco_biomes,
+            y_max = 31000,
+            y_min = 1,
+            schematic = minetest.get_modpath('x_farming') .. '/schematics/x_farming_jungle_tree_with_cocoa.mts',
+            flags = 'place_center_x, place_center_z',
+            rotation = '0',
+        })
+    end
+end)

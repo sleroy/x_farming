@@ -39,6 +39,16 @@ minetest.override_item('x_farming:cotton', {
     groups = { compost = 50 }
 })
 
+---crate
+x_farming.register_crate('crate_cotton2_3', {
+    description = S('Cotton Crate'),
+    short_description = S('Cotton Crate'),
+    tiles = { 'x_farming_crate_cotton2_3.png' },
+    _custom = {
+        crate_item = 'x_farming:cotton'
+    }
+})
+
 minetest.register_on_mods_loaded(function()
     local deco_cotton_place_on = {}
     local deco_cotton_biomes = {}
@@ -82,13 +92,3 @@ minetest.register_on_mods_loaded(function()
         })
     end
 end)
-
----crate
-x_farming.register_crate('crate_cotton2_3', {
-    description = S('Cotton Crate'),
-    short_description = S('Cotton Crate'),
-    tiles = { 'x_farming_crate_cotton2_3.png' },
-    _custom = {
-        crate_item = 'x_farming:cotton'
-    }
-})

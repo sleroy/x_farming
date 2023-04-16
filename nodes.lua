@@ -43,7 +43,7 @@ minetest.register_node('x_farming:donut', {
         fixed = { -0.25, -0.5, -0.25, 0.25, -0.35, 0.25 }
     },
     groups = { dig_immediate = 3, attached_node = 1, compost = 85 },
-    sounds = default.node_sound_leaves_defaults(),
+    sounds = x_farming.node_sound_leaves_defaults(),
     on_use = minetest.item_eat(3),
     sunlight_propagates = true
 })
@@ -70,7 +70,7 @@ minetest.register_node('x_farming:donut_chocolate', {
         fixed = { -0.25, -0.5, -0.25, 0.25, -0.35, 0.25 }
     },
     groups = { dig_immediate = 3, attached_node = 1, compost = 85 },
-    sounds = default.node_sound_leaves_defaults(),
+    sounds = x_farming.node_sound_leaves_defaults(),
     on_use = minetest.item_eat(4),
     sunlight_propagates = true
 })
@@ -99,7 +99,7 @@ minetest.register_node('x_farming:fries', {
         fixed = { -0.25, -0.5, -0.1, 0.25, -0.2, 0.1 }
     },
     groups = { dig_immediate = 3, attached_node = 1, compost = 85 },
-    sounds = default.node_sound_leaves_defaults(),
+    sounds = x_farming.node_sound_leaves_defaults(),
     on_use = minetest.item_eat(6),
     sunlight_propagates = true
 })
@@ -114,7 +114,7 @@ minetest.register_node('x_farming:pumpkin_pie', {
     tiles = { 'x_farming_pumpkin_pie_mesh.png' },
     use_texture_alpha = 'clip',
     inventory_image = 'x_farming_pumpkin_pie.png',
-    wield_image = 'x_farming_pumpkin_pie.png',
+    wield_image = 'x_farming_pumpkin_pie.png^[transformFXFYR180',
     paramtype = 'light',
     paramtype2 = 'facedir',
     is_ground_content = false,
@@ -128,7 +128,7 @@ minetest.register_node('x_farming:pumpkin_pie', {
         fixed = { -0.3, -0.5, -0.3, 0.3, -0.3, 0.3 }
     },
     groups = { dig_immediate = 3, attached_node = 1, compost = 100 },
-    sounds = default.node_sound_leaves_defaults(),
+    sounds = x_farming.node_sound_leaves_defaults(),
     on_use = minetest.item_eat(6),
     sunlight_propagates = true
 })
@@ -158,7 +158,7 @@ minetest.register_node('x_farming:beetroot_soup', {
     },
     groups = { vessel = 1, dig_immediate = 3, attached_node = 1, compost = 100 },
     on_use = minetest.item_eat(6, 'x_farming:bowl'),
-    sounds = default.node_sound_wood_defaults(),
+    sounds = x_farming.node_sound_wood_defaults(),
     sunlight_propagates = true
 })
 
@@ -187,7 +187,7 @@ minetest.register_node('x_farming:fish_stew', {
     },
     groups = { vessel = 1, dig_immediate = 3, attached_node = 1, compost = 100 },
     on_use = minetest.item_eat(8, 'x_farming:bowl'),
-    sounds = default.node_sound_wood_defaults(),
+    sounds = x_farming.node_sound_wood_defaults(),
     sunlight_propagates = true
 })
 
@@ -203,7 +203,7 @@ minetest.register_node('x_farming:cactus_brick', {
     },
     is_ground_content = false,
     groups = { cracky = 3 },
-    sounds = default.node_sound_stone_defaults()
+    sounds = x_farming.node_sound_stone_defaults()
 })
 
 if minetest.global_exists('stairs') and minetest.get_modpath('stairs') then
@@ -214,7 +214,7 @@ if minetest.global_exists('stairs') and minetest.get_modpath('stairs') then
         { 'x_farming_cactus_brick.png' },
         S('Cactus Brick Stair'),
         S('Cactus Brick Slab'),
-        default.node_sound_stone_defaults(),
+        x_farming.node_sound_stone_defaults(),
         false
     )
 end
@@ -248,7 +248,7 @@ minetest.register_node('x_farming:scarecrow', {
         fixed = { -0.4, -0.5, -0.4, 0.4, 1.5, 0.4 }
     },
     groups = { choppy = 1, oddly_breakable_by_hand = 1, flammable = 2 },
-    sounds = default.node_sound_wood_defaults(),
+    sounds = x_farming.node_sound_wood_defaults(),
     on_construct = function(pos)
         local meta = minetest.get_meta(pos)
         meta:set_string('x_farming_scarecrow_state', 'inactive')
@@ -319,7 +319,7 @@ minetest.register_node('x_farming:scarecrow_2', {
         fixed = { -0.4, -0.5, -0.4, 0.4, 1.5, 0.4 }
     },
     groups = { choppy = 1, oddly_breakable_by_hand = 1, flammable = 2 },
-    sounds = default.node_sound_wood_defaults(),
+    sounds = x_farming.node_sound_wood_defaults(),
     on_construct = function(pos)
         local meta = minetest.get_meta(pos)
         meta:set_string('x_farming_scarecrow_state', 'active')
@@ -435,3 +435,61 @@ minetest.register_node('x_farming:scarecrow_2', {
         end
     end,
 })
+
+--
+-- Convert farming soils - copy from MTG
+--
+
+if not minetest.get_modpath('farming') then
+    minetest.register_abm({
+        label = 'X Farming soil',
+        nodenames = { 'group:field' },
+        interval = 15,
+        chance = 4,
+        action = function(pos, node)
+            local n_def = minetest.registered_nodes[node.name] or nil
+            local wet = n_def.soil.wet or nil
+            local base = n_def.soil.base or nil
+            local dry = n_def.soil.dry or nil
+            if not n_def or not n_def.soil or not wet or not base or not dry then
+                return
+            end
+
+            pos.y = pos.y + 1
+            local nn = minetest.get_node_or_nil(pos)
+            if not nn or not nn.name then
+                return
+            end
+            local nn_def = minetest.registered_nodes[nn.name] or nil
+            pos.y = pos.y - 1
+
+            if nn_def and nn_def.walkable and minetest.get_item_group(nn.name, 'plant') == 0 then
+                minetest.set_node(pos, { name = base })
+                return
+            end
+            -- check if there is water nearby
+            local wet_lvl = minetest.get_item_group(node.name, 'wet')
+            if minetest.find_node_near(pos, 3, { 'group:water' }) then
+                -- if it is dry soil and not base node, turn it into wet soil
+                if wet_lvl == 0 then
+                    minetest.set_node(pos, { name = wet })
+                end
+            else
+                -- only turn back if there are no unloaded blocks (and therefore
+                -- possible water sources) nearby
+                if not minetest.find_node_near(pos, 3, { 'ignore' }) then
+                    -- turn it back into base if it is already dry
+                    if wet_lvl == 0 then
+                        -- only turn it back if there is no plant/seed on top of it
+                        if minetest.get_item_group(nn.name, 'plant') == 0 and minetest.get_item_group(nn.name, 'seed') == 0 then
+                            minetest.set_node(pos, { name = base })
+                        end
+                    elseif wet_lvl == 1 then
+                        -- if its wet turn it back into dry soil
+                        minetest.set_node(pos, { name = dry })
+                    end
+                end
+            end
+        end,
+    })
+end

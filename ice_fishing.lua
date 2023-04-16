@@ -17,7 +17,6 @@
 --]]
 
 creative = minetest.global_exists('creative') and creative --[[@as MtgCreative]]
-screwdriver = minetest.global_exists('screwdriver') and screwdriver --[[@as MtgScrewdriver]]
 hbhunger = minetest.global_exists('hbhunger') and hbhunger --[[@as table]]
 
 local S = minetest.get_translator(minetest.get_current_modname())
@@ -715,11 +714,7 @@ icefishing.register_equipment = function(name, def)
         },
         fertility = { "ice_fishing" },
         drop = "",
-        sounds = default.node_sound_dirt_defaults({
-            dig = { name = "", gain = 0 },
-            dug = { name = "default_grass_footstep", gain = 0.2 },
-            place = { name = "default_place_node", gain = 0.25 },
-        }),
+        sounds = x_farming.node_sound_wood_defaults(),
         next_plant = mname .. ":" .. pname .. "_1",
         on_timer = icefishing.grow_plant,
         minlight = 13,
@@ -729,18 +724,17 @@ icefishing.register_equipment = function(name, def)
             local under = pointed_thing.under
             local node = minetest.get_node(under)
             local udef = minetest.registered_nodes[node.name]
-            if udef and udef.on_rightclick and
-                    not (placer and placer:is_player() and
-                    placer:get_player_control().sneak) then
-                return udef.on_rightclick(under, node, placer, itemstack,
-                    pointed_thing) or itemstack
+            if udef and udef.on_rightclick
+                and not (placer and placer:is_player()
+                and placer:get_player_control().sneak)
+            then
+                return udef.on_rightclick(under, node, placer, itemstack, pointed_thing) or itemstack
             end
 
             return icefishing.place_seed(itemstack, placer, pointed_thing, "x_farming:seed_icefishing")
         end,
 
         on_construct = icefishing.on_construct,
-
         after_destruct = icefishing.after_destruct,
     })
 
@@ -795,14 +789,16 @@ icefishing.register_equipment = function(name, def)
             walkable = false,
             buildable_to = true,
             sunlight_propagates = true,
-            on_rotate = screwdriver.disallow,
+            on_rotate = function(pos, node, user, mode, new_param2)
+                return false
+            end,
             drop = "",
             node_box = {
                 type = "fixed",
                 fixed = {
                     { -0.5, -0.5, -0.5, 0.5, -0.375, 0.5 },
                     { -0.5, -0.375, 0, 0.5, 0.5, 0 },
-                        { 0, -0.375, -0.5, 0, -0.25, 0.5 },
+                    { 0, -0.375, -0.5, 0, -0.25, 0.5 },
                 }
             },
             collision_box = {
@@ -818,7 +814,7 @@ icefishing.register_equipment = function(name, def)
                 },
             },
             groups = { snappy = 3, plant = 1, not_in_creative_inventory = 1, attached_node = 1 },
-            sounds = default.node_sound_leaves_defaults(),
+            sounds = x_farming.node_sound_leaves_defaults(),
             next_plant = next_plant,
             on_timer = icefishing.grow_plant,
             minlight = 13,
@@ -854,17 +850,17 @@ icefishing.register_equipment("x_farming:icefishing", {
 minetest.register_node("x_farming:drilled_ice", {
     description = S("Drilled Ice"),
     tiles = {
-        "x_farming_drilled_ice.png",
-        "default_ice.png",
-        "default_ice.png",
-        "default_ice.png",
-        "default_ice.png",
-        "default_ice.png",
+        { name = "x_farming_ice.png^x_farming_drilled_ice.png", tileable_vertical = false },
+        "x_farming_ice.png",
+        "x_farming_ice.png",
+        "x_farming_ice.png",
+        "x_farming_ice.png",
+        "x_farming_ice.png",
     },
     paramtype = "light",
     drop = "default:ice",
     groups = { cracky = 3, cools_lava = 1, slippery = 3, not_in_creative_inventory = 1, ice_fishing = 1 },
-    sounds = default.node_sound_ice_defaults(),
+    sounds = x_farming.node_sound_ice_defaults(),
 })
 
 ---tools
@@ -969,31 +965,54 @@ minetest.register_craft({
     }
 })
 
----decorations
-
-minetest.register_decoration({
-    name = "x_farming:icefishing_9",
-    deco_type = "schematic",
-    place_on = { "default:ice", "default:snowblock", "default:snow", "default:dirt_with_snow" },
-    sidelen = 16,
-    noise_params = {
-        offset = 0,
-        scale = 0.0025,
-        spread = { x = 100, y = 100, z = 100 },
-        seed = 2,
-        octaves = 3,
-        persist = 0.7
-    },
-    biomes = { "icesheet", "snowy_grassland", "icesheet_ocean" },
-    y_max = 30,
-    y_min = 1,
-    schematic = minetest.get_modpath("x_farming") .. "/schematics/x_farming_icefishing.mts",
-    flags = "force_placement",
-    rotation = "random",
-})
-
 ---crate
 x_farming.register_crate('crate_fish_3', {
     description = S('Fish Crate'),
     tiles = { 'x_farming_crate_fish_3.png' },
 })
+
+minetest.register_on_mods_loaded(function()
+    local deco_place_on = {}
+    local deco_biomes = {}
+
+    -- MTG
+    if minetest.get_modpath('default') then
+        table.insert(deco_place_on, 'default:ice')
+        table.insert(deco_place_on, 'default:snowblock')
+        table.insert(deco_place_on, 'default:snow')
+        table.insert(deco_place_on, 'default:dirt_with_snow')
+        table.insert(deco_biomes, 'icesheet')
+        table.insert(deco_biomes, 'snowy_grassland')
+        table.insert(deco_biomes, 'icesheet_ocean')
+    end
+
+    -- Everness
+    if minetest.get_modpath('everness') then
+        table.insert(deco_place_on, 'everness:frosted_snowblock')
+        table.insert(deco_biomes, 'everness_frosted_icesheet')
+    end
+
+    if next(deco_place_on) and next(deco_biomes) then
+        minetest.register_decoration({
+            name = 'x_farming:icefishing',
+            deco_type = 'schematic',
+            place_on = deco_place_on,
+            sidelen = 16,
+            noise_params = {
+                offset = 0,
+                scale = 0.0025,
+                spread = { x = 100, y = 100, z = 100 },
+                seed = 2,
+                octaves = 3,
+                persist = 0.7
+            },
+            biomes = deco_biomes,
+            y_max = 30,
+            y_min = 1,
+            schematic = minetest.get_modpath('x_farming') .. '/schematics/x_farming_icefishing.mts',
+            flags = 'force_placement',
+            rotation = 'random',
+        })
+    end
+end)
+

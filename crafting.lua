@@ -23,14 +23,12 @@
 local S = minetest.get_translator(minetest.get_current_modname())
 
 -- Cocoa
-if minetest.get_modpath('dye') then
-    minetest.register_craft({
-        output = 'dye:brown',
-        recipe = {
-            { 'x_farming:cocoa_bean' },
-        }
-    })
-end
+minetest.register_craft({
+    output = 'dye:brown',
+    recipe = {
+        { 'x_farming:cocoa_bean' },
+    }
+})
 
 minetest.register_craftitem('x_farming:cookie', {
     description = S('Cookie') .. '\n' .. minetest.colorize(x_farming.colors.brown, S('Hunger') .. ': 2'),
@@ -75,7 +73,6 @@ minetest.register_craft({
     }
 })
 
-
 -- fish stew
 minetest.register_craft({
     output = 'x_farming:fish_stew',
@@ -105,7 +102,7 @@ end
 minetest.register_craftitem('x_farming:carrot_golden', {
     description = golden_carrot_desc,
     inventory_image = 'x_farming_carrot_golden.png',
-    wield_image = 'x_farming_carrot_golden.png^[transformR270',
+    wield_image = 'x_farming_carrot_golden.png',
     on_use = minetest.item_eat(10),
 })
 
@@ -190,7 +187,7 @@ end
 minetest.register_craftitem('x_farming:golden_melon', {
     description = golden_melon_desc,
     inventory_image = 'x_farming_golden_melon.png',
-    wield_image = 'x_farming_golden_melon.png^[transformR90',
+    wield_image = 'x_farming_golden_melon.png',
     on_use = minetest.item_eat(10),
 })
 
@@ -297,7 +294,7 @@ minetest.register_craft({
     recipe = {
         { '', '', '' },
         { '', 'x_farming:pumpkin_block', '' },
-        { '', 'default:torch', '' }
+        { '', 'group:torch', '' }
     },
 })
 
@@ -327,6 +324,24 @@ minetest.register_craft({
     type = 'fuel',
     recipe = 'x_farming:string',
     burntime = 1,
+})
+
+minetest.register_craft({
+    type = 'fuel',
+    recipe = 'x_farming:barley',
+    burntime = 1,
+})
+
+minetest.register_craft({
+    type = 'fuel',
+    recipe = 'x_farming:cotton',
+    burntime = 1,
+})
+
+minetest.register_craft({
+    type = 'fuel',
+    recipe = 'x_farming:hoe_wood',
+    burntime = 5,
 })
 
 -- Bottle Water
@@ -629,4 +644,24 @@ minetest.register_craft({
     cooktime = 15,
     output = 'x_farming:bread',
     recipe = 'x_farming:flour'
+})
+
+-- Cotton
+
+if minetest.get_modpath('wool') then
+    minetest.register_craft({
+        output = 'wool:white',
+        recipe = {
+            { 'x_farming:cotton', 'x_farming:cotton' },
+            { 'x_farming:cotton', 'x_farming:cotton' },
+        }
+    })
+end
+
+minetest.register_craft({
+    output = 'x_farming:string 2',
+    recipe = {
+        { 'x_farming:cotton' },
+        { 'x_farming:cotton' },
+    }
 })

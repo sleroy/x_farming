@@ -36,21 +36,11 @@ x_farming.register_hoe('x_farming:hoe_stone', {
     groups = { hoe = 1 }
 })
 
-local hoe_steel_material
-
-if minetest.get_modpath('default') then
-    hoe_steel_material = 'default:steel_ingot'
-elseif minetest.get_modpath('mcl_core') then
-    hoe_steel_material = 'mcl_core:iron_ingot'
-end
-
-if hoe_steel_material then
-    x_farming.register_hoe('x_farming:hoe_steel', {
-        description = S('Steel Hoe'),
-        inventory_image = 'x_farming_tool_steelhoe.png',
-        wield_scale = { x = 2, y = 2, z = 1 },
-        max_uses = 500,
-        material = hoe_steel_material,
-        groups = { hoe = 1 }
-    })
-end
+x_farming.register_hoe('x_farming:hoe_steel', {
+    description = S('Steel Hoe'),
+    inventory_image = 'x_farming_tool_steelhoe.png',
+    wield_scale = { x = 2, y = 2, z = 1 },
+    max_uses = 500,
+    material = 'default:steel_ingot',
+    groups = { hoe = 1 }
+})

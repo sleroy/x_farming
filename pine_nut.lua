@@ -20,27 +20,6 @@ stairs = stairs --[[@as MtgStairs]]
 
 local S = minetest.get_translator(minetest.get_current_modname())
 
--- decoration
-minetest.register_decoration({
-    name = 'x_farming:pine_nut_tree',
-    deco_type = 'schematic',
-    place_on = { 'default:dirt_with_snow', 'default:dirt_with_coniferous_litter' },
-    sidelen = 16,
-    noise_params = {
-        offset = 0.010,
-        scale = 0.005,
-        spread = { x = 100, y = 100, z = 100 },
-        seed = 2,
-        octaves = 3,
-        persist = 0.66
-    },
-    biomes = { 'taiga', 'coniferous_forest' },
-    y_max = 31000,
-    y_min = 4,
-    schematic = minetest.get_modpath('x_farming') .. '/schematics/x_farming_pine_nut_tree.mts',
-    flags = 'place_center_x, place_center_z'
-})
-
 -- trunk
 minetest.register_node('x_farming:pine_nut_tree', {
     description = S('Pine Nut Tree'),
@@ -49,8 +28,7 @@ minetest.register_node('x_farming:pine_nut_tree', {
     paramtype2 = 'facedir',
     is_ground_content = false,
     groups = { tree = 1, choppy = 2, oddly_breakable_by_hand = 1, flammable = 2 },
-    sounds = default.node_sound_wood_defaults(),
-
+    sounds = x_farming.node_sound_wood_defaults(),
     on_place = minetest.rotate_node
 })
 
@@ -80,9 +58,8 @@ minetest.register_node('x_farming:pine_nut_leaves', {
             }
         }
     },
-    sounds = default.node_sound_leaves_defaults(),
-
-    after_place_node = default.after_place_leaves,
+    sounds = x_farming.node_sound_leaves_defaults(),
+    after_place_node = x_farming.after_place_leaves,
 })
 
 -- sapling
@@ -103,14 +80,14 @@ minetest.register_node('x_farming:pine_nut_sapling', {
     },
     groups = { snappy = 2, dig_immediate = 3, flammable = 3,
         attached_node = 1, sapling = 1 },
-    sounds = default.node_sound_leaves_defaults(),
+    sounds = x_farming.node_sound_leaves_defaults(),
 
     on_construct = function(pos)
         minetest.get_node_timer(pos):start(math.random(300, 1500))
     end,
 
     on_place = function(itemstack, placer, pointed_thing)
-        itemstack = default.sapling_on_place(itemstack, placer, pointed_thing,
+        itemstack = x_farming.sapling_on_place(itemstack, placer, pointed_thing,
             'x_farming:pine_nut_sapling',
             -- minp, maxp to be checked, relative to sapling pos
             -- minp_relative.y = 1 because sapling pos has been checked
@@ -153,7 +130,7 @@ minetest.register_node('x_farming:pine_nut', {
         leafdecay_drop = 1,
         compost = 65
     },
-    sounds = default.node_sound_leaves_defaults(),
+    sounds = x_farming.node_sound_leaves_defaults(),
 
     after_place_node = function(pos, placer, itemstack, pointed_thing)
         minetest.set_node(pos, { name = 'x_farming:pine_nut', param2 = 1 })
@@ -179,8 +156,8 @@ minetest.register_craftitem('x_farming:pine_nut_roasted', {
 minetest.register_node('x_farming:pine_nut_mark', {
     description = S('Pine Nut Marker'),
     short_description = S('Pine Nut Marker'),
-    inventory_image = 'x_farming:pine_nut.png^default_invisible_node_overlay.png',
-    wield_image = 'x_farming:pine_nut.png^default_invisible_node_overlay.png',
+    inventory_image = 'x_farming:pine_nut.png^x_farming_invisible_node_overlay.png',
+    wield_image = 'x_farming:pine_nut.png^x_farming_invisible_node_overlay.png',
     drawtype = 'airlike',
     paramtype = 'light',
     sunlight_propagates = true,
@@ -202,12 +179,17 @@ minetest.register_node('x_farming:pine_nut_mark', {
 })
 
 -- leafdecay
+-- this doesnt do anything since christmas tree is loaded adterwards
+-- and is overriding it due to the same trunk
 
-default.register_leafdecay({
-    trunks = { 'x_farming:pine_nut_tree' },
-    leaves = { 'x_farming:pine_nut', 'x_farming:pine_nut_leaves' },
-    radius = 3,
-})
+-- x_farming.register_leafdecay({
+--     trunks = { 'x_farming:pine_nut_tree' },
+--     leaves = {
+--         'x_farming:pine_nut',
+--         'x_farming:pine_nut_leaves'
+--     },
+--     radius = 3,
+-- })
 
 -- planks
 minetest.register_node('x_farming:pine_nut_wood', {
@@ -218,7 +200,7 @@ minetest.register_node('x_farming:pine_nut_wood', {
     tiles = { 'x_farming_pine_nut_wood.png' },
     is_ground_content = false,
     groups = { choppy = 2, oddly_breakable_by_hand = 2, flammable = 2, wood = 1 },
-    sounds = default.node_sound_wood_defaults(),
+    sounds = x_farming.node_sound_wood_defaults(),
 })
 
 minetest.register_craft({
@@ -255,7 +237,7 @@ if minetest.global_exists('stairs') and minetest.get_modpath('stairs') then
         { 'x_farming_pine_nut_wood.png' },
         S('Pine Nut Wooden Stair'),
         S('Pine Nut Wooden Slab'),
-        default.node_sound_wood_defaults(),
+        x_farming.node_sound_wood_defaults(),
         false
     )
 end
@@ -269,3 +251,38 @@ x_farming.register_crate('crate_pine_nut_3', {
         crate_item = 'x_farming:pine_nut'
     }
 })
+
+minetest.register_on_mods_loaded(function()
+    local deco_place_on = {}
+    local deco_biomes = {}
+
+    -- MTG
+    if minetest.get_modpath('default') then
+        table.insert(deco_place_on, 'default:dirt_with_snow')
+        table.insert(deco_place_on, 'default:dirt_with_coniferous_litter')
+        table.insert(deco_biomes, 'taiga')
+        table.insert(deco_biomes, 'coniferous_forest')
+    end
+
+    if next(deco_place_on) and next(deco_biomes) then
+        minetest.register_decoration({
+            name = 'x_farming:pine_nut_tree',
+            deco_type = 'schematic',
+            place_on = deco_place_on,
+            sidelen = 16,
+            noise_params = {
+                offset = 0.010,
+                scale = 0.005,
+                spread = { x = 100, y = 100, z = 100 },
+                seed = 2,
+                octaves = 3,
+                persist = 0.66
+            },
+            biomes = deco_biomes,
+            y_max = 31000,
+            y_min = 4,
+            schematic = minetest.get_modpath('x_farming') .. '/schematics/x_farming_pine_nut_tree.mts',
+            flags = 'place_center_x, place_center_z'
+        })
+    end
+end)

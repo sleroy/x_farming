@@ -40,11 +40,3 @@ minetest.register_craftitem('x_farming:string', {
     inventory_image = 'x_farming_string.png',
     groups = { flammable = 2 },
 })
-
-minetest.register_craft({
-    output = 'x_farming:string 2',
-    recipe = {
-        { 'x_farming:cotton' },
-        { 'x_farming:cotton' },
-    }
-})

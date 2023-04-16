@@ -69,7 +69,6 @@ read_globals = {
     },
 
     'hbhunger',
-    'farming',
+    'stairs',
     'default',
-    'x_default'
 }

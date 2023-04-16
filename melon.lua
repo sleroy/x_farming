@@ -37,7 +37,7 @@ minetest.override_item('x_farming:melon', {
         .. minetest.colorize(x_farming.colors.brown, S('Hunger') .. ': 2'),
     groups = { compost = 50 },
     on_use = minetest.item_eat(2),
-    wield_image = 'x_farming_melon.png^[transformR90',
+    wield_image = 'x_farming_melon.png',
 })
 
 -- MELON FRUIT - HARVEST
@@ -45,13 +45,13 @@ minetest.register_node('x_farming:melon_fruit', {
     description = S('Melon Fruit'),
     tiles = {
         'x_farming_melon_fruit_top.png',
-        'x_farming_melon_fruit_top.png',
+        'x_farming_melon_fruit_bottom.png',
         'x_farming_melon_fruit_side.png',
         'x_farming_melon_fruit_side.png',
         'x_farming_melon_fruit_side.png',
         'x_farming_melon_fruit_side.png'
     },
-    sounds = default.node_sound_wood_defaults(),
+    sounds = x_farming.node_sound_wood_defaults(),
     is_ground_content = false,
     groups = { snappy = 3, flammable = 4, fall_damage_add_percent = -30, not_in_creative_inventory = 1 },
     drop = {
@@ -115,13 +115,13 @@ minetest.register_node('x_farming:melon_block', {
     short_description = S('Melon Block'),
     tiles = {
         'x_farming_melon_fruit_top.png',
-        'x_farming_melon_fruit_top.png',
+        'x_farming_melon_fruit_bottom.png',
         'x_farming_melon_fruit_side.png',
         'x_farming_melon_fruit_side.png',
         'x_farming_melon_fruit_side.png',
         'x_farming_melon_fruit_side.png'
     },
-    sounds = default.node_sound_wood_defaults(),
+    sounds = x_farming.node_sound_wood_defaults(),
     is_ground_content = false,
     groups = { snappy = 3, flammable = 4, fall_damage_add_percent = -30, compost = 65 }
 })
@@ -141,25 +141,6 @@ minetest.register_lbm({
     end,
 })
 
-minetest.register_decoration({
-    name = 'x_farming:melon_8',
-    deco_type = 'simple',
-    place_on = { 'default:dirt_with_grass' },
-    sidelen = 16,
-    noise_params = {
-        offset = -0.1,
-        scale = 0.1,
-        spread = { x = 50, y = 50, z = 50 },
-        seed = 4242,
-        octaves = 3,
-        persist = 0.7
-    },
-    biomes = { 'grassland' },
-    y_max = 31000,
-    y_min = 1,
-    decoration = 'x_farming:melon_8',
-})
-
 ---crate
 x_farming.register_crate('crate_melon_3', {
     description = S('Melon Crate'),
@@ -169,3 +150,46 @@ x_farming.register_crate('crate_melon_3', {
         crate_item = 'x_farming:melon'
     }
 })
+
+minetest.register_on_mods_loaded(function()
+    local deco_place_on = {}
+    local deco_biomes = {}
+
+    -- MTG
+    if minetest.get_modpath('default') then
+        table.insert(deco_place_on, 'default:dirt_with_grass')
+        table.insert(deco_biomes, 'grassland')
+    end
+
+    -- Everness
+    if minetest.get_modpath('everness') then
+        table.insert(deco_place_on, 'everness:dirt_with_coral_grass')
+        table.insert(deco_biomes, 'everness_coral_forest')
+    end
+
+    if next(deco_place_on) and next(deco_biomes) then
+        minetest.register_decoration({
+            name = 'x_farming:melon',
+            deco_type = 'simple',
+            place_on = deco_place_on,
+            sidelen = 16,
+            noise_params = {
+                offset = -0.1,
+                scale = 0.1,
+                spread = { x = 50, y = 50, z = 50 },
+                seed = 4242,
+                octaves = 3,
+                persist = 0.7
+            },
+            biomes = deco_biomes,
+            y_max = 31000,
+            y_min = 1,
+            decoration = {
+                'x_farming:melon_5',
+                'x_farming:melon_6',
+                'x_farming:melon_7',
+                'x_farming:melon_8',
+            },
+        })
+    end
+end)

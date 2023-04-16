@@ -39,14 +39,14 @@ minetest.register_node('x_farming:christmas_tree_sapling', {
         attached_node = 1,
         sapling = 1
     },
-    sounds = default.node_sound_leaves_defaults(),
+    sounds = x_farming.node_sound_leaves_defaults(),
 
     on_construct = function(pos)
         minetest.get_node_timer(pos):start(math.random(300, 1500))
     end,
 
     on_place = function(itemstack, placer, pointed_thing)
-        itemstack = default.sapling_on_place(itemstack, placer, pointed_thing,
+        itemstack = x_farming.sapling_on_place(itemstack, placer, pointed_thing,
             'x_farming:christmas_tree_sapling',
             -- minp, maxp to be checked, relative to sapling pos
             -- minp_relative.y = 1 because sapling pos has been checked
@@ -62,6 +62,7 @@ minetest.register_node('x_farming:christmas_tree_sapling', {
 -- Decorated Pine Leaves
 minetest.register_node('x_farming:christmas_tree_leaves', {
     description = S('Decorated Pine Leaves'),
+    short_description = S('Decorated Pine Leaves'),
     drawtype = 'allfaces_optional',
     tiles = {
         {
@@ -79,8 +80,8 @@ minetest.register_node('x_farming:christmas_tree_leaves', {
     paramtype = 'light',
     is_ground_content = false,
     groups = { snappy = 3, leafdecay = 3, flammable = 2, leaves = 1 },
-    sounds = default.node_sound_leaves_defaults(),
-    after_place_node = default.after_place_leaves,
+    sounds = x_farming.node_sound_leaves_defaults(),
+    after_place_node = x_farming.after_place_leaves,
     light_source = 5,
 })
 
@@ -102,16 +103,19 @@ minetest.register_node('x_farming:christmas_tree_star', {
         leafdecay = 3,
         leafdecay_drop = 1
     },
-    sounds = default.node_sound_glass_defaults(),
+    sounds = x_farming.node_sound_thin_glass_defaults(),
     light_source = 5,
 })
 
-default.register_leafdecay({
-    trunks = { 'default:pine_tree' },
+x_farming.register_leafdecay({
+    trunks = { 'x_farming:pine_nut_tree' },
     leaves = {
         'x_farming:christmas_tree_leaves',
-        'default:pine_needles',
         'x_farming:christmas_tree_star',
+        -- since christmas tree is loaded after pine_nut_tree
+        -- we are including pine_nut_leaves here
+        'x_farming:pine_nut',
+        'x_farming:pine_nut_leaves',
     },
     radius = 3,
 })

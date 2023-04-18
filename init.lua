@@ -52,9 +52,7 @@ dofile(path .. '/salt.lua')
 dofile(path .. '/cotton.lua')
 dofile(path .. '/barley.lua')
 
-if not minetest.get_modpath('farming') then
-    dofile(path .. '/hoes.lua')
-end
+dofile(path .. '/hoes.lua')
 
 dofile(path .. '/ice_fishing.lua')
 dofile(path .. '/bonemeal.lua')
@@ -77,17 +75,22 @@ minetest.register_lbm({
     end
 })
 
--- hbhunger
-if x_farming.hbhunger ~= nil then
-    if hbhunger.register_food ~= nil then
-        dofile(path .. '/register_hbhunger.lua')
-    end
-end
-
 -- MOD support
 
 if minetest.get_modpath('default') then
     dofile(path .. '/mod_support_default.lua')
+end
+
+-- hbhunger
+if x_farming.hbhunger ~= nil then
+    if hbhunger.register_food ~= nil then
+        dofile(path .. '/mod_support_hbhunger.lua')
+    end
+end
+
+-- hunger_ng
+if x_farming.hunger_ng then
+    dofile(path .. '/mod_support_hunger_ng.lua')
 end
 
 local mod_end_time = (minetest.get_us_time() - mod_start_time) / 1000000

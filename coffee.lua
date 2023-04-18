@@ -36,20 +36,28 @@ x_farming.register_plant('x_farming:coffee', {
 minetest.override_item('x_farming:coffee', {
     description = S('Coffee bean') .. '\n' .. S('Compost chance') .. ': 50%',
     short_description = S('Coffee bean'),
-    groups = { compost = 50 }
+    groups = {
+        -- MTG
+        compost = 50,
+        -- MCL
+        compostability = 50,
+    }
 })
 
--- hot cup of coffee
-local coffee_cup_hot_desc = S('Hot Cup of Coffee') .. '\n'
-    .. minetest.colorize(x_farming.colors.brown, S('Hunger') .. ': 6')
+minetest.register_craftitem('x_farming:bottle_coffee', {
+    description = S('Coffee Bottle'),
+    tiles = { 'x_farming_bottle_coffee.png' },
+    inventory_image = 'x_farming_bottle_coffee.png',
+    wield_image = 'x_farming_bottle_coffee.png',
+    groups = { vessel = 1 },
+})
 
-if x_farming.hbhunger ~= nil then
-    coffee_cup_hot_desc = coffee_cup_hot_desc .. '\n' .. minetest.colorize(x_farming.colors.red, S('Heal') .. ': 4')
-end
-
-minetest.register_node('x_farming:coffee_cup_hot', {
-    description = coffee_cup_hot_desc,
-    short_description = coffee_cup_hot_desc,
+-- Hot cup of coffee
+local coffee_cup_hot_def = {
+    description = S('Hot Cup of Coffee') .. '\n'
+        .. minetest.colorize(x_farming.colors.brown, S('Hunger') .. ': 6'),
+    short_description = S('Hot Cup of Coffee') .. '\n'
+        .. minetest.colorize(x_farming.colors.brown, S('Hunger') .. ': 6'),
     drawtype = 'mesh',
     mesh = 'x_farming_coffee_cup_hot.obj',
     tiles = { 'x_farming_coffee_cup_hot_mesh.png' },
@@ -68,13 +76,40 @@ minetest.register_node('x_farming:coffee_cup_hot', {
         type = 'fixed',
         fixed = { -0.25, -0.5, -0.4, 0.25, 0, 0.25 }
     },
-    groups = { vessel = 1, dig_immediate = 3, attached_node = 1 },
+    groups = {
+        -- MTG
+        vessel = 1,
+        dig_immediate = 3,
+        attached_node = 1,
+        -- MCL
+        food = 3,
+        eatable = 6,
+        handy = 1,
+        deco_block = 1,
+        dig_by_water = 1,
+        destroy_by_lava_flow = 1,
+    },
     on_use = minetest.item_eat(6),
     sounds = x_farming.node_sound_thin_glass_defaults(),
-    sunlight_propagates = true
-})
+    sunlight_propagates = true,
+    -- MCL
+    _mcl_saturation = 0.6,
+    _mcl_blast_resistance = 0,
+    _mcl_hardness = 0,
+}
 
----crate
+if x_farming.hbhunger ~= nil or x_farming.hunger_ng ~= nil then
+    coffee_cup_hot_def.description = coffee_cup_hot_def.description .. '\n' .. minetest.colorize(x_farming.colors.red, S('Heal') .. ': 4')
+    coffee_cup_hot_def.short_description = coffee_cup_hot_def.short_description .. '\n' .. minetest.colorize(x_farming.colors.red, S('Heal') .. ': 4')
+end
+
+if minetest.get_modpath('mcl_farming') then
+    coffee_cup_hot_def.on_secondary_use = minetest.item_eat(6)
+end
+
+minetest.register_node('x_farming:coffee_cup_hot', coffee_cup_hot_def)
+
+-- Crate
 x_farming.register_crate('crate_coffee_3', {
     description = S('Coffee Crate'),
     short_description = S('Coffee Crate'),
@@ -98,6 +133,12 @@ minetest.register_on_mods_loaded(function()
     if minetest.get_modpath('everness') then
         table.insert(deco_place_on, 'everness:dry_dirt_with_dry_grass')
         table.insert(deco_biomes, 'everness_baobab_savanna')
+    end
+
+    -- MCL
+    if minetest.get_modpath('mcl_core') then
+        table.insert(deco_place_on, 'mcl_core:dirt_with_grass')
+        table.insert(deco_biomes, 'Savanna')
     end
 
     if next(deco_place_on) and next(deco_biomes) then

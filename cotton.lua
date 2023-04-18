@@ -33,13 +33,20 @@ x_farming.register_plant('x_farming:cotton', {
 })
 
 -- needed
-minetest.override_item('x_farming:cotton', {
+local cotton_def = {
     description = S('Cotton') .. '\n' .. S('Compost chance') .. ': 50%',
     short_description = S('Cotton'),
-    groups = { compost = 50 }
-})
+    groups = {
+        -- X Farming
+        compost = 50,
+        -- MCL
+        compostability = 50,
+    }
+}
 
----crate
+minetest.override_item('x_farming:cotton', cotton_def)
+
+-- Crate
 x_farming.register_crate('crate_cotton2_3', {
     description = S('Cotton Crate'),
     short_description = S('Cotton Crate'),
@@ -50,26 +57,32 @@ x_farming.register_crate('crate_cotton2_3', {
 })
 
 minetest.register_on_mods_loaded(function()
-    local deco_cotton_place_on = {}
-    local deco_cotton_biomes = {}
+    local deco_place_on = {}
+    local deco_biomes = {}
 
     -- MTG
     if minetest.get_modpath('default') then
-        table.insert(deco_cotton_place_on, 'default:dry_dirt_with_dry_grass')
-        table.insert(deco_cotton_biomes, 'savanna')
+        table.insert(deco_place_on, 'default:dry_dirt_with_dry_grass')
+        table.insert(deco_biomes, 'savanna')
     end
 
     -- Everness
     if minetest.get_modpath('everness') then
-        table.insert(deco_cotton_place_on, 'everness:dry_dirt_with_dry_grass')
-        table.insert(deco_cotton_biomes, 'everness_baobab_savanna')
+        table.insert(deco_place_on, 'everness:dry_dirt_with_dry_grass')
+        table.insert(deco_biomes, 'everness_baobab_savanna')
     end
 
-    if next(deco_cotton_place_on) and next(deco_cotton_biomes) then
+    -- MCL
+    if minetest.get_modpath('mcl_core') then
+        table.insert(deco_place_on, 'mcl_core:dirt_with_grass')
+        table.insert(deco_biomes, 'Savanna')
+    end
+
+    if next(deco_place_on) and next(deco_biomes) then
         minetest.register_decoration({
             name = 'x_farming:cotton',
             deco_type = 'simple',
-            place_on = deco_cotton_place_on,
+            place_on = deco_place_on,
             sidelen = 16,
             noise_params = {
                 offset = -0.1,
@@ -79,7 +92,7 @@ minetest.register_on_mods_loaded(function()
                 octaves = 3,
                 persist = 0.7
             },
-            biomes = deco_cotton_biomes,
+            biomes = deco_biomes,
             y_max = 31000,
             y_min = 1,
             decoration = {

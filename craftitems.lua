@@ -22,21 +22,61 @@
 
 local S = minetest.get_translator(minetest.get_current_modname())
 
+-- Flour
+
 minetest.register_craftitem('x_farming:flour', {
     description = S('Barley Flour'),
     inventory_image = 'x_farming_flour.png',
     groups = { food_flour = 1, flammable = 1 },
 })
 
-minetest.register_craftitem('x_farming:bread', {
+-- Bread
+
+local bread_def = {
     description = S('Barley Bread'),
     inventory_image = 'x_farming_bread.png',
-    on_use = minetest.item_eat(5),
-    groups = { food_bread = 1, flammable = 2 },
-})
+    groups = {
+        -- MTG
+        food_bread = 1,
+        flammable = 2,
+        -- MCL
+        food = 2,
+        eatable = 5,
+        compostability = 85
+    },
+    _mcl_saturation = 6.0,
+}
+
+if minetest.get_modpath('farming') then
+    bread_def.on_use = minetest.item_eat(5)
+end
+
+if minetest.get_modpath('mcl_farming') then
+    bread_def.on_place = minetest.item_eat(5)
+    bread_def.on_secondary_use = minetest.item_eat(5)
+end
+
+minetest.register_craftitem('x_farming:bread', bread_def)
+
+-- String
 
 minetest.register_craftitem('x_farming:string', {
     description = S('Cotton String'),
     inventory_image = 'x_farming_string.png',
     groups = { flammable = 2 },
+})
+
+-- Soup Bowl
+minetest.register_craftitem('x_farming:bowl', {
+    description = S('Empty Soup Bowl'),
+    inventory_image = 'x_farming_bowl.png',
+})
+
+-- Bottle Water
+minetest.register_craftitem('x_farming:bottle_water', {
+    description = S('Water Bottle'),
+    tiles = { 'x_farming_bottle_water.png' },
+    inventory_image = 'x_farming_bottle_water.png',
+    wield_image = 'x_farming_bottle_water.png',
+    groups = { vessel = 1 },
 })

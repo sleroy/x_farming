@@ -40,18 +40,29 @@ x_farming.register_plant('x_farming:obsidian_wart', {
 minetest.override_item('x_farming:obsidian_wart', {
     description = S('Obsidian Wart') .. '\n' .. S('Compost chance') .. ': 65%',
     short_description = S('Obsidian Wart'),
-    groups = { compost = 65 }
+    groups = {
+        -- X Farming
+        compost = 65,
+        -- MCL
+        compostability = 65
+    },
 })
 
 if minetest.get_modpath('default') then
     -- default obsidian
     minetest.override_item('default:obsidian', {
-        groups = { cracky = 1, level = 2, soil = 1, underground = 1 },
+        groups = {
+            -- MTG
+            cracky = 1,
+            level = 2,
+            soil = 1,
+            underground = 1
+        },
         soil = {
             base = 'default:obsidian',
             dry = 'x_farming:obsidian_soil',
             wet = 'x_farming:obsidian_soil_wet'
-        }
+        },
     })
 
     -- obsidian - soil
@@ -74,7 +85,7 @@ if minetest.get_modpath('default') then
         description = S('Wet Obsidian Soil'),
         short_description = S('Wet Obsidian Soil'),
         drop = 'default:obsidian',
-        tiles = { 'x_farming_obsidian_soil_wet.png', 'x_farming_obsidian_soil_wet_side.png' },
+        tiles = { 'x_farming_obsidian_soil_wet.png', 'default_obsidian.png^x_farming_soil_wet_side.png' },
         groups = { cracky = 1, level = 2, soil = 3, wet = 1, underground = 1, field = 1, not_in_creative_inventory = 1 },
         sounds = x_farming.node_sound_stone_defaults(),
         soil = {
@@ -82,6 +93,75 @@ if minetest.get_modpath('default') then
             dry = 'x_farming:obsidian_soil',
             wet = 'x_farming:obsidian_soil_wet'
         }
+    })
+elseif minetest.get_modpath('mcl_core') then
+    -- mcl_core obsidian
+    minetest.override_item('mcl_core:obsidian', {
+        groups = {
+            pickaxey = 5,
+            building_block = 1,
+            material_stone = 1,
+            soil = 1,
+            underground = 1,
+        },
+        soil = {
+            base = 'default:obsidian',
+            dry = 'x_farming:mcl_obsidian_soil',
+            wet = 'x_farming:mcl_obsidian_soil_wet'
+        },
+        _mcl_blast_resistance = 1200,
+        _mcl_hardness = 50,
+    })
+
+    -- mcl_core obsidian - soil
+    minetest.register_node('x_farming:mcl_obsidian_soil', {
+        description = S('Obsidian Soil'),
+        short_description = S('Obsidian Soil'),
+        drop = 'mcl_core:obsidian',
+        tiles = { 'x_farming_obsidian_soil.png', 'default_obsidian.png' },
+        groups = {
+            pickaxey = 5,
+            building_block = 1,
+            material_stone = 1,
+            soil = 2,
+            field = 1,
+            not_in_creative_inventory = 1,
+            underground = 1
+        },
+        sounds = x_farming.node_sound_stone_defaults(),
+        soil = {
+            base = 'mcl_core:obsidian',
+            dry = 'x_farming:mcl_obsidian_soil',
+            wet = 'x_farming:mcl_obsidian_soil_wet'
+        },
+        _mcl_blast_resistance = 1200,
+        _mcl_hardness = 50,
+    })
+
+    -- mcl_core obsidian - soil - wet
+    minetest.register_node('x_farming:mcl_obsidian_soil_wet', {
+        description = S('Wet Obsidian Soil'),
+        short_description = S('Wet Obsidian Soil'),
+        drop = 'mcl_core:obsidian',
+        tiles = { 'x_farming_obsidian_soil_wet.png', 'default_obsidian.png^x_farming_soil_wet_side.png' },
+        groups = {
+            pickaxey = 5,
+            building_block = 1,
+            material_stone = 1,
+            soil = 3,
+            wet = 1,
+            field = 1,
+            not_in_creative_inventory = 1,
+            underground = 1
+        },
+        sounds = x_farming.node_sound_stone_defaults(),
+        soil = {
+            base = 'mcl_core:obsidian',
+            dry = 'x_farming:mcl_obsidian_soil',
+            wet = 'x_farming:mcl_obsidian_soil_wet'
+        },
+        _mcl_blast_resistance = 1200,
+        _mcl_hardness = 50,
     })
 end
 
@@ -92,38 +172,92 @@ minetest.register_node('x_farming:wart_block', {
     description = S('Wart Block') .. '\n' .. S('Compost chance') .. ': 85%',
     short_description = S('Wart Block'),
     tiles = { 'x_farming_wart_block.png' },
-    groups = { cracky = 3, compost = 85 },
-    sounds = x_farming.node_sound_stone_defaults()
+    groups = {
+        -- MTG
+        cracky = 3,
+        compost = 85,
+        -- MCL
+        pickaxey = 1,
+        sandstone = 1,
+        normal_sandstone = 1,
+        building_block = 1,
+        material_stone = 1,
+    },
+    sounds = x_farming.node_sound_stone_defaults(),
+    _mcl_blast_resistance = 0.8,
+    _mcl_hardness = 0.8,
 })
 
 minetest.register_node('x_farming:wartrack', {
     description = S('Wartrack'),
     short_description = S('Wartrack'),
     tiles = { 'x_farming_wartrack.png' },
-    groups = { cracky = 3 },
-    sounds = x_farming.node_sound_stone_defaults()
+    groups = {
+        -- MTG
+        cracky = 3,
+        -- MCL
+        -- MCL
+        pickaxey = 1,
+        sandstone = 1,
+        normal_sandstone = 1,
+        building_block = 1,
+        material_stone = 1,
+        -- ALL
+        stone = 1
+    },
+    sounds = x_farming.node_sound_stone_defaults(),
+    _mcl_blast_resistance = 0.8,
+    _mcl_hardness = 0.8,
 })
 
 minetest.register_node('x_farming:wart_brick_block', {
     description = S('Wart Brick Block'),
     short_description = S('Wart Brick Block'),
     tiles = { 'x_farming_wart_brick_block.png' },
-    groups = { cracky = 2 },
-    sounds = x_farming.node_sound_stone_defaults()
+    groups = {
+        -- MTG
+        cracky = 2,
+        -- MCL
+        -- MCL
+        pickaxey = 1,
+        sandstone = 1,
+        normal_sandstone = 1,
+        building_block = 1,
+        material_stone = 1,
+        -- ALL
+        stone = 1
+    },
+    sounds = x_farming.node_sound_stone_defaults(),
+    _mcl_blast_resistance = 0.8,
+    _mcl_hardness = 0.8,
 })
 
 minetest.register_node('x_farming:wart_red_brick_block', {
     description = S('Wart Red Brick Block'),
     short_description = S('Wart Red Brick Block'),
     tiles = { 'x_farming_wart_red_brick_block.png' },
-    groups = { cracky = 2 },
-    sounds = x_farming.node_sound_stone_defaults()
+    groups = {
+        -- MTG
+        cracky = 2,
+        -- MCL
+        -- MCL
+        pickaxey = 1,
+        sandstone = 1,
+        normal_sandstone = 1,
+        building_block = 1,
+        material_stone = 1,
+        -- ALL
+        stone = 1
+    },
+    sounds = x_farming.node_sound_stone_defaults(),
+    _mcl_blast_resistance = 0.8,
+    _mcl_hardness = 0.8,
 })
 
 --
 -- Register Wart stairs and slabs
 --
-    if minetest.get_modpath('default') then
+if minetest.get_modpath('default') then
     stairs.register_stair_and_slab(
         'wart_block',
         'x_farming:wart_block',
@@ -165,6 +299,98 @@ minetest.register_node('x_farming:wart_red_brick_block', {
     )
 end
 
+if minetest.get_modpath('mcl_stairs') then
+    mcl_stairs.register_stair_and_slab(
+        'x_farming_wart_block',
+        'x_farming:wart_block',
+        {
+            -- MCL
+            pickaxey = 1,
+            sandstone = 1,
+            normal_sandstone = 1,
+            building_block = 1,
+            material_stone = 1,
+        },
+        { 'x_farming_wart_block.png' },
+        S('Wart Block Stair'),
+        S('Wart Block Slab'),
+        x_farming.node_sound_stone_defaults(),
+        6,
+        2,
+        S('Double Wart Block Slab'),
+        nil
+    )
+
+    mcl_stairs.register_stair_and_slab(
+        'x_farming_wart_brick_block',
+        'x_farming:wart_brick_block',
+        {
+            -- MCL
+            pickaxey = 1,
+            sandstone = 1,
+            normal_sandstone = 1,
+            building_block = 1,
+            material_stone = 1,
+        },
+        { 'x_farming_wart_brick_block.png' },
+        S('Wart Brick Stair'),
+        S('Wart Brick Slab'),
+        x_farming.node_sound_stone_defaults(),
+        6,
+        2,
+        S('Double Wart Brick Slab'),
+        nil
+    )
+
+    mcl_stairs.register_stair_and_slab(
+        'x_farming_wart_red_brick_block',
+        'x_farming:wart_red_brick_block',
+        {
+            -- MCL
+            pickaxey = 1,
+            sandstone = 1,
+            normal_sandstone = 1,
+            building_block = 1,
+            material_stone = 1,
+        },
+        { 'x_farming_wart_red_brick_block.png' },
+        S('Wart Red Brick Stair'),
+        S('Wart Red Brick Slab'),
+        x_farming.node_sound_stone_defaults(),
+        6,
+        2,
+        S('Double Wart Red Brick Slab'),
+        nil
+    )
+
+    mcl_stairs.register_stair_and_slab(
+        'x_farming_wartrack',
+        'x_farming:wartrack',
+        {
+            -- MCL
+            pickaxey = 1,
+            sandstone = 1,
+            normal_sandstone = 1,
+            building_block = 1,
+            material_stone = 1,
+        },
+        { 'x_farming_wartrack.png' },
+        S('Wartrack Stair'),
+        S('Wartrack Slab'),
+        x_farming.node_sound_stone_defaults(),
+        6,
+        2,
+        S('Double Wartrack Slab'),
+        nil
+    )
+end
+
+minetest.register_craftitem('x_farming:wart_brick', {
+    description = S('Wart Brick'),
+    inventory_image = 'x_farming_wart_brick.png',
+    groups = { craftitem = 1 },
+})
+
 minetest.register_node('x_farming:obsidian_wart_decor', {
     description = S('Obsidian Wart'),
     short_description = S('Obsidian Wart'),
@@ -174,7 +400,18 @@ minetest.register_node('x_farming:obsidian_wart_decor', {
     tiles = { 'default_obsidian.png' },
     special_tiles = { { name = 'x_farming_obsidian_wart_6.png', tileable_vertical = true } },
     inventory_image = 'x_farming_obsidian_wart_6.png',
-    groups = { snappy = 3, not_in_creative_inventory = 1 },
+    groups = {
+        -- MTG
+        snappy = 3,
+        not_in_creative_inventory = 1,
+        -- MCL
+        handy = 1,
+        shearsy = 1,
+        deco_block = 1,
+        dig_by_water = 1,
+        destroy_by_lava_flow = 1,
+        dig_by_piston = 1
+    },
     light_source = 4,
     selection_box = {
         type = 'fixed',
@@ -185,6 +422,9 @@ minetest.register_node('x_farming:obsidian_wart_decor', {
     },
     node_dig_prediction = 'default:obsidian',
     node_placement_prediction = '',
+    -- MCL
+    _mcl_blast_resistance = 0,
+    _mcl_hardness = 0,
     sounds = x_farming.node_sound_stone_defaults({
         dig = { name = 'default_dig_snappy', gain = 0.2 },
         dug = { name = 'default_grass_footstep', gain = 0.25 },
@@ -214,46 +454,23 @@ x_farming.register_crate('crate_obsidian_wart_3', {
 })
 
 minetest.register_on_mods_loaded(function()
-    local deco_place_on = {}
-    local deco_biomes = {}
-
-    -- MTG
-    if minetest.get_modpath('default') then
-        table.insert(deco_place_on, 'default:stone')
-        table.insert(deco_biomes, 'icesheet_under')
-        table.insert(deco_biomes, 'tundra_under')
-        table.insert(deco_biomes, 'taiga_under')
-        table.insert(deco_biomes, 'snowy_grassland_under')
-        table.insert(deco_biomes, 'grassland_under')
-        table.insert(deco_biomes, 'coniferous_forest_under')
-        table.insert(deco_biomes, 'deciduous_forest_under')
-        table.insert(deco_biomes, 'desert_under')
-        table.insert(deco_biomes, 'sandstone_desert_under')
-        table.insert(deco_biomes, 'cold_desert_under')
-        table.insert(deco_biomes, 'savanna_under')
-        table.insert(deco_biomes, 'rainforest_under')
-    end
-
-    if next(deco_place_on) and next(deco_biomes) then
-        minetest.register_decoration({
-            name = 'x_farming:obsidian_wart_decor',
-            deco_type = 'simple',
-            place_offset_y = -1,
-            place_on = deco_place_on,
-            sidelen = 16,
-            noise_params = {
-                offset = -0.1,
-                scale = 0.1,
-                spread = { x = 50, y = 50, z = 50 },
-                seed = 4242,
-                octaves = 3,
-                persist = 0.7
-            },
-            biomes = deco_biomes,
-            y_max = -1000,
-            y_min = -31000,
-            flags = 'force_placement, all_floors',
-            decoration = { 'x_farming:obsidian_wart_decor' },
-        })
-    end
+    minetest.register_decoration({
+        name = 'x_farming:obsidian_wart_decor',
+        deco_type = 'simple',
+        place_offset_y = -1,
+        place_on = { 'default:stone' },
+        sidelen = 16,
+        noise_params = {
+            offset = -0.1,
+            scale = 0.1,
+            spread = { x = 50, y = 50, z = 50 },
+            seed = 4242,
+            octaves = 3,
+            persist = 0.7
+        },
+        y_max = -1000,
+        y_min = -31000,
+        flags = 'force_placement, all_floors',
+        decoration = { 'x_farming:obsidian_wart_decor' },
+    })
 end)

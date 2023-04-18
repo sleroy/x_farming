@@ -32,16 +32,63 @@ x_farming.register_plant('x_farming:carrot', {
     fertility = { 'grassland' },
     groups = { flammable = 4, compost = 65 },
     place_param2 = 3,
-    on_use = minetest.item_eat(3),
 })
 
 -- needed
-minetest.override_item('x_farming:carrot', {
+local carrot_def = {
     description = S('Carrot') .. '\n' .. S('Compost chance') .. ': 65%\n'
         .. minetest.colorize(x_farming.colors.brown, S('Hunger') .. ': 3'),
     short_description = S('Carrot'),
-    on_use = minetest.item_eat(3),
-})
+    groups = {
+        -- X Farming
+        compost = 65,
+        -- MCL
+        food = 2,
+        eatable = 1,
+        compostability = 65
+    },
+    _mcl_saturation = 3.6,
+    _mcl_blast_resistance = 0,
+}
+
+if minetest.get_modpath('farming') then
+    carrot_def.on_use = minetest.item_eat(3)
+end
+
+if minetest.get_modpath('mcl_farming') then
+    carrot_def.on_place = minetest.item_eat(3)
+    carrot_def.on_secondary_use = minetest.item_eat(3)
+end
+
+minetest.override_item('x_farming:carrot', carrot_def)
+
+-- Golden carrot
+local golden_carrot_def = {
+    description = S('Golden Carrot') .. '\n' .. minetest.colorize(x_farming.colors.brown, S('Hunger') .. ': 10'),
+    inventory_image = 'x_farming_carrot_golden.png',
+    wield_image = 'x_farming_carrot_golden.png',
+    groups = {
+        -- MCL
+        food = 2,
+        eatable = 1,
+    },
+    _mcl_saturation = 14.4,
+}
+
+if x_farming.hbhunger ~= nil or x_farming.hunger_ng ~= nil then
+    golden_carrot_def.description = golden_carrot_def.description .. '\n' .. minetest.colorize(x_farming.colors.red, S('Heal') .. ': 10')
+end
+
+if minetest.get_modpath('farming') then
+    golden_carrot_def.on_use = minetest.item_eat(10)
+end
+
+if minetest.get_modpath('mcl_farming') then
+    golden_carrot_def.on_place = minetest.item_eat(10)
+    golden_carrot_def.on_secondary_use = minetest.item_eat(10)
+end
+
+minetest.register_craftitem('x_farming:carrot_golden', golden_carrot_def)
 
 ---crate
 x_farming.register_crate('crate_carrot_3', {
@@ -67,6 +114,12 @@ minetest.register_on_mods_loaded(function()
     if minetest.get_modpath('everness') then
         table.insert(deco_place_on, 'everness:dirt_with_coral_grass')
         table.insert(deco_biomes, 'everness_coral_forest')
+    end
+
+    -- MCL
+    if minetest.get_modpath('mcl_core') then
+        table.insert(deco_place_on, 'mcl_core:dirt_with_grass')
+        table.insert(deco_biomes, 'Plains')
     end
 
     if next(deco_place_on) and next(deco_biomes) then

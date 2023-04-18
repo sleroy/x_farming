@@ -20,7 +20,7 @@ local S = minetest.get_translator(minetest.get_current_modname())
 local minlight = 13
 local maxlight = 14
 
----beetroot
+---BEETROOT
 x_farming.register_plant('x_farming:beetroot', {
     description = S('Beetroot Seed') .. '\n' .. S('Compost chance') .. ': 30%',
     short_description = S('Beetroot Seed'),
@@ -32,15 +32,43 @@ x_farming.register_plant('x_farming:beetroot', {
     fertility = { 'grassland' },
     groups = { flammable = 4, compost = 65 },
     place_param2 = 0,
-    on_use = minetest.item_eat(3),
 })
 
 ---needed
-minetest.override_item('x_farming:beetroot', {
+local beetroot_def = {
     description = S('Beetroot') .. '\n' .. S('Compost chance') .. ': 65%\n'
         .. minetest.colorize(x_farming.colors.brown, S('Hunger') .. ': 3'),
     short_description = S('Beetroot'),
-    on_use = minetest.item_eat(3),
+    groups = {
+        -- X Farming
+        compost = 65,
+        -- MCL
+        food = 2,
+        eatable = 1,
+        compostability = 65
+    },
+    _mcl_saturation = 1.2,
+    _mcl_blast_resistance = 0,
+}
+
+if minetest.get_modpath('farming') then
+    beetroot_def.on_use = minetest.item_eat(3)
+end
+
+if minetest.get_modpath('mcl_farming') then
+    beetroot_def.on_place = minetest.item_eat(3)
+    beetroot_def.on_secondary_use = minetest.item_eat(3)
+end
+
+minetest.override_item('x_farming:beetroot', beetroot_def)
+
+---crate
+x_farming.register_crate('crate_beetroot_3', {
+    description = S('Beetroot Crate'),
+    tiles = { 'x_farming_crate_beetroot_3.png' },
+    _custom = {
+        crate_item = 'x_farming:beetroot'
+    }
 })
 
 minetest.register_on_mods_loaded(function()
@@ -57,6 +85,12 @@ minetest.register_on_mods_loaded(function()
     if minetest.get_modpath('everness') then
         table.insert(deco_place_on, 'everness:forsaken_desert_sand')
         table.insert(deco_biomes, 'everness_forsaken_desert')
+    end
+
+    -- MCL
+    if minetest.get_modpath('mcl_core') then
+        table.insert(deco_place_on, 'mcl_colorblocks:hardened_clay')
+        table.insert(deco_biomes, 'Mesa')
     end
 
     if next(deco_place_on) and next(deco_biomes) then
@@ -86,12 +120,3 @@ minetest.register_on_mods_loaded(function()
         })
     end
 end)
-
----crate
-x_farming.register_crate('crate_beetroot_3', {
-    description = S('Beetroot Crate'),
-    tiles = { 'x_farming_crate_beetroot_3.png' },
-    _custom = {
-        crate_item = 'x_farming:beetroot'
-    }
-})

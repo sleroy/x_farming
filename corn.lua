@@ -33,11 +33,18 @@ x_farming.register_plant('x_farming:corn', {
 })
 
 -- needed
-minetest.override_item('x_farming:corn', {
+local corn_def = {
     description = S('Corn') .. '\n' .. S('Compost chance') .. ': 50%',
     short_description = S('Corn'),
-    groups = { compost = 50 }
-})
+    groups = {
+        -- X Farming
+        compost = 50,
+        -- MCL
+        compostability = 50,
+    },
+}
+
+minetest.override_item('x_farming:corn', corn_def)
 
 minetest.override_item('x_farming:corn_6', {
     visual_scale = 2.0,
@@ -79,8 +86,35 @@ minetest.override_item('x_farming:corn_10', {
     }
 })
 
--- popcorn
-minetest.register_node('x_farming:corn_popcorn', {
+-- Popped corn
+local popperd_corn_def = {
+    description = S('Popped corn') .. '\n' .. S('Compost chance') .. ': 50%\n'
+        .. minetest.colorize(x_farming.colors.brown, S('Hunger') .. ': 1'),
+    short_description = S('Popped corn'),
+    inventory_image = 'x_farming_corn_pop.png',
+    groups = {
+        -- MTG
+        compost = 50,
+        -- MCL
+        food = 2,
+        eatable = 2,
+        compostability = 50
+    },
+}
+
+if minetest.get_modpath('farming') then
+    popperd_corn_def.on_use = minetest.item_eat(1)
+end
+
+if minetest.get_modpath('mcl_farming') then
+    popperd_corn_def.on_place = minetest.item_eat(1)
+    popperd_corn_def.on_secondary_use = minetest.item_eat(1)
+end
+
+minetest.register_craftitem('x_farming:corn_pop', popperd_corn_def)
+
+-- Popcorn
+local popcorn_def = {
     description = S('Popcorn') .. '\n' .. S('Compost chance') .. ': 65%\n'
         .. minetest.colorize(x_farming.colors.brown, S('Hunger') .. ': 5'),
     short_description = S('Popcorn'),
@@ -101,11 +135,36 @@ minetest.register_node('x_farming:corn_popcorn', {
         type = 'fixed',
         fixed = { -0.3, -0.5, -0.3, 0.3, 0.25, 0.3 }
     },
-    groups = { dig_immediate = 3, attached_node = 1, compost = 65 },
+    groups = {
+        -- MTG
+        dig_immediate = 3,
+        attached_node = 1,
+        -- X Farming
+        compost = 65,
+        -- MCL
+        food = 2,
+        eatable = 2,
+        compostability = 65,
+        handy = 1,
+        deco_block = 1,
+        fire_encouragement = 60,
+        fire_flammability = 100,
+        dig_by_water = 1,
+        destroy_by_lava_flow = 1,
+    },
     sounds = x_farming.node_sound_leaves_defaults(),
     on_use = minetest.item_eat(5),
-    sunlight_propagates = true
-})
+    sunlight_propagates = true,
+    _mcl_saturation = 0.6,
+    _mcl_blast_resistance = 0,
+    _mcl_hardness = 0,
+}
+
+if minetest.get_modpath('mcl_farming') then
+    popcorn_def.on_secondary_use = minetest.item_eat(5)
+end
+
+minetest.register_node('x_farming:corn_popcorn', popcorn_def)
 
 ---crate
 x_farming.register_crate('crate_corn_3', {
@@ -131,6 +190,12 @@ minetest.register_on_mods_loaded(function()
     if minetest.get_modpath('everness') then
         table.insert(deco_place_on, 'everness:forsaken_desert_sand')
         table.insert(deco_biomes, 'everness_forsaken_desert')
+    end
+
+    -- MCL
+    if minetest.get_modpath('mcl_core') then
+        table.insert(deco_place_on, 'mcl_core:sand')
+        table.insert(deco_biomes, 'Desert')
     end
 
     if next(deco_place_on) and next(deco_biomes) then

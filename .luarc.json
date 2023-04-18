@@ -99,7 +99,11 @@
             "x_farming",
             "hbhunger",
             "stairs",
-            "default"
+            "default",
+            "mcl_farming",
+            "mcl_potions",
+            "hunger_ng",
+            "mcl_stairs"
         ]
     }
 }

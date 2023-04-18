@@ -22,7 +22,19 @@ local S = minetest.get_translator(minetest.get_current_modname())
 x_farming.register_crate('crate_empty', {
     description = S('Empty Crate'),
     tiles = { 'x_farming_crate_empty.png' },
-    groups = { choppy = 2, oddly_breakable_by_hand = 2, flammable = 2 },
+    groups = {
+        -- MTG
+        choppy = 2,
+        oddly_breakable_by_hand = 2,
+        -- MCL
+        handy = 1,
+        material_wood = 1,
+        deco_block = 1,
+        fire_encouragement = 3,
+        fire_flammability = 4,
+        -- ALL
+        flammable = 2
+    },
     stack_max = tonumber(minetest.settings:get('default_stack_max')) or 99
 })
 

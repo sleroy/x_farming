@@ -32,13 +32,31 @@ x_farming.register_plant('x_farming:melon', {
 })
 
 -- needed
-minetest.override_item('x_farming:melon', {
+local melon_def = {
     description = S('Melon') .. '\n' .. S('Compost chance') .. ': 50%\n'
         .. minetest.colorize(x_farming.colors.brown, S('Hunger') .. ': 2'),
-    groups = { compost = 50 },
-    on_use = minetest.item_eat(2),
+    groups = {
+        -- X Farming
+        compost = 50,
+        -- MCL
+        food = 2,
+        eatable = 2,
+        compostability = 50,
+    },
+    _mcl_saturation = 1.2,
     wield_image = 'x_farming_melon.png',
-})
+}
+
+if minetest.get_modpath('farming') then
+    melon_def.on_use = minetest.item_eat(2)
+end
+
+if minetest.get_modpath('mcl_farming') then
+    melon_def.on_place = minetest.item_eat(2)
+    melon_def.on_secondary_use = minetest.item_eat(2)
+end
+
+minetest.override_item('x_farming:melon', melon_def)
 
 -- MELON FRUIT - HARVEST
 minetest.register_node('x_farming:melon_fruit', {
@@ -53,7 +71,20 @@ minetest.register_node('x_farming:melon_fruit', {
     },
     sounds = x_farming.node_sound_wood_defaults(),
     is_ground_content = false,
-    groups = { snappy = 3, flammable = 4, fall_damage_add_percent = -30, not_in_creative_inventory = 1 },
+    groups = {
+        -- MTG
+        snappy = 3,
+        flammable = 4,
+        fall_damage_add_percent = -30,
+        not_in_creative_inventory = 1,
+        -- MCL
+        handy = 1,
+        axey = 1,
+        plant = 1,
+        dig_by_piston = 1,
+    },
+    _mcl_blast_resistance = 1,
+    _mcl_hardness = 1,
     drop = {
         max_items = 7, -- Maximum number of items to drop.
         items = { -- Choose max_items randomly from this list.
@@ -123,7 +154,24 @@ minetest.register_node('x_farming:melon_block', {
     },
     sounds = x_farming.node_sound_wood_defaults(),
     is_ground_content = false,
-    groups = { snappy = 3, flammable = 4, fall_damage_add_percent = -30, compost = 65 }
+    groups = {
+        -- MTG
+        snappy = 3,
+        flammable = 4,
+        fall_damage_add_percent = -30,
+        not_in_creative_inventory = 1,
+        compost = 65,
+        -- MCL
+        handy = 1,
+        axey = 1,
+        plant = 1,
+        dig_by_piston = 1,
+        building_block = 1,
+        enderman_takable = 1,
+        compostability = 65
+    },
+    _mcl_blast_resistance = 1,
+    _mcl_hardness = 1,
 })
 
 -- take over the growth from minetest_game farming from here
@@ -131,6 +179,34 @@ minetest.override_item('x_farming:melon_8', {
     next_plant = 'x_farming:melon_fruit',
     on_timer = x_farming.grow_block
 })
+
+--  Golden Melon
+local golden_melon_def = {
+    description = S('Golden Melon') .. '\n' .. minetest.colorize(x_farming.colors.brown, S('Hunger') .. ': 10'),
+    inventory_image = 'x_farming_golden_melon.png',
+    wield_image = 'x_farming_golden_melon.png',
+    groups = {
+        -- MCL
+        food = 2,
+        eatable = 1,
+    },
+    _mcl_saturation = 14.4,
+}
+
+if x_farming.hbhunger ~= nil or x_farming.hunger_ng ~= nil then
+    golden_melon_def.description = golden_melon_def.description .. '\n' .. minetest.colorize(x_farming.colors.red, S('Heal') .. ': 10')
+end
+
+if minetest.get_modpath('farming') then
+    golden_melon_def.on_use = minetest.item_eat(10)
+end
+
+if minetest.get_modpath('mcl_farming') then
+    golden_melon_def.on_place = minetest.item_eat(10)
+    golden_melon_def.on_secondary_use = minetest.item_eat(10)
+end
+
+minetest.register_craftitem('x_farming:golden_melon', golden_melon_def)
 
 -- replacement LBM for pre-nodetimer plants
 minetest.register_lbm({
@@ -165,6 +241,12 @@ minetest.register_on_mods_loaded(function()
     if minetest.get_modpath('everness') then
         table.insert(deco_place_on, 'everness:dirt_with_coral_grass')
         table.insert(deco_biomes, 'everness_coral_forest')
+    end
+
+    -- MCL
+    if minetest.get_modpath('mcl_core') then
+        table.insert(deco_place_on, 'mcl_core:dirt_with_grass')
+        table.insert(deco_biomes, 'Plains')
     end
 
     if next(deco_place_on) and next(deco_biomes) then

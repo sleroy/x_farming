@@ -22,12 +22,14 @@ local S = minetest.get_translator(minetest.get_current_modname())
 
 -- how often node timers for plants will tick, +/- some random value
 local function tick(pos)
-    minetest.get_node_timer(pos):start(math.random(332, 572))
+    minetest.get_node_timer(pos):start(math.random(1, 2))
+    -- minetest.get_node_timer(pos):start(math.random(332, 572))
 end
 
 -- how often a growth failure tick is retried (e.g. too dark)
 local function tick_again(pos)
-    minetest.get_node_timer(pos):start(math.random(80, 160))
+    minetest.get_node_timer(pos):start(math.random(1, 2))
+    -- minetest.get_node_timer(pos):start(math.random(80, 160))
 end
 
 function x_farming.grow_cocoa_plant(pos, elapsed)
@@ -79,11 +81,11 @@ function x_farming.place_cocoa_bean(itemstack, placer, pointed_thing)
     local above = minetest.get_node(pt.above)
 
     local udef = minetest.registered_nodes[under.name]
-    if udef and udef.on_rightclick and
-            not (placer and placer:is_player() and
-            placer:get_player_control().sneak) then
-        return udef.on_rightclick(pt.under, under, placer, itemstack,
-            pointed_thing) or itemstack
+    if udef and udef.on_rightclick
+        and not (placer and placer:is_player()
+        and placer:get_player_control().sneak)
+    then
+        return udef.on_rightclick(pt.under, under, placer, itemstack, pointed_thing) or itemstack
     end
 
     local player_name = placer and placer:get_player_name() or ''
@@ -92,6 +94,7 @@ function x_farming.place_cocoa_bean(itemstack, placer, pointed_thing)
         minetest.record_protection_violation(pt.under, player_name)
         return
     end
+
     if minetest.is_protected(pt.above, player_name) then
         minetest.record_protection_violation(pt.above, player_name)
         return
@@ -196,12 +199,29 @@ minetest.register_node('x_farming:cocoa_1', {
             { -0.125, -0.0625, 0.1875, 0.125, 0.5, 0.5 },
         },
     },
-    groups = { choppy = 3, flammable = 2, plant = 1, not_in_creative_inventory = 1 },
+    groups = {
+        -- MTG
+        choppy = 3,
+        flammable = 2,
+        plant = 1,
+        cocoa = 1,
+        -- MCL
+        handy = 1,
+        axey = 1,
+        dig_by_water = 1,
+        destroy_by_lava_flow = 1,
+        dig_by_piston = 1,
+        attached_node_facedir = 1,
+        -- ALL
+        not_in_creative_inventory = 1,
+    },
+    _mcl_blast_resistance = 3,
+    _mcl_hardness = 0.2,
     sounds = x_farming.node_sound_wood_defaults(),
     next_plant = 'x_farming:cocoa_2',
     on_timer = x_farming.grow_cocoa_plant,
     minlight = 13,
-    maxlight = 15
+    maxlight = 15,
 })
 
 -- 2
@@ -222,8 +242,8 @@ minetest.register_node('x_farming:cocoa_2', {
     sunlight_propagates = true,
     wield_scale = { x = 1.5, y = 1.5, z = 1.5 },
     on_rotate = function(pos, node, user, mode, new_param2)
-	return false
-end,
+        return false
+    end,
     paramtype2 = 'facedir',
     is_ground_content = false,
     drop = {
@@ -252,7 +272,24 @@ end,
             { -0.1875, -0.1875, 0.0625, 0.1875, 0.5, 0.5 },
         },
     },
-    groups = { choppy = 3, flammable = 2, plant = 1, not_in_creative_inventory = 1 },
+    groups = {
+        -- MTG
+        choppy = 3,
+        flammable = 2,
+        plant = 1,
+        cocoa = 2,
+        -- MCL
+        handy = 1,
+        axey = 1,
+        dig_by_water = 1,
+        destroy_by_lava_flow = 1,
+        dig_by_piston = 1,
+        attached_node_facedir = 1,
+        -- ALL
+        not_in_creative_inventory = 1,
+    },
+    _mcl_blast_resistance = 3,
+    _mcl_hardness = 0.2,
     sounds = x_farming.node_sound_wood_defaults(),
     next_plant = 'x_farming:cocoa_3',
     on_timer = x_farming.grow_cocoa_plant,
@@ -278,8 +315,8 @@ minetest.register_node('x_farming:cocoa_3', {
     sunlight_propagates = true,
     wield_scale = { x = 1.5, y = 1.5, z = 1.5 },
     on_rotate = function(pos, node, user, mode, new_param2)
-	return false
-end,
+        return false
+    end,
     paramtype2 = 'facedir',
     is_ground_content = false,
     drop = {
@@ -309,7 +346,26 @@ end,
             { -0.25, -0.3125, -0.0625, 0.25, 0.5, 0.5 },
         },
     },
-    groups = { choppy = 3, flammable = 2, plant = 1, not_in_creative_inventory = 1, leafdecay = 3, leafdecay_drop = 1 },
+    groups = {
+        -- MTG
+        choppy = 3,
+        flammable = 2,
+        plant = 1,
+        leafdecay = 3,
+        leafdecay_drop = 1,
+        cocoa = 3,
+        -- MCL
+        handy = 1,
+        axey = 1,
+        dig_by_water = 1,
+        destroy_by_lava_flow = 1,
+        dig_by_piston = 1,
+        attached_node_facedir = 1,
+        -- ALL
+        not_in_creative_inventory = 1,
+    },
+    _mcl_blast_resistance = 3,
+    _mcl_hardness = 0.2,
     sounds = x_farming.node_sound_wood_defaults(),
     minlight = 13,
     maxlight = 15
@@ -343,12 +399,24 @@ minetest.register_node('x_farming:jungle_with_cocoa_sapling', {
         fixed = { -4 / 16, -0.5, -4 / 16, 4 / 16, 7 / 16, 4 / 16 }
     },
     groups = {
+        -- MTG
         snappy = 2,
-        dig_immediate = 3,
         flammable = 2,
+        -- MCL
+        plant = 1,
+        non_mycelium_plant = 1,
+        deco_block = 1,
+        dig_by_water = 1,
+        dig_by_piston = 1,
+        destroy_by_lava_flow = 1,
+        compostability = 30,
+        -- ALL
+        dig_immediate = 3,
         attached_node = 1,
-        sapling = 1
+        sapling = 1,
     },
+    _mcl_blast_resistance = 0,
+    _mcl_hardness = 0,
     sounds = x_farming.node_sound_leaves_defaults(),
 
     on_construct = function(pos)
@@ -375,7 +443,23 @@ minetest.register_node('x_farming:jungle_tree', {
     tiles = { 'x_farming_jungle_tree_top.png', 'x_farming_jungle_tree_top.png', 'x_farming_jungle_tree.png' },
     paramtype2 = 'facedir',
     is_ground_content = false,
-    groups = { tree = 1, choppy = 2, oddly_breakable_by_hand = 1, flammable = 2 },
+    groups = {
+        -- MTG
+        choppy = 2,
+        oddly_breakable_by_hand = 1,
+        -- MCL
+        handy = 1,
+        axey = 1,
+        building_block = 1,
+        material_wood = 1,
+        fire_encouragement = 5,
+        fire_flammability = 5,
+        -- ALL
+        tree = 1,
+        flammable = 2,
+    },
+    _mcl_blast_resistance = 2,
+    _mcl_hardness = 2,
     sounds = x_farming.node_sound_wood_defaults(),
 
     on_place = minetest.rotate_node
@@ -391,7 +475,28 @@ minetest.register_node('x_farming:jungle_leaves', {
     special_tiles = { 'x_farming_jungleleaves.png' },
     paramtype = 'light',
     is_ground_content = false,
-    groups = { snappy = 3, leafdecay = 3, flammable = 2, leaves = 1 },
+    groups = {
+        -- MTG
+        snappy = 3,
+        leafdecay = 3,
+        -- MCL
+        handy = 1,
+        hoey = 1,
+        shearsy = 1,
+        swordy = 1,
+        dig_by_piston = 1,
+        fire_encouragement = 30,
+        fire_flammability = 60,
+        deco_block = 1,
+        compostability = 30,
+        -- ALL
+        flammable = 2,
+        leaves = 1,
+    },
+    _mcl_shears_drop = true,
+    _mcl_blast_resistance = 0.2,
+    _mcl_hardness = 0.2,
+    _mcl_silk_touch_drop = true,
     drop = {
         max_items = 1,
         items = {
@@ -415,7 +520,10 @@ minetest.register_node('x_farming:jungle_leaves', {
 -- leafdecay
 x_farming.register_leafdecay({
     trunks = { 'x_farming:jungle_tree' },
-    leaves = { 'x_farming:cocoa_3', 'x_farming:jungle_leaves' },
+    leaves = {
+        'x_farming:cocoa_3',
+        'x_farming:jungle_leaves'
+    },
     radius = 2,
 })
 
@@ -427,29 +535,81 @@ minetest.register_node('x_farming:jungle_wood', {
     place_param2 = 0,
     tiles = { 'x_farming_jungle_wood.png' },
     is_ground_content = false,
-    groups = { choppy = 2, oddly_breakable_by_hand = 2, flammable = 2, wood = 1 },
+    groups = {
+        -- MTG
+        choppy = 2,
+        oddly_breakable_by_hand = 2,
+        -- Everness
+        everness_wood = 1,
+        -- MCL
+        handy = 1,
+        axey = 1,
+        building_block = 1,
+        material_wood = 1,
+        fire_encouragement = 5,
+        fire_flammability = 20,
+        -- ALL
+        flammable = 3,
+        wood = 1,
+    },
+    _mcl_blast_resistance = 3,
+    _mcl_hardness = 2,
     sounds = x_farming.node_sound_wood_defaults(),
 })
 
-minetest.register_craft({
-    output = 'x_farming:jungle_wood 4',
-    recipe = {
-        { 'x_farming:jungle_tree' },
-    }
-})
+-- Cookie
+local cookie_def = {
+    description = S('Cookie') .. '\n' .. S('Compost chance') .. ': 85%\n'
+        .. minetest.colorize(x_farming.colors.brown, S('Hunger') .. ': 2'),
+    inventory_image = 'x_farming_cookie.png',
+    groups = {
+        -- MTG
+        compost = 85,
+        -- MCL
+        food = 2,
+        eatable = 2,
+        compostability = 85
+    },
+}
 
-minetest.register_craft({
-    type = 'fuel',
-    recipe = 'x_farming:jungle_tree',
-    burntime = 38,
-})
+if minetest.get_modpath('farming') then
+    cookie_def.on_use = minetest.item_eat(2)
+end
 
-minetest.register_craft({
-    type = 'fuel',
-    recipe = 'x_farming:jungle_wood',
-    burntime = 9,
-})
+if minetest.get_modpath('mcl_farming') then
+    cookie_def.on_place = minetest.item_eat(2)
+    cookie_def.on_secondary_use = minetest.item_eat(2)
+end
 
+minetest.register_craftitem('x_farming:cookie', cookie_def)
+
+-- Chocolate
+local chocolate_def = {
+    description = S('Chocolate') .. '\n' .. S('Compost chance') .. ': 65%\n'
+        .. minetest.colorize(x_farming.colors.brown, S('Hunger') .. ': 3'),
+    inventory_image = 'x_farming_chocolate.png',
+    groups = {
+        -- MTG
+        compost = 65,
+        -- MCL
+        food = 2,
+        eatable = 2,
+        compostability = 65
+    },
+}
+
+if minetest.get_modpath('farming') then
+    chocolate_def.on_use = minetest.item_eat(3)
+end
+
+if minetest.get_modpath('mcl_farming') then
+    chocolate_def.on_place = minetest.item_eat(3)
+    chocolate_def.on_secondary_use = minetest.item_eat(3)
+end
+
+minetest.register_craftitem('x_farming:chocolate', chocolate_def)
+
+-- Stairs
 if minetest.global_exists('stairs') and minetest.get_modpath('stairs') then
     stairs.register_stair_and_slab(
         'jungle_wood',
@@ -463,7 +623,23 @@ if minetest.global_exists('stairs') and minetest.get_modpath('stairs') then
     )
 end
 
----crate
+if minetest.get_modpath('mcl_stairs') then
+    mcl_stairs.register_stair_and_slab(
+        'x_farming_jungle_wood',
+        'x_farming:jungle_wood',
+        { handy = 1, axey = 1, building_block = 1, material_wood = 1, fire_encouragement = 5, fire_flammability = 20, flammable = 3, wood = 1, },
+        { 'x_farming_jungle_wood.png' },
+        S('Jungle Wooden Stair'),
+        S('Jungle Wooden Slab'),
+        x_farming.node_sound_wood_defaults(),
+        6,
+        2,
+        S('Double Jungle Wooden Slab'),
+        nil
+    )
+end
+
+-- Crate
 x_farming.register_crate('crate_cocoa_bean_3', {
     description = S('Cocoa Bean Crate'),
     short_description = S('Cocoa Bean Crate'),
@@ -489,6 +665,12 @@ minetest.register_on_mods_loaded(function()
         table.insert(deco_place_on, 'everness:dirt_with_grass_1')
         table.insert(deco_biomes, 'everness_bamboo_forest')
         deco_fill_ratio = deco_fill_ratio / 20
+    end
+
+    -- MCL
+    if minetest.get_modpath('mcl_core') then
+        table.insert(deco_place_on, 'mcl_core:dirt_with_grass')
+        table.insert(deco_biomes, 'Jungle')
     end
 
     if next(deco_place_on) and next(deco_biomes) then

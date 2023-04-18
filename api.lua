@@ -20,6 +20,7 @@ local S = minetest.get_translator(minetest.get_current_modname())
 
 -- main class
 x_farming = {
+    hunger_ng = minetest.get_modpath('hunger_ng'),
     hbhunger = minetest.get_modpath('hbhunger'),
     vessels = minetest.get_modpath('vessels'),
     bucket = minetest.get_modpath('bucket'),
@@ -194,13 +195,11 @@ end
 
 -- how often node timers for plants will tick, +/- some random value
 function x_farming.tick(pos)
-    minetest.get_node_timer(pos):start(math.random(1, 2))
-    -- minetest.get_node_timer(pos):start(math.random(166, 286))
+    minetest.get_node_timer(pos):start(math.random(166, 286))
 end
 -- how often a growth failure tick is retried (e.g. too dark)
 function x_farming.tick_again(pos)
-    minetest.get_node_timer(pos):start(math.random(1, 2))
-    -- minetest.get_node_timer(pos):start(math.random(40, 80))
+    minetest.get_node_timer(pos):start(math.random(40, 80))
 end
 
 ---just shorthand for minetest metadata handling
@@ -306,47 +305,51 @@ end
 
 -- Register new hoes
 x_farming.register_hoe = function(name, def)
+    local _def = table.copy(def)
     -- Check for : prefix (register new hoes in your mod's namespace)
     if name:sub(1, 1) ~= ':' then
         name = ':' .. name
     end
     -- Check def table
-    if def.description == nil then
-        def.description = S('Hoe')
+    if _def.description == nil then
+        _def.description = S('Hoe')
     end
-    if def.inventory_image == nil then
-        def.inventory_image = 'x_farming_unknown_item.png'
+    if _def.inventory_image == nil then
+        _def.inventory_image = 'x_farming_unknown_item.png'
     end
-    if def.max_uses == nil then
-        def.max_uses = 30
+    if _def.max_uses == nil then
+        _def.max_uses = 30
     end
 
+    if minetest.get_modpath('farming') then
+        _def.on_use = function(itemstack, user, pointed_thing)
+            return x_farming.hoe_on_use(itemstack, user, pointed_thing, _def.max_uses)
+        end
+    end
+
+    if minetest.get_modpath('mcl_farming') then
+        _def.on_place = x_farming.mcl.hoe_on_place_function(_def.max_uses)
+    end
+
+    -- MCL
+    _def.groups = _def.groups
+    _def.sound = { breaks = 'x_farming_tool_breaks' }
+    _def.wield_scale = _def.wield_scale or { x = 1, y = 1, z = 1 }
+
     -- Register the tool
-    minetest.register_tool(name, {
-        description = def.description,
-        inventory_image = def.inventory_image,
-        -- MTG
-        on_use = function(itemstack, user, pointed_thing)
-            return x_farming.hoe_on_use(itemstack, user, pointed_thing, def.max_uses)
-        end,
-        -- MCL
-        on_place = minetest.get_modpath('mcl_farming') and x_farming.mcl.hoe_on_place_function(def.max_uses) or minetest.item_place,
-        groups = def.groups,
-        sound = { breaks = 'x_farming_tool_breaks' },
-        wield_scale = def.wield_scale or { x = 1, y = 1, z = 1 }
-    })
+    minetest.register_tool(name, _def)
     -- Register its recipe
-    if def.recipe then
+    if _def.recipe then
         minetest.register_craft({
             output = name:sub(2),
-            recipe = def.recipe
+            recipe = _def.recipe
         })
-    elseif def.material then
+    elseif _def.material then
         minetest.register_craft({
             output = name:sub(2),
             recipe = {
-                { def.material, 'group:stick' },
-                { def.material, 'group:stick' },
+                { _def.material, 'group:stick' },
+                { _def.material, 'group:stick' },
                 { '', 'group:stick' }
             }
         })
@@ -501,7 +504,7 @@ local function leafdecay_after_destruct(pos, oldnode, def)
     for _, v in pairs(minetest.find_nodes_in_area(vector.subtract(pos, def.radius), vector.add(pos, def.radius), def.leaves)) do
         local node = minetest.get_node(v)
         local timer = minetest.get_node_timer(v)
-        if node.param2 ~= 1 and not timer:is_started() then
+        if (node.param2 ~= 1 or minetest.get_item_group('cocoa') == 0) and not timer:is_started() then
             timer:start(math.random(20, 120) / 10)
         end
     end
@@ -640,7 +643,6 @@ x_farming.grow_plant = function(pos, elapsed)
 
     if not def.next_plant then
         -- disable timer for fully grown plant
-        print('1')
         return
     end
 
@@ -649,7 +651,6 @@ x_farming.grow_plant = function(pos, elapsed)
         local soil_node = minetest.get_node_or_nil({ x = pos.x, y = pos.y - 1, z = pos.z })
         if not soil_node then
             x_farming.tick_again(pos)
-            print('2')
             return
         end
         -- omitted is a check for light, we assume seeds can germinate in the dark.
@@ -662,12 +663,11 @@ x_farming.grow_plant = function(pos, elapsed)
                 minetest.swap_node(pos, placenode)
                 if minetest.registered_nodes[def.next_plant].next_plant then
                     x_farming.tick(pos)
-                    print('3')
                     return
                 end
             end
         end
-        print('4')
+
         return
     end
 
@@ -675,7 +675,6 @@ x_farming.grow_plant = function(pos, elapsed)
     local below = minetest.get_node({ x = pos.x, y = pos.y - 1, z = pos.z })
     if minetest.get_item_group(below.name, 'soil') < 3 then
         x_farming.tick_again(pos)
-        print('5')
         return
     end
 
@@ -683,7 +682,6 @@ x_farming.grow_plant = function(pos, elapsed)
     local light = minetest.get_node_light(pos)
     if not light or light < def.minlight or light > def.maxlight then
         x_farming.tick_again(pos)
-        print('6')
         return
     end
 
@@ -733,7 +731,20 @@ x_farming.register_plant = function(name, def)
 
     -- Register seed
     local lbm_nodes = { mname .. ':seed_' .. pname }
-    local g = { seed = 1, snappy = 3, attached_node = 1, flammable = 2 }
+    local g = {
+        -- MTG
+        seed = 1,
+        snappy = 3,
+        attached_node = 1,
+        flammable = 2,
+        -- MCL
+        handy = 1,
+        shearsy = 1,
+        deco_block = 1,
+        dig_by_water = 1,
+        destroy_by_lava_flow = 1,
+        dig_by_piston = 1
+    }
 
     for k, v in pairs(def.fertility) do
         g[v] = 1
@@ -741,7 +752,7 @@ x_farming.register_plant = function(name, def)
 
     minetest.register_node(':' .. mname .. ':seed_' .. pname, {
         description = def.description,
-        tiles = {def.inventory_image},
+        tiles = { def.inventory_image },
         inventory_image = def.inventory_image,
         wield_image = def.inventory_image,
         drawtype = 'signlike',
@@ -775,6 +786,8 @@ x_farming.register_plant = function(name, def)
         on_timer = x_farming.grow_plant,
         minlight = def.minlight,
         maxlight = def.maxlight,
+        _mcl_blast_resistance = 0,
+        _mcl_hardness = 0,
     })
 
     -- Register harvest
@@ -798,7 +811,21 @@ x_farming.register_plant = function(name, def)
                 {items = { mname .. ':seed_' .. pname }, rarity = base_rarity * 2 },
             }
         }
-        local nodegroups = { snappy = 3, flammable = 2, plant = 1, not_in_creative_inventory = 1, attached_node = 1 }
+        local nodegroups = {
+            -- MTG
+            snappy = 3,
+            flammable = 2,
+            plant = 1,
+            not_in_creative_inventory = 1,
+            attached_node = 1,
+            -- MCL
+            handy = 1,
+            shearsy = 1,
+            deco_block = 1,
+            dig_by_water = 1,
+            destroy_by_lava_flow = 1,
+            dig_by_piston = 1
+        }
         nodegroups[pname] = i
 
         local next_plant = nil
@@ -828,6 +855,8 @@ x_farming.register_plant = function(name, def)
             on_timer = x_farming.grow_plant,
             minlight = def.minlight,
             maxlight = def.maxlight,
+            _mcl_blast_resistance = 0,
+            _mcl_hardness = 0,
         })
     end
 
@@ -1039,22 +1068,32 @@ end
 
 function x_farming.get_crate_or_bag_formspec(pos, label_copy)
     local spos = pos.x .. ',' .. pos.y .. ',' .. pos.z
-
-    -- Hotbar background
     local hotbar_bg = ''
+    local list_bg = ''
+
     for i = 0, 7, 1 do
-        hotbar_bg = hotbar_bg .. 'image[' .. 0 + i .. ', ' .. 4.85 .. ';1,1;x_farming_gui_hb_bg.png]'
+        hotbar_bg = hotbar_bg .. 'image[' .. 0 + i .. ', ' .. 4.85 .. ';1,1;x_farming_crate_ui_bg_hb_slot.png]'
+    end
+
+    for row = 0, 2, 1 do
+        for i = 0, 7, 1 do
+            list_bg = list_bg .. 'image[' .. 0 + i .. ',' .. 6.08 + row .. ';1,1;x_farming_crate_ui_bg_slot.png]'
+        end
     end
 
     local formspec = {
         'size[8,9]',
+        'style_type[label;textcolor=#FFFFFF]',
+        'background[5,5;1,1;x_farming_crate_ui_bg.png;true]',
         'list[nodemeta:', spos, ';main;0,0.3;8,4;]',
         'list[current_player;main;0,4.85;8,1;]',
         'list[current_player;main;0,6.08;8,3;8]',
         'listring[nodemeta:', spos, ';main]',
         'listring[current_player;main]',
         'label[2,0;' .. minetest.formspec_escape(label_copy) .. ']',
-        hotbar_bg
+        list_bg,
+        hotbar_bg,
+        'image[0,0.3;1,1;x_farming_crate_ui_bg_hb_slot.png]'
     }
 
     formspec = table.concat(formspec, '')
@@ -1079,9 +1118,25 @@ function x_farming.register_crate(name, def)
     _def.use_texture_alpha = 'clip'
     _def.sounds = def.sounds or x_farming.node_sound_wood_defaults()
     _def.is_ground_content = false
-    _def.groups = def.groups or { choppy = 2, oddly_breakable_by_hand = 2, not_in_creative_inventory = 1, flammable = 2 }
+    _def.groups = def.groups or {
+        -- MTG
+        choppy = 2,
+        oddly_breakable_by_hand = 2,
+        -- MCL
+        handy = 1,
+        material_wood = 1,
+        deco_block = 1,
+        fire_encouragement = 3,
+        fire_flammability = 4,
+        -- ALL
+        not_in_creative_inventory = 1,
+        flammable = 2
+    }
     _def.stack_max = def.stack_max or 1
     _def.mod_origin = 'x_farming'
+    -- MCL
+    _def._mcl_hardness = 0.6
+    _def._mcl_blast_resistance = 0.6
 
     if _def._custom.crate_item then
         x_farming.allowed_crate_items[_def._custom.crate_item] = true
@@ -1350,7 +1405,18 @@ function x_farming.register_bag(name, def)
     _def.use_texture_alpha = 'clip'
     _def.sounds = def.sounds or x_farming.node_sound_sand_defaults()
     _def.is_ground_content = false
-    _def.groups = def.groups or { choppy = 2, oddly_breakable_by_hand = 2, not_in_creative_inventory = 1, flammable = 2 }
+    _def.groups = def.groups or {
+        -- MTG
+        choppy = 2,
+        oddly_breakable_by_hand = 2,
+        -- MCL
+        handy = 1,
+        building_block = 1,
+        deco_block = 1,
+        -- ALL
+        not_in_creative_inventory = 1,
+        flammable = 2
+    }
     _def.stack_max = def.stack_max or 1
     _def.mod_origin = 'x_farming'
 
@@ -1569,7 +1635,7 @@ function x_farming.x_bonemeal.is_on_soil(under)
         return false
     end
 
-    if minetest.get_item_group(below.name, 'soil') == 0 then
+    if minetest.get_item_group(below.name, 'soil') == 0 or below.name ~= 'mcl_farming:soil_wet' then
         return false
     end
 
@@ -1865,7 +1931,7 @@ function x_farming.x_bonemeal.grow_grass_and_flowers(itemstack, user, pointed_th
 
             local random_decor_item_def = minetest.registered_nodes[random_decor_item]
 
-            if random_pos ~= nil then
+            if random_pos ~= nil and random_decor_item_def.drawtype ~= 'airlike' then
                 if random_decor_item_def.on_place ~= nil and node_def and not node_def.on_rightclick then
                     ---on_place
                     local pt = {
@@ -1966,7 +2032,7 @@ function x_farming.x_bonemeal.grow_farming(itemstack, user, pointed_thing)
         local below = minetest.get_node({ x = pos.x, y = pos.y - 1, z = pos.z })
         local below_def = minetest.registered_nodes[below.name]
 
-        if minetest.get_item_group(below.name, 'soil') == 3 then
+        if minetest.get_item_group(below.name, 'soil') == 3 or below.name == 'mcl_farming:soil_wet' then
             local current_step = tonumber(string.reverse(string.reverse(replace_node_name):split('_')[1]))
             local max_step = farming_steps[replace_node_name:gsub('_%d+', '', 1)]
 
@@ -2001,7 +2067,7 @@ function x_farming.x_bonemeal.grow_farming(itemstack, user, pointed_thing)
                 if below_def.groups then
                     for _, v in ipairs(seed_def.fertility) do
                         if not isFertile then
-                            isFertile = x_farming.x_bonemeal.groupContains(below_def.groups, v, 1)
+                            isFertile = x_farming.x_bonemeal.groupContains(below_def.groups, v, 1) or below.name == 'mcl_farming:soil_wet'
                         end
                     end
                 end

@@ -33,13 +33,28 @@ x_farming.register_plant('x_farming:strawberry', {
 })
 
 -- needed
-minetest.override_item('x_farming:strawberry', {
+local strawberry_def = {
     description = S('Strawberry') .. '\n' .. S('Compost chance') .. ': 30%\n'
         .. minetest.colorize(x_farming.colors.brown, S('Hunger') .. ': 2'),
-    groups = { compost = 30 },
+    groups = {
+        -- X Farming
+        compost = 30,
+        -- MCL
+        compostability = 30
+    },
     short_description = S('Strawberry'),
-    on_use = minetest.item_eat(2),
-})
+}
+
+if minetest.get_modpath('farming') then
+    strawberry_def.on_use = minetest.item_eat(2)
+end
+
+if minetest.get_modpath('mcl_farming') then
+    strawberry_def.on_place = minetest.item_eat(2)
+    strawberry_def.on_secondary_use = minetest.item_eat(2)
+end
+
+minetest.override_item('x_farming:strawberry', strawberry_def)
 
 ---crate
 x_farming.register_crate('crate_strawberry_3', {
@@ -65,6 +80,13 @@ minetest.register_on_mods_loaded(function()
     if minetest.get_modpath('everness') then
         table.insert(deco_place_on, 'everness:dirt_with_crystal_grass')
         table.insert(deco_biomes, 'everness_crystal_forest')
+    end
+
+    -- MCL
+    if minetest.get_modpath('mcl_core') then
+        table.insert(deco_place_on, 'mcl_core:podzol')
+        table.insert(deco_biomes, 'MegaSpruceTaiga')
+        table.insert(deco_biomes, 'MegaTaiga')
     end
 
     if next(deco_place_on) and next(deco_biomes) then

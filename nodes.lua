@@ -21,7 +21,7 @@ stairs = stairs --[[@as MtgStairs]]
 local S = minetest.get_translator(minetest.get_current_modname())
 
 -- Donuts
-minetest.register_node('x_farming:donut', {
+local donut_def = {
     description = S('Donut') .. '\n' .. S('Compost chance') .. ': 85%\n'
         .. minetest.colorize(x_farming.colors.brown, S('Hunger') .. ': 3'),
     short_description = S('Donut'),
@@ -42,13 +42,40 @@ minetest.register_node('x_farming:donut', {
         type = 'fixed',
         fixed = { -0.25, -0.5, -0.25, 0.25, -0.35, 0.25 }
     },
-    groups = { dig_immediate = 3, attached_node = 1, compost = 85 },
+    groups = {
+        -- MTG
+        dig_immediate = 3,
+        compost = 85,
+        -- MCL
+        handy = 1,
+        shearsy = 1,
+        deco_block = 1,
+        non_mycelium_plant = 1,
+        fire_encouragement = 60,
+        fire_flammability = 100,
+        dig_by_water = 1,
+        destroy_by_lava_flow = 1,
+        compostability = 85,
+        food = 2,
+        eatable = 1,
+        -- ALL
+        flammable = 2,
+        attached_node = 1,
+    },
+    _mcl_blast_resistance = 0,
+    _mcl_hardness = 0,
     sounds = x_farming.node_sound_leaves_defaults(),
     on_use = minetest.item_eat(3),
     sunlight_propagates = true
-})
+}
 
-minetest.register_node('x_farming:donut_chocolate', {
+if minetest.get_modpath('mcl_farming') then
+    donut_def.on_secondary_use = minetest.item_eat(3)
+end
+
+minetest.register_node('x_farming:donut', donut_def)
+
+local donut_chocolate_def = {
     description = S('Chocolate Donut') .. '\n' .. S('Compost chance') .. ': 85%\n'
         .. minetest.colorize(x_farming.colors.brown, S('Hunger') .. ': 4'),
     short_description = S('Chocolate Donut'),
@@ -69,14 +96,41 @@ minetest.register_node('x_farming:donut_chocolate', {
         type = 'fixed',
         fixed = { -0.25, -0.5, -0.25, 0.25, -0.35, 0.25 }
     },
-    groups = { dig_immediate = 3, attached_node = 1, compost = 85 },
+    groups = {
+        -- MTG
+        dig_immediate = 3,
+        compost = 85,
+        -- MCL
+        handy = 1,
+        shearsy = 1,
+        deco_block = 1,
+        non_mycelium_plant = 1,
+        fire_encouragement = 60,
+        fire_flammability = 100,
+        dig_by_water = 1,
+        destroy_by_lava_flow = 1,
+        compostability = 85,
+        food = 2,
+        eatable = 1,
+        -- ALL
+        flammable = 2,
+        attached_node = 1,
+    },
+    _mcl_blast_resistance = 0,
+    _mcl_hardness = 0,
     sounds = x_farming.node_sound_leaves_defaults(),
     on_use = minetest.item_eat(4),
     sunlight_propagates = true
-})
+}
+
+if minetest.get_modpath('mcl_farming') then
+    donut_chocolate_def.on_secondary_use = minetest.item_eat(4)
+end
+
+minetest.register_node('x_farming:donut_chocolate', donut_chocolate_def)
 
 -- Fries
-minetest.register_node('x_farming:fries', {
+local fries_def = {
     description = S('Fries') .. '\n' .. S('Compost chance') .. ': 85%\n'
         .. minetest.colorize(x_farming.colors.brown, S('Hunger') .. ': 6'),
     short_description = S('Fries'),
@@ -98,14 +152,41 @@ minetest.register_node('x_farming:fries', {
         type = 'fixed',
         fixed = { -0.25, -0.5, -0.1, 0.25, -0.2, 0.1 }
     },
-    groups = { dig_immediate = 3, attached_node = 1, compost = 85 },
+    groups = {
+        -- MTG
+        dig_immediate = 3,
+        compost = 85,
+        -- MCL
+        handy = 1,
+        shearsy = 1,
+        deco_block = 1,
+        non_mycelium_plant = 1,
+        fire_encouragement = 60,
+        fire_flammability = 100,
+        dig_by_water = 1,
+        destroy_by_lava_flow = 1,
+        compostability = 85,
+        food = 2,
+        eatable = 1,
+        -- ALL
+        flammable = 2,
+        attached_node = 1,
+    },
+    _mcl_blast_resistance = 0,
+    _mcl_hardness = 0,
     sounds = x_farming.node_sound_leaves_defaults(),
     on_use = minetest.item_eat(6),
     sunlight_propagates = true
-})
+}
+
+if minetest.get_modpath('mcl_farming') then
+    fries_def.on_secondary_use = minetest.item_eat(6)
+end
+
+minetest.register_node('x_farming:fries', fries_def)
 
 -- Pumpkin pie
-minetest.register_node('x_farming:pumpkin_pie', {
+local pumpkin_pie_def = {
     description = S('Pumpkin Pie') .. '\n' .. S('Compost chance') .. ': 100%\n'
         .. minetest.colorize(x_farming.colors.brown, S('Hunger') .. ': 6'),
     short_description = S('Pumpkin Pie'),
@@ -127,14 +208,41 @@ minetest.register_node('x_farming:pumpkin_pie', {
         type = 'fixed',
         fixed = { -0.3, -0.5, -0.3, 0.3, -0.3, 0.3 }
     },
-    groups = { dig_immediate = 3, attached_node = 1, compost = 100 },
+    groups = {
+        -- MTG
+        dig_immediate = 3,
+        compost = 100,
+        -- MCL
+        handy = 1,
+        shearsy = 1,
+        deco_block = 1,
+        non_mycelium_plant = 1,
+        fire_encouragement = 60,
+        fire_flammability = 100,
+        dig_by_water = 1,
+        destroy_by_lava_flow = 1,
+        compostability = 100,
+        food = 2,
+        eatable = 1,
+        -- ALL
+        flammable = 2,
+        attached_node = 1,
+    },
+    _mcl_blast_resistance = 0,
+    _mcl_hardness = 0,
     sounds = x_farming.node_sound_leaves_defaults(),
     on_use = minetest.item_eat(6),
     sunlight_propagates = true
-})
+}
+
+if minetest.get_modpath('mcl_farming') then
+    pumpkin_pie_def.on_secondary_use = minetest.item_eat(6)
+end
+
+minetest.register_node('x_farming:pumpkin_pie', pumpkin_pie_def)
 
 -- Beetroot soup
-minetest.register_node('x_farming:beetroot_soup', {
+local beetroot_soup_def = {
     description = S('Beetroot Soup') .. '\n' .. S('Compost chance') .. ': 100%\n'
         .. minetest.colorize(x_farming.colors.brown, S('Hunger') .. ': 6'),
     short_description = S('Beetroot Soup'),
@@ -156,14 +264,41 @@ minetest.register_node('x_farming:beetroot_soup', {
         type = 'fixed',
         fixed = { -0.5, -0.5, -0.5, 0.5, -0.1, 0.5 }
     },
-    groups = { vessel = 1, dig_immediate = 3, attached_node = 1, compost = 100 },
-    on_use = minetest.item_eat(6, 'x_farming:bowl'),
+    groups = {
+        -- MTG
+        vessel = 1,
+        dig_immediate = 3,
+        attached_node = 1,
+        -- X Farming
+        compost = 100,
+        -- MCL
+        food = 3,
+        eatable = 6,
+        compostability = 100,
+        handy = 1,
+        deco_block = 1,
+        fire_encouragement = 60,
+        fire_flammability = 100,
+        dig_by_water = 1,
+        destroy_by_lava_flow = 1,
+    },
     sounds = x_farming.node_sound_wood_defaults(),
-    sunlight_propagates = true
-})
+    sunlight_propagates = true,
+    on_use = minetest.item_eat(6, 'x_farming:bowl'),
+    -- MCL
+    _mcl_saturation = 0.6,
+    _mcl_blast_resistance = 0,
+    _mcl_hardness = 0,
+}
+
+if minetest.get_modpath('mcl_farming') then
+    beetroot_soup_def.on_secondary_use = minetest.item_eat(6, 'x_farming:bowl')
+end
+
+minetest.register_node('x_farming:beetroot_soup', beetroot_soup_def)
 
 -- Fish Stew
-minetest.register_node('x_farming:fish_stew', {
+local fish_stew_def = {
     description = S('Fish Stew') .. '\n' .. S('Compost chance') .. ': 100%\n'
         .. minetest.colorize(x_farming.colors.brown, S('Hunger') .. ': 8'),
     short_description = S('Fish Stew'),
@@ -185,11 +320,34 @@ minetest.register_node('x_farming:fish_stew', {
         type = 'fixed',
         fixed = { -0.5, -0.5, -0.5, 0.5, -0.1, 0.5 }
     },
-    groups = { vessel = 1, dig_immediate = 3, attached_node = 1, compost = 100 },
+    groups = {
+        -- MTG
+        vessel = 1,
+        dig_immediate = 3,
+        attached_node = 1,
+        -- X Farming
+        compost = 100,
+        -- MCL
+        food = 3,
+        eatable = 6,
+        compostability = 100,
+        handy = 1,
+        deco_block = 1,
+        fire_encouragement = 60,
+        fire_flammability = 100,
+        dig_by_water = 1,
+        destroy_by_lava_flow = 1,
+    },
     on_use = minetest.item_eat(8, 'x_farming:bowl'),
     sounds = x_farming.node_sound_wood_defaults(),
     sunlight_propagates = true
-})
+}
+
+if minetest.get_modpath('mcl_farming') then
+    fish_stew_def.on_secondary_use = minetest.item_eat(8, 'x_farming:bowl')
+end
+
+minetest.register_node('x_farming:fish_stew', fish_stew_def)
 
 -- Cactus brick
 minetest.register_node('x_farming:cactus_brick', {
@@ -202,7 +360,16 @@ minetest.register_node('x_farming:cactus_brick', {
         'x_farming_cactus_brick.png',
     },
     is_ground_content = false,
-    groups = { cracky = 3 },
+    groups = {
+        -- MTG
+        cracky = 2,
+        -- MCL
+        pickaxey = 1,
+        stonebrick = 1,
+        building_block = 1
+    },
+    _mcl_blast_resistance = 6,
+    _mcl_hardness = 3,
     sounds = x_farming.node_sound_stone_defaults()
 })
 
@@ -216,6 +383,22 @@ if minetest.global_exists('stairs') and minetest.get_modpath('stairs') then
         S('Cactus Brick Slab'),
         x_farming.node_sound_stone_defaults(),
         false
+    )
+end
+
+if minetest.get_modpath('mcl_stairs') then
+    mcl_stairs.register_stair_and_slab(
+        'cactus_brick',
+        'x_farming:cactus_brick',
+        { pickaxey = 1 },
+        { 'x_farming_cactus_brick.png' },
+        S('Cactus Brick Stair'),
+        S('Cactus Brick Slab'),
+        x_farming.node_sound_stone_defaults(),
+        6,
+        2,
+        S('Double Cactus Brick Slab'),
+        nil
     )
 end
 
@@ -247,7 +430,17 @@ minetest.register_node('x_farming:scarecrow', {
         type = 'fixed',
         fixed = { -0.4, -0.5, -0.4, 0.4, 1.5, 0.4 }
     },
-    groups = { choppy = 1, oddly_breakable_by_hand = 1, flammable = 2 },
+    groups = {
+        -- MTG
+        choppy = 1,
+        oddly_breakable_by_hand = 1,
+        flammable = 2,
+        -- MCL
+        handy = 1,
+        axey = 1,
+    },
+    _mcl_blast_resistance = 1,
+    _mcl_hardness = 1,
     sounds = x_farming.node_sound_wood_defaults(),
     on_construct = function(pos)
         local meta = minetest.get_meta(pos)
@@ -318,7 +511,18 @@ minetest.register_node('x_farming:scarecrow_2', {
         type = 'fixed',
         fixed = { -0.4, -0.5, -0.4, 0.4, 1.5, 0.4 }
     },
-    groups = { choppy = 1, oddly_breakable_by_hand = 1, flammable = 2 },
+    groups = {
+        -- MTG
+        choppy = 1,
+        oddly_breakable_by_hand = 1,
+        flammable = 2,
+        not_in_creative_inventory = 1,
+        -- MCL
+        handy = 1,
+        axey = 1,
+    },
+    _mcl_blast_resistance = 1,
+    _mcl_hardness = 1,
     sounds = x_farming.node_sound_wood_defaults(),
     on_construct = function(pos)
         local meta = minetest.get_meta(pos)

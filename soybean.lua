@@ -36,7 +36,12 @@ x_farming.register_plant('x_farming:soybean', {
 minetest.override_item('x_farming:soybean', {
     description = S('Soybean') .. '\n' .. S('Compost chance') .. ': 65%',
     short_description = S('Soybean'),
-    groups = { compost = 65 }
+    groups = {
+        -- X Farming
+        compost = 65,
+        -- MCL
+        compostability = 65
+    },
 })
 
 minetest.register_craftitem('x_farming:bottle_soymilk', {
@@ -71,19 +76,6 @@ minetest.register_craft({
     }
 })
 
-minetest.register_craft({
-    type = 'cooking',
-    output = 'x_farming:bottle_soymilk',
-    recipe = 'x_farming:bottle_soymilk_raw',
-    cooktime = 15,
-})
-
-minetest.register_craft({
-    type = 'fuel',
-    recipe = 'x_farming:soybean',
-    burntime = 1,
-})
-
 ---crate
 x_farming.register_crate('crate_soybean_3', {
     description = S('Soybean Crate'),
@@ -108,6 +100,12 @@ minetest.register_on_mods_loaded(function()
     if minetest.get_modpath('everness') then
         table.insert(deco_place_on, 'everness:dirt_with_crystal_grass')
         table.insert(deco_biomes, 'everness_crystal_forest')
+    end
+
+    -- MCL
+    if minetest.get_modpath('mcl_core') then
+        table.insert(deco_place_on, 'mcl_core:dirt_with_grass')
+        table.insert(deco_biomes, 'Plains')
     end
 
     if next(deco_place_on) and next(deco_biomes) then

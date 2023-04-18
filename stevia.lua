@@ -36,7 +36,12 @@ x_farming.register_plant('x_farming:stevia', {
 minetest.override_item('x_farming:stevia', {
     description = S('Stevia') .. '\n' .. S('Compost chance') .. ': 65%',
     short_description = S('Stevia'),
-    groups = { compost = 65 }
+    groups = {
+        -- X Farming
+        compost = 65,
+        -- MCL
+        compostability = 65
+    },
 })
 
 minetest.register_craftitem('x_farming:sugar', {
@@ -44,18 +49,6 @@ minetest.register_craftitem('x_farming:sugar', {
     short_description = S('Sugar'),
     inventory_image = 'x_farming_sugar.png',
     groups = { flammable = 1 },
-})
-
-minetest.register_craft({
-    type = 'shapeless',
-    output = 'x_farming:sugar',
-    recipe = { 'x_farming:stevia', 'x_farming:stevia', 'x_farming:stevia', 'x_farming:stevia' }
-})
-
-minetest.register_craft({
-    type = 'fuel',
-    recipe = 'x_farming:stevia',
-    burntime = 1,
 })
 
 ---crate
@@ -82,6 +75,12 @@ minetest.register_on_mods_loaded(function()
     if minetest.get_modpath('everness') then
         table.insert(deco_place_on, 'everness:dry_dirt_with_dry_grass')
         table.insert(deco_biomes, 'everness_baobab_savanna')
+    end
+
+    -- MCL
+    if minetest.get_modpath('mcl_core') then
+        table.insert(deco_place_on, 'mcl_core:dirt_with_grass')
+        table.insert(deco_biomes, 'Savanna')
     end
 
     if next(deco_place_on) and next(deco_biomes) then

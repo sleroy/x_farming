@@ -32,7 +32,7 @@ x_farming.register_plant('x_farming:pumpkin', {
 })
 
 -- PUMPKIN FRUIT - HARVEST
-minetest.register_node('x_farming:pumpkin_fruit', {
+local pumpkin_fruit_def = {
     description = S('Pumpkin Fruit'),
     short_description = S('Pumpkin Fruit'),
     tiles = {
@@ -46,7 +46,20 @@ minetest.register_node('x_farming:pumpkin_fruit', {
     paramtype2 = 'facedir',
     sounds = x_farming.node_sound_wood_defaults(),
     is_ground_content = false,
-    groups = { snappy = 3, flammable = 4, fall_damage_add_percent = -30, not_in_creative_inventory = 1 },
+    groups = {
+        -- MTG
+        snappy = 3,
+        flammable = 4,
+        fall_damage_add_percent = -30,
+        not_in_creative_inventory = 1,
+        -- MCL
+        handy = 1,
+        axey = 1,
+        plant = 1,
+        dig_by_piston = 1,
+    },
+    _mcl_blast_resistance = 1,
+    _mcl_hardness = 1,
     drop = {
         max_items = 4, -- Maximum number of items to drop.
         items = { -- Choose max_items randomly from this list.
@@ -80,7 +93,9 @@ minetest.register_node('x_farming:pumpkin_fruit', {
             x_farming.tick_block(parent_pos_from_child)
         end
     end
-})
+}
+
+minetest.register_node('x_farming:pumpkin_fruit', pumpkin_fruit_def)
 
 -- PUMPKIN BLOCK - HARVEST from crops
 minetest.register_node('x_farming:pumpkin_block', {
@@ -97,7 +112,24 @@ minetest.register_node('x_farming:pumpkin_block', {
     paramtype2 = 'facedir',
     sounds = x_farming.node_sound_wood_defaults(),
     is_ground_content = false,
-    groups = { snappy = 3, flammable = 4, fall_damage_add_percent = -30, compost = 65 },
+    groups = {
+        -- MTG
+        snappy = 3,
+        flammable = 4,
+        fall_damage_add_percent = -30,
+        not_in_creative_inventory = 1,
+        compost = 65,
+        -- MCL
+        handy = 1,
+        axey = 1,
+        plant = 1,
+        dig_by_piston = 1,
+        building_block = 1,
+        enderman_takable = 1,
+        compostability = 65
+    },
+    _mcl_blast_resistance = 1,
+    _mcl_hardness = 1,
 })
 
 -- PUMPKIN LANTERN -- from recipe
@@ -118,7 +150,18 @@ minetest.register_node('x_farming:pumpkin_lantern', {
     is_ground_content = false,
     light_source = 12,
     drop = 'x_farming:pumpkin_lantern',
-    groups = { snappy = 3, flammable = 4, fall_damage_add_percent = -30 },
+    groups = {
+        -- MTG
+        snappy = 3,
+        flammable = 4,
+        fall_damage_add_percent = -30,
+        not_in_creative_inventory = 1,
+        -- MCL
+        handy = 1,
+        axey = 1,
+    },
+    _mcl_blast_resistance = 1,
+    _mcl_hardness = 1,
 })
 
 -- drop blocks instead of items
@@ -163,6 +206,12 @@ minetest.register_on_mods_loaded(function()
     if minetest.get_modpath('everness') then
         table.insert(deco_place_on, 'everness:forsaken_desert_sand')
         table.insert(deco_biomes, 'everness_forsaken_desert')
+    end
+
+    -- MCL
+    if minetest.get_modpath('mcl_core') then
+        table.insert(deco_place_on, 'mcl_core:sand')
+        table.insert(deco_biomes, 'Desert')
     end
 
     if next(deco_place_on) and next(deco_biomes) then

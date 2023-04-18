@@ -71,4 +71,8 @@ read_globals = {
     'hbhunger',
     'stairs',
     'default',
+    'mcl_farming',
+    'mcl_potions',
+    'hunger_ng',
+    'mcl_stairs',
 }

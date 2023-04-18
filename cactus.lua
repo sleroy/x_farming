@@ -31,7 +31,19 @@ minetest.register_node('x_farming:cactus', {
         'x_farming_cactus.png^[transformFX',
     },
     paramtype2 = 'facedir',
-    groups = { choppy = 3, compost = 50 },
+    groups = {
+        -- MTG
+        choppy = 3,
+        -- X Farming
+        compost = 50,
+        -- MCL
+        handy = 1,
+        deco_block = 1,
+        dig_by_piston = 1,
+        plant = 1,
+        enderman_takable = 1,
+        compostability = 50
+    },
     sounds = x_farming.node_sound_wood_defaults(),
     on_place = minetest.rotate_node,
 })
@@ -71,7 +83,21 @@ minetest.register_node('x_farming:cactus_fruit', {
             }
         },
     },
-    groups = { choppy = 3, flammable = 2, not_in_creative_inventory = 1, leafdecay = 3, leafdecay_drop = 1 },
+    groups = {
+        -- MTG
+        choppy = 3,
+        flammable = 2,
+        not_in_creative_inventory = 1,
+        leafdecay = 3,
+        leafdecay_drop = 1,
+        -- MCL
+        handy = 1,
+        deco_block = 1,
+        dig_by_piston = 1,
+        plant = 1,
+        enderman_takable = 1,
+        compostability = 50
+    },
     sounds = x_farming.node_sound_wood_defaults(),
 
     after_dig_node = function(pos, oldnode, oldmetadata, digger)
@@ -109,7 +135,9 @@ minetest.register_node('x_farming:cactus_fruit_mark', {
     end
 })
 
-minetest.register_node('x_farming:cactus_fruit_item', {
+--  Fruit Item
+
+local cactus_fruit_item_def = {
     description = S('Dragon Fruit') .. '\n' .. S('Compost chance') .. ': 65%\n'
         .. minetest.colorize(x_farming.colors.brown, S('Hunger') .. ': 2'),
     short_description = S('Dragon Fruit'),
@@ -118,12 +146,26 @@ minetest.register_node('x_farming:cactus_fruit_item', {
     inventory_image = 'x_farming_cactus_fruit_item.png',
     on_use = minetest.item_eat(2),
     sounds = x_farming.node_sound_leaves_defaults(),
-    groups = { compost = 65 },
+    groups = {
+        -- X Farming
+        compost = 65,
+        -- MCL
+        food = 2,
+        eatable = 1,
+        compostability = 65,
+    },
 
     after_place_node = function(pos, placer, itemstack, pointed_thing)
         minetest.set_node(pos, { name = 'x_farming:cactus_fruit' })
     end,
-})
+}
+
+if minetest.get_modpath('mcl_farming') then
+    cactus_fruit_item_def.on_secondary_use = minetest.item_eat(2)
+end
+
+
+minetest.register_node('x_farming:cactus_fruit_item', cactus_fruit_item_def)
 
 minetest.register_node('x_farming:large_cactus_with_fruit_seedling', {
     description = S('Large Cactus with Fruit Seedling') .. '\n' .. S('Compost chance') .. ': 30%',
@@ -142,7 +184,18 @@ minetest.register_node('x_farming:large_cactus_with_fruit_seedling', {
             5 / 16, 0.5, 5 / 16
         }
     },
-    groups = { choppy = 3, dig_immediate = 3, attached_node = 1, compost = 30 },
+    groups = {
+        -- MTG
+        choppy = 3,
+        dig_immediate = 3,
+        attached_node = 1,
+        compost = 30,
+        -- MCL
+        handy = 1,
+        deco_block = 1,
+        dig_by_piston = 1,
+        compostability = 30
+    },
     sounds = x_farming.node_sound_wood_defaults(),
 
     on_place = function(itemstack, placer, pointed_thing)
@@ -248,6 +301,12 @@ minetest.register_on_mods_loaded(function()
     if minetest.get_modpath('everness') then
         table.insert(deco_place_on, 'everness:forsaken_desert_sand')
         table.insert(deco_biomes, 'everness_forsaken_desert')
+    end
+
+    -- MCL
+    if minetest.get_modpath('mcl_core') then
+        table.insert(deco_place_on, 'mcl_core:sand')
+        table.insert(deco_biomes, 'Desert')
     end
 
     if next(deco_place_on) and next(deco_biomes) then

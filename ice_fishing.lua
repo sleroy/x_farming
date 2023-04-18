@@ -269,7 +269,7 @@ icefishing.after_destruct = function(pos, oldnode, oldmetadata, digger)
     local positions = minetest.find_nodes_in_area_under_air(
         { x = under.x - 1, y = under.y, z = under.z - 1 },
         { x = under.x + 1, y = under.y, z = under.z + 1 },
-        "default:ice"
+        { 'default:ice', 'group:ice' }
     )
     ---subtract 1 - not including the node where the icefishing was
     local rarity = 8 - (current_step - 1) * 7 / (max_steps - 1)
@@ -616,27 +616,50 @@ for i, def in ipairs(fishes) do
     local desc = string.gsub(string.gsub(def.name, "(_)", " "), "(%a)([%w_']*)", x_farming.tchelper)
     local img = "x_farming_fish_" .. def.name .. ".png"
 
-    ---raw
-    minetest.register_craftitem(name, {
+    -- raw
+    local raw_fish_def = {
         description = desc .. "\n"
             .. minetest.colorize(x_farming.colors.brown, S("Hunger") .. ": " .. def.item_eat),
         tiles = { img },
         inventory_image = img,
         wield_image = img .. "^[transformFXR90",
-        groups = { fish = 1 },
-        on_use = minetest.item_eat(def.item_eat),
-    })
+        groups = {
+            -- X Farming
+            fish = 1,
+            -- MCL
+            food = 2,
+            eatable = 2,
+            smoker_cookable = 1
+        },
+        _mcl_saturation = 0.4
+    }
 
-    ---hbhunger
+    if minetest.get_modpath('farming') then
+        raw_fish_def.on_use = minetest.item_eat(def.item_eat)
+    end
+
+    if minetest.get_modpath('mcl_farming') then
+        raw_fish_def.on_place = minetest.item_eat(def.item_eat)
+        raw_fish_def.on_secondary_use = minetest.item_eat(def.item_eat)
+    end
+
+    minetest.register_craftitem(name, raw_fish_def)
+
+    -- hbhunger
     if x_farming.hbhunger ~= nil then
         if hbhunger.register_food ~= nil then
             hbhunger.register_food(name, def.item_eat)
         end
     end
 
+    -- hunger_ng
+    if x_farming.hunger_ng ~= nil then
+        hunger_ng.add_hunger_data(name, { satiates = def.item_eat })
+    end
+
     if def.item_eat_cooked ~= nil then
-        ---cooked
-        minetest.register_craftitem(name .. "_cooked", {
+        -- cooked
+        local cooked_fish_def = {
             description = S("Cooked") .. " " .. desc .. "\n"
                 .. minetest.colorize(x_farming.colors.brown, S("Hunger") .. ": "
                 .. def.item_eat_cooked),
@@ -645,8 +668,24 @@ for i, def in ipairs(fishes) do
                 '^(' .. img .. '^[colorize:#FFFFFF:255^[mask:x_farming_cooked_mask.png^[opacity:191)',
             wield_image = img .. '^[transformFXR90^[colorize:#3B2510:204' ..
                 '^(' .. img .. '^[colorize:#FFFFFF:255^[mask:x_farming_cooked_mask.png^[opacity:191)',
-            on_use = minetest.item_eat(def.item_eat_cooked),
-        })
+            groups = {
+                -- MCL
+                food = 2,
+                eatable = 5,
+            },
+            _mcl_saturation = 6,
+        }
+
+        if minetest.get_modpath('farming') then
+            cooked_fish_def.on_use = minetest.item_eat(def.item_eat_cooked)
+        end
+
+        if minetest.get_modpath('mcl_farming') then
+            cooked_fish_def.on_place = minetest.item_eat(def.item_eat_cooked)
+            cooked_fish_def.on_secondary_use = minetest.item_eat(def.item_eat_cooked)
+        end
+
+        minetest.register_craftitem(name .. "_cooked", cooked_fish_def)
 
         minetest.register_craft({
             type = "cooking",
@@ -660,6 +699,11 @@ for i, def in ipairs(fishes) do
             if hbhunger.register_food ~= nil then
                 hbhunger.register_food(name .. "_cooked", def.item_eat_cooked)
             end
+        end
+
+        -- hunger_ng
+        if x_farming.hunger_ng ~= nil then
+            hunger_ng.add_hunger_data(name .. "_cooked", { satiates = def.item_eat_cooked })
         end
     end
 end
@@ -688,7 +732,22 @@ icefishing.register_equipment = function(name, def)
         inventory_image = "x_farming_icefishing_inv.png",
         wield_image = "x_farming_icefishing_inv.png",
         drawtype = "nodebox",
-        groups = { seed = 1, snappy = 3, plant = 1, attached_node = 1 },
+        groups = {
+            -- MTG
+            seed = 1,
+            snappy = 3,
+            plant = 1,
+            attached_node = 1,
+            -- MCL
+            handy = 1,
+            shearsy = 1,
+            deco_block = 1,
+            dig_by_water = 1,
+            destroy_by_lava_flow = 1,
+            dig_by_piston = 1
+        },
+        _mcl_blast_resistance = 0,
+        _mcl_hardness = 0,
         paramtype = "light",
         walkable = false,
         sunlight_propagates = true,
@@ -813,7 +872,23 @@ icefishing.register_equipment = function(name, def)
                     { -0.5, -0.5, -0.5, 0.5, -0.375, 0.5 },
                 },
             },
-            groups = { snappy = 3, plant = 1, not_in_creative_inventory = 1, attached_node = 1 },
+            groups = {
+                -- MTG
+                seed = 1,
+                snappy = 3,
+                plant = 1,
+                attached_node = 1,
+                not_in_creative_inventory = 1,
+                -- MCL
+                handy = 1,
+                shearsy = 1,
+                deco_block = 1,
+                dig_by_water = 1,
+                destroy_by_lava_flow = 1,
+                dig_by_piston = 1
+            },
+            _mcl_blast_resistance = 0,
+            _mcl_hardness = 0,
             sounds = x_farming.node_sound_leaves_defaults(),
             next_plant = next_plant,
             on_timer = icefishing.grow_plant,
@@ -859,7 +934,20 @@ minetest.register_node("x_farming:drilled_ice", {
     },
     paramtype = "light",
     drop = "default:ice",
-    groups = { cracky = 3, cools_lava = 1, slippery = 3, not_in_creative_inventory = 1, ice_fishing = 1 },
+    groups = {
+        -- MTG
+        cracky = 3,
+        cools_lava = 1,
+        not_in_creative_inventory = 1,
+        ice_fishing = 1,
+        -- MCL
+        handy = 1,
+        pickaxey = 1,
+        building_block = 1,
+        ice = 1,
+        -- ALL
+        slippery = 3
+    },
     sounds = x_farming.node_sound_ice_defaults(),
 })
 
@@ -903,7 +991,7 @@ minetest.register_tool("x_farming:ice_auger", {
         end
 
         ---check if pointing at soil
-        if under.name ~= "default:ice" then
+        if under.name ~= "default:ice" and minetest.get_item_group(under.name, 'ice') == 0 then
             return
         end
 
@@ -990,6 +1078,12 @@ minetest.register_on_mods_loaded(function()
     if minetest.get_modpath('everness') then
         table.insert(deco_place_on, 'everness:frosted_snowblock')
         table.insert(deco_biomes, 'everness_frosted_icesheet')
+    end
+
+    -- MCL
+    if minetest.get_modpath('mcl_core') then
+        table.insert(deco_place_on, 'mcl_core:snow')
+        table.insert(deco_biomes, 'IcePlains')
     end
 
     if next(deco_place_on) and next(deco_biomes) then

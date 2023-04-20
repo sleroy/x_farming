@@ -187,7 +187,7 @@ function x_farming.node_sound_slime_defaults(table)
     table = table or {}
     table.footstep = table.footstep or { name = 'x_farming_slime_footstep', gain = 0.2 }
     table.dig = table.dig or { name = 'x_farming_slime_dig', gain = 1.0 }
-    table.dug = table.dug or { name = 'x_farming_slime_dug', gain = 0.6 }
+    table.dug = table.dug or { name = 'x_farming_slime_dug', gain = 0.3 }
     table.place = table.place or { name = 'x_farming_slime_footstep', gain = 1.0 }
     return table
 end

@@ -22,14 +22,12 @@ local S = minetest.get_translator(minetest.get_current_modname())
 
 -- how often node timers for plants will tick, +/- some random value
 local function tick(pos)
-    minetest.get_node_timer(pos):start(math.random(1, 2))
-    -- minetest.get_node_timer(pos):start(math.random(332, 572))
+    minetest.get_node_timer(pos):start(math.random(332, 572))
 end
 
 -- how often a growth failure tick is retried (e.g. too dark)
 local function tick_again(pos)
-    minetest.get_node_timer(pos):start(math.random(1, 2))
-    -- minetest.get_node_timer(pos):start(math.random(80, 160))
+    minetest.get_node_timer(pos):start(math.random(80, 160))
 end
 
 function x_farming.grow_cocoa_plant(pos, elapsed)

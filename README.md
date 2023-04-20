@@ -10,6 +10,7 @@ Hunger points in the description assume that you have [hbhubger](https://forum.m
 
 ## Features
 
+- adds bees, bee hives and honey harvesting
 - compatible with Mineclone
 - compatible with Everness
 - adds christmas tree
@@ -406,16 +407,23 @@ Seeds can be found also in dungeon chests.
 
 ## Dependencies
 
-- default
+- _none_
 
 ## Optional Dependencies
 
+- default
+- farming
 - hbhunger
 - stairs
 - wool
 - dye
 - vessels (recipes, if not present then x_farming will load its own vessels needed for recipe)
 - bucket (recipes)
+- mcl_core
+- mcl_farming
+- mcl_potions
+- hunger_ng
+- mcl_stairs
 
 ## License:
 

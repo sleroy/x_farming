@@ -1644,7 +1644,7 @@ function x_farming.x_bonemeal.is_on_soil(under)
         return false
     end
 
-    if minetest.get_item_group(below.name, 'soil') == 0 or below.name ~= 'mcl_farming:soil_wet' then
+    if minetest.get_item_group(below.name, 'soil') == 0 and below.name ~= 'mcl_farming:soil_wet' then
         return false
     end
 

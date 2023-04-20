@@ -68,3 +68,11 @@ hunger_ng.add_hunger_data('x_farming:donut_chocolate', { satiates = 4 })
 
 --  Fries
 hunger_ng.add_hunger_data('x_farming:fries', { satiates = 6 })
+hunger_ng.add_hunger_data('x_farming:bread', { satiates = 5 })
+
+-- Bottle Honey
+if x_farming.vessels then
+    hunger_ng.add_hunger_data('x_farming:bottle_honey', { satiates = 6, returns = 'vessels:glass_bottle' })
+else
+    hunger_ng.add_hunger_data('x_farming:bottle_honey', { satiates = 6, returns = 'x_farming:glass_bottle' })
+end

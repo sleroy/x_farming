@@ -51,7 +51,9 @@ dofile(path .. '/soybean.lua')
 dofile(path .. '/salt.lua')
 dofile(path .. '/cotton.lua')
 dofile(path .. '/barley.lua')
+dofile(path .. '/bees.lua')
 
+dofile(path .. '/tools.lua')
 dofile(path .. '/hoes.lua')
 
 dofile(path .. '/ice_fishing.lua')

@@ -183,6 +183,15 @@ function x_farming.node_sound_stone_defaults(table)
     return table
 end
 
+function x_farming.node_sound_slime_defaults(table)
+    table = table or {}
+    table.footstep = table.footstep or { name = 'x_farming_slime_footstep', gain = 0.2 }
+    table.dig = table.dig or { name = 'x_farming_slime_dig', gain = 1.0 }
+    table.dug = table.dug or { name = 'x_farming_slime_dug', gain = 0.6 }
+    table.place = table.place or { name = 'x_farming_slime_footstep', gain = 1.0 }
+    return table
+end
+
 ---how often node timers for plants will tick, +/- some random value
 function x_farming.tick_block(pos)
     minetest.get_node_timer(pos):start(math.random(498, 1287))
@@ -2190,6 +2199,162 @@ function x_farming.x_bonemeal.register_tree_defs(self, defs)
         local def = table.copy(value)
         if not self.tree_defs[def.name] then
             self.tree_defs[def.name] = value
+        end
+    end
+end
+
+-- TheTermos (MIT)
+-- vec components can be omitted e.g. vec={y=1}
+function x_farming.pos_shift(pos, vec)
+    vec.x = vec.x or 0
+    vec.y = vec.y or 0
+    vec.z = vec.z or 0
+
+    return {
+        x = pos.x + vec.x,
+        y = pos.y + vec.y,
+        z = pos.z + vec.z
+    }
+end
+
+-- TheTermos (MIT)
+function x_farming.get_node_pos(pos)
+    return {
+        x = math.floor(pos.x + 0.5),
+        y = math.floor(pos.y + 0.5),
+        z = math.floor(pos.z + 0.5),
+    }
+end
+
+-- TheTermos (MIT)
+function x_farming.nodeatpos(pos)
+    local node = minetest.get_node_or_nil(pos)
+    if node then
+        return minetest.registered_nodes[node.name]
+    end
+end
+
+-- TheTermos (MIT)
+function x_farming.get_node_height(pos)
+    local npos = x_farming.get_node_pos(pos)
+    local node = x_farming.nodeatpos(npos)
+    if node == nil then
+        return nil
+    end
+
+    if node.walkable then
+        if node.drawtype == 'nodebox' then
+            if node.node_box and node.node_box.type == 'fixed' then
+                if type(node.node_box.fixed[1]) == 'number' then
+                    return npos.y + node.node_box.fixed[5], 0, false
+                elseif type(node.node_box.fixed[1]) == 'table' then
+                    return npos.y + node.node_box.fixed[1][5], 0, false
+                else
+                    -- todo handle table of boxes
+                    return npos.y + 0.5, 1, false
+                end
+            elseif node.node_box and node.node_box.type == 'leveled' then
+                return minetest.get_node_level(pos) / 64 - 0.5 + x_farming.get_node_pos(pos).y, 0, false
+            else
+                -- the unforeseen
+                return npos.y + 0.5, 1, false
+            end
+        else
+            -- full node
+            return npos.y + 0.5, 1, false
+        end
+    else
+        local liquidflag = false
+        if node.drawtype == 'liquid' then liquidflag = true end
+        return npos.y - 0.5, -1, liquidflag
+    end
+end
+
+-- TheTermos (MIT)
+-- get_terrain_height
+-- steps(optional) number of recursion steps; default=3
+-- dir(optional) is 1=up, -1=down, 0=both; default=0
+-- liquidflag(forbidden) never provide this parameter.
+-- dir is 1=up, -1=down, 0=both
+function x_farming.get_terrain_height(pos, steps, dir, liquidflag)
+    steps = steps or 3
+    dir = dir or 0
+
+    local h, f, l = x_farming.get_node_height(pos)
+    if h == nil then
+        return nil
+    end
+    if l then
+        liquidflag = true
+    end
+
+    if f == 0 then
+        return h, liquidflag
+    end
+
+    if dir == 0 or dir == f then
+        steps = steps - 1
+        if steps <= 0 then
+            return nil
+        end
+
+        return x_farming.get_terrain_height(x_farming.pos_shift(pos, { y = f }), steps, f, liquidflag)
+    else
+        return h, liquidflag
+    end
+end
+
+-- TheTermos (MIT)
+-- modified by SaKeL
+function x_farming.get_spawn_pos_abr(dtime, intrvl, radius, chance, reduction)
+    dtime = math.min(dtime, 0.1)
+    local players = minetest.get_connected_players()
+    intrvl = 1 / intrvl
+
+    if math.random() < dtime * (intrvl * #players) then
+        -- choose random player
+        local player = players[math.random(#players)]
+        local vel = player:get_velocity()
+        local spd = vector.length(vel)
+        chance = (1 - chance) * 1 / (spd * 0.75 + 1)
+
+        local yaw
+        if spd > 1 then
+            -- spawn in the front arc
+            yaw = minetest.dir_to_yaw(vel) + math.random() * 0.35 - 0.75
+        else
+            -- random yaw
+            yaw = math.random() * math.pi * 2 - math.pi
+        end
+
+        local pos = player:get_pos()
+        local dir = vector.multiply(minetest.yaw_to_dir(yaw), radius)
+        local pos2 = vector.add(pos, dir)
+
+        pos2.y = pos2.y - 5
+
+        local height, liquidflag = x_farming.get_terrain_height(pos2, 32)
+        if height then
+            local objs = minetest.find_node_near(pos, radius * 1.1, { 'group:bee' }) or {}
+
+            -- count mobs in abrange
+            for _, obj in ipairs(objs) do
+                chance = chance + (1 - chance) * reduction
+            end
+
+            if chance < math.random() then
+                pos2.y = height
+                objs = minetest.get_objects_inside_radius(pos2, radius * 0.95)
+
+                -- do not spawn if another player around
+                for _, obj in ipairs(objs) do
+                    if obj:is_player() then
+                        return
+                    end
+                end
+
+                return pos2, liquidflag
+            end
         end
     end
 end

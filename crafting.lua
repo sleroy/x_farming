@@ -654,3 +654,74 @@ minetest.register_craft({
     recipe = 'x_farming:stevia',
     burntime = 1,
 })
+
+-- Empty Jar
+minetest.register_craft({
+    output = 'x_farming:jar_empty',
+    recipe = {
+        { 'x_farming:glass_bottle', 'x_farming:glass_bottle' }
+    }
+})
+
+minetest.register_craft({
+    output = 'x_farming:jar_empty',
+    recipe = {
+        { 'vessels:glass_bottle', 'vessels:glass_bottle' }
+    }
+})
+
+-- Hive
+minetest.register_craft({
+    output = 'x_farming:bee_hive',
+    recipe = {
+        { 'group:wood', 'group:wood', 'group:wood' },
+        { 'x_farming:honeycomb', 'x_farming:honeycomb', 'x_farming:honeycomb' },
+        { 'group:wood', 'group:wood', 'group:wood' }
+    }
+})
+
+-- Honeycomb saw
+minetest.register_craft({
+    output = 'x_farming:honeycomb_saw',
+    recipe = {
+        { '', 'x_farming:honeycomb', 'default:steel_ingot' },
+        { 'x_farming:honeycomb', 'default:steel_ingot', '' },
+        { 'group:stick', '', '' }
+    }
+})
+
+minetest.register_craft({
+    output = 'x_farming:honeycomb_block',
+    recipe = {
+        { 'x_farming:honeycomb', 'x_farming:honeycomb' },
+        { 'x_farming:honeycomb', 'x_farming:honeycomb' },
+    },
+})
+
+minetest.register_craft({
+    output = 'x_farming:honey_block',
+    recipe = {
+        { 'x_farming:bottle_honey', 'x_farming:bottle_honey' },
+        { 'x_farming:bottle_honey', 'x_farming:bottle_honey' },
+    },
+    replacements = {
+        { 'x_farming:bottle_honey', 'x_farming:glass_bottle' },
+        { 'x_farming:bottle_honey', 'x_farming:glass_bottle' },
+        { 'x_farming:bottle_honey', 'x_farming:glass_bottle' },
+        { 'x_farming:bottle_honey', 'x_farming:glass_bottle' },
+    },
+})
+
+minetest.register_craft({
+    output = 'x_farming:honey_block',
+    recipe = {
+        { 'x_farming:bottle_honey', 'x_farming:bottle_honey' },
+        { 'x_farming:bottle_honey', 'x_farming:bottle_honey' },
+    },
+    replacements = {
+        { 'x_farming:bottle_honey', 'vessels:glass_bottle' },
+        { 'x_farming:bottle_honey', 'vessels:glass_bottle' },
+        { 'x_farming:bottle_honey', 'vessels:glass_bottle' },
+        { 'x_farming:bottle_honey', 'vessels:glass_bottle' },
+    },
+})

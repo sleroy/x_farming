@@ -896,6 +896,20 @@ GNU Lesser General Public License v2.1 or later (see included LICENSE file)
 - x_farming_pumpkin_fruit_bottom.png
 - x_farming_pumpkin_pie.png
 - x_farming_pumpkin_seed.png
+- x_farming_bee_hive_bottom.png
+- x_farming_bee_hive_front.png
+- x_farming_bee_hive_saturated_overlay.png
+- x_farming_bee_hive_side.png
+- x_farming_bee_hive_top.png
+- x_farming_bee_mesh_animated.png
+- x_farming_bottle_honey.png
+- x_farming_default_particle.png
+- x_farming_honey_block_mesh.png
+- x_farming_honeycomb.png
+- x_farming_honeycomb_block.png
+- x_farming_honeycomb_saw.png
+- x_farming_jar_empty.png
+- x_farming_jar_with_bee.png
 
 **CC-BY-SA-3.0, modified by Thomas-S**
 
@@ -915,6 +929,197 @@ GNU Lesser General Public License v2.1 or later (see included LICENSE file)
 
 - x_farming_ice_dug.ogg
 
+**CC0-1.0, by felix.blume**, https://freesound.org/people/felix.blume/sounds/583040/
+
+- x_farming_bee.1.ogg
+- x_farming_bee.2.ogg
+- x_farming_bee.3.ogg
+- x_farming_bee.4.ogg
+- x_farming_bee.5.ogg
+- x_farming_bee.6.ogg
+- x_farming_bee.7.ogg
+
+**CC0-1.0, by niittymaa**, https://freesound.org/people/niittymaa/sounds/666969/
+
+- x_farming_slime_footstep.1.ogg
+- x_farming_slime_footstep.2.ogg
+- x_farming_slime_footstep.3.ogg
+- x_farming_slime_footstep.4.ogg
+
+**CC0-1.0, by EminYILDIRIM**, https://freesound.org/people/EminYILDIRIM/sounds/544636/
+
+- x_farming_slime_dug.1.ogg
+- x_farming_slime_dug.2.ogg
+- x_farming_slime_dug.3.ogg
+
+**CC0-1.0, by jtap97**, https://freesound.org/people/jtap97/sounds/448885/
+
+- x_farming_slime_dig.1.ogg
+- x_farming_slime_dig.2.ogg
+- x_farming_slime_dig.3.ogg
+
+**CC0-1.0, by kyles**, https://freesound.org
+
+- x_farming_dirt_hit.1.ogg
+- x_farming_dirt_hit.2.ogg
+- x_farming_dirt_hit.3.ogg
+
+**CC-BY-4.0, by RICHERlandTV**, https://freesound.org
+
+- x_farming_wood_place.1.ogg
+- x_farming_wood_place.2.ogg
+- x_farming_wood_place.3.ogg
+
+**CC0-1.0, by igroglaz**, https://freesound.org
+
+- x_farming_wood_hit.1.ogg
+- x_farming_wood_hit.2.ogg
+- x_farming_wood_hit.3.ogg
+- x_farming_wood_hit.4.ogg
+- x_farming_wood_hit.5.ogg
+- x_farming_wood_hit.6.ogg
+
+**CC0-1.0, by Fission9**, https://freesound.org
+
+- x_farming_dirt_footstep.1.ogg
+- x_farming_dirt_footstep.2.ogg
+- x_farming_dirt_footstep.3.ogg
+- x_farming_dirt_footstep.4.ogg
+- x_farming_wood_footstep.1.ogg
+- x_farming_wood_footstep.2.ogg
+- x_farming_wood_footstep.3.ogg
+- x_farming_wood_footstep.4.ogg
+- x_farming_wood_footstep.5.ogg
+- x_farming_wood_footstep.6.ogg
+
+**CC-BY-4.0, by HerbertBoland**, https://freesound.org/people/AtevonHes/sounds/454783/
+
+- x_farming_tool_breaks.1.ogg
+- x_farming_tool_breaks.2.ogg
+- x_farming_tool_breaks.3.ogg
+
+**CC-BY-3.0, by Mito551**, https://freesound.org
+
+- x_farming_thin_glass_footstep.ogg
+
+**CC-BY-4.0, by F.M.Audio**, https://freesound.org
+
+- x_farming_stone_place.1.ogg
+- x_farming_stone_place.2.ogg
+- x_farming_stone_place.3.ogg
+- x_farming_stone_place.4.ogg
+
+
+**CC0-1.0, by lolamadeus**, https://freesound.org
+
+- x_farming_stone_hit.1.ogg
+- x_farming_stone_hit.2.ogg
+- x_farming_stone_hit.3.ogg
+
+**CC0-1.0, by Nox_Sound**, https://freesound.org
+
+- x_farming_stone_dug.1.ogg
+- x_farming_stone_dug.2.ogg
+- x_farming_stone_dug.3.ogg
+- x_farming_stone_footstep.1.ogg
+- x_farming_stone_footstep.2.ogg
+- x_farming_stone_footstep.3.ogg
+- x_farming_stone_footstep.4.ogg
+- x_farming_stone_footstep.5.ogg
+
+**CC-BY-3.0, by Coral_Island_Studios**, https://freesound.org
+
+- x_farming_sand_place.1.ogg
+- x_farming_sand_place.2.ogg
+- x_farming_sand_place.3.ogg
+- x_farming_sand_place.4.ogg
+- x_farming_sand_place.5.ogg
+
+**CC0-1.0, by Lukeo135**, https://freesound.org
+
+- x_farming_sand_hit.1.ogg
+- x_farming_sand_hit.2.ogg
+- x_farming_sand_hit.3.ogg
+
+**CC0-1.0, by pan14**, https://freesound.org
+
+- x_farming_sand_footstep.1.ogg
+- x_farming_sand_footstep.2.ogg
+- x_farming_sand_footstep.3.ogg
+
+**CC0-1.0, by schneidi67**, https://freesound.org
+
+- x_farming_sand_dug.1.ogg
+- x_farming_sand_dug.2.ogg
+- x_farming_sand_dug.3.ogg
+
+**CC0-1.0, by vgraham1**, https://freesound.org
+
+- x_farming_leaves_place.1.ogg
+- x_farming_leaves_place.2.ogg
+
+**CC-BY-4.0, by Abacagi**, https://freesound.org
+
+- x_farming_leaves_hit.1.ogg
+- x_farming_leaves_hit.2.ogg
+
+**CC-BY-4.0, by elektroproleter**, https://freesound.org
+
+- x_farming_leaves_footstep.1.ogg
+- x_farming_leaves_footstep.2.ogg
+- x_farming_leaves_footstep.3.ogg
+- x_farming_leaves_footstep.4.ogg
+
+**CC-BY-4.0, by JanKoehl**, https://freesound.org
+
+- x_farming_leaves_dug.1.ogg
+- x_farming_leaves_dug.2.ogg
+
+**CC-BY-4.0, by EminYILDIRIM**, https://freesound.org
+
+- x_farming_ice_hit.1.ogg
+- x_farming_ice_hit.2.ogg
+- x_farming_ice_hit.3.ogg
+- x_farming_ice_hit.4.ogg
+
+**CC-BY-4.0, by InspectorJ**, https://freesound.org
+
+- x_farming_ice_footstep.1.ogg
+- x_farming_ice_footstep.2.ogg
+- x_farming_ice_footstep.3.ogg
+- x_farming_ice_footstep.4.ogg
+
+**CC0-1.0, by Nox_Sound**, https://freesound.org
+
+- x_farming_grass_hit.1.ogg
+- x_farming_grass_hit.3.ogg
+- x_farming_grass_hit.2.ogg
+
+**CC0-1.0, by Yuval**, https://freesound.org
+
+- x_farming_grass_footstep.1.ogg
+- x_farming_grass_footstep.2.ogg
+- x_farming_grass_footstep.3.ogg
+
+**CC0-1.0, by Robson220pl**, https://freesound.org
+
+- x_farming_glass_place.1.ogg
+- x_farming_glass_place.2.ogg
+- x_farming_glass_place.3.ogg
+
+**CC-BY-3.0, by cmusounddesign**, http://www.freesound.org/people/cmusounddesign/sounds/71947/
+
+- x_farming_break_thin_glass.1.ogg
+
+**CC-BY-3.0, by Tomlija**, http://www.freesound.org/people/Tomlija/sounds/97669/
+
+- x_farming_break_thin_glass.2.ogg
+
+**CC-BY-3.0, by lsprice**, http://www.freesound.org/people/lsprice/sounds/88808/
+
+- x_farming_break_thin_glass.3.ogg
+
+
 ### Models
 
 **CC-BY-SA-4.0, by SaKeL**
@@ -931,3 +1136,5 @@ GNU Lesser General Public License v2.1 or later (see included LICENSE file)
 - x_farming_bag.obj
 - x_farming_scarecrow.obj
 - x_farming_scarecrow_2.obj
+- x_farming_bee.obj
+- x_farming_honey.obj

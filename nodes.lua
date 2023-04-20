@@ -640,6 +640,55 @@ minetest.register_node('x_farming:scarecrow_2', {
     end,
 })
 
+-- Honey
+minetest.register_node('x_farming:honey_block', {
+    description = S('Honey Block'),
+    short_description = S('Honey Block'),
+    drawtype = 'mesh',
+    mesh = 'x_farming_honey.obj',
+    tiles = { 'x_farming_honey_block_mesh.png' },
+    use_texture_alpha = 'blend',
+    paramtype = 'light',
+    sunlight_propagates = true,
+    groups = {
+        -- MTG
+        snappy = 3,
+        disable_jump = 1,
+        -- MCL
+        handy = 1,
+        hoey = 1,
+        swordy = 1,
+        deco_block = 1,
+        -- ALL
+        fall_damage_add_percent = -80,
+    },
+    collision_box = {
+        type = 'fixed',
+        fixed = { -0.3, -0.3, -0.3, 0.3, 0.3, 0.3 }
+    },
+    _mcl_blast_resistance = 0,
+    _mcl_hardness = 0,
+    sounds = x_farming.node_sound_slime_defaults(),
+    move_resistance = 7,
+})
+
+minetest.register_node('x_farming:honeycomb_block', {
+    description = S('Honeycomb Block'),
+    short_description = S('Honeeycomb Block'),
+    tiles = { 'x_farming_honeycomb_block.png' },
+    paramtype = 'light',
+    groups = {
+        -- MTG
+        crumbly = 3,
+        -- MCL
+        handy = 1,
+        deco_block = 1,
+    },
+    _mcl_blast_resistance = 0.6,
+    _mcl_hardness = 0.6,
+    sounds = x_farming.node_sound_dirt_defaults()
+})
+
 --
 -- Convert farming soils - copy from MTG
 --

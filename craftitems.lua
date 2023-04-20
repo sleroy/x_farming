@@ -59,7 +59,6 @@ end
 minetest.register_craftitem('x_farming:bread', bread_def)
 
 -- String
-
 minetest.register_craftitem('x_farming:string', {
     description = S('Cotton String'),
     inventory_image = 'x_farming_string.png',
@@ -79,4 +78,61 @@ minetest.register_craftitem('x_farming:bottle_water', {
     inventory_image = 'x_farming_bottle_water.png',
     wield_image = 'x_farming_bottle_water.png',
     groups = { vessel = 1 },
+})
+
+-- Bottle Honey
+local bottle_honey_def = {
+    description = S('Honey Bottle'),
+    tiles = { 'x_farming_bottle_honey.png' },
+    inventory_image = 'x_farming_bottle_honey.png',
+    wield_image = 'x_farming_bottle_honey.png',
+    groups = {
+        -- MCL
+        craftitem = 1,
+        food = 3,
+        eatable = 6,
+        can_eat_when_full = 1
+    },
+    _mcl_saturation = 1.2,
+    stack_max = 16,
+}
+
+if minetest.get_modpath('farming') then
+    if x_farming.vessels then
+        bottle_honey_def.on_use = minetest.item_eat(6, 'vessels:glass_bottle')
+    else
+        bottle_honey_def.on_use = minetest.item_eat(6, 'x_farming:glass_bottle')
+    end
+end
+
+if minetest.get_modpath('mcl_farming') then
+    if x_farming.vessels then
+        bottle_honey_def.on_place = minetest.item_eat(6, 'x_farming:glass_bottle')
+        bottle_honey_def.on_secondary_use = minetest.item_eat(6, 'x_farming:glass_bottle')
+    else
+        bottle_honey_def.on_place = minetest.item_eat(6, 'x_farming:glass_bottle')
+        bottle_honey_def.on_secondary_use = minetest.item_eat(6, 'x_farming:glass_bottle')
+    end
+end
+
+minetest.register_craftitem('x_farming:bottle_honey', bottle_honey_def)
+
+-- Honeycomb
+minetest.register_craftitem('x_farming:honeycomb', {
+    description = S('Honeycomb'),
+    inventory_image = 'x_farming_honeycomb.png',
+})
+
+-- Jar empty
+minetest.register_craftitem('x_farming:jar_empty', {
+    description = S('Empty Jar - Right-click to catch Bee with it'),
+    inventory_image = 'x_farming_jar_empty.png',
+    groups = { vessel = 1 }
+})
+
+-- Jar with bee
+minetest.register_craftitem('x_farming:jar_with_bee', {
+    description = S('Jar with Bee - Right-click to add bee to a Hive'),
+    inventory_image = 'x_farming_jar_with_bee.png',
+    groups = { bee = 1, not_in_creative_inventory = 1 }
 })

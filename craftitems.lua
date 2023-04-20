@@ -94,7 +94,6 @@ local bottle_honey_def = {
         can_eat_when_full = 1
     },
     _mcl_saturation = 1.2,
-    stack_max = 16,
 }
 
 if minetest.get_modpath('farming') then

@@ -95,6 +95,11 @@ if x_farming.hunger_ng then
     dofile(path .. '/mod_support_hunger_ng.lua')
 end
 
+-- candles_3d
+if minetest.get_modpath('candles_3d') then
+    dofile(path .. '/mod_support_candles_3d.lua')
+end
+
 local mod_end_time = (minetest.get_us_time() - mod_start_time) / 1000000
 
 print('[Mod] x_farming loaded.. [' .. mod_end_time .. 's]')

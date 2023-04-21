@@ -915,7 +915,7 @@ for color_id, color_def in pairs(x_farming.candle_colors) do
                 handy = 1,
                 hoey = 1,
                 swordy = 1,
-                deco_block = 1
+                deco_block = 1,
             },
             selection_box = {
                 type = 'fixed',
@@ -1043,6 +1043,22 @@ for color_id, color_def in pairs(x_farming.candle_colors) do
         output = 'x_farming:candle_' .. color_id .. '_off_1',
         recipe = { 'group:candle', craft_dye },
     })
+
+    if minetest.get_modpath('mcl_dye') then
+        local mcl_groups = {}
+
+        for key, value in pairs(color_def.mcl_groups) do
+            table.insert(mcl_groups, key)
+        end
+
+        local mcl_craft_dye = 'group:dye,' .. table.concat(mcl_groups, ',')
+
+        minetest.register_craft({
+            type = 'shapeless',
+            output = 'x_farming:candle_' .. color_id .. '_off_1',
+            recipe = { 'group:candle', mcl_craft_dye },
+        })
+    end
 end
 
 --

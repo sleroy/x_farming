@@ -110,21 +110,82 @@ x_farming = {
     registered_plants = {},
     mcl = {},
     candle_colors = {
-        black = { name = S('Black'), hex = '#2B2B2B' },
-        dark_grey = { name = S('Dark Grey'), hex = '#4E4E4E' },
-        grey = { name = S('Grey'), hex = '#A5A5A5' },
-        red = { name = S('Red'), hex = '#AB5C4A' },
-        violet = { name = S('Violet'), hex = '#595287' },
-        magenta = { name = S('Magenta'), hex = '#A25B5D' },
-        pink = { name = S('Pink'), hex = '#FFA6A6' },
-        dark_green = { name = S('Dark Green'), hex = '#556E48' },
-        green = { name = S('Green'), hex = '#779154' },
-        cyan = { name = S('Cyan'), hex = '#4E7683' },
-        blue = { name = S('Blue'), hex = '#4B6696' },
-        light_blue = { name = S('Light Blue'), hex = '#648CB4', craft_dye = 'group:dye,color_light_blue' },
-        orange = { name = S('Orange'), hex = '#A86A4D' },
-        yellow = { name = S('Yellow'), hex = '#BD8D39' },
-        brown = { name = S('Brown'), hex = '#684E45' }
+        black = {
+            name = S('Black'),
+            hex = '#2B2B2B',
+            mcl_groups = { basecolor_black = 1, excolor_black = 1, unicolor_black = 1 }
+        },
+        dark_grey = {
+            name = S('Dark Grey'),
+            hex = '#4E4E4E',
+            mcl_groups = { basecolor_grey = 1, excolor_darkgrey = 1, unicolor_darkgrey = 1 }
+        },
+        grey = {
+            name = S('Grey'),
+            hex = '#A5A5A5',
+            mcl_groups = { basecolor_grey = 1, excolor_grey = 1, unicolor_grey = 1 }
+        },
+        red = {
+            name = S('Red'),
+            hex = '#AB5C4A',
+            mcl_groups = { basecolor_red = 1, excolor_red = 1, unicolor_red = 1 }
+        },
+        violet = {
+            name = S('Violet'),
+            hex = '#595287',
+            mcl_groups = { basecolor_magenta = 1, excolor_violet = 1, unicolor_violet = 1 }
+        },
+        magenta = {
+            name = S('Magenta'),
+            hex = '#A25B5D',
+            mcl_groups = { basecolor_magenta = 1, excolor_red_violet = 1, unicolor_red_violet = 1 }
+        },
+        pink = {
+            name = S('Pink'),
+            hex = '#FFA6A6',
+            mcl_groups = { basecolor_red = 1, excolor_red = 1, unicolor_light_red = 1 }
+        },
+        dark_green = {
+            name = S('Dark Green'),
+            hex = '#556E48',
+            mcl_groups = { basecolor_green = 1, excolor_green = 1, unicolor_dark_green = 1 }
+        },
+        green = {
+            name = S('Green'),
+            hex = '#779154',
+            mcl_groups = { basecolor_green = 1, excolor_green = 1, unicolor_green = 1 }
+        },
+        cyan = {
+            name = S('Cyan'),
+            hex = '#4E7683',
+            mcl_groups = { basecolor_cyan = 1, excolor_cyan = 1, unicolor_cyan = 1 }
+        },
+        blue = {
+            name = S('Blue'),
+            hex = '#4B6696',
+            mcl_groups = { basecolor_blue = 1, excolor_blue = 1, unicolor_blue = 1 }
+        },
+        light_blue = {
+            name = S('Light Blue'),
+            hex = '#648CB4',
+            craft_dye = 'group:dye,color_light_blue',
+            mcl_groups = { basecolor_blue = 1, excolor_blue = 1, unicolor_light_blue = 1 }
+        },
+        orange = {
+            name = S('Orange'),
+            hex = '#A86A4D',
+            mcl_groups = { basecolor_orange = 1, excolor_orange = 1, unicolor_orange = 1 }
+        },
+        yellow = {
+            name = S('Yellow'),
+            hex = '#BD8D39',
+            mcl_groups = { basecolor_yellow = 1, excolor_yellow = 1, unicolor_yellow = 1 }
+        },
+        brown = {
+            name = S('Brown'),
+            hex = '#684E45',
+            mcl_groups = { basecolor_brown = 1, excolor_orange = 1, unicolor_dark_orange = 1 }
+        }
     },
 }
 

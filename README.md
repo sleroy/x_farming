@@ -10,6 +10,7 @@ Hunger points in the description assume that you have [hbhubger](https://forum.m
 
 ## Features
 
+- Candles (with colors)
 - adds bees, bee hives and honey harvesting
 - compatible with Mineclone
 - compatible with Everness

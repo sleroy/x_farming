@@ -910,6 +910,10 @@ GNU Lesser General Public License v2.1 or later (see included LICENSE file)
 - x_farming_honeycomb_saw.png
 - x_farming_jar_empty.png
 - x_farming_jar_with_bee.png
+- x_farming_candle_flame_animated.png
+- x_farming_candle_item.png
+- x_farming_candle_mesh.png
+- x_farming_candle_no_flame.png
 
 **CC-BY-SA-3.0, modified by Thomas-S**
 
@@ -1119,6 +1123,10 @@ GNU Lesser General Public License v2.1 or later (see included LICENSE file)
 
 - x_farming_break_thin_glass.3.ogg
 
+**CC0-1.0, by 16FThumaF**, https://freesound.org/people/16FThumaF/sounds/499020/
+
+- x_farming_extinguish_candle.ogg
+
 
 ### Models
 
@@ -1138,3 +1146,7 @@ GNU Lesser General Public License v2.1 or later (see included LICENSE file)
 - x_farming_scarecrow_2.obj
 - x_farming_bee.obj
 - x_farming_honey.obj
+- x_farming_candle_1.obj
+- x_farming_candle_2.obj
+- x_farming_candle_3.obj
+- x_farming_candle_4.obj

@@ -725,3 +725,21 @@ minetest.register_craft({
         { 'x_farming:bottle_honey', 'vessels:glass_bottle' },
     },
 })
+
+-- Candles
+
+minetest.register_craft({
+    output = 'x_farming:candle_off_1',
+    recipe = {
+        { 'x_farming:string' },
+        { 'x_farming:honeycomb' },
+    },
+})
+
+minetest.register_craft({
+    output = 'x_farming:candle_off_1',
+    recipe = {
+        { 'farming:string' },
+        { 'x_farming:honeycomb' },
+    },
+})

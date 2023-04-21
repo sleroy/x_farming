@@ -108,7 +108,24 @@ x_farming = {
     registered_crates = {},
     lbm_nodenames_crates = {},
     registered_plants = {},
-    mcl = {}
+    mcl = {},
+    candle_colors = {
+        black = { name = S('Black'), hex = '#2B2B2B' },
+        dark_grey = { name = S('Dark Grey'), hex = '#4E4E4E' },
+        grey = { name = S('Grey'), hex = '#A5A5A5' },
+        red = { name = S('Red'), hex = '#AB5C4A' },
+        violet = { name = S('Violet'), hex = '#595287' },
+        magenta = { name = S('Magenta'), hex = '#A25B5D' },
+        pink = { name = S('Pink'), hex = '#FFA6A6' },
+        dark_green = { name = S('Dark Green'), hex = '#556E48' },
+        green = { name = S('Green'), hex = '#779154' },
+        cyan = { name = S('Cyan'), hex = '#4E7683' },
+        blue = { name = S('Blue'), hex = '#4B6696' },
+        light_blue = { name = S('Light Blue'), hex = '#648CB4', craft_dye = 'group:dye,color_light_blue' },
+        orange = { name = S('Orange'), hex = '#A86A4D' },
+        yellow = { name = S('Yellow'), hex = '#BD8D39' },
+        brown = { name = S('Brown'), hex = '#684E45' }
+    },
 }
 
 function x_farming.node_sound_grass_defaults(table)
@@ -2357,6 +2374,31 @@ function x_farming.get_spawn_pos_abr(dtime, intrvl, radius, chance, reduction)
             end
         end
     end
+end
+
+function x_farming.on_flood_candle(pos, oldnode, newnode)
+    local drops = minetest.get_node_drops(oldnode)
+
+    for _, item_name in ipairs(drops) do
+        minetest.add_item(pos, ItemStack(item_name))
+    end
+
+    -- Play flame-extinguish sound if liquid is not an 'igniter'
+    local nodedef = minetest.registered_items[newnode.name]
+
+    if not (nodedef and nodedef.groups
+        and nodedef.groups.igniter and nodedef.groups.igniter > 0)
+        and minetest.get_item_group(oldnode.name, 'candle_on') > 0
+    then
+        minetest.sound_play(
+            'x_farming_extinguish_candle',
+            { pos = pos, max_hear_distance = 16, gain = 0.07 },
+            true
+        )
+    end
+
+    -- Remove the torch node
+    return false
 end
 
 --

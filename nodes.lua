@@ -689,6 +689,362 @@ minetest.register_node('x_farming:honeycomb_block', {
     sounds = x_farming.node_sound_dirt_defaults()
 })
 
+-- Candles
+for i = 1, 4 do
+    -- OFF
+    minetest.register_node('x_farming:candle_off_' .. i, {
+        description = S('Candle'),
+        short_description = S('Candle'),
+        drawtype = 'mesh',
+        mesh = 'x_farming_candle_' .. i .. '.obj',
+        tiles = {
+            { name = 'x_farming_candle_mesh.png' },
+            {
+                name = 'x_farming_candle_no_flame.png',
+                backface_culling = false
+            }
+        },
+        paramtype2 = 'facedir',
+        use_texture_alpha = 'clip',
+        paramtype = 'light',
+        sunlight_propagates = true,
+        walkable = false,
+        liquids_pointable = false,
+        floodable = true,
+        inventory_image = 'x_farming_candle_item.png',
+        wield_image = 'x_farming_candle_item.png',
+        drop = {
+            max_items = i,
+            items = {
+                {
+                    rarity = 1,
+                    items = { 'x_farming:candle_off_1' },
+                },
+                {
+                    rarity = 1,
+                    items = { 'x_farming:candle_off_1' },
+                },
+                {
+                    rarity = 1,
+                    items = { 'x_farming:candle_off_1' },
+                },
+                {
+                    rarity = 1,
+                    items = { 'x_farming:candle_off_1' },
+                }
+            },
+        },
+        groups = {
+            -- MTG
+            snappy = 3,
+            candle = i == 1 and 1 or nil,
+            attached_node = 1,
+            not_in_creative_inventory = i == 1 and 0 or 1,
+            -- MCL
+            handy = 1,
+            hoey = 1,
+            swordy = 1,
+            deco_block = 1
+        },
+        selection_box = {
+            type = 'fixed',
+            fixed = { -0.3, -0.5, -0.3, 0.3, 0.4, 0.3 }
+        },
+        _mcl_blast_resistance = 0,
+        _mcl_hardness = 0,
+        sounds = x_farming.node_sound_wood_defaults(),
+        on_rightclick = function(pos, node, clicker, itemstack, pointed_thing)
+            local stack_name = itemstack:get_name()
+
+            if minetest.get_item_group(stack_name, 'candle') > 0 and i < 4 then
+                minetest.swap_node(pos, { name = 'x_farming:candle_off_' .. i + 1, param2 = node.param2 })
+                itemstack:take_item()
+            elseif minetest.get_item_group(stack_name, 'torch') > 0
+                or stack_name == 'fire:flint_and_steel'
+                or stack_name == 'mcl_fire:flint_and_steel'
+            then
+                minetest.swap_node(pos, { name = 'x_farming:candle_on_' .. i, param2 = node.param2 })
+            end
+
+            return itemstack
+        end,
+        on_flood = x_farming.on_flood_candle
+    })
+
+    -- ON
+    minetest.register_node('x_farming:candle_on_' .. i, {
+        description = S('Candle'),
+        short_description = S('Candle'),
+        drawtype = 'mesh',
+        mesh = 'x_farming_candle_' .. i .. '.obj',
+        tiles = {
+            { name = 'x_farming_candle_mesh.png' },
+            {
+                name = 'x_farming_candle_flame_animated.png',
+                backface_culling = false,
+                animation = {
+                    type = 'vertical_frames',
+                    aspect_w = 16,
+                    aspect_h = 16,
+                    length = 1
+                },
+            }
+        },
+        paramtype2 = 'facedir',
+        use_texture_alpha = 'clip',
+        paramtype = 'light',
+        sunlight_propagates = true,
+        walkable = false,
+        liquids_pointable = false,
+        floodable = true,
+        inventory_image = 'x_farming_candle_item.png',
+        wield_image = 'x_farming_candle_item.png',
+        drop = {
+            max_items = i,
+            items = {
+                {
+                    rarity = 1,
+                    items = { 'x_farming:candle_off_1' },
+                },
+                {
+                    rarity = 1,
+                    items = { 'x_farming:candle_off_1' },
+                },
+                {
+                    rarity = 1,
+                    items = { 'x_farming:candle_off_1' },
+                },
+                {
+                    rarity = 1,
+                    items = { 'x_farming:candle_off_1' },
+                }
+            },
+        },
+        groups = {
+            -- MTG
+            snappy = 3,
+            attached_node = 1,
+            candle_on = 1,
+            not_in_creative_inventory = 1,
+            -- MCL
+            handy = 1,
+            hoey = 1,
+            swordy = 1,
+            deco_block = 1
+        },
+        selection_box = {
+            type = 'fixed',
+            fixed = { -0.3, -0.5, -0.3, 0.3, 0.4, 0.3 }
+        },
+        _mcl_blast_resistance = 0,
+        _mcl_hardness = 0,
+        sounds = x_farming.node_sound_wood_defaults(),
+        light_source = i * 3,
+        on_rightclick = function(pos, node, clicker, itemstack, pointed_thing)
+            local stack_name = itemstack:get_name()
+
+            if minetest.get_item_group(stack_name, 'candle') > 0 and i < 4 then
+                minetest.swap_node(pos, { name = 'x_farming:candle_on_' .. i + 1, param2 = node.param2 })
+                itemstack:take_item()
+            else
+                minetest.swap_node(pos, { name = 'x_farming:candle_off_' .. i, param2 = node.param2 })
+            end
+
+            return itemstack
+        end,
+        on_flood = x_farming.on_flood_candle
+    })
+end
+
+-- Colored Candles
+for color_id, color_def in pairs(x_farming.candle_colors) do
+    local color_group = 'color_' .. color_id
+
+    for i = 1, 4 do
+        -- OFF
+        minetest.register_node('x_farming:candle_' .. color_id .. '_off_' .. i, {
+            description = color_def.name .. ' ' .. S('Candle'),
+            short_description = color_def.name .. ' ' .. S('Candle'),
+            drawtype = 'mesh',
+            mesh = 'x_farming_candle_' .. i .. '.obj',
+            tiles = {
+                { name = 'x_farming_candle_mesh.png^[multiply:' .. color_def.hex .. ':255' },
+                {
+                    name = 'x_farming_candle_no_flame.png',
+                    backface_culling = false
+                }
+            },
+            paramtype2 = 'facedir',
+            use_texture_alpha = 'clip',
+            paramtype = 'light',
+            sunlight_propagates = true,
+            walkable = false,
+            liquids_pointable = false,
+            floodable = true,
+            inventory_image = 'x_farming_candle_item.png^[multiply:' .. color_def.hex .. ':255',
+            wield_image = 'x_farming_candle_item.png^[multiply:' .. color_def.hex .. ':255',
+            drop = {
+                max_items = i,
+                items = {
+                    {
+                        rarity = 1,
+                        items = { 'x_farming:candle_' .. color_id .. '_off_1' },
+                    },
+                    {
+                        rarity = 1,
+                        items = { 'x_farming:candle_' .. color_id .. '_off_1' },
+                    },
+                    {
+                        rarity = 1,
+                        items = { 'x_farming:candle_' .. color_id .. '_off_1' },
+                    },
+                    {
+                        rarity = 1,
+                        items = { 'x_farming:candle_' .. color_id .. '_off_1' },
+                    }
+                },
+            },
+            groups = {
+                -- MTG
+                snappy = 3,
+                candle = i == 1 and 1 or nil,
+                attached_node = 1,
+                not_in_creative_inventory = i == 1 and 0 or 1,
+                ['candle_' .. '_' .. color_group] = 1,
+                -- MCL
+                handy = 1,
+                hoey = 1,
+                swordy = 1,
+                deco_block = 1
+            },
+            selection_box = {
+                type = 'fixed',
+                fixed = { -0.3, -0.5, -0.3, 0.3, 0.4, 0.3 }
+            },
+            _mcl_blast_resistance = 0,
+            _mcl_hardness = 0,
+            sounds = x_farming.node_sound_wood_defaults(),
+            on_rightclick = function(pos, node, clicker, itemstack, pointed_thing)
+                local stack_name = itemstack:get_name()
+
+                if minetest.get_item_group(stack_name, 'candle') > 0
+                    and minetest.get_item_group(stack_name, 'candle_' .. '_' .. color_group) > 0
+                    and i < 4
+                then
+                    minetest.swap_node(pos, { name = 'x_farming:candle_' .. color_id .. '_off_' .. i + 1, param2 = node.param2 })
+                    itemstack:take_item()
+                elseif minetest.get_item_group(stack_name, 'torch') > 0
+                    or stack_name == 'fire:flint_and_steel'
+                    or stack_name == 'mcl_fire:flint_and_steel'
+                then
+                    minetest.swap_node(pos, { name = 'x_farming:candle_' .. color_id .. '_on_' .. i, param2 = node.param2 })
+                end
+
+                return itemstack
+            end,
+            on_flood = x_farming.on_flood_candle
+        })
+
+        -- ON
+        minetest.register_node('x_farming:candle_' .. color_id .. '_on_' .. i, {
+            description = color_def.name .. ' ' .. S('Candle'),
+            short_description = color_def.name .. ' ' .. S('Candle'),
+            drawtype = 'mesh',
+            mesh = 'x_farming_candle_' .. i .. '.obj',
+            tiles = {
+                { name = 'x_farming_candle_mesh.png^[multiply:' .. color_def.hex .. ':255' },
+                {
+                    name = 'x_farming_candle_flame_animated.png',
+                    backface_culling = false,
+                    animation = {
+                        type = 'vertical_frames',
+                        aspect_w = 16,
+                        aspect_h = 16,
+                        length = 1
+                    },
+                }
+            },
+            paramtype2 = 'facedir',
+            use_texture_alpha = 'clip',
+            paramtype = 'light',
+            sunlight_propagates = true,
+            walkable = false,
+            liquids_pointable = false,
+            floodable = true,
+            inventory_image = 'x_farming_candle_item.png^[multiply:' .. color_def.hex .. ':255',
+            wield_image = 'x_farming_candle_item.png^[multiply:' .. color_def.hex .. ':255',
+            drop = {
+                max_items = i,
+                items = {
+                    {
+                        rarity = 1,
+                        items = { 'x_farming:candle_' .. color_id .. '_off_1' },
+                    },
+                    {
+                        rarity = 1,
+                        items = { 'x_farming:candle_' .. color_id .. '_off_1' },
+                    },
+                    {
+                        rarity = 1,
+                        items = { 'x_farming:candle_' .. color_id .. '_off_1' },
+                    },
+                    {
+                        rarity = 1,
+                        items = { 'x_farming:candle_' .. color_id .. '_off_1' },
+                    }
+                },
+            },
+            groups = {
+                -- MTG
+                snappy = 3,
+                attached_node = 1,
+                candle_on = 1,
+                -- ['candle_' .. '_' .. color_group] = 1,
+                not_in_creative_inventory = 1,
+                -- MCL
+                handy = 1,
+                hoey = 1,
+                swordy = 1,
+                deco_block = 1
+            },
+            selection_box = {
+                type = 'fixed',
+                fixed = { -0.3, -0.5, -0.3, 0.3, 0.4, 0.3 }
+            },
+            _mcl_blast_resistance = 0,
+            _mcl_hardness = 0,
+            sounds = x_farming.node_sound_wood_defaults(),
+            light_source = i * 3,
+            on_rightclick = function(pos, node, clicker, itemstack, pointed_thing)
+                local stack_name = itemstack:get_name()
+
+                if minetest.get_item_group(stack_name, 'candle') > 0 and i < 4 then
+                    minetest.swap_node(pos, { name = 'x_farming:candle_' .. color_id .. '_on_' .. i + 1, param2 = node.param2 })
+                    itemstack:take_item()
+                else
+                    minetest.swap_node(pos, { name = 'x_farming:candle_' .. color_id .. '_off_' .. i, param2 = node.param2 })
+                end
+
+                return itemstack
+            end,
+            on_flood = x_farming.on_flood_candle
+        })
+    end
+
+    local craft_dye = 'group:dye,' .. color_group
+
+    if color_def.craft_dye then
+        craft_dye = color_def.craft_dye
+    end
+
+    -- Crafting
+    minetest.register_craft({
+        type = 'shapeless',
+        output = 'x_farming:candle_' .. color_id .. '_off_1',
+        recipe = { 'group:candle', craft_dye },
+    })
+end
+
 --
 -- Convert farming soils - copy from MTG
 --

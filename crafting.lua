@@ -743,3 +743,30 @@ minetest.register_craft({
         { 'x_farming:honeycomb' },
     },
 })
+
+-- Rope
+
+minetest.register_craft({
+    output = 'x_farming:rope',
+    recipe = {
+        { '', 'x_farming:barley', '' },
+        { '', 'x_farming:barley', '' },
+        { '', 'x_farming:barley', '' }
+    }
+})
+
+minetest.register_craft({
+    output = 'x_farming:rope_fence 4',
+    recipe = {
+        { 'x_farming:rope', 'x_farming:rope', 'x_farming:rope' },
+        { 'x_farming:rope', 'x_farming:rope', 'x_farming:rope' },
+    }
+})
+
+minetest.register_craft({
+    output = 'x_farming:safety_net',
+    recipe = {
+        { 'x_farming:rope', 'x_farming:rope' },
+        { 'x_farming:rope', 'x_farming:rope' },
+    }
+})

@@ -914,6 +914,12 @@ GNU Lesser General Public License v2.1 or later (see included LICENSE file)
 - x_farming_candle_item.png
 - x_farming_candle_mesh.png
 - x_farming_candle_no_flame.png
+- x_farming_rope.png
+- x_farming_rope_item.png
+- x_farming_rope_fence.png
+- x_farming_rope_fence_item.png
+- x_farming_safety_net.png
+- x_farming_safety_net_side.png
 
 **CC-BY-SA-3.0, modified by Thomas-S**
 
@@ -1126,6 +1132,29 @@ GNU Lesser General Public License v2.1 or later (see included LICENSE file)
 **CC0-1.0, by 16FThumaF**, https://freesound.org/people/16FThumaF/sounds/499020/
 
 - x_farming_extinguish_candle.ogg
+
+**CC0-1.0, by bahaish**, https://freesound.org/people/bahaish/sounds/145786/
+
+- x_farming_rope_footstep.1.ogg
+- x_farming_rope_footstep.2.ogg
+- x_farming_rope_footstep.3.ogg
+- x_farming_rope_footstep.4.ogg
+
+**CC0-1.0, by dansotak**, https://freesound.org/people/dansotak/sounds/137711/
+
+- x_farming_rope_hit.1.ogg
+- x_farming_rope_hit.2.ogg
+- x_farming_rope_hit.3.ogg
+- x_farming_rope_hit.4.ogg
+
+**CC-BY-4.0, by Benboncan**,
+https://freesound.org/people/Benboncan/sounds/78248/
+https://freesound.org/people/Benboncan/sounds/78249/
+https://freesound.org/people/Benboncan/sounds/78250/
+
+- x_farming_rope_dug.1.ogg
+- x_farming_rope_dug.2.ogg
+- x_farming_rope_dug.3.ogg
 
 
 ### Models

@@ -279,6 +279,15 @@ function x_farming.node_sound_rope_defaults(table)
     return table
 end
 
+function x_farming.node_sound_pillow_defaults(table)
+    table = table or {}
+    table.footstep = table.footstep or { name = 'x_farming_pillow_footstep', gain = 0.1 }
+    table.dig = table.dig or { name = 'x_farming_pillow_hit', gain = 0.15 }
+    table.dug = table.dug or { name = 'x_farming_pillow_dug', gain = 0.2 }
+    table.place = table.place or { name = 'x_farming_pillow_footstep', gain = 0.25 }
+    return table
+end
+
 ---how often node timers for plants will tick, +/- some random value
 function x_farming.tick_block(pos)
     minetest.get_node_timer(pos):start(math.random(498, 1287))

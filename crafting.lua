@@ -339,7 +339,7 @@ minetest.register_craft({
 minetest.register_craft({
     output = 'x_farming:seed_icefishing',
     recipe = {
-        { 'group:wool', 'x_farming:string', 'group:stick' },
+        { 'group:pillow', 'x_farming:string', 'group:stick' },
         { '', 'x_farming:string', 'group:stick' },
         { '', 'x_farming:string', 'group:stick' }
     },
@@ -529,7 +529,7 @@ minetest.register_craft({
     output = 'x_farming:scarecrow',
     recipe = {
         { '', 'x_farming:pumpkin_block', '' },
-        { 'x_farming:barley_stack', 'group:wool', 'x_farming:barley_stack' },
+        { 'x_farming:barley_stack', 'group:pillow', 'x_farming:barley_stack' },
         { '', 'group:wood', '' },
     }
 })
@@ -587,8 +587,8 @@ minetest.register_craft({
     output = 'x_farming:christmas_tree_sapling',
     recipe = {
         { 'default:goldblock', 'default:meselamp', 'default:goldblock' },
-        { 'wool:green', 'default:pine_sapling', 'wool:blue' },
-        { 'wool:yellow', 'default:pine_sapling', 'wool:red' }
+        { 'x_farming:pillow_green', 'default:pine_sapling', 'x_farming:pillow_blue' },
+        { 'x_farming:pillow_yellow', 'default:pine_sapling', 'x_farming:pillow_red' }
     }
 })
 
@@ -608,16 +608,13 @@ minetest.register_craft({
 })
 
 -- Cotton
-
-if minetest.get_modpath('wool') then
-    minetest.register_craft({
-        output = 'wool:white',
-        recipe = {
-            { 'x_farming:cotton', 'x_farming:cotton' },
-            { 'x_farming:cotton', 'x_farming:cotton' },
-        }
-    })
-end
+minetest.register_craft({
+    output = 'x_farming:pillow_white',
+    recipe = {
+        { 'x_farming:cotton', 'x_farming:cotton' },
+        { 'x_farming:cotton', 'x_farming:cotton' },
+    }
+})
 
 minetest.register_craft({
     output = 'x_farming:string 2',
@@ -769,4 +766,13 @@ minetest.register_craft({
         { 'x_farming:rope', 'x_farming:rope' },
         { 'x_farming:rope', 'x_farming:rope' },
     }
+})
+
+
+-- Fuels
+
+minetest.register_craft({
+    type = 'fuel',
+    recipe = 'group:pillow',
+    burntime = 5,
 })

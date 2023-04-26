@@ -1118,3 +1118,158 @@ if not minetest.get_modpath('farming') then
         end,
     })
 end
+
+-- Pillow
+
+local pillow_colors = {
+    {
+        name = 'white',
+        description = S('White'),
+        mcl_group = { 'unicolor_white' }
+    },
+    {
+        name = 'grey',
+        description = S('Grey'),
+        mcl_group = { 'unicolor_grey' }
+    },
+    {
+        name = 'dark_grey',
+        description = S('Dark Grey'),
+        mcl_group = { 'unicolor_darkgrey' }
+    },
+    {
+        name = 'black',
+        description = S('Black'),
+        mcl_group = { 'unicolor_black' }
+    },
+    {
+        name = 'violet',
+        description = S('Violet'),
+        mcl_group = { 'unicolor_red_violet' }
+    },
+    {
+        name = 'blue',
+        description = S('Blue'),
+        mcl_group = { 'unicolor_blue' }
+    },
+    {
+        name = 'light_blue',
+        description = S('Light Blue'),
+        mcl_group = { 'unicolor_light_blue' }
+    },
+    {
+        name = 'cyan',
+        description = S('Cyan'),
+        mcl_group = { 'unicolor_cyan' }
+    },
+    {
+        name = 'dark_green',
+        description = S('Dark Green'),
+        mcl_group = { 'unicolor_dark_green' }
+    },
+    {
+        name = 'green',
+        description = S('Green'),
+        mcl_group = { 'unicolor_green' }
+    },
+    {
+        name = 'yellow',
+        description = S('Yellow'),
+        mcl_group = { 'unicolor_yellow' }
+    },
+    {
+        name = 'brown',
+        description = S('Brown'),
+        mcl_group = { 'unicolor_dark_orange' }
+    },
+    {
+        name = 'orange',
+        description = S('Orange'),
+        mcl_group = { 'unicolor_orange' }
+    },
+    {
+        name = 'red',
+        description = S('Red'),
+        mcl_group = { 'unicolor_red' }
+    },
+    {
+        name = 'magenta',
+        description = S('Magenta'),
+        mcl_group = { 'unicolor_red_violet' }
+    },
+    {
+        name = 'pink',
+        description = S('Pink'),
+        mcl_group = { 'unicolor_light_red' }
+    },
+}
+
+if not minetest.get_modpath('x_clay') then
+    minetest.register_craftitem('x_farming:dye_light_blue', {
+        inventory_image = 'x_farming_dye_light_blue.png',
+        description = S('Light Blue Dye'),
+        short_description = S('Light Blue Dye'),
+        groups = { dye = 1, color_light_blue = 1 }
+    })
+
+    minetest.register_craft({
+        type = 'shapeless',
+        output = 'x_clay:dye_light_blue 2',
+        recipe = { 'group:dye,color_white', 'group:dye,color_blue' },
+    })
+end
+
+for _, def in ipairs(pillow_colors) do
+    local color_group = 'color_' .. def.name
+
+    minetest.register_node('x_farming:pillow_' .. def.name, {
+        description = S('Pillow') .. ' ' .. def.description,
+        short_description = S('Pillow') .. ' ' .. def.description,
+        tiles = { 'x_farming_pillow_' .. def.name .. '.png' },
+        is_ground_content = false,
+        groups = {
+            -- MTG
+            snappy = 2,
+            choppy = 2,
+            oddly_breakable_by_hand = 3,
+            flammable = 3,
+            pillow = 1,
+            [color_group] = 1,
+            -- MCL
+            handy = 1,
+            shearsy_wool = 1,
+            fire_encouragement = 30,
+            fire_flammability = 60,
+            building_block = 1,
+            [def.mcl_group[1]] = 1,
+        },
+        _mcl_hardness = 0.8,
+        _mcl_blast_resistance = 0.8,
+        sounds = x_farming.node_sound_pillow_defaults(),
+    })
+
+    if minetest.get_modpath('mcl_dye') and x_farming.candle_colors[def.name] then
+        local mcl_groups = {}
+        local color_def = x_farming.candle_colors[def.name]
+
+        for key, value in pairs(color_def.mcl_groups) do
+            table.insert(mcl_groups, key)
+        end
+
+        local mcl_craft_dye = 'group:dye,' .. table.concat(mcl_groups, ',')
+
+        minetest.register_craft({
+            type = 'shapeless',
+            output = 'x_farming:pillow_' .. def.name,
+            recipe = { mcl_craft_dye, 'group:pillow' },
+        })
+    end
+
+    if minetest.get_modpath('dye') then
+        minetest.register_craft({
+            type = 'shapeless',
+            output = 'x_farming:pillow_' .. def.name,
+            recipe = { 'group:dye,' .. color_group, 'group:pillow' },
+        })
+    end
+end

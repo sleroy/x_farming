@@ -920,6 +920,22 @@ GNU Lesser General Public License v2.1 or later (see included LICENSE file)
 - x_farming_rope_fence_item.png
 - x_farming_safety_net.png
 - x_farming_safety_net_side.png
+- x_farming_pillow_violet.png
+- x_farming_pillow_pink.png
+- x_farming_pillow_yellow.png
+- x_farming_pillow_white.png
+- x_farming_pillow_light_blue.png
+- x_farming_pillow_green.png
+- x_farming_pillow_orange.png
+- x_farming_pillow_red.png
+- x_farming_pillow_blue.png
+- x_farming_pillow_magenta.png
+- x_farming_pillow_cyan.png
+- x_farming_pillow_dark_green.png
+- x_farming_pillow_brown.png
+- x_farming_pillow_grey.png
+- x_farming_pillow_dark_grey.png
+- x_farming_pillow_black.png
 
 **CC-BY-SA-3.0, modified by Thomas-S**
 
@@ -1156,6 +1172,22 @@ https://freesound.org/people/Benboncan/sounds/78250/
 - x_farming_rope_dug.2.ogg
 - x_farming_rope_dug.3.ogg
 
+**CC0-1.0, by cmorris035**, https://freesound.org/people/cmorris035/sounds/207275/
+
+- x_farming_pillow_footstep.1.ogg
+- x_farming_pillow_footstep.2.ogg
+- x_farming_pillow_footstep.3.ogg
+- x_farming_pillow_footstep.4.ogg
+- x_farming_pillow_dug.1.ogg
+- x_farming_pillow_dug.2.ogg
+- x_farming_pillow_dug.3.ogg
+
+**CC0-1.0, by Jay_You**, https://freesound.org/people/Jay_You/sounds/538744/
+
+- x_farming_pillow_hit.1.ogg
+- x_farming_pillow_hit.2.ogg
+- x_farming_pillow_hit.3.ogg
+- x_farming_pillow_hit.4.ogg
 
 ### Models
 

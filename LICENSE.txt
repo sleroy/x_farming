@@ -1227,6 +1227,12 @@ https://freesound.org/people/Benboncan/sounds/78250/
 - x_farming_stove_sizzle.3.ogg
 - x_farming_stove_sizzle.2.ogg
 
+**CC-BY-3.0, by Quistard**, https://freesound.org/people/Quistard/sounds/240234/
+
+- x_farming_stove_sizzle_put.1.ogg
+- x_farming_stove_sizzle_put.2.ogg
+- x_farming_stove_sizzle_put.3.ogg
+
 ### Models
 
 **CC-BY-SA-4.0, by SaKeL**

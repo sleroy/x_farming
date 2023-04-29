@@ -685,8 +685,14 @@ minetest.register_node('x_farming:stove_active', {
             obj:set_rotation(ent_rot)
         end
 
+        -- Play cooling sound
+        minetest.sound_play('x_farming_stove_sizzle_put', {
+            pos = ent_pos,
+            max_hear_distance = 16,
+            gain = 0.1
+        }, true)
+
         meta:set_string('grid_matrix', minetest.serialize(grid_matrix))
-        -- minetest.get_node_timer(pos):start(1)
 
         return itemstack
     end,

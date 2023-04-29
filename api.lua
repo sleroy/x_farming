@@ -855,26 +855,36 @@ x_farming.register_plant = function(name, def)
         g[v] = 1
     end
 
+    if def.groups then
+        for group, value in pairs(def.groups) do
+            g[group] = value
+        end
+    end
+
     minetest.register_node(':' .. mname .. ':seed_' .. pname, {
         description = def.description,
-        tiles = { def.inventory_image },
+        tiles = def.tiles or { def.inventory_image },
         inventory_image = def.inventory_image,
         wield_image = def.inventory_image,
-        drawtype = 'signlike',
+        drawtype = def.drawtype or 'signlike',
         groups = g,
         paramtype = 'light',
-        paramtype2 = 'wallmounted',
+        paramtype2 = def.paramtype2 or 'wallmounted',
         place_param2 = def.place_param2 or nil, -- this isn't actually used for placement
         walkable = false,
         sunlight_propagates = true,
-        selection_box = {
+        selection_box = def.selection_box or {
             type = 'fixed',
             fixed = { -0.5, -0.5, -0.5, 0.5, -5 / 16, 0.5 },
         },
         fertility = def.fertility,
         sounds = x_farming.node_sound_grass_defaults(),
+        special_tiles = def.special_tiles and { { name = def.special_tiles, tileable_vertical = true } } or nil,
+        visual_scale = def.visual_scale or 1,
+        node_dig_prediction = def.node_dig_prediction or '',
+        node_placement_prediction = def.node_placement_prediction or nil,
 
-        on_place = function(itemstack, placer, pointed_thing)
+        on_place = def.on_place or function(itemstack, placer, pointed_thing)
             local under = pointed_thing.under
             local node = minetest.get_node(under)
             local udef = minetest.registered_nodes[node.name]
@@ -887,8 +897,9 @@ x_farming.register_plant = function(name, def)
 
             return x_farming.place_seed(itemstack, placer, pointed_thing, mname .. ':seed_' .. pname)
         end,
+        after_destruct = def.after_destruct or nil,
         next_plant = mname .. ':' .. pname .. '_1',
-        on_timer = x_farming.grow_plant,
+        on_timer = def.on_timer or x_farming.grow_plant,
         minlight = def.minlight,
         maxlight = def.maxlight,
         _mcl_blast_resistance = 0,
@@ -933,6 +944,12 @@ x_farming.register_plant = function(name, def)
         }
         nodegroups[pname] = i
 
+        if def.groups then
+            for group, value in pairs(def.groups) do
+                nodegroups[group] = value
+            end
+        end
+
         local next_plant = nil
 
         if i < def.steps then
@@ -940,28 +957,39 @@ x_farming.register_plant = function(name, def)
             lbm_nodes[#lbm_nodes + 1] = mname .. ':' .. pname .. '_' .. i
         end
 
+        local _buildable_to = true
+
+        if def.buildable_to ~= nil then
+            _buildable_to = def.buildable_to
+        end
+
         minetest.register_node(':' .. mname .. ':' .. pname .. '_' .. i, {
-            drawtype = 'plantlike',
+            drawtype = def.drawtype or 'plantlike',
             waving = 1,
-            tiles = { mname .. '_' .. pname .. '_' .. i .. '.png' },
+            tiles = def.tiles or { mname .. '_' .. pname .. '_' .. i .. '.png' },
+            special_tiles = def.special_tiles and { { name = mname .. '_' .. pname .. '_' .. i .. '.png', tileable_vertical = true } } or nil,
             paramtype = 'light',
             paramtype2 = def.paramtype2 or nil,
             place_param2 = def.place_param2 or nil,
+            visual_scale = def.visual_scale or 1,
+            node_dig_prediction = def.node_dig_prediction or '',
+            node_placement_prediction = def.node_placement_prediction or nil,
             walkable = false,
-            buildable_to = true,
+            buildable_to = _buildable_to,
             drop = drop,
-            selection_box = {
+            selection_box = def['selection_box_' .. i] and def['selection_box_' .. i] or {
                 type = 'fixed',
                 fixed = { -0.5, -0.5, -0.5, 0.5, -5 / 16, 0.5 },
             },
             groups = nodegroups,
             sounds = x_farming.node_sound_leaves_defaults(),
             next_plant = next_plant,
-            on_timer = x_farming.grow_plant,
+            on_timer = def.on_timer or x_farming.grow_plant,
             minlight = def.minlight,
             maxlight = def.maxlight,
             _mcl_blast_resistance = 0,
             _mcl_hardness = 0,
+            after_destruct = def.after_destruct or nil,
         })
     end
 
@@ -1522,6 +1550,9 @@ function x_farming.register_bag(name, def)
         not_in_creative_inventory = 1,
         flammable = 2
     }
+    -- MCL
+    _def._mcl_hardness = 0.6
+    _def._mcl_blast_resistance = 0.6
     _def.stack_max = def.stack_max or 1
     _def.mod_origin = 'x_farming'
 

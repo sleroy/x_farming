@@ -47,35 +47,11 @@ local override_def = {
 
 minetest.override_item('x_farming:barley', override_def)
 
--- barley stack
-minetest.register_node('x_farming:barley_stack', {
-    description = S('Barley Stack'),
-    tiles = {
-        'x_farming_barley_stack_top.png',
-        'x_farming_barley_stack_top.png',
-        'x_farming_barley_stack_side.png',
-    },
-    paramtype2 = 'facedir',
-    is_ground_content = false,
-    groups = { snappy = 3, flammable = 4, fall_damage_add_percent = -30 },
-    sounds = x_farming.node_sound_leaves_defaults(),
-    on_place = minetest.rotate_node
-})
-
+-- Registered before the stairs so the stairs get fuel recipes.
 minetest.register_craft({
-    output = 'x_farming:barley_stack 3',
-    recipe = {
-        {'x_farming:barley', 'x_farming:barley', 'x_farming:barley'},
-        {'x_farming:barley', 'x_farming:barley', 'x_farming:barley'},
-        {'x_farming:barley', 'x_farming:barley', 'x_farming:barley'},
-    }
-})
-
-minetest.register_craft({
-    output = 'x_farming:barley 3',
-    recipe = {
-        { 'x_farming:barley_stack' },
-    }
+    type = 'fuel',
+    recipe = 'x_farming:barley_stack',
+    burntime = 3,
 })
 
 if minetest.get_modpath('stairs') then
@@ -95,13 +71,6 @@ if minetest.get_modpath('stairs') then
             sounds, true)
     end
 end
-
--- Registered before the stairs so the stairs get fuel recipes.
-minetest.register_craft({
-    type = 'fuel',
-    recipe = 'x_farming:barley_stack',
-    burntime = 3,
-})
 
 ---crate
 x_farming.register_crate('crate_barley_3', {

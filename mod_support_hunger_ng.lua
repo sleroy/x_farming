@@ -76,3 +76,7 @@ if x_farming.vessels then
 else
     hunger_ng.add_hunger_data('x_farming:bottle_honey', { satiates = 6, returns = 'x_farming:glass_bottle' })
 end
+
+-- Sushi
+hunger_ng.add_hunger_data('x_farming:sushi_maki', { satiates = 5 })
+hunger_ng.add_hunger_data('x_farming:sushi_nigiri', { satiates = 3 })

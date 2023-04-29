@@ -135,3 +135,66 @@ minetest.register_craftitem('x_farming:jar_with_bee', {
     inventory_image = 'x_farming_jar_with_bee.png',
     groups = { bee = 1, not_in_creative_inventory = 1 }
 })
+
+-- Rice
+minetest.register_craftitem('x_farming:rice_grains', {
+    description = S('Rice Grains'),
+    inventory_image = 'x_farming_rice_grains.png',
+})
+
+-- Sushi
+local sushi_maki_def = {
+    description = S('Sushi Maki'),
+    inventory_image = 'x_farming_sushi_maki.png',
+    groups = {
+        -- MTG
+        flammable = 2,
+        -- MCL
+        food = 2,
+        eatable = 5,
+        compostability = 85
+    },
+    _mcl_saturation = 6.0,
+}
+
+if minetest.get_modpath('farming') then
+    sushi_maki_def.on_use = minetest.item_eat(5)
+end
+
+if minetest.get_modpath('mcl_farming') then
+    sushi_maki_def.on_place = minetest.item_eat(5)
+    sushi_maki_def.on_secondary_use = minetest.item_eat(5)
+end
+
+minetest.register_craftitem('x_farming:sushi_maki', sushi_maki_def)
+
+local sushi_nigiri_def = {
+    description = S('Sushi Nigiri'),
+    inventory_image = 'x_farming_sushi_nigiri.png',
+    groups = {
+        -- MTG
+        flammable = 2,
+        -- MCL
+        food = 2,
+        eatable = 3,
+        compostability = 85
+    },
+    _mcl_saturation = 4.0,
+}
+
+if minetest.get_modpath('farming') then
+    sushi_nigiri_def.on_use = minetest.item_eat(3)
+end
+
+if minetest.get_modpath('mcl_farming') then
+    sushi_nigiri_def.on_place = minetest.item_eat(3)
+    sushi_nigiri_def.on_secondary_use = minetest.item_eat(3)
+end
+
+minetest.register_craftitem('x_farming:sushi_nigiri', sushi_nigiri_def)
+
+-- Brick
+minetest.register_craftitem('x_farming:silt_loam_brick', {
+    description = S('Silt Loam Brick'),
+    inventory_image = 'x_farming_silt_loam_brick.png',
+})

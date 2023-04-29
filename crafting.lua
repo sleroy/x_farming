@@ -257,6 +257,12 @@ minetest.register_craft({
 
 minetest.register_craft({
     type = 'fuel',
+    recipe = 'x_farming:rice',
+    burntime = 1,
+})
+
+minetest.register_craft({
+    type = 'fuel',
     recipe = 'x_farming:cotton',
     burntime = 1,
 })
@@ -264,6 +270,12 @@ minetest.register_craft({
 minetest.register_craft({
     type = 'fuel',
     recipe = 'x_farming:hoe_wood',
+    burntime = 5,
+})
+
+minetest.register_craft({
+    type = 'fuel',
+    recipe = 'group:pillow',
     burntime = 5,
 })
 
@@ -595,6 +607,22 @@ minetest.register_craft({
 -- Barley
 
 minetest.register_craft({
+    output = 'x_farming:barley_stack 3',
+    recipe = {
+        { 'x_farming:barley', 'x_farming:barley', 'x_farming:barley' },
+        { 'x_farming:barley', 'x_farming:barley', 'x_farming:barley' },
+        { 'x_farming:barley', 'x_farming:barley', 'x_farming:barley' },
+    }
+})
+
+minetest.register_craft({
+    output = 'x_farming:barley 3',
+    recipe = {
+        { 'x_farming:barley_stack' },
+    }
+})
+
+minetest.register_craft({
     type = 'shapeless',
     output = 'x_farming:flour',
     recipe = { 'x_farming:barley', 'x_farming:barley', 'x_farming:barley', 'x_farming:barley' }
@@ -768,11 +796,105 @@ minetest.register_craft({
     }
 })
 
-
--- Fuels
+-- Rice
+minetest.register_craft({
+    type = 'shapeless',
+    output = 'x_farming:silt_loam_soil',
+    recipe = { 'group:soil', 'default:clay', 'group:sand' }
+})
 
 minetest.register_craft({
-    type = 'fuel',
-    recipe = 'group:pillow',
-    burntime = 5,
+    type = 'shapeless',
+    output = 'x_farming:silt_loam_soil',
+    recipe = { 'group:soil', 'default:clay', 'group:everness_sand' }
+})
+
+minetest.register_craft({
+    type = 'shapeless',
+    output = 'x_farming:silt_loam_soil',
+    recipe = { 'group:soil', 'group:hardenedclay', 'group:sand' }
+})
+
+minetest.register_craft({
+    type = 'shapeless',
+    output = 'x_farming:silt_loam_soil',
+    recipe = { 'group:soil', 'group:hardenedclay', 'group:everness_sand' }
+})
+
+minetest.register_craft({
+    type = 'shapeless',
+    output = 'x_farming:silt_loam_soil',
+    recipe = { 'group:soil', 'group:hardenedclay_smooth', 'group:sand' }
+})
+
+minetest.register_craft({
+    type = 'shapeless',
+    output = 'x_farming:silt_loam_soil',
+    recipe = { 'group:soil', 'group:hardenedclay_smooth', 'group:everness_sand' }
+})
+
+minetest.register_craft({
+    type = 'cooking',
+    output = 'x_farming:rice_grains',
+    recipe = 'x_farming:rice'
+})
+
+minetest.register_craft({
+    output = 'x_farming:rice_stack 3',
+    recipe = {
+        { 'x_farming:rice', 'x_farming:rice', 'x_farming:rice' },
+        { 'x_farming:rice', 'x_farming:rice', 'x_farming:rice' },
+        { 'x_farming:rice', 'x_farming:rice', 'x_farming:rice' },
+    }
+})
+
+minetest.register_craft({
+    output = 'x_farming:rice 3',
+    recipe = {
+        { 'x_farming:rice_stack' },
+    }
+})
+
+minetest.register_craft({
+    output = 'x_farming:silt_loam_brick_block',
+    recipe = {
+        { 'x_farming:silt_loam_brick', 'x_farming:silt_loam_brick' },
+        { 'x_farming:silt_loam_brick', 'x_farming:silt_loam_brick' },
+    }
+})
+
+minetest.register_craft({
+    output = 'x_farming:silt_loam_brick 4',
+    recipe = {
+        { 'x_farming:silt_loam_brick_block' },
+    }
+})
+
+minetest.register_craft({
+    type = 'cooking',
+    output = 'x_farming:silt_loam_brick',
+    recipe = 'x_farming:silt_loam_soil',
+})
+
+minetest.register_craft({
+    output = 'x_farming:stove',
+    recipe = {
+        { 'default:steel_ingot', 'default:steel_ingot', 'default:steel_ingot' },
+        { 'x_farming:silt_loam_brick_block', '', 'x_farming:silt_loam_brick_block' },
+        { 'x_farming:silt_loam_brick_block', 'default:furnace', 'x_farming:silt_loam_brick_block' }
+    }
+})
+
+-- Sushi
+
+minetest.register_craft({
+    type = 'shapeless',
+    output = 'x_farming:sushi_maki',
+    recipe = { 'x_farming:rice_grains', 'default:sand_with_kelp', 'group:fish' }
+})
+
+minetest.register_craft({
+    type = 'shapeless',
+    output = 'x_farming:sushi_nigiri',
+    recipe = { 'x_farming:rice_grains', 'group:fish' }
 })

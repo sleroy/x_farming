@@ -758,7 +758,10 @@ for i = 1, 4 do
 
             if minetest.get_item_group(stack_name, 'candle') > 0 and i < 4 then
                 minetest.swap_node(pos, { name = 'x_farming:candle_off_' .. i + 1, param2 = node.param2 })
-                itemstack:take_item()
+
+                if not minetest.is_creative_enabled(clicker:get_player_name()) then
+                    itemstack:take_item()
+                end
             elseif minetest.get_item_group(stack_name, 'torch') > 0
                 or stack_name == 'fire:flint_and_steel'
                 or stack_name == 'mcl_fire:flint_and_steel'
@@ -845,7 +848,10 @@ for i = 1, 4 do
 
             if minetest.get_item_group(stack_name, 'candle') > 0 and i < 4 then
                 minetest.swap_node(pos, { name = 'x_farming:candle_on_' .. i + 1, param2 = node.param2 })
-                itemstack:take_item()
+
+                if not minetest.is_creative_enabled(clicker:get_player_name()) then
+                    itemstack:take_item()
+                end
             else
                 minetest.swap_node(pos, { name = 'x_farming:candle_off_' .. i, param2 = node.param2 })
             end
@@ -932,7 +938,10 @@ for color_id, color_def in pairs(x_farming.candle_colors) do
                     and i < 4
                 then
                     minetest.swap_node(pos, { name = 'x_farming:candle_' .. color_id .. '_off_' .. i + 1, param2 = node.param2 })
-                    itemstack:take_item()
+
+                    if not minetest.is_creative_enabled(clicker:get_player_name()) then
+                        itemstack:take_item()
+                    end
                 elseif minetest.get_item_group(stack_name, 'torch') > 0
                     or stack_name == 'fire:flint_and_steel'
                     or stack_name == 'mcl_fire:flint_and_steel'
@@ -1020,7 +1029,10 @@ for color_id, color_def in pairs(x_farming.candle_colors) do
 
                 if minetest.get_item_group(stack_name, 'candle') > 0 and i < 4 then
                     minetest.swap_node(pos, { name = 'x_farming:candle_' .. color_id .. '_on_' .. i + 1, param2 = node.param2 })
-                    itemstack:take_item()
+
+                    if not minetest.is_creative_enabled(clicker:get_player_name()) then
+                        itemstack:take_item()
+                    end
                 else
                     minetest.swap_node(pos, { name = 'x_farming:candle_' .. color_id .. '_off_' .. i, param2 = node.param2 })
                 end
@@ -1059,64 +1071,6 @@ for color_id, color_def in pairs(x_farming.candle_colors) do
             recipe = { 'group:candle', mcl_craft_dye },
         })
     end
-end
-
---
--- Convert farming soils - copy from MTG
---
-
-if not minetest.get_modpath('farming') then
-    minetest.register_abm({
-        label = 'X Farming soil',
-        nodenames = { 'group:field' },
-        interval = 15,
-        chance = 4,
-        action = function(pos, node)
-            local n_def = minetest.registered_nodes[node.name] or nil
-            local wet = n_def.soil.wet or nil
-            local base = n_def.soil.base or nil
-            local dry = n_def.soil.dry or nil
-            if not n_def or not n_def.soil or not wet or not base or not dry then
-                return
-            end
-
-            pos.y = pos.y + 1
-            local nn = minetest.get_node_or_nil(pos)
-            if not nn or not nn.name then
-                return
-            end
-            local nn_def = minetest.registered_nodes[nn.name] or nil
-            pos.y = pos.y - 1
-
-            if nn_def and nn_def.walkable and minetest.get_item_group(nn.name, 'plant') == 0 then
-                minetest.set_node(pos, { name = base })
-                return
-            end
-            -- check if there is water nearby
-            local wet_lvl = minetest.get_item_group(node.name, 'wet')
-            if minetest.find_node_near(pos, 3, { 'group:water' }) then
-                -- if it is dry soil and not base node, turn it into wet soil
-                if wet_lvl == 0 then
-                    minetest.set_node(pos, { name = wet })
-                end
-            else
-                -- only turn back if there are no unloaded blocks (and therefore
-                -- possible water sources) nearby
-                if not minetest.find_node_near(pos, 3, { 'ignore' }) then
-                    -- turn it back into base if it is already dry
-                    if wet_lvl == 0 then
-                        -- only turn it back if there is no plant/seed on top of it
-                        if minetest.get_item_group(nn.name, 'plant') == 0 and minetest.get_item_group(nn.name, 'seed') == 0 then
-                            minetest.set_node(pos, { name = base })
-                        end
-                    elseif wet_lvl == 1 then
-                        -- if its wet turn it back into dry soil
-                        minetest.set_node(pos, { name = dry })
-                    end
-                end
-            end
-        end,
-    })
 end
 
 -- Pillow
@@ -1272,4 +1226,168 @@ for _, def in ipairs(pillow_colors) do
             recipe = { 'group:dye,' .. color_group, 'group:pillow' },
         })
     end
+end
+
+minetest.register_node('x_farming:silt_loam_soil', {
+    description = S('Silt Loam Soil. Used for farming rice.'),
+    short_description = S('Silt Loam Soil'),
+    tiles = { 'x_farming_silt_loam_soil.png' },
+    groups = {
+        -- MTG
+        crumbly = 3,
+        -- MCL
+        handy = 1,
+        shovely = 1,
+        dirt = 1,
+        soil_sapling = 2,
+        soil_sugarcane = 1,
+        cultivatable = 2,
+        enderman_takable = 1,
+        building_block = 1,
+        -- ALL
+        soil = 1,
+    },
+    _mcl_blast_resistance = 0.5,
+    _mcl_hardness = 0.5,
+    sounds = x_farming.node_sound_dirt_defaults(),
+})
+
+-- barley stack
+minetest.register_node('x_farming:barley_stack', {
+    description = S('Barley Stack'),
+    tiles = {
+        'x_farming_barley_stack_top.png',
+        'x_farming_barley_stack_top.png',
+        'x_farming_barley_stack_side.png',
+    },
+    paramtype2 = 'facedir',
+    is_ground_content = false,
+    groups = {
+        -- MTG
+        snappy = 3,
+        -- MCL
+        handy = 1,
+        hoey = 1,
+        building_block = 1,
+        fire_encouragement = 60,
+        fire_flammability = 20,
+        compostability = 85,
+        -- ALL
+        flammable = 4,
+        fall_damage_add_percent = -30,
+    },
+    _mcl_blast_resistance = 0.5,
+    _mcl_hardness = 0.5,
+    sounds = x_farming.node_sound_leaves_defaults(),
+    on_place = minetest.rotate_node
+})
+
+-- rice stack
+minetest.register_node('x_farming:rice_stack', {
+    description = S('Rice Stack'),
+    tiles = {
+        'x_farming_rice_stack_top.png',
+        'x_farming_rice_stack_bottom.png',
+        'x_farming_rice_stack_side.png',
+    },
+    paramtype2 = 'facedir',
+    is_ground_content = false,
+    groups = {
+        -- MTG
+        snappy = 3,
+        -- MCL
+        handy = 1,
+        hoey = 1,
+        building_block = 1,
+        fire_encouragement = 60,
+        fire_flammability = 20,
+        compostability = 85,
+        -- ALL
+        flammable = 4,
+        fall_damage_add_percent = -30,
+    },
+    _mcl_blast_resistance = 0.5,
+    _mcl_hardness = 0.5,
+    sounds = x_farming.node_sound_leaves_defaults(),
+    on_place = minetest.rotate_node
+})
+
+minetest.register_node('x_farming:silt_loam_brick_block', {
+    description = S('Silt Loam Brick Block'),
+    paramtype2 = 'facedir',
+    place_param2 = 0,
+    tiles = {
+        'x_farming_silt_loam_brick_block.png^[transformFX',
+        'x_farming_silt_loam_brick_block.png',
+    },
+    is_ground_content = false,
+    groups = {
+        -- MTG
+        cracky = 3,
+        -- MCL
+        pickaxey = 1,
+        building_block = 1,
+        material_stone = 1
+    },
+    _mcl_blast_resistance = 6,
+    _mcl_hardness = 2,
+    sounds = x_farming.node_sound_stone_defaults(),
+})
+
+--
+-- Convert farming soils - copy from MTG
+--
+
+if not minetest.get_modpath('farming') then
+    minetest.register_abm({
+        label = 'X Farming soil',
+        nodenames = { 'group:field' },
+        interval = 15,
+        chance = 4,
+        action = function(pos, node)
+            local n_def = minetest.registered_nodes[node.name] or nil
+            local wet = n_def.soil.wet or nil
+            local base = n_def.soil.base or nil
+            local dry = n_def.soil.dry or nil
+            if not n_def or not n_def.soil or not wet or not base or not dry then
+                return
+            end
+
+            pos.y = pos.y + 1
+            local nn = minetest.get_node_or_nil(pos)
+            if not nn or not nn.name then
+                return
+            end
+            local nn_def = minetest.registered_nodes[nn.name] or nil
+            pos.y = pos.y - 1
+
+            if nn_def and nn_def.walkable and minetest.get_item_group(nn.name, 'plant') == 0 then
+                minetest.set_node(pos, { name = base })
+                return
+            end
+            -- check if there is water nearby
+            local wet_lvl = minetest.get_item_group(node.name, 'wet')
+            if minetest.find_node_near(pos, 3, { 'group:water' }) then
+                -- if it is dry soil and not base node, turn it into wet soil
+                if wet_lvl == 0 then
+                    minetest.set_node(pos, { name = wet })
+                end
+            else
+                -- only turn back if there are no unloaded blocks (and therefore
+                -- possible water sources) nearby
+                if not minetest.find_node_near(pos, 3, { 'ignore' }) then
+                    -- turn it back into base if it is already dry
+                    if wet_lvl == 0 then
+                        -- only turn it back if there is no plant/seed on top of it
+                        if minetest.get_item_group(nn.name, 'plant') == 0 and minetest.get_item_group(nn.name, 'seed') == 0 then
+                            minetest.set_node(pos, { name = base })
+                        end
+                    elseif wet_lvl == 1 then
+                        -- if its wet turn it back into dry soil
+                        minetest.set_node(pos, { name = dry })
+                    end
+                end
+            end
+        end,
+    })
 end

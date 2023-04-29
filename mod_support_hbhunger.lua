@@ -80,3 +80,7 @@ if x_farming.vessels then
 else
     hbhunger.register_food('x_farming:bottle_honey', 6, 'x_farming:glass_bottle')
 end
+
+-- Sushi
+hbhunger.register_food('x_farming:sushi_maki', 5)
+hbhunger.register_food('x_farming:sushi_nigiri', 3)

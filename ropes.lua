@@ -149,7 +149,7 @@ minetest.register_node('x_farming:rope', {
                 inv:add_item('main', stack)
             else
                 -- drop on the ground
-                minetest.item_drop(stack, nil, puncher:get_pos())
+                minetest.add_item(puncher:get_pos(), stack)
             end
         end
 

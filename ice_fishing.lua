@@ -216,14 +216,12 @@ local icefishing = {
 
 ---how often node timers for plants will tick, +/- some random value
 function icefishing.tick(pos)
-    minetest.get_node_timer(pos):start(math.random(1, 3))
-    -- minetest.get_node_timer(pos):start(math.random(166, 286))
+    minetest.get_node_timer(pos):start(math.random(166, 286))
 end
 
 ---how often a growth failure tick is retried (e.g. too dark)
 function icefishing.tick_again(pos)
-    minetest.get_node_timer(pos):start(math.random(1, 3))
-    -- minetest.get_node_timer(pos):start(math.random(40, 80))
+    minetest.get_node_timer(pos):start(math.random(40, 80))
 end
 
 icefishing.on_construct = function(pos)

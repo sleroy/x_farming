@@ -1,6 +1,6 @@
 # X Farming [x_farming]
 
-Farming mod with new plants, crops and ice fishing.
+Farming with new plants, crops and ice fishing.
 
 ![screenshot](screenshot.png)
 
@@ -10,8 +10,9 @@ Hunger points in the description assume that you have [hbhubger](https://forum.m
 
 ## Features
 
+- stove
 - ropes, rope fence, rope safety net
-- Candles (with colors)
+- candles (with colors)
 - adds bees, bee hives and honey harvesting
 - compatible with Mineclone
 - compatible with Everness

@@ -338,6 +338,8 @@ local fish_stew_def = {
         dig_by_water = 1,
         destroy_by_lava_flow = 1,
     },
+    -- MCL
+    _mcl_saturation = 0.6,
     on_use = minetest.item_eat(8, 'x_farming:bowl'),
     sounds = x_farming.node_sound_wood_defaults(),
     sunlight_propagates = true
@@ -1334,10 +1336,35 @@ minetest.register_node('x_farming:silt_loam_brick_block', {
     sounds = x_farming.node_sound_stone_defaults(),
 })
 
+-- French Potatoes
+x_farming.register_feast('french_potatoes', {
+    description = S('French Potatoes') .. '\n' .. S('Compost chance') .. ': 100%\n'
+        .. minetest.colorize(x_farming.colors.brown, S('Hunger') .. ': 8'),
+    short_description = S('French Potatoes'),
+    mesh = 'x_farming_french_potatoes.obj',
+    selection_box = {
+        type = 'fixed',
+        fixed = { -8 / 16, -8 / 16, -7 / 16, 8 / 16, -1 / 16, 7 / 16 }
+    },
+    steps = 5
+})
+
+-- Baked Fish
+x_farming.register_feast('baked_fish', {
+    description = S('Baked Fish') .. '\n' .. S('Compost chance') .. ': 100%\n'
+        .. minetest.colorize(x_farming.colors.brown, S('Hunger') .. ': 8'),
+    short_description = S('French Potatoes'),
+    mesh = 'x_farming_baked_fish.obj',
+    selection_box = {
+        type = 'fixed',
+        fixed = { -8 / 16, -8 / 16, -7 / 16, 8 / 16, -1 / 16, 7 / 16 }
+    },
+    steps = 5
+})
+
 --
 -- Convert farming soils - copy from MTG
 --
-
 if not minetest.get_modpath('farming') then
     minetest.register_abm({
         label = 'X Farming soil',

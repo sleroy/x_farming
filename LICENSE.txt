@@ -964,6 +964,22 @@ GNU Lesser General Public License v2.1 or later (see included LICENSE file)
 - x_farming_sushi_nigiri.png
 - x_farming_silt_loam_brick.png
 - x_farming_silt_loam_brick_block.png
+- x_farming_baked_fish_item.png
+- x_farming_baked_fish_mesh.png
+- x_farming_baked_fish_mesh_1.png
+- x_farming_baked_fish_mesh_2.png
+- x_farming_baked_fish_mesh_3.png
+- x_farming_baked_fish_mesh_4.png
+- x_farming_baked_fish_mesh_5.png
+- x_farming_bowl_baked_fish.png
+- x_farming_bowl_french_potatoes.png
+- x_farming_french_potatoes_item.png
+- x_farming_french_potatoes_mesh.png
+- x_farming_french_potatoes_mesh_1.png
+- x_farming_french_potatoes_mesh_2.png
+- x_farming_french_potatoes_mesh_3.png
+- x_farming_french_potatoes_mesh_4.png
+- x_farming_french_potatoes_mesh_5.png
 
 **CC-BY-SA-3.0, modified by Thomas-S**
 
@@ -1233,6 +1249,15 @@ https://freesound.org/people/Benboncan/sounds/78250/
 - x_farming_stove_sizzle_put.2.ogg
 - x_farming_stove_sizzle_put.3.ogg
 
+**CC-BY-3.0, by youandbiscuitme**,
+https://freesound.org/people/youandbiscuitme/sounds/258248/
+https://freesound.org/people/youandbiscuitme/sounds/258247/
+https://freesound.org/people/youandbiscuitme/sounds/258246/
+
+- x_farming_wooden_bowl.1.ogg
+- x_farming_wooden_bowl.2.ogg
+- x_farming_wooden_bowl.3.ogg
+
 ### Models
 
 **CC-BY-SA-4.0, by SaKeL**
@@ -1255,3 +1280,5 @@ https://freesound.org/people/Benboncan/sounds/78250/
 - x_farming_candle_2.obj
 - x_farming_candle_3.obj
 - x_farming_candle_4.obj
+- x_farming_baked_fish.obj
+- x_farming_french_potatoes.obj

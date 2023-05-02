@@ -898,3 +898,23 @@ minetest.register_craft({
     output = 'x_farming:sushi_nigiri',
     recipe = { 'x_farming:rice_grains', 'group:fish' }
 })
+
+-- Feasts
+
+minetest.register_craft({
+    output = 'x_farming:french_potatoes_1',
+    recipe = {
+        { 'x_farming:bakedpotato', 'x_farming:bottle_soymilk', 'x_farming:bakedpotato' },
+        { 'x_farming:bakedpotato', 'x_farming:corn', 'x_farming:bakedpotato' },
+        { 'x_farming:salt', 'x_farming:bowl', 'x_farming:salt' },
+    }
+})
+
+minetest.register_craft({
+    output = 'x_farming:baked_fish_1',
+    recipe = {
+        { 'x_farming:beetroot', 'x_farming:rice_grains', 'x_farming:beetroot' },
+        { 'x_farming:carrot', 'group:fish', 'x_farming:carrot' },
+        { 'x_farming:salt', 'x_farming:bowl', 'x_farming:salt' },
+    }
+})

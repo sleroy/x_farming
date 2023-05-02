@@ -2511,6 +2511,153 @@ function x_farming.on_flood_candle(pos, oldnode, newnode)
     return false
 end
 
+function x_farming.register_feast(name, def)
+    local g = {
+        -- MTG
+        choppy = 3,
+        oddly_breakable_by_hand = 3,
+        compost = 100,
+        -- MCL
+        handy = 1,
+        shearsy = 1,
+        deco_block = 1,
+        non_mycelium_plant = 1,
+        fire_encouragement = 60,
+        fire_flammability = 100,
+        dig_by_water = 1,
+        destroy_by_lava_flow = 1,
+        compostability = 100,
+        food = 2,
+        eatable = 1,
+        -- ALL
+        flammable = 2,
+        attached_node = 1,
+    }
+
+    -- merge groups from `def`
+    if def.groups then
+        for group, value in pairs(def.groups) do
+            g[group] = value
+        end
+    end
+
+    local _def = {
+        description = def.description,
+        short_description = def.short_description or def.description,
+        drawtype = 'mesh',
+        mesh = def.mesh,
+        use_texture_alpha = 'clip',
+        inventory_image = def.inventory_image or ('x_farming_' .. name .. '_item.png'),
+        wield_image = def.wield_image or ('x_farming_' .. name .. '_item.png'),
+        wield_scale = { x = 2, y = 2, z = 1 },
+        paramtype = 'light',
+        paramtype2 = '4dir',
+        is_ground_content = false,
+        walkable = false,
+        selection_box = def.selection_box,
+        groups = g,
+        _mcl_blast_resistance = 0,
+        _mcl_hardness = 0,
+        sounds = x_farming.node_sound_wood_defaults(),
+        sunlight_propagates = true,
+    }
+
+    for i = 1, def.steps do
+        local d = table.copy(_def)
+
+        d._next_step = i + 1
+        d.tiles = {
+            { name = 'x_farming_' .. name .. '_mesh.png', backface_culling = false },
+            { name = 'x_farming_' .. name .. '_mesh_' .. i .. '.png', backface_culling = false },
+        }
+
+        if i ~= 1 then
+            d.groups['not_in_creative_inventory'] = 1
+        end
+
+        -- last (no more food) step
+        if i == def.steps then
+            d.drop = 'x_farming:bowl'
+        else
+            d.drop = {
+                max_items = def.steps - i,
+                items = {
+                    {
+                        rarity = 1,
+                        items = {
+                            'x_farming:bowl_' .. name
+                        }
+                    },
+                    {
+                        rarity = 1,
+                        items = {
+                            'x_farming:bowl_' .. name
+                        }
+                    },
+                    {
+                        rarity = 1,
+                        items = {
+                            'x_farming:bowl_' .. name
+                        }
+                    },
+                    {
+                        rarity = 1,
+                        items = {
+                            'x_farming:bowl_' .. name
+                        }
+                    },
+                }
+            }
+        end
+
+        d.on_rightclick = function(pos, node, clicker, itemstack, pointed_thing)
+            local n = minetest.registered_nodes[node.name]
+            local p_name = clicker:get_player_name()
+            local inv = clicker:get_inventory()
+            local stack_name = itemstack:get_name()
+
+            if not n then
+                return itemstack
+            end
+
+            -- last (no more food) step
+            if n._next_step > def.steps then
+                minetest.chat_send_player(p_name, S('There is no more food left!'))
+                return itemstack
+            end
+
+            if stack_name == 'x_farming:bowl' then
+                minetest.swap_node(pos, { name = 'x_farming:' .. name .. '_' .. n._next_step, param2 = node.param2 })
+
+                if not minetest.is_creative_enabled(p_name) then
+                    itemstack:take_item()
+                end
+
+                minetest.sound_play('x_farming_wooden_bowl', {
+                    pos = pos,
+                    gain = 0.4,
+                    max_hear_distance = 16
+                })
+
+                local stack_bowl = ItemStack({ name = 'x_farming:bowl_' .. name })
+
+                if inv and inv:room_for_item('main', stack_bowl) then
+                    inv:add_item('main', stack_bowl)
+                else
+                    -- drop on the ground
+                    minetest.add_item(clicker:get_pos(), stack_bowl)
+                end
+            else
+                minetest.chat_send_player(p_name, S('You need to hold empty bowl if you want to take portion of the food!'))
+            end
+
+            return itemstack
+        end
+
+        minetest.register_node('x_farming:' .. name .. '_' .. i, d)
+    end
+end
+
 --
 -- MCL
 --

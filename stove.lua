@@ -693,6 +693,7 @@ minetest.register_node('x_farming:stove_active', {
         }, true)
 
         meta:set_string('grid_matrix', minetest.serialize(grid_matrix))
+        itemstack:take_item()
 
         return itemstack
     end,

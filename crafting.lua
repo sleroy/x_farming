@@ -918,3 +918,12 @@ minetest.register_craft({
         { 'x_farming:salt', 'x_farming:bowl', 'x_farming:salt' },
     }
 })
+
+minetest.register_craft({
+    output = 'x_farming:melon_slush_1',
+    recipe = {
+        { 'x_farming:sugar', 'x_farming:melon_block', 'x_farming:sugar' },
+        { 'default:ice', 'x_farming:melon_block', 'default:ice' },
+        { 'default:ice', 'default:glass', 'default:ice' },
+    }
+})

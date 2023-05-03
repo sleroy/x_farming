@@ -2546,7 +2546,7 @@ function x_farming.register_feast(name, def)
         short_description = def.short_description or def.description,
         drawtype = 'mesh',
         mesh = def.mesh,
-        use_texture_alpha = 'clip',
+        use_texture_alpha = def.use_texture_alpha or 'clip',
         inventory_image = def.inventory_image or ('x_farming_' .. name .. '_item.png'),
         wield_image = def.wield_image or ('x_farming_' .. name .. '_item.png'),
         wield_scale = { x = 2, y = 2, z = 1 },
@@ -2558,7 +2558,7 @@ function x_farming.register_feast(name, def)
         groups = g,
         _mcl_blast_resistance = 0,
         _mcl_hardness = 0,
-        sounds = x_farming.node_sound_wood_defaults(),
+        sounds = def.sounds or x_farming.node_sound_wood_defaults(),
         sunlight_propagates = true,
     }
 
@@ -2567,8 +2567,8 @@ function x_farming.register_feast(name, def)
 
         d._next_step = i + 1
         d.tiles = {
-            { name = 'x_farming_' .. name .. '_mesh.png', backface_culling = false },
-            { name = 'x_farming_' .. name .. '_mesh_' .. i .. '.png', backface_culling = false },
+            { name = 'x_farming_' .. name .. '_mesh.png', backface_culling = def.tiles_backface_culling or false },
+            { name = 'x_farming_' .. name .. '_mesh_' .. i .. '.png', backface_culling = def.tiles_backface_culling or false },
         }
 
         if i ~= 1 then
@@ -2577,7 +2577,7 @@ function x_farming.register_feast(name, def)
 
         -- last (no more food) step
         if i == def.steps then
-            d.drop = 'x_farming:bowl'
+            d.drop = def.last_drop or 'x_farming:bowl'
         else
             d.drop = {
                 max_items = def.steps - i,
@@ -2654,7 +2654,37 @@ function x_farming.register_feast(name, def)
             return itemstack
         end
 
+        -- Node
         minetest.register_node('x_farming:' .. name .. '_' .. i, d)
+
+        -- Bowl baked fish
+        local craftitem_def = {
+            description = def.short_description .. ' ' .. S('Bowl'),
+            inventory_image = 'x_farming_bowl_' .. name .. '.png',
+            groups = {
+                -- MTG
+                -- X Farming
+                compost = 100,
+                -- MCL
+                food = 3,
+                eatable = 10,
+                compostability = 100,
+            },
+            -- MCL
+            _mcl_saturation = 12.0,
+        }
+
+        if minetest.get_modpath('farming') then
+            craftitem_def.on_use = minetest.item_eat(8)
+        end
+
+        if minetest.get_modpath('mcl_farming') then
+            craftitem_def.on_place = minetest.item_eat(8)
+            craftitem_def.on_secondary_use = minetest.item_eat(8)
+        end
+
+        -- Craftitem
+        minetest.register_craftitem('x_farming:bowl_' .. name, craftitem_def)
     end
 end
 

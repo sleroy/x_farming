@@ -1362,6 +1362,22 @@ x_farming.register_feast('baked_fish', {
     steps = 5
 })
 
+-- Melon Slush
+x_farming.register_feast('melon_slush', {
+    description = S('Melon Slush') .. '\n' .. S('Compost chance') .. ': 100%\n'
+        .. minetest.colorize(x_farming.colors.brown, S('Hunger') .. ': 8'),
+    short_description = S('Melon Slush'),
+    mesh = 'x_farming_melon_slush.obj',
+    selection_box = {
+        type = 'fixed',
+        fixed = { -7 / 16, -8 / 16, -7 / 16, 7 / 16, 3 / 16, 7 / 16 }
+    },
+    use_texture_alpha = 'blend',
+    last_drop = 'default:glass',
+    sounds = x_farming.node_sound_thin_glass_defaults(),
+    steps = 5
+})
+
 --
 -- Convert farming soils - copy from MTG
 --

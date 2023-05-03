@@ -980,6 +980,14 @@ GNU Lesser General Public License v2.1 or later (see included LICENSE file)
 - x_farming_french_potatoes_mesh_3.png
 - x_farming_french_potatoes_mesh_4.png
 - x_farming_french_potatoes_mesh_5.png
+- x_farming_bowl_melon_slush.png
+- x_farming_melon_slush_item.png
+- x_farming_melon_slush_mesh_1.png
+- x_farming_melon_slush_mesh_2.png
+- x_farming_melon_slush_mesh_3.png
+- x_farming_melon_slush_mesh_4.png
+- x_farming_melon_slush_mesh_5.png
+- x_farming_melon_slush_mesh.png
 
 **CC-BY-SA-3.0, modified by Thomas-S**
 
@@ -1282,3 +1290,4 @@ https://freesound.org/people/youandbiscuitme/sounds/258246/
 - x_farming_candle_4.obj
 - x_farming_baked_fish.obj
 - x_farming_french_potatoes.obj
+- x_farming_melon_slush.obj

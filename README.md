@@ -10,6 +10,7 @@ Hunger points in the description assume that you have [hbhubger](https://forum.m
 
 ## Features
 
+- shareable food items
 - stove
 - ropes, rope fence, rope safety net
 - candles (with colors)

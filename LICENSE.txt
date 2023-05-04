@@ -988,6 +988,24 @@ GNU Lesser General Public License v2.1 or later (see included LICENSE file)
 - x_farming_melon_slush_mesh_4.png
 - x_farming_melon_slush_mesh_5.png
 - x_farming_melon_slush_mesh.png
+- x_farming_chocolate_pie_item.png
+- x_farming_chocolate_pie_mesh_1.png
+- x_farming_chocolate_pie_mesh_2.png
+- x_farming_chocolate_pie_mesh_3.png
+- x_farming_chocolate_pie_mesh_4.png
+- x_farming_honey_kiwi_pie_item.png
+- x_farming_honey_kiwi_pie_mesh_1.png
+- x_farming_honey_kiwi_pie_mesh_2.png
+- x_farming_honey_kiwi_pie_mesh_3.png
+- x_farming_honey_kiwi_pie_mesh_4.png
+- x_farming_slice_chocolate_pie.png
+- x_farming_slice_honey_kiwi_pie.png
+- x_farming_slice_strawberry_pie.png
+- x_farming_strawberry_pie_item.png
+- x_farming_strawberry_pie_mesh_1.png
+- x_farming_strawberry_pie_mesh_2.png
+- x_farming_strawberry_pie_mesh_3.png
+- x_farming_strawberry_pie_mesh_4.png
 
 **CC-BY-SA-3.0, modified by Thomas-S**
 
@@ -1291,3 +1309,4 @@ https://freesound.org/people/youandbiscuitme/sounds/258246/
 - x_farming_baked_fish.obj
 - x_farming_french_potatoes.obj
 - x_farming_melon_slush.obj
+- x_farming_pie.obj

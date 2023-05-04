@@ -2511,12 +2511,14 @@ function x_farming.on_flood_candle(pos, oldnode, newnode)
     return false
 end
 
+-- Feasts
 function x_farming.register_feast(name, def)
     local g = {
         -- MTG
         choppy = 3,
         oddly_breakable_by_hand = 3,
         compost = 100,
+        no_silktouch = 1,
         -- MCL
         handy = 1,
         shearsy = 1,
@@ -2657,10 +2659,11 @@ function x_farming.register_feast(name, def)
         -- Node
         minetest.register_node('x_farming:' .. name .. '_' .. i, d)
 
-        -- Bowl baked fish
+        -- Craftitem definition
         local craftitem_def = {
             description = def.short_description .. ' ' .. S('Bowl'),
             inventory_image = 'x_farming_bowl_' .. name .. '.png',
+            wield_image = 'x_farming_bowl_' .. name .. '.png',
             groups = {
                 -- MTG
                 -- X Farming
@@ -2685,6 +2688,180 @@ function x_farming.register_feast(name, def)
 
         -- Craftitem
         minetest.register_craftitem('x_farming:bowl_' .. name, craftitem_def)
+    end
+end
+
+-- Pies
+
+function x_farming.register_pie(name, def)
+    local g = {
+        -- MTG
+        choppy = 3,
+        oddly_breakable_by_hand = 3,
+        compost = 100,
+        no_silktouch = 1,
+        -- MCL
+        handy = 1,
+        shearsy = 1,
+        deco_block = 1,
+        non_mycelium_plant = 1,
+        fire_encouragement = 60,
+        fire_flammability = 100,
+        dig_by_water = 1,
+        destroy_by_lava_flow = 1,
+        compostability = 100,
+        food = 2,
+        eatable = 1,
+        -- ALL
+        flammable = 2,
+        attached_node = 1,
+    }
+
+    -- merge groups from `def`
+    if def.groups then
+        for group, value in pairs(def.groups) do
+            g[group] = value
+        end
+    end
+
+    local _def = {
+        description = def.description,
+        short_description = def.short_description or def.description,
+        drawtype = 'mesh',
+        mesh = def.mesh,
+        use_texture_alpha = def.use_texture_alpha or 'clip',
+        inventory_image = def.inventory_image or ('x_farming_' .. name .. '_item.png'),
+        wield_image = def.wield_image or ('x_farming_' .. name .. '_item.png'),
+        wield_scale = { x = 2, y = 2, z = 1 },
+        paramtype = 'light',
+        paramtype2 = '4dir',
+        is_ground_content = false,
+        walkable = false,
+        selection_box = {
+            type = 'fixed',
+            fixed = { -7 / 16, -8 / 16, -7 / 16, 7 / 16, -3 / 16, 7 / 16 }
+        },
+        groups = g,
+        _mcl_blast_resistance = 0,
+        _mcl_hardness = 0,
+        sounds = def.sounds or x_farming.node_sound_wood_defaults(),
+        sunlight_propagates = true,
+        item_eat = 6
+    }
+
+    for i = 1, def.steps do
+        local d = table.copy(_def)
+
+        d._next_step = i + 1
+        d.tiles = {
+            { name = 'x_farming_' .. name .. '_mesh_' .. i .. '.png', backface_culling = def.tiles_backface_culling or false },
+        }
+
+        if i ~= 1 then
+            d.groups['not_in_creative_inventory'] = 1
+        end
+
+        d.drop = {
+            max_items = def.steps - i + 1,
+            items = {
+                {
+                    rarity = 1,
+                    items = {
+                        'x_farming:slice_' .. name
+                    }
+                },
+                {
+                    rarity = 1,
+                    items = {
+                        'x_farming:slice_' .. name
+                    }
+                },
+                {
+                    rarity = 1,
+                    items = {
+                        'x_farming:slice_' .. name
+                    }
+                },
+                {
+                    rarity = 1,
+                    items = {
+                        'x_farming:slice_' .. name
+                    }
+                },
+            }
+        }
+
+        d.on_rightclick = function(pos, node, clicker, itemstack, pointed_thing)
+            local n = minetest.registered_nodes[node.name]
+
+            if not n then
+                return itemstack
+            end
+
+            if i < def.steps then
+                minetest.swap_node(pos, { name = 'x_farming:' .. name .. '_' .. n._next_step, param2 = node.param2 })
+            else
+                minetest.remove_node(pos)
+                minetest.check_for_falling(pos)
+            end
+
+            local sound_name = 'x_farming_wooden_bowl'
+
+            if minetest.get_modpath('hunger_ng') then
+                hunger_ng.alter_hunger(clicker:get_player_name(), _def.item_eat)
+                sound_name = 'hunger_ng_eat'
+            elseif minetest.get_modpath('hbhunger') then
+                hbhunger.eat(_def.item_eat, nil, ItemStack({ name = 'x_farming:' .. name .. '_1' }), clicker, pointed_thing)
+                sound_name = nil
+            elseif minetest.get_modpath('stamina') then
+                stamina.change_saturation(clicker, _def.item_eat)
+                sound_name = 'stamina_eat'
+            elseif minetest.get_modpath('mcl_hunger') then
+                local h = mcl_hunger.get_hunger(clicker)
+                mcl_hunger.set_hunger(clicker, math.min(h + _def.item_eat, 20))
+                sound_name = 'mcl_hunger_bite'
+            else
+                minetest.item_eat(_def.item_eat)
+            end
+
+            if sound_name then
+                minetest.sound_play(sound_name, { pos = pos, gain = 0.7, max_hear_distance = 5 }, true)
+            end
+
+            return itemstack
+        end
+
+        -- Node
+        minetest.register_node('x_farming:' .. name .. '_' .. i, d)
+
+        local craftitem_def = {
+            description = def.short_description .. ' ' .. S('Slice'),
+            inventory_image = 'x_farming_slice_' .. name .. '.png',
+            wield_image = 'x_farming_slice_' .. name .. '.png',
+            groups = {
+                -- MTG
+                -- X Farming
+                compost = 100,
+                -- MCL
+                food = 3,
+                eatable = 10,
+                compostability = 100,
+            },
+            -- MCL
+            _mcl_saturation = 10.0,
+        }
+
+        if minetest.get_modpath('farming') then
+            craftitem_def.on_use = minetest.item_eat(_def.item_eat)
+        end
+
+        if minetest.get_modpath('mcl_farming') then
+            craftitem_def.on_place = minetest.item_eat(_def.item_eat)
+            craftitem_def.on_secondary_use = minetest.item_eat(_def.item_eat)
+        end
+
+        -- Craftitem
+        minetest.register_craftitem('x_farming:slice_' .. name, craftitem_def)
     end
 end
 

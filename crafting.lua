@@ -927,3 +927,67 @@ minetest.register_craft({
         { 'default:ice', 'default:glass', 'default:ice' },
     }
 })
+
+minetest.register_craft({
+    type = 'shapeless',
+    output = 'x_farming:french_potatoes_1',
+    recipe = { 'x_farming:bowl_french_potatoes', 'x_farming:bowl_french_potatoes', 'x_farming:bowl_french_potatoes', 'x_farming:bowl_french_potatoes' }
+})
+
+minetest.register_craft({
+    type = 'shapeless',
+    output = 'x_farming:baked_fish_1',
+    recipe = { 'x_farming:bowl_baked_fish', 'x_farming:bowl_baked_fish', 'x_farming:bowl_baked_fish', 'x_farming:bowl_baked_fish' }
+})
+
+minetest.register_craft({
+    type = 'shapeless',
+    output = 'x_farming:melon_slush_1',
+    recipe = { 'x_farming:bowl_melon_slush', 'x_farming:bowl_melon_slush', 'x_farming:bowl_melon_slush', 'x_farming:bowl_melon_slush' }
+})
+
+-- Pies
+minetest.register_craft({
+    output = 'x_farming:strawberry_pie_1',
+    recipe = {
+        { 'x_farming:barley', 'x_farming:barley', 'x_farming:barley' },
+        { 'x_farming:strawberry', 'x_farming:strawberry', 'x_farming:strawberry' },
+        { 'x_farming:sugar', 'x_farming:flour', 'x_farming:sugar' },
+    }
+})
+
+minetest.register_craft({
+    output = 'x_farming:chocolate_pie_1',
+    recipe = {
+        { 'x_farming:chocolate', 'x_farming:chocolate', 'x_farming:chocolate' },
+        { 'x_farming:bottle_soymilk', 'x_farming:bottle_soymilk', 'x_farming:bottle_soymilk' },
+        { 'x_farming:sugar', 'x_farming:flour', 'x_farming:sugar' },
+    }
+})
+
+minetest.register_craft({
+    output = 'x_farming:honey_kiwi_pie_1',
+    recipe = {
+        { 'x_farming:bottle_honey', 'x_farming:bottle_honey', 'x_farming:bottle_honey' },
+        { 'x_farming:kiwi', 'x_farming:kiwi', 'x_farming:kiwi' },
+        { 'x_farming:bottle_soymilk', 'x_farming:flour', 'x_farming:bottle_soymilk' },
+    }
+})
+
+minetest.register_craft({
+    type = 'shapeless',
+    output = 'x_farming:strawberry_pie_1',
+    recipe = { 'x_farming:slice_strawberry_pie', 'x_farming:slice_strawberry_pie', 'x_farming:slice_strawberry_pie', 'x_farming:slice_strawberry_pie' }
+})
+
+minetest.register_craft({
+    type = 'shapeless',
+    output = 'x_farming:chocolate_pie_1',
+    recipe = { 'x_farming:slice_chocolate_pie', 'x_farming:slice_chocolate_pie', 'x_farming:slice_chocolate_pie', 'x_farming:slice_chocolate_pie' }
+})
+
+minetest.register_craft({
+    type = 'shapeless',
+    output = 'x_farming:honey_kiwi_pie_1',
+    recipe = { 'x_farming:slice_honey_kiwi_pie', 'x_farming:slice_honey_kiwi_pie', 'x_farming:slice_honey_kiwi_pie', 'x_farming:slice_honey_kiwi_pie' }
+})

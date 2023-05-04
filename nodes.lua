@@ -1378,6 +1378,33 @@ x_farming.register_feast('melon_slush', {
     steps = 5
 })
 
+-- Strawberry Pie
+x_farming.register_pie('strawberry_pie', {
+    description = S('Strawberry Pie') .. '\n' .. S('Compost chance') .. ': 100%\n'
+        .. minetest.colorize(x_farming.colors.brown, S('Hunger') .. ': 6'),
+    short_description = S('Strawberry Pie'),
+    mesh = 'x_farming_pie.obj',
+    steps = 4
+})
+
+-- Chocolate Pie
+x_farming.register_pie('chocolate_pie', {
+    description = S('Chocolade Pie') .. '\n' .. S('Compost chance') .. ': 100%\n'
+        .. minetest.colorize(x_farming.colors.brown, S('Hunger') .. ': 6'),
+    short_description = S('Chocolade Pie'),
+    mesh = 'x_farming_pie.obj',
+    steps = 4
+})
+
+-- Honey Glazed Kiwi Pie
+x_farming.register_pie('honey_kiwi_pie', {
+    description = S('Honey Glazed Kiwi') .. '\n' .. S('Compost chance') .. ': 100%\n'
+        .. minetest.colorize(x_farming.colors.brown, S('Hunger') .. ': 6'),
+    short_description = S('Honey Glazed Kiwi'),
+    mesh = 'x_farming_pie.obj',
+    steps = 4
+})
+
 --
 -- Convert farming soils - copy from MTG
 --

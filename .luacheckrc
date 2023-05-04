@@ -19,7 +19,7 @@ exclude_files = {
 globals = {
     'x_farming',
     'mobs',
-    'x_default'
+    'hbhunger'
 }
 
 read_globals = {
@@ -69,11 +69,13 @@ read_globals = {
         }
     },
 
-    'hbhunger',
     'stairs',
     'default',
     'mcl_farming',
     'mcl_potions',
     'hunger_ng',
     'mcl_stairs',
+    'hunger',
+    'stamina',
+    'mcl_hunger'
 }

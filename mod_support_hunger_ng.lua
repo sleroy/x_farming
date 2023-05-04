@@ -80,3 +80,11 @@ end
 -- Sushi
 hunger_ng.add_hunger_data('x_farming:sushi_maki', { satiates = 5 })
 hunger_ng.add_hunger_data('x_farming:sushi_nigiri', { satiates = 3 })
+
+hunger_ng.add_hunger_data('x_farming:bowl_french_potatoes', { satiates = 8, returns = 'x_farming:bowl' })
+hunger_ng.add_hunger_data('x_farming:bowl_baked_fish', { satiates = 8, returns = 'x_farming:bowl' })
+hunger_ng.add_hunger_data('x_farming:bowl_melon_slush', { satiates = 8, returns = 'x_farming:bowl' })
+
+hunger_ng.add_hunger_data('x_farming:slice_strawberry_pie', { satiates = 6 })
+hunger_ng.add_hunger_data('x_farming:slice_chocolate_pie', { satiates = 6 })
+hunger_ng.add_hunger_data('x_farming:slice_honey_kiwi_pie', { satiates = 6 })

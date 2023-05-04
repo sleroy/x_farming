@@ -84,3 +84,12 @@ end
 -- Sushi
 hbhunger.register_food('x_farming:sushi_maki', 5)
 hbhunger.register_food('x_farming:sushi_nigiri', 3)
+
+
+hbhunger.register_food('x_farming:bowl_french_potatoes', 8, 'x_farming:bowl')
+hbhunger.register_food('x_farming:bowl_baked_fish', 8, 'x_farming:bowl')
+hbhunger.register_food('x_farming:bowl_melon_slush', 8, 'x_farming:bowl')
+
+hbhunger.register_food('x_farming:slice_strawberry_pie', 6)
+hbhunger.register_food('x_farming:slice_chocolate_pie', 6)
+hbhunger.register_food('x_farming:slice_honey_kiwi_pie', 6)

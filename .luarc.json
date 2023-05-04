@@ -103,7 +103,10 @@
             "mcl_farming",
             "mcl_potions",
             "hunger_ng",
-            "mcl_stairs"
+            "mcl_stairs",
+            "hunger",
+            "stamina",
+            "mcl_hunger"
         ]
     }
 }

@@ -652,6 +652,8 @@ minetest.register_node('x_farming:honey_block', {
     use_texture_alpha = 'blend',
     paramtype = 'light',
     sunlight_propagates = true,
+    wield_image = 'x_farming_honey_block_item.png',
+    inventory_image = '[inventorycube{x_farming_honey_block_item.png{x_farming_honey_block_item.png{x_farming_honey_block_item.png',
     groups = {
         -- MTG
         snappy = 3,

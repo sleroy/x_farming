@@ -117,7 +117,6 @@ minetest.register_node('x_farming:pumpkin_block', {
         snappy = 3,
         flammable = 4,
         fall_damage_add_percent = -30,
-        not_in_creative_inventory = 1,
         compost = 65,
         -- MCL
         handy = 1,
@@ -155,7 +154,6 @@ minetest.register_node('x_farming:pumpkin_lantern', {
         snappy = 3,
         flammable = 4,
         fall_damage_add_percent = -30,
-        not_in_creative_inventory = 1,
         -- MCL
         handy = 1,
         axey = 1,

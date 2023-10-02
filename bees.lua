@@ -526,8 +526,6 @@ minetest.register_node('x_farming:bee', {
             pos = pos,
         })
 
-        bee_particles(pos)
-
         local pos_hive_front = vector.subtract(vector.new(pos_hive.x, pos_hive.y + 0.5, pos_hive.z), minetest.facedir_to_dir(node_hive.param2))
 
         bee_particles(pos)

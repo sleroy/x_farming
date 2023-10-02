@@ -47,3 +47,12 @@ if minetest.get_modpath('default') then
         }
     })
 end
+
+if minetest.get_modpath('everness') then
+    minetest.register_craft({
+        output = 'x_farming:bonemeal 4',
+        recipe = {
+            { 'everness:coral_skeleton' }
+        }
+    })
+end

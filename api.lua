@@ -2813,7 +2813,9 @@ function x_farming.register_pie(name, def)
             elseif minetest.get_modpath('hbhunger') then
                 hbhunger.eat(_def.item_eat, nil, ItemStack({ name = 'x_farming:' .. name .. '_1' }), clicker, pointed_thing)
                 sound_name = nil
-            elseif minetest.get_modpath('stamina') then
+            elseif minetest.get_modpath('stamina') and minetest.global_exists('stamina') then
+                -- extra check for global variable since there are some mods called "stamina" without registering global "stamina" namespace
+                -- @see https://content.minetest.net/threads/6791/
                 stamina.change_saturation(clicker, _def.item_eat)
                 sound_name = 'stamina_eat'
             elseif minetest.get_modpath('mcl_hunger') then

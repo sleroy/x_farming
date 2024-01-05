@@ -185,7 +185,13 @@ minetest.register_node('x_farming:safety_net', {
         flammable = 3,
         bouncy = 33,
         fall_damage_add_percent = -100,
+        -- MCL
+        handy = 1,
+        hoey = 1,
+        shearsy = 1,
+        swordy = 1
     },
+    _mcl_hardness = 0.2,
     sounds = x_farming.node_sound_rope_defaults()
 })
 
@@ -241,7 +247,13 @@ minetest.register_node('x_farming:rope_fence', {
         -- MTG
         fence = 1,
         snappy = 3,
-        flammable = 2
+        flammable = 2,
+        -- MCL
+        handy = 1,
+        hoey = 1,
+        shearsy = 1,
+        swordy = 1
     },
+    _mcl_hardness = 0.2,
     sounds = x_farming.node_sound_rope_defaults()
 })

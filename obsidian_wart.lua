@@ -257,7 +257,7 @@ minetest.register_node('x_farming:wart_red_brick_block', {
 --
 -- Register Wart stairs and slabs
 --
-if minetest.get_modpath('default') then
+if minetest.get_modpath('stairs') then
     stairs.register_stair_and_slab(
         'wart_block',
         'x_farming:wart_block',

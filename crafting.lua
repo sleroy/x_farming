@@ -969,7 +969,7 @@ minetest.register_craft({
     output = 'x_farming:honey_kiwi_pie_1',
     recipe = {
         { 'x_farming:bottle_honey', 'x_farming:bottle_honey', 'x_farming:bottle_honey' },
-        { 'x_farming:kiwi', 'x_farming:kiwi', 'x_farming:kiwi' },
+        { 'x_farming:kiwi_fruit', 'x_farming:kiwi_fruit', 'x_farming:kiwi_fruit' },
         { 'x_farming:bottle_soymilk', 'x_farming:flour', 'x_farming:bottle_soymilk' },
     }
 })

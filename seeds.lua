@@ -1,6 +1,6 @@
 --[[
     X Farming. Extends Minetest farming mod with new plants, crops and ice fishing.
-    Copyright (C) 2023 SaKeL <juraj.vajda@gmail.com>
+    Copyright (C) 2024 SaKeL
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -15,8 +15,6 @@
     You should have received a copy of the GNU Lesser General Public
     License along with this library; if not, write to juraj.vajda@gmail.com
 --]]
-
-dungeon_loot = dungeon_loot --[[@as MtgDungeonLoot]]
 
 -- Register farming items as dungeon loot
 if minetest.global_exists('dungeon_loot') then

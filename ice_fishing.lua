@@ -1,6 +1,6 @@
 --[[
     X Farming. Extends Minetest farming mod with new plants, crops and ice fishing.
-    Copyright (C) 2023 SaKeL <juraj.vajda@gmail.com>
+    Copyright (C) 2024 SaKeL
 
     This library is free software; you can redistribute it and/or
     modify it under the terms of the GNU Lesser General Public
@@ -15,9 +15,6 @@
     You should have received a copy of the GNU Lesser General Public
     License along with this library; if not, write to juraj.vajda@gmail.com
 --]]
-
-creative = minetest.global_exists('creative') and creative --[[@as MtgCreative]]
-hbhunger = minetest.global_exists('hbhunger') and hbhunger --[[@as table]]
 
 local S = minetest.get_translator(minetest.get_current_modname())
 

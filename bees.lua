@@ -579,39 +579,46 @@ minetest.register_node('x_farming:bee', {
 })
 
 -- Spawn bees on flowers
+-- local bee_spawn_timer = 0
 minetest.register_globalstep(function(dtime)
-    local abr = minetest.get_mapgen_setting('active_block_range') or 4
-    local spawn_reduction = 0.5
-    local spawn_rate = 0.5
-    local spawnpos, liquidflag = x_farming.get_spawn_pos_abr(dtime, 3, abr * 16, spawn_rate, spawn_reduction)
-    local tod = minetest.get_timeofday()
-    local is_day = false
+    -- bee_spawn_timer = bee_spawn_timer + dtime
 
-    if tod > 0.2 and tod < 0.805 then
-        is_day = true
-    end
+    -- if bee_spawn_timer > rand:next(90, 150) then
+        local abr = minetest.get_mapgen_setting('active_block_range') or 4
+        local spawn_reduction = 0.5
+        local spawn_rate = 0.5
+        local spawnpos, liquidflag = x_farming.get_spawn_pos_abr(dtime, 3, abr * 16, spawn_rate, spawn_reduction)
+        local tod = minetest.get_timeofday()
+        local is_day = false
 
-    if spawnpos and not liquidflag and is_day then
-        local bees = minetest.find_node_near(spawnpos, abr * 16 * 1.1, { 'group:bee' }) or {}
-
-        if #bees > 1 then
-            return
+        if tod > 0.2 and tod < 0.805 then
+            is_day = true
         end
 
-        local flower_positions = minetest.find_nodes_in_area_under_air(
-            vector.add(spawnpos, 5),
-            vector.subtract(spawnpos, 5),
-            { 'group:flower' }
-        )
+        if spawnpos and not liquidflag and is_day then
+            local bees = minetest.find_node_near(spawnpos, abr * 16 * 1.1, { 'group:bee' }) or {}
 
-        if flower_positions and #flower_positions > 1 then
-            local rand_pos = flower_positions[rand:next(1, #flower_positions)]
-            local bee_pos = vector.new(rand_pos.x, rand_pos.y + 1, rand_pos.z)
+            if #bees > 1 then
+                return
+            end
 
-            minetest.swap_node(bee_pos, { name = 'x_farming:bee', param2 = rand:next(0, 3) })
-            tick_bee(spawnpos)
+            local flower_positions = minetest.find_nodes_in_area_under_air(
+                vector.add(spawnpos, 5),
+                vector.subtract(spawnpos, 5),
+                { 'group:flower' }
+            )
 
-            minetest.log('action', '[x_farming] Added Bee at ' .. minetest.pos_to_string(bee_pos))
+            if flower_positions and #flower_positions > 1 then
+                local rand_pos = flower_positions[rand:next(1, #flower_positions)]
+                local bee_pos = vector.new(rand_pos.x, rand_pos.y + 1, rand_pos.z)
+
+                minetest.swap_node(bee_pos, { name = 'x_farming:bee', param2 = rand:next(0, 3) })
+                tick_bee(bee_pos)
+
+                minetest.log('action', '[x_farming] Added Bee at ' .. minetest.pos_to_string(bee_pos))
+            end
         end
-    end
+
+    --     bee_spawn_timer = 0
+    -- end
 end)

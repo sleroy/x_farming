@@ -30,6 +30,7 @@ end
 dofile(path .. '/api.lua')
 dofile(path .. '/craftitems.lua')
 dofile(path .. '/nodes.lua')
+dofile(path .. '/functions.lua')
 
 dofile(path .. '/melon.lua')
 dofile(path .. '/pumpkin.lua')

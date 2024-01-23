@@ -1338,8 +1338,7 @@ minetest.register_node('x_farming:silt_loam_brick_block', {
 
 -- French Potatoes
 x_farming.register_feast('french_potatoes', {
-    description = S('French Potatoes') .. '\n' .. S('Compost chance') .. ': 100%\n'
-        .. minetest.colorize(x_farming.colors.brown, S('Hunger') .. ': 8'),
+    description = S('French Potatoes') .. '\n' .. S('Compost chance') .. ': 100%',
     short_description = S('French Potatoes'),
     mesh = 'x_farming_french_potatoes.obj',
     selection_box = {
@@ -1351,9 +1350,8 @@ x_farming.register_feast('french_potatoes', {
 
 -- Baked Fish
 x_farming.register_feast('baked_fish', {
-    description = S('Baked Fish') .. '\n' .. S('Compost chance') .. ': 100%\n'
-        .. minetest.colorize(x_farming.colors.brown, S('Hunger') .. ': 8'),
-    short_description = S('French Potatoes'),
+    description = S('Baked Fish') .. '\n' .. S('Compost chance') .. ': 100%',
+    short_description = S('Baked Fish'),
     mesh = 'x_farming_baked_fish.obj',
     selection_box = {
         type = 'fixed',
@@ -1364,8 +1362,7 @@ x_farming.register_feast('baked_fish', {
 
 -- Melon Slush
 x_farming.register_feast('melon_slush', {
-    description = S('Melon Slush') .. '\n' .. S('Compost chance') .. ': 100%\n'
-        .. minetest.colorize(x_farming.colors.brown, S('Hunger') .. ': 8'),
+    description = S('Melon Slush') .. '\n' .. S('Compost chance') .. ': 100%',
     short_description = S('Melon Slush'),
     mesh = 'x_farming_melon_slush.obj',
     selection_box = {
@@ -1380,8 +1377,7 @@ x_farming.register_feast('melon_slush', {
 
 -- Strawberry Pie
 x_farming.register_pie('strawberry_pie', {
-    description = S('Strawberry Pie') .. '\n' .. S('Compost chance') .. ': 100%\n'
-        .. minetest.colorize(x_farming.colors.brown, S('Hunger') .. ': 6'),
+    description = S('Strawberry Pie') .. '\n' .. S('Compost chance') .. ': 100%',
     short_description = S('Strawberry Pie'),
     mesh = 'x_farming_pie.obj',
     steps = 4
@@ -1389,8 +1385,7 @@ x_farming.register_pie('strawberry_pie', {
 
 -- Chocolate Pie
 x_farming.register_pie('chocolate_pie', {
-    description = S('Chocolade Pie') .. '\n' .. S('Compost chance') .. ': 100%\n'
-        .. minetest.colorize(x_farming.colors.brown, S('Hunger') .. ': 6'),
+    description = S('Chocolade Pie') .. '\n' .. S('Compost chance') .. ': 100%',
     short_description = S('Chocolade Pie'),
     mesh = 'x_farming_pie.obj',
     steps = 4
@@ -1398,8 +1393,7 @@ x_farming.register_pie('chocolate_pie', {
 
 -- Honey Glazed Kiwi Pie
 x_farming.register_pie('honey_kiwi_pie', {
-    description = S('Honey Glazed Kiwi') .. '\n' .. S('Compost chance') .. ': 100%\n'
-        .. minetest.colorize(x_farming.colors.brown, S('Hunger') .. ': 6'),
+    description = S('Honey Glazed Kiwi') .. '\n' .. S('Compost chance') .. ': 100%',
     short_description = S('Honey Glazed Kiwi'),
     mesh = 'x_farming_pie.obj',
     steps = 4

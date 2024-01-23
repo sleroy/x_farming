@@ -2661,7 +2661,8 @@ function x_farming.register_feast(name, def)
 
         -- Craftitem definition
         local craftitem_def = {
-            description = def.short_description .. ' ' .. S('Bowl'),
+            description = def.short_description .. ' ' .. S('Bowl') .. '\n' .. S('Compost chance') .. ': 100%\n'
+            .. minetest.colorize(x_farming.colors.brown, S('Hunger') .. ': 8'),
             inventory_image = 'x_farming_bowl_' .. name .. '.png',
             wield_image = 'x_farming_bowl_' .. name .. '.png',
             groups = {
@@ -2837,7 +2838,8 @@ function x_farming.register_pie(name, def)
         minetest.register_node('x_farming:' .. name .. '_' .. i, d)
 
         local craftitem_def = {
-            description = def.short_description .. ' ' .. S('Slice'),
+            description = def.short_description .. ' ' .. S('Slice') .. '\n' .. S('Compost chance') .. ': 100%\n'
+            .. minetest.colorize(x_farming.colors.brown, S('Hunger') .. ': ' .. _def.item_eat),
             inventory_image = 'x_farming_slice_' .. name .. '.png',
             wield_image = 'x_farming_slice_' .. name .. '.png',
             groups = {

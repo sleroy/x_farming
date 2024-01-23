@@ -82,7 +82,7 @@ minetest.register_craftitem('x_farming:bottle_water', {
 
 -- Bottle Honey
 local bottle_honey_def = {
-    description = S('Honey Bottle'),
+    description = S('Honey Bottle') .. '\n' .. minetest.colorize(x_farming.colors.brown, S('Hunger') .. ': 6'),
     tiles = { 'x_farming_bottle_honey.png' },
     inventory_image = 'x_farming_bottle_honey.png',
     wield_image = 'x_farming_bottle_honey.png',
@@ -144,7 +144,8 @@ minetest.register_craftitem('x_farming:rice_grains', {
 
 -- Sushi
 local sushi_maki_def = {
-    description = S('Sushi Maki'),
+    description = S('Sushi Maki') .. '\n' .. S('Compost chance') .. ': 85%\n'
+    .. minetest.colorize(x_farming.colors.brown, S('Hunger') .. ': 5'),
     inventory_image = 'x_farming_sushi_maki.png',
     groups = {
         -- MTG
@@ -169,7 +170,8 @@ end
 minetest.register_craftitem('x_farming:sushi_maki', sushi_maki_def)
 
 local sushi_nigiri_def = {
-    description = S('Sushi Nigiri'),
+    description = S('Sushi Nigiri') .. '\n' .. S('Compost chance') .. ': 85%\n'
+    .. minetest.colorize(x_farming.colors.brown, S('Hunger') .. ': 3'),
     inventory_image = 'x_farming_sushi_nigiri.png',
     groups = {
         -- MTG

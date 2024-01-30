@@ -659,7 +659,7 @@ minetest.register_on_mods_loaded(function()
     -- Everness
     if minetest.get_modpath('everness') then
         table.insert(deco_place_on, 'everness:dirt_with_grass_1')
-        table.insert(deco_biomes, 'everness_bamboo_forest')
+        table.insert(deco_biomes, 'everness:bamboo_forest')
         deco_fill_ratio = deco_fill_ratio / 20
     end
 

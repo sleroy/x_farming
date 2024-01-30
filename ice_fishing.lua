@@ -1076,7 +1076,7 @@ minetest.register_on_mods_loaded(function()
     -- Everness
     if minetest.get_modpath('everness') then
         table.insert(deco_place_on, 'everness:frosted_snowblock')
-        table.insert(deco_biomes, 'everness_frosted_icesheet')
+        table.insert(deco_biomes, 'everness:frosted_icesheet')
     end
 
     -- MCL

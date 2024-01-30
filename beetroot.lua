@@ -84,7 +84,7 @@ minetest.register_on_mods_loaded(function()
     -- Everness
     if minetest.get_modpath('everness') then
         table.insert(deco_place_on, 'everness:forsaken_desert_sand')
-        table.insert(deco_biomes, 'everness_forsaken_desert')
+        table.insert(deco_biomes, 'everness:forsaken_desert')
     end
 
     -- MCL

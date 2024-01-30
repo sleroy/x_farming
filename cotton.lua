@@ -69,7 +69,7 @@ minetest.register_on_mods_loaded(function()
     -- Everness
     if minetest.get_modpath('everness') then
         table.insert(deco_place_on, 'everness:dry_dirt_with_dry_grass')
-        table.insert(deco_biomes, 'everness_baobab_savanna')
+        table.insert(deco_biomes, 'everness:baobab_savanna')
     end
 
     -- MCL

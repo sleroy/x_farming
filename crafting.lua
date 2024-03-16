@@ -705,6 +705,12 @@ minetest.register_craft({
     }
 })
 
+minetest.register_craft({
+    type = 'shapeless',
+    output = 'x_farming:honeycomb',
+    recipe = { 'x_farming:jar_with_bee', 'x_farming:jar_with_bee', 'x_farming:jar_with_bee' }
+})
+
 -- Honeycomb saw
 minetest.register_craft({
     output = 'x_farming:honeycomb_saw',

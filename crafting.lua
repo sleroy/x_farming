@@ -286,7 +286,7 @@ if x_farming.vessels then
         output = 'x_farming:bottle_water 5',
         recipe = {
             'mcl_potions:glass_bottle', 'mcl_potions:glass_bottle', 'mcl_potions:glass_bottle',
-            'mcl_potions:glass_bottle', 'mcl_potions:glass_bottle', 'bucket:bucket_water'
+            'mcl_potions:glass_bottle', 'mcl_potions:glass_bottle', 'bucket:mcl_buckets:bucket_water'
         },
         replacements = { { 'bucket:water_bucket', 'bucket:bucket_empty' } },
     })
@@ -306,7 +306,7 @@ else
         output = 'x_farming:bottle_water 5',
         recipe = {
             'x_farming:glass_bottle', 'x_farming:glass_bottle', 'x_farming:glass_bottle',
-            'x_farming:glass_bottle', 'x_farming:glass_bottle', 'bucket:bucket_water'
+            'x_farming:glass_bottle', 'x_farming:glass_bottle', 'bucket:mcl_buckets:bucket_water'
         },
         replacements = { { 'bucket:water_bucket', 'bucket:bucket_empty' } },
     })

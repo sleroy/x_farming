@@ -45,12 +45,18 @@ local hoe_steel_def = {
     groups = { hoe = 1 }
 }
 
-if minetest.get_modpath('farming') then
-    minetest.override_item('farming:hoe_wood', hoe_wood_def)
-    minetest.override_item('farming:hoe_stone', hoe_stone_def)
-    minetest.override_item('farming:hoe_steel', hoe_steel_def)
+if minetest.get_modpath("mcl_core") then
+    minetest.register_alias('farming:hoe_wood', 'farming:hoe_wood')
+    minetest.register_alias('farming:hoe_stone', 'farming:hoe_stone')
+    minetest.register_alias('farming:hoe_steel', 'farming:hoe_steel')
 else
-    x_farming.register_hoe('x_farming:hoe_wood', hoe_wood_def)
-    x_farming.register_hoe('x_farming:hoe_stone', hoe_stone_def)
-    x_farming.register_hoe('x_farming:hoe_steel', hoe_steel_def)
+    if minetest.get_modpath('farming') then
+        minetest.override_item('farming:hoe_wood', hoe_wood_def)
+        minetest.override_item('farming:hoe_stone', hoe_stone_def)
+        minetest.override_item('farming:hoe_steel', hoe_steel_def)
+    else
+        x_farming.register_hoe('x_farming:hoe_wood', hoe_wood_def)
+        x_farming.register_hoe('x_farming:hoe_stone', hoe_stone_def)
+        x_farming.register_hoe('x_farming:hoe_steel', hoe_steel_def)
+    end
 end

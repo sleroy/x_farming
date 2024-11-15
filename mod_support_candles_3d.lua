@@ -29,7 +29,7 @@ minetest.register_craft({
 minetest.register_craft({
     output = 'candles_3d:unlit_orange_1',
     recipe = {
-        { 'farming:string' },
+        { 'mcl_mobsitems:string' },
         { 'x_farming:honeycomb' },
         { 'x_farming:honeycomb' },
     },

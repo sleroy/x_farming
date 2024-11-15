@@ -98,7 +98,7 @@ local bottle_honey_def = {
 
 if minetest.get_modpath('farming') then
     if x_farming.vessels then
-        bottle_honey_def.on_use = minetest.item_eat(6, 'vessels:glass_bottle')
+        bottle_honey_def.on_use = minetest.item_eat(6, 'mcl_potions:glass_bottle')
     else
         bottle_honey_def.on_use = minetest.item_eat(6, 'x_farming:glass_bottle')
     end
@@ -145,7 +145,7 @@ minetest.register_craftitem('x_farming:rice_grains', {
 -- Sushi
 local sushi_maki_def = {
     description = S('Sushi Maki') .. '\n' .. S('Compost chance') .. ': 85%\n'
-    .. minetest.colorize(x_farming.colors.brown, S('Hunger') .. ': 5'),
+        .. minetest.colorize(x_farming.colors.brown, S('Hunger') .. ': 5'),
     inventory_image = 'x_farming_sushi_maki.png',
     groups = {
         -- MTG
@@ -171,7 +171,7 @@ minetest.register_craftitem('x_farming:sushi_maki', sushi_maki_def)
 
 local sushi_nigiri_def = {
     description = S('Sushi Nigiri') .. '\n' .. S('Compost chance') .. ': 85%\n'
-    .. minetest.colorize(x_farming.colors.brown, S('Hunger') .. ': 3'),
+        .. minetest.colorize(x_farming.colors.brown, S('Hunger') .. ': 3'),
     inventory_image = 'x_farming_sushi_nigiri.png',
     groups = {
         -- MTG

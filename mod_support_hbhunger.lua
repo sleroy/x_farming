@@ -76,7 +76,7 @@ hbhunger.register_food('x_farming:bread', 5)
 
 -- Bottle Honey
 if x_farming.vessels then
-    hbhunger.register_food('x_farming:bottle_honey', 6, 'vessels:glass_bottle')
+    hbhunger.register_food('x_farming:bottle_honey', 6, 'mcl_potions:glass_bottle')
 else
     hbhunger.register_food('x_farming:bottle_honey', 6, 'x_farming:glass_bottle')
 end

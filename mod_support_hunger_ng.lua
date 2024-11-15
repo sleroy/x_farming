@@ -38,7 +38,7 @@ hunger_ng.add_hunger_data('x_farming:golden_melon', { satiates = 10, heals = 10 
 -- Potato
 hunger_ng.add_hunger_data('x_farming:potato', { satiates = 2 })
 hunger_ng.add_hunger_data('x_farming:bakedpotato', { satiates = 6 })
-hunger_ng.add_hunger_data('x_farming:poisonouspotato', { satiates = -6, heals= -6 })
+hunger_ng.add_hunger_data('x_farming:poisonouspotato', { satiates = -6, heals = -6 })
 
 -- Pumpkin
 hunger_ng.add_hunger_data('x_farming:pumpkin_pie', { satiates = 6 })
@@ -72,7 +72,7 @@ hunger_ng.add_hunger_data('x_farming:bread', { satiates = 5 })
 
 -- Bottle Honey
 if x_farming.vessels then
-    hunger_ng.add_hunger_data('x_farming:bottle_honey', { satiates = 6, returns = 'vessels:glass_bottle' })
+    hunger_ng.add_hunger_data('x_farming:bottle_honey', { satiates = 6, returns = 'mcl_potions:glass_bottle' })
 else
     hunger_ng.add_hunger_data('x_farming:bottle_honey', { satiates = 6, returns = 'x_farming:glass_bottle' })
 end

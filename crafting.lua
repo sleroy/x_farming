@@ -113,7 +113,7 @@ if x_farming.vessels then
         cooktime = 7,
         output = 'x_farming:coffee_cup_hot',
         recipe = 'x_farming:bottle_coffee',
-        replacements = { { 'x_farming:bottle_coffee', 'vessels:glass_bottle' } }
+        replacements = { { 'x_farming:bottle_coffee', 'mcl_potions:glass_bottle' } }
     })
 else
     minetest.register_craft({
@@ -285,8 +285,8 @@ if x_farming.vessels then
         type = 'shapeless',
         output = 'x_farming:bottle_water 5',
         recipe = {
-            'vessels:glass_bottle', 'vessels:glass_bottle', 'vessels:glass_bottle',
-            'vessels:glass_bottle', 'vessels:glass_bottle', 'bucket:bucket_water'
+            'mcl_potions:glass_bottle', 'mcl_potions:glass_bottle', 'mcl_potions:glass_bottle',
+            'mcl_potions:glass_bottle', 'mcl_potions:glass_bottle', 'bucket:bucket_water'
         },
         replacements = { { 'bucket:water_bucket', 'bucket:bucket_empty' } },
     })
@@ -295,8 +295,8 @@ if x_farming.vessels then
         type = 'shapeless',
         output = 'x_farming:bottle_water 5',
         recipe = {
-            'vessels:glass_bottle', 'vessels:glass_bottle', 'vessels:glass_bottle',
-            'vessels:glass_bottle', 'vessels:glass_bottle', 'x_farming:seed_salt'
+            'mcl_potions:glass_bottle', 'mcl_potions:glass_bottle', 'mcl_potions:glass_bottle',
+            'mcl_potions:glass_bottle', 'mcl_potions:glass_bottle', 'x_farming:seed_salt'
         },
         replacements = { { 'x_farming:seed_salt', 'x_farming:seed_salt' } },
     })
@@ -691,7 +691,7 @@ minetest.register_craft({
 minetest.register_craft({
     output = 'x_farming:jar_empty',
     recipe = {
-        { 'vessels:glass_bottle', 'vessels:glass_bottle' }
+        { 'mcl_potions:glass_bottle', 'mcl_potions:glass_bottle' }
     }
 })
 
@@ -750,10 +750,10 @@ minetest.register_craft({
         { 'x_farming:bottle_honey', 'x_farming:bottle_honey' },
     },
     replacements = {
-        { 'x_farming:bottle_honey', 'vessels:glass_bottle' },
-        { 'x_farming:bottle_honey', 'vessels:glass_bottle' },
-        { 'x_farming:bottle_honey', 'vessels:glass_bottle' },
-        { 'x_farming:bottle_honey', 'vessels:glass_bottle' },
+        { 'x_farming:bottle_honey', 'mcl_potions:glass_bottle' },
+        { 'x_farming:bottle_honey', 'mcl_potions:glass_bottle' },
+        { 'x_farming:bottle_honey', 'mcl_potions:glass_bottle' },
+        { 'x_farming:bottle_honey', 'mcl_potions:glass_bottle' },
     },
 })
 

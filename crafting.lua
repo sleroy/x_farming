@@ -37,9 +37,9 @@ minetest.register_craft({
 minetest.register_craft({
     output = 'x_farming:chocolate',
     recipe = {
-        { '', '', 'x_farming:cocoa_bean' },
-        { '', 'x_farming:cocoa_bean', '' },
-        { 'default:paper', '', '' },
+        { '',              '',                     'x_farming:cocoa_bean' },
+        { '',              'x_farming:cocoa_bean', '' },
+        { 'default:paper', '',                     '' },
     }
 })
 
@@ -66,8 +66,8 @@ minetest.register_craft({
 minetest.register_craft({
     output = 'x_farming:bowl 3',
     recipe = {
-        { 'group:wood', '', 'group:wood' },
-        { '', 'group:wood', '' }
+        { 'group:wood', '',           'group:wood' },
+        { '',           'group:wood', '' }
     }
 })
 
@@ -75,9 +75,9 @@ minetest.register_craft({
 minetest.register_craft({
     output = 'x_farming:fish_stew',
     recipe = {
-        { '', 'group:fish', '' },
+        { '',                 'group:fish',            '' },
         { 'x_farming:carrot', 'x_farming:bakedpotato', 'x_farming:salt' },
-        { '', 'x_farming:bowl', '' }
+        { '',                 'x_farming:bowl',        '' }
     }
 })
 
@@ -86,7 +86,7 @@ minetest.register_craft({
     recipe = {
         { 'x_farming:beetroot', 'x_farming:beetroot', 'x_farming:beetroot' },
         { 'x_farming:beetroot', 'x_farming:beetroot', 'x_farming:beetroot' },
-        { '', 'x_farming:bowl', '' }
+        { '',                   'x_farming:bowl',     '' }
     }
 })
 
@@ -95,7 +95,7 @@ minetest.register_craft({
     output = 'x_farming:carrot_golden',
     recipe = {
         { 'default:gold_lump', 'default:gold_lump', 'default:gold_lump' },
-        { 'default:gold_lump', 'x_farming:carrot', 'default:gold_lump' },
+        { 'default:gold_lump', 'x_farming:carrot',  'default:gold_lump' },
         { 'default:gold_lump', 'default:gold_lump', 'default:gold_lump' }
     },
 })
@@ -137,8 +137,8 @@ minetest.register_craft({
     output = 'x_farming:corn_popcorn',
     recipe = {
         { 'x_farming:corn_pop', 'x_farming:corn_pop', 'x_farming:corn_pop' },
-        { 'default:paper', 'x_farming:salt', 'default:paper' },
-        { 'default:paper', 'default:paper', 'default:paper' },
+        { 'default:paper',      'x_farming:salt',     'default:paper' },
+        { 'default:paper',      'default:paper',      'default:paper' },
     }
 })
 
@@ -147,7 +147,7 @@ minetest.register_craft({
     output = 'x_farming:golden_melon',
     recipe = {
         { 'default:gold_lump', 'default:gold_lump', 'default:gold_lump' },
-        { 'default:gold_lump', 'x_farming:melon', 'default:gold_lump' },
+        { 'default:gold_lump', 'x_farming:melon',   'default:gold_lump' },
         { 'default:gold_lump', 'default:gold_lump', 'default:gold_lump' }
     },
 })
@@ -190,8 +190,8 @@ minetest.register_craft({
 minetest.register_craft({
     output = 'x_farming:wart_red_brick_block',
     recipe = {
-        { 'x_farming:obsidian_wart', 'x_farming:wart_brick', '' },
-        { 'x_farming:wart_brick', 'x_farming:obsidian_wart', '' }
+        { 'x_farming:obsidian_wart', 'x_farming:wart_brick',    '' },
+        { 'x_farming:wart_brick',    'x_farming:obsidian_wart', '' }
     },
 })
 
@@ -215,9 +215,9 @@ minetest.register_craft({
 minetest.register_craft({
     output = 'x_farming:pumpkin_lantern',
     recipe = {
-        { '', '', '' },
+        { '', '',                         '' },
         { '', 'x_farming:bottle_soymilk', '' },
-        { '', 'group:torch', '' }
+        { '', 'group:torch',              '' }
     },
 })
 
@@ -340,9 +340,9 @@ minetest.register_craft({
 minetest.register_craft({
     output = 'x_farming:fries',
     recipe = {
-        { '', '', 'x_farming:salt' },
-        { '', 'x_farming:bakedpotato', '' },
-        { 'default:paper', '', '' }
+        { '',              '',                      'x_farming:salt' },
+        { '',              'x_farming:bakedpotato', '' },
+        { 'default:paper', '',                      '' }
     },
 })
 
@@ -352,8 +352,8 @@ minetest.register_craft({
     output = 'x_farming:seed_icefishing',
     recipe = {
         { 'group:pillow', 'x_farming:string', 'group:stick' },
-        { '', 'x_farming:string', 'group:stick' },
-        { '', 'x_farming:string', 'group:stick' }
+        { '',             'x_farming:string', 'group:stick' },
+        { '',             'x_farming:string', 'group:stick' }
     },
 })
 
@@ -504,15 +504,15 @@ minetest.register_craft({
     recipe = {
         { 'group:wood', 'group:stick', 'group:wood' },
         { 'group:wood', 'group:stick', 'group:wood' },
-        { 'group:wood', 'group:wood', 'group:wood' }
+        { 'group:wood', 'group:wood',  'group:wood' }
     }
 })
 
 minetest.register_craft({
     output = 'x_farming:bag_empty',
     recipe = {
-        { 'x_farming:barley_stack', '', 'x_farming:barley_stack' },
-        { 'x_farming:barley_stack', '', 'x_farming:barley_stack' },
+        { 'x_farming:barley_stack', '',                       'x_farming:barley_stack' },
+        { 'x_farming:barley_stack', '',                       'x_farming:barley_stack' },
         { 'x_farming:barley_stack', 'x_farming:barley_stack', 'x_farming:barley_stack' }
     }
 })
@@ -523,7 +523,7 @@ minetest.register_craft({
     recipe = {
         { 'group:wood', 'group:fence', 'group:wood' },
         { 'group:wood', 'group:fence', 'group:wood' },
-        { 'group:wood', 'group:wood', 'group:wood' }
+        { 'group:wood', 'group:wood',  'group:wood' }
     }
 })
 
@@ -540,9 +540,9 @@ minetest.register_craft({
 minetest.register_craft({
     output = 'x_farming:scarecrow',
     recipe = {
-        { '', 'x_farming:pumpkin_block', '' },
-        { 'x_farming:barley_stack', 'group:pillow', 'x_farming:barley_stack' },
-        { '', 'group:wood', '' },
+        { '',                       'x_farming:pumpkin_block', '' },
+        { 'x_farming:barley_stack', 'group:pillow',            'x_farming:barley_stack' },
+        { '',                       'group:wood',              '' },
     }
 })
 
@@ -598,8 +598,8 @@ minetest.register_craft({
 minetest.register_craft({
     output = 'x_farming:christmas_tree_sapling',
     recipe = {
-        { 'default:goldblock', 'default:meselamp', 'default:goldblock' },
-        { 'x_farming:pillow_green', 'default:pine_sapling', 'x_farming:pillow_blue' },
+        { 'default:goldblock',       'default:meselamp',     'default:goldblock' },
+        { 'x_farming:pillow_green',  'default:pine_sapling', 'x_farming:pillow_blue' },
         { 'x_farming:pillow_yellow', 'default:pine_sapling', 'x_farming:pillow_red' }
     }
 })
@@ -699,9 +699,9 @@ minetest.register_craft({
 minetest.register_craft({
     output = 'x_farming:bee_hive',
     recipe = {
-        { 'group:wood', 'group:wood', 'group:wood' },
+        { 'group:wood',          'group:wood',          'group:wood' },
         { 'x_farming:honeycomb', 'x_farming:honeycomb', 'x_farming:honeycomb' },
-        { 'group:wood', 'group:wood', 'group:wood' }
+        { 'group:wood',          'group:wood',          'group:wood' }
     }
 })
 
@@ -715,9 +715,9 @@ minetest.register_craft({
 minetest.register_craft({
     output = 'x_farming:honeycomb_saw',
     recipe = {
-        { '', 'x_farming:honeycomb', 'default:steel_ingot' },
+        { '',                    'x_farming:honeycomb', 'default:steel_ingot' },
         { 'x_farming:honeycomb', 'default:steel_ingot', '' },
-        { 'group:stick', '', '' }
+        { 'group:stick',         '',                    '' }
     }
 })
 
@@ -885,9 +885,9 @@ minetest.register_craft({
 minetest.register_craft({
     output = 'x_farming:stove',
     recipe = {
-        { 'default:steel_ingot', 'default:steel_ingot', 'default:steel_ingot' },
-        { 'x_farming:silt_loam_brick_block', '', 'x_farming:silt_loam_brick_block' },
-        { 'x_farming:silt_loam_brick_block', 'default:furnace', 'x_farming:silt_loam_brick_block' }
+        { 'default:steel_ingot',             'default:steel_ingot',  'default:steel_ingot' },
+        { 'x_farming:silt_loam_brick_block', '',                     'x_farming:silt_loam_brick_block' },
+        { 'x_farming:silt_loam_brick_block', 'mcl_furnaces:furnace', 'x_farming:silt_loam_brick_block' }
     }
 })
 
@@ -911,8 +911,8 @@ minetest.register_craft({
     output = 'x_farming:french_potatoes_1',
     recipe = {
         { 'x_farming:bakedpotato', 'x_farming:bottle_soymilk', 'x_farming:bakedpotato' },
-        { 'x_farming:bakedpotato', 'x_farming:corn', 'x_farming:bakedpotato' },
-        { 'x_farming:salt', 'x_farming:bowl', 'x_farming:salt' },
+        { 'x_farming:bakedpotato', 'x_farming:corn',           'x_farming:bakedpotato' },
+        { 'x_farming:salt',        'x_farming:bowl',           'x_farming:salt' },
     }
 })
 
@@ -920,8 +920,8 @@ minetest.register_craft({
     output = 'x_farming:baked_fish_1',
     recipe = {
         { 'x_farming:beetroot', 'x_farming:rice_grains', 'x_farming:beetroot' },
-        { 'x_farming:carrot', 'group:fish', 'x_farming:carrot' },
-        { 'x_farming:salt', 'x_farming:bowl', 'x_farming:salt' },
+        { 'x_farming:carrot',   'group:fish',            'x_farming:carrot' },
+        { 'x_farming:salt',     'x_farming:bowl',        'x_farming:salt' },
     }
 })
 
@@ -929,8 +929,8 @@ minetest.register_craft({
     output = 'x_farming:melon_slush_1',
     recipe = {
         { 'x_farming:sugar', 'x_farming:melon_block', 'x_farming:sugar' },
-        { 'default:ice', 'x_farming:melon_block', 'default:ice' },
-        { 'default:ice', 'default:glass', 'default:ice' },
+        { 'default:ice',     'x_farming:melon_block', 'default:ice' },
+        { 'default:ice',     'default:glass',         'default:ice' },
     }
 })
 
@@ -956,27 +956,27 @@ minetest.register_craft({
 minetest.register_craft({
     output = 'x_farming:strawberry_pie_1',
     recipe = {
-        { 'x_farming:barley', 'x_farming:barley', 'x_farming:barley' },
+        { 'x_farming:barley',     'x_farming:barley',     'x_farming:barley' },
         { 'x_farming:strawberry', 'x_farming:strawberry', 'x_farming:strawberry' },
-        { 'x_farming:sugar', 'x_farming:flour', 'x_farming:sugar' },
+        { 'x_farming:sugar',      'x_farming:flour',      'x_farming:sugar' },
     }
 })
 
 minetest.register_craft({
     output = 'x_farming:chocolate_pie_1',
     recipe = {
-        { 'x_farming:chocolate', 'x_farming:chocolate', 'x_farming:chocolate' },
+        { 'x_farming:chocolate',      'x_farming:chocolate',      'x_farming:chocolate' },
         { 'x_farming:bottle_soymilk', 'x_farming:bottle_soymilk', 'x_farming:bottle_soymilk' },
-        { 'x_farming:sugar', 'x_farming:flour', 'x_farming:sugar' },
+        { 'x_farming:sugar',          'x_farming:flour',          'x_farming:sugar' },
     }
 })
 
 minetest.register_craft({
     output = 'x_farming:honey_kiwi_pie_1',
     recipe = {
-        { 'x_farming:bottle_honey', 'x_farming:bottle_honey', 'x_farming:bottle_honey' },
-        { 'x_farming:kiwi_fruit', 'x_farming:kiwi_fruit', 'x_farming:kiwi_fruit' },
-        { 'x_farming:bottle_soymilk', 'x_farming:flour', 'x_farming:bottle_soymilk' },
+        { 'x_farming:bottle_honey',   'x_farming:bottle_honey', 'x_farming:bottle_honey' },
+        { 'x_farming:kiwi_fruit',     'x_farming:kiwi_fruit',   'x_farming:kiwi_fruit' },
+        { 'x_farming:bottle_soymilk', 'x_farming:flour',        'x_farming:bottle_soymilk' },
     }
 })
 
